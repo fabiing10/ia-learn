@@ -2602,29 +2602,80 @@
    Optional block
    ========================================================= */
 
-.s-qa {
+.reveal .slides section.s-qa {
   justify-content: center;
 }
 
-.qa__tag {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 40px;
-  color: var(--text-2);
+.qa {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto 1fr;
+  column-gap: 64px;
+  align-items: start;
+}
+
+.qa__text {
+  display: contents;
 }
 
 .qa__title {
-  margin-top: 24px;
-  font-size: 300px;
+  grid-column: 1 / -1;
+  font-size: 240px;
 }
 
 .qa__slogan {
-  margin-top: 40px;
+  grid-row: 2;
+  margin-top: 56px;
+  font-size: 76px;
 }
 
-.iter__prompt {
-  margin-top: 72px;
-  max-width: 1500px;
+.qa__contact {
+  grid-row: 3;
+  margin-top: 28px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 52px;
+  letter-spacing: -0.02em;
+}
+
+.qa__qrs {
+  grid-column: 2;
+  grid-row: 2 / span 2;
+  display: flex;
+  gap: 44px;
+  margin-top: 48px;
+}
+
+.qa__qr {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.qrbox--qa {
+  width: 380px;
+  height: 380px;
+  padding: 18px;
+  border-radius: 30px;
+}
+
+.qa__qr figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.qa__qr figcaption b {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.05;
+  color: var(--gold-text);
+}
+
+.qa__qr figcaption span {
+  font-size: 30px;
+  color: var(--text-2);
 }
 
 /* =========================================================

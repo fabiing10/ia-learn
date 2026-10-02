@@ -2,14 +2,13 @@
 // text values, QR codes, media files, slide order tweaks and cuts.
 import config from '../../../config.json';
 import qrPlaybook from '../../assets/qr/playbook.svg?raw';
-import qrLanding from '../../assets/qr/landing.svg?raw';
-import qrDemo from '../../assets/qr/demo.svg?raw';
 import qrTest from '../../assets/qr/test.svg?raw';
 import qrSite from '../../assets/qr/site.svg?raw';
+import qrWhatsapp from '../../assets/qr/whatsapp.svg?raw';
 
 export { config };
 
-const QR = { playbook: qrPlaybook, landing: qrLanding, demo: qrDemo, test: qrTest, site: qrSite };
+const QR = { playbook: qrPlaybook, test: qrTest, site: qrSite, whatsapp: qrWhatsapp };
 
 export const isPlaceholder = (v) => typeof v !== 'string' || /^\s*\{\{.*\}\}\s*$/.test(v);
 

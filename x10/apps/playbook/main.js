@@ -14,7 +14,7 @@ import '../../src/styles/theme-light.css';
 import './playbook.css';
 import './print.css';
 
-import { contacto } from '../../config.json';
+import { contacto, whatsapp } from '../../config.json';
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -415,7 +415,18 @@ renderRuta();
 /* ---------- Contact from config.json, once the presenter fills it ---------- */
 
 if (contacto && !/^\s*\{\{/.test(contacto)) {
-  $$('[data-config="contacto"]').forEach((el) => (el.textContent = contacto));
+  $$('[data-config="contacto"]').forEach((el) => {
+    if (!whatsapp?.numero) {
+      el.textContent = contacto;
+      return;
+    }
+    // WhatsApp link pre-filled so the presenter knows the message comes from the workshop
+    const a = document.createElement('a');
+    a.href = `https://wa.me/${whatsapp.numero}?text=${encodeURIComponent(whatsapp.mensaje || '')}`;
+    a.rel = 'noopener';
+    a.textContent = contacto;
+    el.replaceChildren(a);
+  });
 }
 
 /* ---------- Print / Guardar como PDF ---------- */

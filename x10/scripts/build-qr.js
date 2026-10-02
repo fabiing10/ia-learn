@@ -12,12 +12,13 @@ const config = JSON.parse(await readFile(resolve(root, 'config.json'), 'utf8'));
 const outDir = resolve(root, 'src/assets/qr');
 await mkdir(outDir, { recursive: true });
 
+const wa = config.whatsapp;
 const targets = {
   playbook: config.urlPlaybook,
   test: config.urlTest,
   site: config.urlSite,
-  landing: config.urlLanding,
-  demo: config.urlDemoApp,
+  // WhatsApp chat with the presenter, pre-filled so the message says who wrote
+  whatsapp: wa?.numero ? `https://wa.me/${wa.numero}?text=${encodeURIComponent(wa.mensaje || '')}` : '',
 };
 
 const isPlaceholder = (v) => !v || /^\s*\{\{.*\}\}\s*$/.test(v);
@@ -40,7 +41,8 @@ for (const [name, value] of Object.entries(targets)) {
   } else {
     svg = await QRCode.toString(value, {
       type: 'svg',
-      errorCorrectionLevel: 'M',
+      // Long WhatsApp links need fewer modules to scan from the back row
+      errorCorrectionLevel: name === 'whatsapp' ? 'L' : 'M',
       margin: 2,
       color: { dark: '#0B0F1A', light: '#FFFFFF' },
     });

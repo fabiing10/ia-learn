@@ -5,8 +5,6 @@ Archivos que el expositor coloca en esta carpeta (los nombres se pueden cambiar 
   video-real.mp4             (incluido, ver CREDITS.md)   S03 ronda 3, video real
   video-ia.mp4               (incluido, ver CREDITS.md)   S03 ronda 3, video generado por IA
   caso-landing.png           (incluida)                   S36, captura de la landing
-  audio-real.mp3             {{AUDIO_REAL}}               S03 ronda 4, tu voz real (8 s)
-  audio-clon.mp3             {{AUDIO_CLON}}               S03 ronda 4, tu voz clonada (8 s, solo tu propia voz)
   captura-prompt-pobre.png   {{CAPTURA_PROMPT_POBRE}}     respaldo S14 (tecla 1)
   captura-prompt-rctf.png    {{CAPTURA_PROMPT_RCTF}}      respaldo S14 (tecla 1)
   video-demo-talento.mp4     {{VIDEO_DEMO_TALENTO}}       respaldo S27 (tecla 2), ≤ 90 s

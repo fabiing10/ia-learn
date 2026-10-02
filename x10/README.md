@@ -1,6 +1,6 @@
 # x10 · Multiplica tus talentos con inteligencia artificial
 
-Presentación web para la Convención de Hombres MCI 2026 (G12 Centro de Convenciones, 1 al 3 de octubre de 2026). 60 minutos + bloque opcional de 20.
+Presentación web para la Convención de Hombres MCI 2026 (G12 Centro de Convenciones, 1 al 3 de octubre de 2026). 60 minutos; la última slide, "Preguntas", queda proyectada para el tiempo de preguntas.
 
 Reveal.js 5.2.1 maneja la navegación, las notas y el PDF. GSAP 3.15 (SplitText, DrawSVG, MorphSVG, Flip) anima en los eventos de Reveal. Three.js dibuja solo el fondo de partículas. Todo está empaquetado: **no necesita internet para presentar**.
 
@@ -37,7 +37,7 @@ No necesita dependencias ni internet (Node 18+).
 Antes de empezar:
 
 1. Pantalla completa con **F**.
-2. Haz **un clic** en la ventana proyectada. El navegador exige una interacción antes de reproducir audio (S03, ronda de voz).
+2. Haz **un clic** en la ventana proyectada para que el navegador permita reproducir los videos de S03.
 3. Prueba **T** (tema claro) y **M** (modo ligero) en el proyector. Ambos se recuerdan al recargar.
 
 ## 2. Atajos de teclado
@@ -62,7 +62,7 @@ Antes de empezar:
 | **Inicio / Fin** | Primera / última slide |
 | **?** | Lista de atajos en pantalla |
 
-Con el mouse: los audios de S03 se reproducen con su botón, el botón "Copiar prompt" de S27 copia el prompt al portapapeles, los temporizadores de S14 y S28 se pausan con un clic, y en S35 un clic sobre una idea la marca como ganadora.
+Con el mouse: el botón "Copiar prompt" de S27 y de S35 copia el prompt al portapapeles y los temporizadores de S14 y S28 se pausan con un clic.
 
 ## 3. Vista del presentador
 
@@ -90,13 +90,13 @@ Todo lo que está entre `{{LLAVES}}` se ve en pantalla como un recuadro punteado
 | Campo | Para qué |
 |---|---|
 | `urlPlaybook` | QR del cierre (S39) |
-| `urlLanding` | QR del bloque opcional (notas en vivo) |
-| `urlDemoApp` | QR de S36 a la app publicada en la demo |
-| `contacto` | Contacto del expositor en S39 |
-| `herramientaDemo` | Nombre de la herramienta en S35 y S41 |
-| `textos.textoHumano`, `textos.textoIa` | Párrafos de la ronda 2 de S03 |
-| `humanoOIa` | En qué lado (A o B) va lo hecho por IA en cada ronda |
-| `media` | Rutas de imágenes, audios y videos |
+| `urlSite` | QR a la página principal (S36, S39 y Preguntas) |
+| `urlTest` | QR del test en la pantalla de espera |
+| `contacto` | Contacto del expositor (S39 y Preguntas): `WhatsApp 314 366 6151` |
+| `whatsapp` | Número (`573143666151`) y mensaje del QR de WhatsApp en la slide final |
+| `herramientaDemo` | Herramienta sugerida para correr el prompt en vivo |
+| `humanoOIa` | En qué lado (A o B) va lo hecho por IA en cada ronda (imagen y video) |
+| `media` | Rutas de imágenes y videos |
 | `semaforoOrden` | Orden de los casos de S22. Por defecto `[1,2,3,4,5,6,8,7]`: el 7 (consejería) va al final, como piden las notas |
 | `recortes` | Ids de slides a ocultar, por ejemplo `["s08", "s16", "s19", "s32"]` |
 
@@ -105,7 +105,7 @@ Mientras una URL sea un placeholder, el QR muestra "QR pendiente" en lugar de un
 **Ejemplos ya incluidos para "¿Humano o IA?"** (rondas imagen y video): `img-real.jpg`, `img-ia.jpg`, `video-real.mp4`, `video-ia.mp4`, de Wikimedia Commons con licencias que permiten publicarlos. Fuentes, licencias y atribuciones en `public/media/CREDITS.md`; el crédito aparece bajo cada opción al revelar (`config.json → creditos`).
 
 **Archivos que sigues poniendo tú** en `public/media/` (o directo en `dist/presentacion/media/` sin recompilar). La lista está en `public/media/LEEME.txt`:
-`audio-real.mp3` y `audio-clon.mp3` (solo tu propia voz; no los subas al repositorio público), `captura-prompt-pobre.png`, `captura-prompt-rctf.png`, `video-demo-talento.mp4`, `captura-alucinacion.png` (solo una captura real tuya) y `video-demo-lovable.mp4` (video del proceso, respaldo de S35).
+`captura-prompt-pobre.png`, `captura-prompt-rctf.png`, `video-demo-talento.mp4`, `captura-alucinacion.png` (solo una captura real tuya) y `video-demo-lovable.mp4` (video del proceso, respaldo de S35).
 
 **Por verificar antes de presentar** (también están en las notas): `{{VERIFICAR_META_AI_ACTIVO}}` (S08), `{{VERIFICAR_PLANES_GRATIS}}` (S31), `{{VERIFICAR_ESTADO_PL_ANTES_DEL_EVENTO}}` (S25), `{{CONFIRMAR_VERSION}}` (citas en Reina-Valera 1960).
 
@@ -120,7 +120,7 @@ En vivo: **Alt + →** salta los pasos que falten de una slide. Si sabes de ante
 | 3 | Semáforo con 5 casos | `"semaforoOrden": [1, 4, 6, 8, 7]` |
 | 4 | Omitir S32 | `"recortes": ["s32"]` |
 
-Nunca recortar: S14, S23, S28, S37–S39.
+Nunca recortar: S14, S23, S28, S37–S39 y Preguntas (slide final).
 
 ## 7. Modo ligero, movimiento reducido y rendimiento
 
@@ -145,7 +145,7 @@ x10/
   config.json              URLs, textos, medios, orden y recortes
   scripts/build-qr.js      QR en SVG desde config.json (librería qrcode)
   scripts/serve.js         servidor estático sin dependencias para dist/
-  public/media/            fotos, audios y videos del expositor
+  public/media/            fotos y videos (ejemplos con licencia + capturas del expositor)
   src/
     main.js                arranque: Reveal + GSAP + Three.js
     slides/                un archivo por bloque (b0-presesion.html … bx-opcional.html)
@@ -181,7 +181,7 @@ Antes del evento: plan con créditos suficientes (el gratis de Lovable da 5 diar
 **Prompt 1, idea C (grupo)**
 > Crea una app sencilla para organizar las reuniones semanales de un grupo pequeño: calendario de próximas reuniones, tema de cada reunión, lista de quién lleva qué (anfitrión, alimentos, música) y una sección de anuncios. Usa datos de ejemplo ficticios. Diseño amigable y optimizado para celular. Todo en español.
 
-**Prompt 2 (iteración, bloque opcional, S41)**
+**Prompt 2 (iteración opcional)**
 > Agrega un formulario de contacto con nombre, servicio de interés y mensaje. Al enviarlo, abre WhatsApp con el mensaje ya armado.
 
 **Alternativa sin Lovable:** pedirle a Claude que genere en vivo una línea de tiempo interactiva del contexto de Mateo 25 y Lucas 19.
@@ -192,7 +192,6 @@ Antes del evento: plan con créditos suficientes (el gratis de Lovable da 5 diar
 - [ ] Vista del presentador probada (S), notas legibles, reloj visible.
 - [ ] Proyector probado en tema claro y oscuro (T). Elegir uno.
 - [ ] Modo ligero probado (M) por si el equipo del salón no da.
-- [ ] Audio de S03 suena por el sistema del salón (clic previo en la ventana).
 - [ ] Videos de respaldo (2 y 4) cargan y se reproducen.
 - [ ] QR del playbook escaneable desde la última fila (ocupa más del 25 % del alto).
 - [ ] PDF exportado en una memoria USB.

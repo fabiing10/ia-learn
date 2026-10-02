@@ -8,7 +8,7 @@ import {
   DEFAULT_SESSION, FEAR_LABELS, getPath, resolveTitle, isAnswered, pruneAnswers,
 } from '../shared/questions.js';
 import { diagnose, LEVELS, LEVEL_ORDER, DIMENSION_LABELS } from '../shared/diagnosis.js';
-import { buildRow, cleanSession, validateAlias } from '../shared/data.js';
+import { buildRow, cleanSession, validateAlias, validateEmail } from '../shared/data.js';
 import { isDemo, submitResponse, flushQueue } from '../shared/supabase.js';
 import { esc, bindThemeToggle, toast, ICONS, reducedMotion, readParam } from '../shared/ui.js';
 
@@ -43,6 +43,8 @@ const state = {
   index: 0,
   answers: {},
   alias: '',
+  email: '',
+  consentAt: null,
   startedAt: 0,
   result: null,
   save: null,
@@ -80,6 +82,8 @@ const saveProgress = () =>
     index: state.index,
     answers: state.answers,
     alias: state.alias,
+    email: state.email,
+    consentAt: state.consentAt,
     startedAt: state.startedAt,
   });
 
@@ -351,24 +355,47 @@ function renderIntro() {
         <label class="field" for="alias">
           <span class="field__label">¿Cómo te llamamos? <small>Opcional</small></span>
           <input id="alias" name="alias" type="text" maxlength="40" autocomplete="nickname" autocapitalize="words"
-            enterkeyhint="go" placeholder="Tu nombre o apodo" value="${esc(state.alias)}" aria-describedby="alias-err" />
+            enterkeyhint="next" placeholder="Tu nombre o apodo" value="${esc(state.alias)}" aria-describedby="alias-err" />
           <span class="field__error" id="alias-err" role="alert"></span>
         </label>
+        <label class="field" for="email">
+          <span class="field__label">Tu correo</span>
+          <input id="email" name="email" type="email" inputmode="email" maxlength="254" autocomplete="email" autocapitalize="off"
+            spellcheck="false" enterkeyhint="go" placeholder="nombre@correo.com" value="${esc(state.email)}" aria-describedby="email-err" required />
+          <span class="field__error" id="email-err" role="alert"></span>
+        </label>
+        <label class="consent" for="consent">
+          <input id="consent" name="consent" type="checkbox" ${state.consentAt ? 'checked' : ''} aria-describedby="consent-err" required />
+          <span>Autorizo el uso de mi correo para recibir el material del taller x10 y comunicaciones sobre él (Ley 1581 de 2012).</span>
+        </label>
+        <span class="field__error" id="consent-err" role="alert"></span>
         <button class="btn btn--gold btn--block" type="submit">Empezar ${ICONS.arrow}</button>
       </form>
-      <p class="privacy">${ICONS.shield}<span>Anónimo. Solo para conocer al público del taller (Ley 1581 de 2012).</span></p>
+      <p class="privacy">${ICONS.shield}<span>Tu correo solo lo ve el expositor y no se comparte. Las respuestas se muestran en el taller únicamente como totales del grupo.</span></p>
     </section>`, { focus: null });
 }
 
 function start(form) {
-  const { value, error } = validateAlias(form.alias.value);
-  const err = form.querySelector('.field__error');
-  if (error) {
-    err.textContent = error;
-    form.alias.setAttribute('aria-invalid', 'true');
-    form.alias.focus();
+  const alias = validateAlias(form.alias.value);
+  const email = validateEmail(form.email.value);
+  const consent = form.consent.checked;
+  const fail = (input, id, message) => {
+    form.querySelector(`#${id}`).textContent = message;
+    input.setAttribute('aria-invalid', 'true');
+  };
+  form.querySelectorAll('.field__error').forEach((el) => (el.textContent = ''));
+  form.querySelectorAll('[aria-invalid]').forEach((el) => el.removeAttribute('aria-invalid'));
+  if (alias.error) fail(form.alias, 'alias-err', alias.error);
+  if (email.error) fail(form.email, 'email-err', email.error);
+  if (!consent) fail(form.consent, 'consent-err', 'Necesitamos tu autorización para guardar el correo.');
+  const firstBad = form.querySelector('[aria-invalid="true"]');
+  if (firstBad) {
+    firstBad.focus();
     return;
   }
+  const value = alias.value;
+  state.email = email.value;
+  state.consentAt = state.consentAt || new Date().toISOString();
   state.alias = value;
   if (!state.startedAt || !Object.keys(state.answers).length) state.startedAt = Date.now();
   state.view = 'question';
@@ -381,7 +408,14 @@ function start(form) {
 
 async function finish() {
   const answers = pruneAnswers(state.answers);
-  const row = buildRow({ answers, alias: state.alias, session, durationMs: Date.now() - state.startedAt });
+  const row = buildRow({
+    answers,
+    alias: state.alias,
+    email: state.email,
+    consentAt: state.consentAt,
+    session,
+    durationMs: Date.now() - state.startedAt,
+  });
   state.result = { answers, alias: row.alias, level: row.level };
   state.save = 'pending';
   state.view = 'result';

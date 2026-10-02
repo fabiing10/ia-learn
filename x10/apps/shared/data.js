@@ -30,13 +30,23 @@ export function validateAlias(raw) {
   return { value, error: null };
 }
 
+/** Required email (Ley 1581: stored only with explicit consent, see consent_at). */
+export function validateEmail(raw) {
+  const value = String(raw ?? '').trim().toLowerCase().slice(0, 254);
+  if (!value) return { value: '', error: 'Escribe tu correo.' };
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value)) return { value: '', error: 'Revisa tu correo: parece incompleto.' };
+  return { value, error: null };
+}
+
 /** One insert payload for public.x10_responses (columns per CONTRACT.md). */
-export function buildRow({ answers, alias, session, durationMs }) {
+export function buildRow({ answers, alias, email, consentAt, session, durationMs }) {
   const a = pruneAnswers(answers);
   const d = diagnose(a);
   return {
     session: cleanSession(session),
     alias: validateAlias(alias).value || null,
+    email: email ? validateEmail(email).value || null : null,
+    consent_at: email ? consentAt || new Date().toISOString() : null,
     role: a.role,
     industry: a.industry ?? null,
     usage_frequency: a.usage ?? null,
@@ -111,14 +121,14 @@ export function ranked(map, limit = Infinity) {
 }
 
 const CSV_COLUMNS = [
-  'created_at', 'session', 'alias', 'role', 'industry', 'usage_frequency', 'fear_level',
+  'created_at', 'session', 'alias', 'email', 'consent_at', 'role', 'industry', 'usage_frequency', 'fear_level',
   'use_areas', 'level', 'score', 'uso', 'fundamentos', 'aplicacion', 'discernimiento',
   'duration_ms', 'answers',
 ];
 
 function csvCell(v) {
   let s = v === null || v === undefined ? '' : typeof v === 'object' ? JSON.stringify(v) : String(v);
-  // Neutralise spreadsheet formulas (alias is user text).
+  // Neutralise spreadsheet formulas (alias and email are user text).
   if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`;
   return /[",\r\n;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
@@ -129,7 +139,7 @@ export function toCSV(rows = []) {
     const s = r.scores ?? {};
     lines.push(
       [
-        r.created_at, r.session, r.alias, r.role, r.industry, r.usage_frequency, r.fear_level,
+        r.created_at, r.session, r.alias, r.email, r.consent_at, r.role, r.industry, r.usage_frequency, r.fear_level,
         list(r.use_areas).join('|'), r.level, r.score, s.uso, s.fundamentos, s.aplicacion, s.discernimiento,
         r.duration_ms, r.answers,
       ]

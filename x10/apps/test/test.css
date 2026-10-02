@@ -177,6 +177,31 @@
   display: none;
 }
 
+/* Ley 1581 consent: explicit, unticked by default */
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.consent input {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin: 1px 0 0;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+
+.consent input[aria-invalid='true'] {
+  outline: 2px solid var(--stop);
+  outline-offset: 2px;
+}
+
 .btn--block {
   width: 100%;
   min-height: 56px;

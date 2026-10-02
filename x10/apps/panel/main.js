@@ -179,7 +179,7 @@ function feedCard(agg) {
       (r) => `
       <li class="${r.id === state.freshId ? 'is-new' : ''}">
         <span class="feed__lvl feed__lvl--${esc(r.level)}">${LEVELS[r.level]?.mult ?? '?'}</span>
-        <span class="feed__who"><b>${r.alias ? esc(r.alias) : 'Anónimo'}</b><small>${esc(labelOf.role(r.role))}</small></span>
+        <span class="feed__who"><b>${r.alias ? esc(r.alias) : 'Sin nombre'}</b><small>${esc(labelOf.role(r.role))}${r.email ? ` · ${esc(r.email)}` : ''}</small></span>
         <time class="feed__time" datetime="${esc(r.created_at)}" data-ago="${esc(r.created_at)}">${ago(r.created_at)}</time>
       </li>`,
     )

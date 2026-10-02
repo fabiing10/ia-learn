@@ -1,99 +1,14 @@
-// S03 · ¿Humano o IA? — three rounds (image, text, voice), each revealed with a
-// gold frame drawn around the AI-made option. Voice round plays audio on
-// clicker steps, or by clicking the buttons.
+// S03 · ¿Humano o IA? — two rounds (image, video), each revealed with a gold
+// frame drawn around the AI-made option. Video clips loop muted while shown.
 import { gsap, defineCtrl } from '../core/motion.js';
 import { readStep } from '../core/stepper.js';
 
-const ROUNDS = ['imagen', 'texto', 'video', 'voz'];
-const BARS = 22;
+const ROUNDS = ['imagen', 'video'];
 
 function parse(name) {
   if (!name) return { round: 'imagen', phase: 'show' };
   const [round, phase] = name.split(':');
   return { round, phase };
-}
-
-/* ---------- audio ---------- */
-
-function audioOf(opt) {
-  return opt.querySelector('audio');
-}
-
-function setPlaying(box, on) {
-  box.classList.toggle('is-playing', on);
-  const bars = box.querySelectorAll('.audio__wave i');
-  gsap.killTweensOf(bars);
-  if (on) {
-    bars.forEach((bar) => {
-      gsap.to(bar, {
-        scaleY: () => gsap.utils.random(0.2, 1),
-        duration: () => gsap.utils.random(0.12, 0.28),
-        ease: 'sine.inOut',
-        repeat: -1,
-        repeatRefresh: true,
-        yoyo: true,
-      });
-    });
-  } else {
-    gsap.to(bars, { scaleY: 0.12, duration: 0.3, ease: 'power2.out' });
-  }
-}
-
-function stopAll(slide) {
-  slide.querySelectorAll('.audio').forEach((box) => {
-    const a = box.querySelector('audio');
-    if (a) {
-      a.pause();
-      a.currentTime = 0;
-    }
-    setPlaying(box, false);
-    gsap.set(box.querySelector('.audio__ring'), { drawSVG: '0%' });
-  });
-}
-
-function play(slide, side) {
-  stopAll(slide);
-  const opt = slide.querySelector(`[data-round="voz"] [data-opt="${side}"]`);
-  const box = opt?.querySelector('.audio');
-  const a = audioOf(opt);
-  if (!box) return;
-  setPlaying(box, true);
-  if (!a || box.classList.contains('is-missing')) return;
-  a.currentTime = 0;
-  a.play().catch(() => setPlaying(box, false));
-}
-
-function wireAudio(slide) {
-  slide.querySelectorAll('[data-round="voz"] .audio').forEach((box) => {
-    const wave = box.querySelector('.audio__wave');
-    wave.innerHTML = '<i></i>'.repeat(BARS);
-    const ring = box.querySelector('.audio__ring');
-    gsap.set(ring, { drawSVG: '0%' });
-
-    box.querySelector('.audio__play').addEventListener('click', (e) => {
-      e.stopPropagation();
-      const a = box.querySelector('audio');
-      if (box.classList.contains('is-playing')) {
-        a?.pause();
-        setPlaying(box, false);
-      } else {
-        play(slide, box.closest('[data-opt]').dataset.opt);
-      }
-    });
-
-    // audio element is mounted by config.js; wait for it
-    const hook = () => {
-      const a = box.querySelector('audio');
-      if (!a) return false;
-      a.addEventListener('timeupdate', () => {
-        if (a.duration) gsap.to(ring, { drawSVG: `${(a.currentTime / a.duration) * 100}%`, duration: 0.25, ease: 'none' });
-      });
-      a.addEventListener('ended', () => setPlaying(box, false));
-      a.addEventListener('pause', () => a.paused && setPlaying(box, false));
-      return true;
-    };
-    if (!hook()) requestAnimationFrame(hook);
-  });
 }
 
 /* ---------- frames ---------- */
@@ -174,20 +89,12 @@ function render(slide, { animate }) {
     else v.pause?.();
   });
 
-  // Voice round audio follows the clicker
-  if (round !== 'voz') stopAll(slide);
-  else if (phase === 'playA') play(slide, 'A');
-  else if (phase === 'playB') play(slide, 'B');
-  else if (phase === 'show') stopAll(slide);
 
   slide.dataset.round = round;
   slide.dataset.revealed = revealed ? '1' : '0';
 }
 
 defineCtrl('hoia', {
-  init(slide) {
-    wireAudio(slide);
-  },
   prepare(slide) {
     sizeFrames(slide);
   },
@@ -201,7 +108,6 @@ defineCtrl('hoia', {
     render(slide, { animate: !document.documentElement.classList.contains('is-lite') });
   },
   leave(slide) {
-    stopAll(slide);
     slide.querySelectorAll('[data-round="video"] video').forEach((v) => v.pause());
   },
   print(slide) {

@@ -3,34 +3,20 @@
   "urlTest": "https://x10-presentacion.vercel.app/test/",
   "urlSite": "https://x10-presentacion.vercel.app/",
   "testSession": "mci-2026",
-  "urlLanding": "{{URL_LANDING_OPCIONAL}}",
-  "urlDemoApp": "{{URL_DEMO_APP}}",
-  "contacto": "{{CONTACTO_EXPOSITOR}}",
+  "contacto": "WhatsApp 314 366 6151",
   "herramientaDemo": "Lovable",
   "expositor": "Fabian Zapata",
-  "textos": {
-    "textoHumano": "{{TEXTO_HUMANO}}",
-    "textoIa": "{{TEXTO_IA}}"
-  },
   "humanoOIa": {
     "imagen": {
       "ia": "B"
     },
-    "texto": {
-      "ia": "A"
-    },
     "video": {
       "ia": "A"
-    },
-    "voz": {
-      "ia": "B"
     }
   },
   "media": {
     "imgReal": "media/img-real.jpg",
     "imgIa": "media/img-ia.jpg",
-    "audioReal": "media/audio-real.mp3",
-    "audioClon": "media/audio-clon.mp3",
     "capturaPromptPobre": "media/captura-prompt-pobre.png",
     "capturaPromptRctf": "media/captura-prompt-rctf.png",
     "capturaAlucinacion": "media/captura-alucinacion.png",
@@ -56,5 +42,9 @@
     "imgIa": "IA: «ChatGPT image of a London pigeon» (GPT Image), dominio público, vía Wikimedia Commons",
     "videoReal": "Video: «Orange tabby cat grooming…», Brion Vibber, CC BY-SA 3.0, vía Wikimedia Commons (recortado, sin audio)",
     "videoIa": "IA: «Cat-on-bed» (Sora, OpenAI), dominio público, vía Wikimedia Commons"
+  },
+  "whatsapp": {
+    "numero": "573143666151",
+    "mensaje": "Hola Fabian, soy participante del taller x10 (MCI 2026). Mi nombre es "
   }
 }

@@ -8,7 +8,7 @@ import {
   QUESTIONS, BRANCH_KEYS, MAX_QUESTIONS, getPath, pruneAnswers, isAnswered, answerKeys,
 } from './questions.js';
 import { diagnose, LEVELS, PLAYBOOK_ANCHORS, scoreDimensions } from './diagnosis.js';
-import { buildRow, aggregate, toCSV, makeSampleRows, validateAlias, cleanSession } from './data.js';
+import { buildRow, aggregate, toCSV, makeSampleRows, validateAlias, validateEmail, cleanSession } from './data.js';
 
 let failures = 0;
 const test = (name, fn) => {
@@ -241,11 +241,20 @@ test('pruneAnswers drops answers from an abandoned branch', () => {
 
 test('row payload fits the table constraints', () => {
   for (const p of PROFILES) {
-    const row = buildRow({ answers: p.answers, alias: '  Juan   Pablo ', session: 'MCI-2026', durationMs: 183456.7 });
+    const row = buildRow({
+      answers: p.answers,
+      alias: '  Juan   Pablo ',
+      email: ' Juan@Correo.com ',
+      consentAt: '2026-10-02T18:00:00.000Z',
+      session: 'MCI-2026',
+      durationMs: 183456.7,
+    });
     assert.deepEqual(Object.keys(row).sort(), [
-      'alias', 'answers', 'duration_ms', 'fear_level', 'industry', 'level', 'role', 'score', 'scores',
-      'session', 'usage_frequency', 'use_areas',
+      'alias', 'answers', 'consent_at', 'duration_ms', 'email', 'fear_level', 'industry', 'level', 'role',
+      'score', 'scores', 'session', 'usage_frequency', 'use_areas',
     ]);
+    assert.equal(row.email, 'juan@correo.com');
+    assert.equal(row.consent_at, '2026-10-02T18:00:00.000Z');
     assert.equal(row.session, 'mci-2026');
     assert.equal(row.alias, 'Juan Pablo');
     assert.ok(row.role.length <= 60 && row.use_areas.length <= 12);
@@ -254,6 +263,16 @@ test('row payload fits the table constraints', () => {
     assert.ok(Buffer.byteLength(JSON.stringify(row.scores)) < 500);
     assert.equal(row.duration_ms, 183457);
   }
+});
+
+test('email is required, normalised and validated', () => {
+  assert.equal(validateEmail('  Ana@Correo.CO ').value, 'ana@correo.co');
+  assert.ok(validateEmail('').error);
+  assert.ok(validateEmail('ana@correo').error);
+  assert.ok(validateEmail('sin-arroba.com').error);
+  const anon = buildRow({ answers: PROFILES[0].answers, session: 'x' });
+  assert.equal(anon.email, null);
+  assert.equal(anon.consent_at, null);
 });
 
 test('alias rejects contact data and session falls back safely', () => {
