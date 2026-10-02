@@ -1,22 +1,31 @@
 {
-  "urlPlaybook": "{{URL_PLAYBOOK}}",
+  "urlPlaybook": "https://x10-presentacion.vercel.app/playbook/",
+  "urlTest": "https://x10-presentacion.vercel.app/test/",
+  "urlSite": "https://x10-presentacion.vercel.app/",
+  "testSession": "mci-2026",
   "urlLanding": "{{URL_LANDING_OPCIONAL}}",
   "urlDemoApp": "{{URL_DEMO_APP}}",
   "contacto": "{{CONTACTO_EXPOSITOR}}",
   "herramientaDemo": "Lovable",
   "expositor": "Fabian Zapata",
-
   "textos": {
     "textoHumano": "{{TEXTO_HUMANO}}",
     "textoIa": "{{TEXTO_IA}}"
   },
-
   "humanoOIa": {
-    "imagen": { "ia": "B" },
-    "texto": { "ia": "A" },
-    "voz": { "ia": "B" }
+    "imagen": {
+      "ia": "B"
+    },
+    "texto": {
+      "ia": "A"
+    },
+    "video": {
+      "ia": "A"
+    },
+    "voz": {
+      "ia": "B"
+    }
   },
-
   "media": {
     "imgReal": "media/img-real.jpg",
     "imgIa": "media/img-ia.jpg",
@@ -25,12 +34,27 @@
     "capturaPromptPobre": "media/captura-prompt-pobre.png",
     "capturaPromptRctf": "media/captura-prompt-rctf.png",
     "capturaAlucinacion": "media/captura-alucinacion.png",
-    "capturaResultadoDemo": "media/captura-resultado-demo.png",
     "videoDemoTalento": "media/video-demo-talento.mp4",
-    "videoDemoLovable": "media/video-demo-lovable.mp4"
+    "videoDemoLovable": "media/video-demo-lovable.mp4",
+    "videoReal": "media/video-real.mp4",
+    "videoIa": "media/video-ia.mp4",
+    "capturaLanding": "media/caso-landing.png"
   },
-
-  "semaforoOrden": [1, 2, 3, 4, 5, 6, 8, 7],
-
-  "recortes": []
+  "semaforoOrden": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    7
+  ],
+  "recortes": [],
+  "creditos": {
+    "imgReal": "Foto: «Pigeons with Westminster Bridge», Rev Stan, CC BY 2.0, vía Wikimedia Commons",
+    "imgIa": "IA: «ChatGPT image of a London pigeon» (GPT Image), dominio público, vía Wikimedia Commons",
+    "videoReal": "Video: «Orange tabby cat grooming…», Brion Vibber, CC BY-SA 3.0, vía Wikimedia Commons (recortado, sin audio)",
+    "videoIa": "IA: «Cat-on-bed» (Sora, OpenAI), dominio público, vía Wikimedia Commons"
+  }
 }

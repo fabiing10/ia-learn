@@ -19,6 +19,41 @@
   </aside>
 </section>
 
+<section id="s37b" data-block="9" data-bg-alpha="0.3" data-ctrl="results" class="s-results s-tight">
+  <header class="results__head">
+    <h2 class="t-h1" data-split="chars">¿Dónde estamos?</h2>
+    <p class="results__count"><b data-res-total>0</b><span>respuestas en vivo</span></p>
+  </header>
+  <div class="results__top">
+    <ol class="results__levels" data-res-levels>
+      <li data-level="x1"><span class="results__lv"><b>×1</b> Observador</span><span class="results__bar"><i></i></span><span class="results__pct">0%</span></li>
+      <li data-level="x2"><span class="results__lv"><b>×2</b> Explorador</span><span class="results__bar"><i></i></span><span class="results__pct">0%</span></li>
+      <li data-level="x5"><span class="results__lv"><b>×5</b> Practicante</span><span class="results__bar"><i></i></span><span class="results__pct">0%</span></li>
+      <li data-level="x10"><span class="results__lv"><b>×10</b> Multiplicador</span><span class="results__bar"><i></i></span><span class="results__pct">0%</span></li>
+    </ol>
+    <div class="results__fear">
+      <p class="results__label">Nivel de temor promedio</p>
+      <p class="results__fear-num"><b data-res-fear>–</b><span>/ 5</span></p>
+      <span class="results__fear-scale" data-res-fear-scale><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+  <div class="results__lists">
+    <div><p class="results__label">Roles</p><ol data-res-list="role"></ol></div>
+    <div><p class="results__label">Industrias</p><ol data-res-list="industry"></ol></div>
+    <div><p class="results__label">Dónde la usarían</p><ol data-res-list="use_areas"></ol></div>
+  </div>
+  <p class="results__status" data-res-status aria-live="polite"></p>
+  <aside class="notes">
+    <p><strong>S37b · ¿Dónde estamos?</strong> · resultados en vivo del test x10 (sesión de <code>config.json → testSession</code>)</p>
+    <ul>
+      <li>Se actualiza cada pocos segundos mientras la slide está en pantalla. Necesita internet; sin conexión muestra un aviso y sigues.</li>
+      <li>Conectar con S37: "Lo que recibimos es para multiplicarlo. Miren dónde estamos hoy como grupo."</li>
+      <li>Leer el nivel más común, el temor promedio y dónde la usarían. No señalar a nadie: es anónimo.</li>
+      <li>Detalle completo (industrias, preocupaciones, fundamentos) en /panel.</li>
+    </ul>
+  </aside>
+</section>
+
 <section id="s38" data-block="9" data-bg-alpha="0.4" class="s-challenges">
   <h2 class="t-h1" data-split="chars">Tres retos para esta semana</h2>
   <ol class="challenges" data-in="stagger">
@@ -40,15 +75,15 @@
       <p class="close__contact" data-in><span class="close__contact-label">Contacto</span> <span data-config="contacto" data-ph="CONTACTO_EXPOSITOR"></span></p>
     </div>
     <figure class="close__qr" data-in="mask">
-      <div class="qrbox" data-qr="playbook"></div>
-      <figcaption>Playbook x10</figcaption>
+      <div class="qrbox" data-qr="site"></div>
+      <figcaption>x10-presentacion.vercel.app</figcaption>
     </figure>
   </div>
   <aside class="notes">
     <p><strong>S39 · Cierre</strong> · NUNCA RECORTAR</p>
     <ul>
       <li>Dejar este slide proyectado durante las preguntas.</li>
-      <li>QR al playbook: <code>config.json → urlPlaybook</code>, luego <code>npm run build</code>.</li>
+      <li>El QR lleva a la página principal (x10-presentacion.vercel.app): desde ahí, el playbook, el test y la presentación. Cambia la URL en <code>config.json → urlSite</code> y luego <code>npm run build</code>.</li>
       <li>Si hay 80 minutos, el clicker continúa al bloque opcional.</li>
     </ul>
   </aside>

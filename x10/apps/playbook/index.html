@@ -1,0 +1,1631 @@
+<!doctype html>
+<html lang="es-CO" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0B0F1A" />
+    <meta name="description" content="Playbook x10: guías, prompts listos para copiar, el semáforo de uso, investigación bíblica con verificación, seguridad familiar y una ruta de 30 días para usar la inteligencia artificial con criterio." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230B0F1A%22/%3E%3Cpath d=%22M28 28L72 72M72 28L28 72%22 stroke=%22%23E8B53A%22 stroke-width=%2214%22 stroke-linecap=%22round%22/%3E%3C/svg%3E" />
+    <title>Playbook ×10 · Multiplica tus talentos con inteligencia artificial</title>
+    <script>
+      // Theme before first paint: saved choice, then the system preference, then dark.
+      (function () {
+        var d = document.documentElement;
+        var t = null;
+        try { t = localStorage.getItem('x10-playbook-theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        d.dataset.theme = t;
+        d.classList.add('js');
+      })();
+    </script>
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <svg class="sprite" aria-hidden="true" focusable="false">
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2.5" /><path d="M15.5 5.5v-.5a2 2 0 0 0-2-2H6a2.5 2.5 0 0 0-2.5 2.5v7.5a2 2 0 0 0 2 2h.5" /></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></symbol>
+      <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1" /><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1" /></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4" /></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" /></symbol>
+      <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9" /><rect x="3.5" y="9" width="17" height="8" rx="2" /><path d="M7 14.5h10v6H7z" /></symbol>
+      <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6.5h11M9 12h11M9 17.5h11" /><path d="M4.5 6.5h.01M4.5 12h.01M4.5 17.5h.01" /></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4.5v15M6 13.5l6 6 6-6" /></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6" /></symbol>
+      <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7" /><path d="M4 4.5V9h4.5" /></symbol>
+    </svg>
+
+    <a class="skip" href="#contenido">Saltar al contenido</a>
+    <div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
+
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Playbook ×10, volver al inicio">
+        <span class="brand__mark" aria-hidden="true"><span class="brand__x">×</span>10</span>
+        <span class="brand__name">Playbook</span>
+      </a>
+      <div class="topbar__actions">
+        <button class="tbtn tbtn--toc" type="button" data-toc-open aria-controls="indice" aria-expanded="false">
+          <svg class="ico" aria-hidden="true"><use href="#i-list" /></svg><span class="tbtn__label">Índice</span>
+        </button>
+        <button class="tbtn" type="button" data-print>
+          <svg class="ico" aria-hidden="true"><use href="#i-print" /></svg><span class="tbtn__label">Guardar PDF</span>
+        </button>
+        <button class="tbtn tbtn--icon" type="button" data-theme-toggle aria-label="Cambiar a tema claro">
+          <svg class="ico ico--sun" aria-hidden="true"><use href="#i-sun" /></svg>
+          <svg class="ico ico--moon" aria-hidden="true"><use href="#i-moon" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="hero" id="top">
+      <div class="hero__inner">
+        <p class="hero__event">Convención de Hombres MCI 2026 · Taller práctico</p>
+        <p class="hero__mark" aria-label="por 10"><span class="hero__x" aria-hidden="true">×</span><span class="hero__n" data-count aria-hidden="true">10</span></p>
+        <h1 class="hero__title"><span class="hero__kicker">Playbook</span> Multiplica tus talentos con inteligencia artificial</h1>
+        <p class="hero__slogan">La IA acelera. <span class="t-gold">Tú decides.</span></p>
+        <p class="hero__by">Fabian Zapata · Material para llevar a casa</p>
+        <div class="hero__cta">
+          <a class="btn btn--gold" href="#bienvenida"><span>Empezar a leer</span><svg class="ico" aria-hidden="true"><use href="#i-down" /></svg></a>
+          <a class="btn btn--ghost" href="/test/"><span>Haz tu diagnóstico</span><svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+        </div>
+        <ul class="hero__facts" aria-label="Qué hay en este playbook">
+          <li><b>10</b> capítulos</li>
+          <li><b>20</b> prompts listos para copiar</li>
+          <li><b>30</b> días de ruta práctica</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="scrim" data-toc-close hidden></div>
+      <nav class="toc" id="indice" aria-label="Índice del playbook">
+        <div class="toc__head">
+          <p class="toc__title">Índice</p>
+          <button class="tbtn tbtn--icon toc__close" type="button" data-toc-close aria-label="Cerrar índice">
+            <svg class="ico" aria-hidden="true"><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <ol class="toc__list">
+          <li><a href="#bienvenida"><span class="toc__n">01</span><span>Bienvenida</span></a></li>
+          <li>
+            <a href="#que-es-la-ia"><span class="toc__n">02</span><span>Qué es la IA</span></a>
+            <ol><li><a href="#glosario">Glosario</a></li></ol>
+          </li>
+          <li>
+            <a href="#rctf"><span class="toc__n">03</span><span>La fórmula R·C·T·F</span></a>
+            <ol>
+              <li><a href="#prompts-trabajo">Prompts · Trabajo</a></li>
+              <li><a href="#prompts-negocio">Prompts · Negocio</a></li>
+              <li><a href="#prompts-hogar">Prompts · Hogar</a></li>
+              <li><a href="#prompts-biblia">Prompts · Biblia</a></li>
+            </ol>
+          </li>
+          <li><a href="#semaforo"><span class="toc__n">04</span><span>El semáforo</span></a></li>
+          <li><a href="#investigacion-biblica"><span class="toc__n">05</span><span>Investigación bíblica</span></a></li>
+          <li><a href="#herramientas"><span class="toc__n">06</span><span>Herramientas</span></a></li>
+          <li>
+            <a href="#seguridad"><span class="toc__n">07</span><span>Seguridad</span></a>
+            <ol>
+              <li><a href="#palabra-clave">Palabra clave familiar</a></li>
+              <li><a href="#privacidad">Privacidad</a></li>
+              <li><a href="#ia-y-los-hijos">IA y los hijos</a></li>
+            </ol>
+          </li>
+          <li><a href="#marco-legal"><span class="toc__n">08</span><span>Marco legal</span></a></li>
+          <li><a href="#ruta-30-dias"><span class="toc__n">09</span><span>Ruta de 30 días</span></a></li>
+          <li><a href="#recursos"><span class="toc__n">10</span><span>Recursos</span></a></li>
+        </ol>
+        <div class="toc__foot">
+          <p class="toc__read"><span data-read-pct>0</span>&nbsp;% leído</p>
+          <a class="toc__test" href="/test/">Haz tu diagnóstico <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+        </div>
+      </nav>
+
+      <main id="contenido" tabindex="-1">
+        <!-- ===================================================== 01 -->
+        <section class="chapter" id="bienvenida" aria-labelledby="t-bienvenida" data-title="Bienvenida">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">01</span><span class="chapter__phase">Empezar</span></p>
+            <h2 class="chapter__title" id="t-bienvenida">Bienvenida</h2>
+            <p class="chapter__lede">Este playbook es la versión larga del taller: lo que vimos en 60 minutos, desarrollado para que lo leas con calma, lo practiques y lo compartas.</p>
+            <div class="segbar" style="--n: 1" aria-hidden="true"></div>
+          </header>
+
+          <div class="prose">
+            <h3>Qué es x10</h3>
+            <p><strong>x10 · Multiplica tus talentos con inteligencia artificial</strong> es un taller práctico de la Convención de Hombres MCI 2026. No es una prédica ni un curso técnico: es un espacio para entender una herramienta que ya está en tu bolsillo y decidir cómo usarla bien en tu trabajo, tu negocio, tu casa y tu servicio.</p>
+            <p>El nombre viene de la parábola de las minas. El “×10” es una <strong>metáfora de multiplicación, no una promesa</strong> de riqueza ni de resultados mágicos.</p>
+          </div>
+
+          <blockquote class="verse">
+            <p>“Señor, tu mina ha ganado diez minas.” … “tendrás autoridad sobre diez ciudades.”</p>
+            <cite>Lucas 19:16-17</cite>
+          </blockquote>
+
+          <div class="prose">
+            <p>Lo que recibimos es para multiplicarlo. Y con la multiplicación viene la responsabilidad.</p>
+          </div>
+
+          <div class="thesis">
+            <p class="thesis__label">La tesis del taller</p>
+            <p class="thesis__text">La IA multiplica; <span class="t-gold">el hombre decide.</span></p>
+            <p class="thesis__sub">La IA acelera lo que sabes hacer. El criterio, la responsabilidad, la consejería y la creatividad con propósito siguen siendo humanos.</p>
+          </div>
+
+          <div class="prose">
+            <h3>El camino: cinco fases</h3>
+            <p>El taller y este playbook siguen el mismo recorrido. Cada fase prepara la siguiente.</p>
+          </div>
+          <ol class="path wide" aria-label="Las cinco fases del recorrido">
+            <li><span class="path__n">1</span><b>Entender</b><span>Qué es la IA y cómo pedirle bien. <a href="#que-es-la-ia">Cap. 2</a> y <a href="#rctf">3</a></span></li>
+            <li><span class="path__n">2</span><b>Desmitificar</b><span>Lo que puede, lo que no y los mitos. <a href="#que-es-la-ia">Cap. 2</a></span></li>
+            <li><span class="path__n">3</span><b>Discernir</b><span>Cuándo sí, cuándo no, y cómo protegerte. <a href="#semaforo">Cap. 4</a>, <a href="#seguridad">7</a> y <a href="#marco-legal">8</a></span></li>
+            <li><span class="path__n">4</span><b>Aplicar</b><span>Prompts, investigación bíblica y herramientas. <a href="#investigacion-biblica">Cap. 5</a> y <a href="#herramientas">6</a></span></li>
+            <li><span class="path__n">5</span><b>Crear</b><span>Construir algo real y enseñar a otros. <a href="#ruta-30-dias">Cap. 9</a></span></li>
+          </ol>
+
+          <div class="prose">
+            <h3>Cómo usar este playbook</h3>
+            <ul class="ticks">
+              <li><strong>No tienes que leerlo de corrido.</strong> Usa el índice y empieza por tu nivel (abajo).</li>
+              <li><strong>Copia y adapta.</strong> Cada prompt tiene un botón para copiarlo. Cambia lo que está entre <span class="fill">{{LLAVES}}</span> por tus datos, sin datos sensibles.</li>
+              <li><strong>Practica con la ruta.</strong> La <a href="#ruta-30-dias">ruta de 30 días</a> guarda tu avance en este dispositivo.</li>
+              <li><strong>Guárdalo.</strong> Puedes <a href="#recursos">guardarlo como PDF</a> o dejarlo en los favoritos de tu celular.</li>
+              <li><strong>Compártelo.</strong> Cada título tiene un enlace directo: tócalo para copiar el enlace a esa sección.</li>
+            </ul>
+          </div>
+
+          <div class="prose">
+            <h3>Tu nivel: ×1, ×2, ×5 o ×10</h3>
+            <p>Nadie empieza en el mismo lugar. Ubica tu nivel y empieza por donde más te sirve. Si no estás seguro, el diagnóstico te lo dice.</p>
+          </div>
+          <ol class="levels wide">
+            <li class="level" data-level="x1">
+              <p class="level__mark"><span class="level__x" aria-hidden="true">×</span>1</p>
+              <h4 class="level__name">Observador</h4>
+              <p class="level__desc">Has oído hablar de la IA; la usas poco o nada.</p>
+              <p class="level__start"><b>Empieza por:</b> <a href="#que-es-la-ia">Qué es la IA</a>, el <a href="#glosario">glosario</a>, el Ejercicio 1 de <a href="#rctf">R·C·T·F</a> y la <a href="#palabra-clave">palabra clave familiar</a>.</p>
+              <span class="level__dots" aria-hidden="true"><i></i></span>
+            </li>
+            <li class="level" data-level="x2">
+              <p class="level__mark"><span class="level__x" aria-hidden="true">×</span>2</p>
+              <h4 class="level__name">Explorador</h4>
+              <p class="level__desc">La pruebas de vez en cuando, con instrucciones básicas.</p>
+              <p class="level__start"><b>Empieza por:</b> la fórmula <a href="#rctf">R·C·T·F</a> completa, los 5 prompts de tu área y <a href="#semaforo">el semáforo</a>.</p>
+              <span class="level__dots" aria-hidden="true"><i></i><i></i></span>
+            </li>
+            <li class="level" data-level="x5">
+              <p class="level__mark"><span class="level__x" aria-hidden="true">×</span>5</p>
+              <h4 class="level__name">Practicante</h4>
+              <p class="level__desc">La usas cada semana con intención, verificas y conoces sus límites.</p>
+              <p class="level__start"><b>Empieza por:</b> <a href="#investigacion-biblica">investigación bíblica</a>, cómo iterar y pedir fuentes, <a href="#herramientas">herramientas</a> y <a href="#privacidad">privacidad</a>.</p>
+              <span class="level__dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+            </li>
+            <li class="level" data-level="x10">
+              <p class="level__mark"><span class="level__x" aria-hidden="true">×</span>10</p>
+              <h4 class="level__name">Multiplicador</h4>
+              <p class="level__desc">La integras a tu trabajo o ministerio, delegas con criterio y enseñas a otros.</p>
+              <p class="level__start"><b>Empieza por:</b> la semana 4 de la <a href="#ruta-30-dias">ruta</a>, <a href="#ia-y-los-hijos">IA y los hijos</a>, el <a href="#marco-legal">marco legal</a> y usa este material para enseñar.</p>
+              <span class="level__dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            </li>
+          </ol>
+          <div class="cta-band wide">
+            <p><b>¿No sabes cuál es tu nivel?</b> Responde el diagnóstico y recibe una recomendación personal.</p>
+            <a class="btn btn--gold" href="/test/"><span>Haz tu diagnóstico</span><svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+          </div>
+        </section>
+
+        <!-- ===================================================== 02 -->
+        <section class="chapter" id="que-es-la-ia" aria-labelledby="t-que-es" data-title="Qué es la IA">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">02</span><span class="chapter__phase">Entender · Desmitificar</span></p>
+            <h2 class="chapter__title" id="t-que-es">Qué es la IA</h2>
+            <p class="chapter__lede">Una explicación sin tecnicismos: qué es, qué hace, qué no hace y por qué la responsabilidad sigue siendo tuya.</p>
+            <div class="segbar" style="--n: 2" aria-hidden="true"></div>
+          </header>
+
+          <div class="defbox">
+            <p class="defbox__label">En una frase</p>
+            <p class="defbox__text">Un sistema que aprendió de millones de ejemplos a reconocer patrones y producir respuestas.</p>
+            <p class="defbox__hint">Piensa en el autocompletar de tu WhatsApp… <span class="t-gold">pero gigante.</span></p>
+          </div>
+
+          <div class="prose">
+            <h3>El autocompletar gigante</h3>
+            <p>Cuando escribes en el celular, el teclado te sugiere la siguiente palabra. No “sabe” lo que quieres decir: calcula qué palabra suele venir después, según lo que ha visto antes.</p>
+            <p>Los asistentes de IA como ChatGPT, Claude, Gemini o Meta AI hacen algo parecido, pero a una escala enorme. Aprendieron de cantidades gigantescas de texto y, cuando les escribes, <strong>calculan cuál es la siguiente palabra más probable</strong>, y la siguiente, y la siguiente. Lo hacen tan bien que parece que entienden.</p>
+          </div>
+
+          <figure class="predict wide" aria-labelledby="predict-cap">
+            <div class="predict__line" aria-hidden="true">
+              <span>La</span> <span>IA</span> <span>acelera.</span> <span>Tú</span> <span class="predict__gap">___</span>
+            </div>
+            <ul class="predict__opts" aria-hidden="true">
+              <li class="is-top"><b>decides</b><i style="--w: 92%"></i></li>
+              <li><b>eliges</b><i style="--w: 46%"></i></li>
+              <li><b>respondes</b><i style="--w: 28%"></i></li>
+            </ul>
+            <figcaption id="predict-cap">Ilustración: el modelo elige la palabra que más probablemente sigue. Las barras son un ejemplo, no son datos reales.</figcaption>
+          </figure>
+
+          <div class="prose">
+            <p>Esto explica dos cosas importantes:</p>
+            <ul class="ticks">
+              <li><strong>Por qué escribe tan bien:</strong> ha visto muchísimos ejemplos de cómo se escribe un correo, un resumen o una explicación.</li>
+              <li><strong>Por qué se equivoca con total seguridad:</strong> produce lo <em>probable</em>, no necesariamente lo <em>cierto</em>. Si no tiene el dato, puede “completarlo” con algo que suena bien y es falso. A eso se le llama <a href="#glosario">alucinación</a>.</li>
+            </ul>
+            <p class="pull">No piensa como tú. Calcula cuál es la siguiente palabra más probable.</p>
+          </div>
+
+          <div class="prose">
+            <h3>Cómo llegamos aquí</h3>
+            <p>La IA no es nueva. Lo nuevo es la <strong>velocidad</strong>: tomó unos 70 años llegar a 2022, y en apenas unos años la IA pasó de responder a ejecutar tareas.</p>
+          </div>
+          <ol class="timeline wide">
+            <li><span class="timeline__y">1950</span><p>Alan Turing pregunta: ¿pueden pensar las máquinas?</p></li>
+            <li><span class="timeline__y">1956</span><p>Nace el término “inteligencia artificial”.</p></li>
+            <li><span class="timeline__y">1997</span><p>Una computadora (Deep Blue) vence al campeón mundial de ajedrez.</p></li>
+            <li><span class="timeline__y">2012</span><p>Las máquinas aprenden a “ver” imágenes.</p></li>
+            <li><span class="timeline__y">2017</span><p>Se inventa el <em>Transformer</em>, la “T” de ChatGPT.</p></li>
+            <li><span class="timeline__y">2022</span><p>ChatGPT llega a 100 millones de usuarios en unos 2 meses, según estimaciones de UBS reportadas en febrero de 2023.</p></li>
+            <li class="is-now"><span class="timeline__y">2024–2026</span><p>Agentes: la IA ya no solo responde, <strong>ejecuta tareas</strong>.</p></li>
+          </ol>
+
+          <div class="prose">
+            <h3>Cada herramienta nueva dio miedo</h3>
+            <p class="chain" aria-label="Imprenta, radio, televisión, internet, IA">Imprenta <span aria-hidden="true">→</span> Radio <span aria-hidden="true">→</span> Televisión <span aria-hidden="true">→</span> Internet <span aria-hidden="true">→</span> <b>IA</b></p>
+            <p>Uno de los primeros grandes libros impresos con tipos móviles fue la Biblia de Gutenberg, en el siglo XV. La iglesia usó la radio, la televisión e internet para llevar el mensaje, y cada una generó resistencia al principio.</p>
+            <p class="pull">La pregunta nunca fue la herramienta. Fue quién la usa y para qué.</p>
+          </div>
+
+          <div class="prose">
+            <h3>¿Por qué ahora?</h3>
+            <ol class="numbered">
+              <li><strong>Entiende tu idioma.</strong> Le hablas como a una persona, sin comandos ni programación.</li>
+              <li><strong>Está en tu bolsillo, muchas veces gratis.</strong> Probablemente ya la tienes en WhatsApp: es el círculo de colores de Meta AI. <span class="ph">{{VERIFICAR_META_AI_ACTIVO}}</span></li>
+              <li><strong>Mejora cada mes.</strong> Lo que hoy no hace bien, quizá lo haga pronto. Por eso importa más la habilidad que la herramienta.</li>
+            </ol>
+          </div>
+
+          <div class="prose">
+            <h3>Lo que hace y lo que no hace</h3>
+          </div>
+          <div class="canwont wide">
+            <div class="canwont__col canwont__col--yes">
+              <h4><span aria-hidden="true">+</span> Sí puede</h4>
+              <ul>
+                <li>Escribir</li>
+                <li>Resumir</li>
+                <li>Traducir</li>
+                <li>Analizar</li>
+                <li>Crear imágenes y voces</li>
+                <li>Programar</li>
+              </ul>
+            </div>
+            <div class="canwont__col canwont__col--no">
+              <h4><span aria-hidden="true">×</span> No puede</h4>
+              <ul>
+                <li>Sentir</li>
+                <li>Creer</li>
+                <li>Orar</li>
+                <li>Tener conciencia</li>
+                <li>Tener criterio moral</li>
+                <li class="is-key">Saber si lo que dice es verdad</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="prose">
+            <h3>Por qué tú sigues siendo el responsable</h3>
+            <p>La última línea de la columna derecha es la clave: <strong>la IA no sabe si lo que dice es verdad.</strong> No tiene forma de responder por sus palabras. Tú sí.</p>
+            <ul class="ticks">
+              <li>Si envías el correo que escribió, <strong>lo firmas tú</strong>.</li>
+              <li>Si publicas el dato que te dio, <strong>respondes tú</strong>.</li>
+              <li>Si tomas una decisión con su ayuda, <strong>la decisión es tuya</strong>.</li>
+            </ul>
+            <p class="pull">La IA propone. Tú decides y respondes por lo que decides.</p>
+          </div>
+
+          <div class="prose">
+            <h3>Cinco mitos, en limpio</h3>
+            <p>En el taller los votamos a mano alzada. Aquí va cada uno con su explicación.</p>
+          </div>
+          <div class="myths wide">
+            <article class="myth">
+              <p class="myth__claim">“La IA piensa y siente”</p>
+              <p class="myth__verdict">Mito</p>
+              <p>Predice palabras. No tiene alma, conciencia ni fe. La imagen de Dios está en el hombre, no en la máquina; la máquina la hizo el hombre.</p>
+              <blockquote class="verse verse--inline"><p>“…creó Dios al hombre a su imagen.”</p><cite>Génesis 1:27</cite></blockquote>
+            </article>
+            <article class="myth">
+              <p class="myth__claim">“Si lo dice la IA, es verdad”</p>
+              <p class="myth__verdict">Mito</p>
+              <p>Puede inventar datos, citas y hasta versículos, con total seguridad. Todo lo que importa se verifica. Lo practicamos en el <a href="#investigacion-biblica">capítulo 5</a>.</p>
+            </article>
+            <article class="myth">
+              <p class="myth__claim">“La IA es mala en sí misma”</p>
+              <p class="myth__verdict">Mito</p>
+              <p>Es una herramienta. El uso define el fruto. Hay preocupaciones reales —estafas, contenido falso, pornografía, adicción a pantallas— y merecen respeto. La respuesta es el discernimiento, no la ignorancia: el que no la entiende es el más fácil de engañar.</p>
+            </article>
+            <article class="myth myth--half">
+              <p class="myth__claim">“Me va a reemplazar”</p>
+              <p class="myth__verdict">Media verdad</p>
+              <p>Reemplaza tareas. El que aprende a usarla gana ventaja. Algunos trabajos van a cambiar mucho. La pregunta útil no es si te va a afectar, sino qué tareas tuyas cambian y qué haces con el tiempo que te libera.</p>
+            </article>
+            <article class="myth">
+              <p class="myth__claim">“Es gratis”</p>
+              <p class="myth__verdict">Mito</p>
+              <p>Si no pagas con dinero, muchas veces pagas con datos. <strong>Regla de oro:</strong> nunca le entregues cédulas, claves, tarjetas ni datos de otras personas. Más en <a href="#privacidad">Privacidad</a>.</p>
+            </article>
+          </div>
+
+          <!-- Glossary -->
+          <section class="sub" id="glosario" aria-labelledby="t-glosario">
+            <div class="prose">
+              <h3 class="sub__title" id="t-glosario">Glosario</h3>
+              <p>Las 6 palabras del taller y otras que vas a escuchar con frecuencia. Cada una con una definición sencilla y un ejemplo de la vida diaria.</p>
+            </div>
+            <dl class="glossary wide">
+              <div class="term term--core">
+                <dt>IA generativa <span class="badge">Del taller</span></dt>
+                <dd><p>IA que crea: texto, imágenes, voz, video, código.</p><p class="term__ex"><b>Ejemplo:</b> le pides “una imagen de una mesa servida para una cena familiar” y la crea desde cero.</p></dd>
+              </div>
+              <div class="term term--core">
+                <dt>Modelo <span class="badge">Del taller</span></dt>
+                <dd><p>El “motor”: ChatGPT, Claude, Gemini, Meta AI… En rigor, cada aplicación funciona con uno o varios modelos por dentro; en el día a día se usan casi como sinónimos.</p><p class="term__ex"><b>Ejemplo:</b> como en un carro, la aplicación es la carrocería y el modelo es el motor.</p></dd>
+              </div>
+              <div class="term term--core">
+                <dt>Prompt <span class="badge">Del taller</span></dt>
+                <dd><p>La instrucción que le das.</p><p class="term__ex"><b>Ejemplo:</b> “Resume este texto en 5 viñetas para mi jefe”.</p></dd>
+              </div>
+              <div class="term term--core">
+                <dt>Contexto <span class="badge">Del taller</span></dt>
+                <dd><p>Todo lo que le cuentas para que entienda tu caso.</p><p class="term__ex"><b>Ejemplo:</b> “Tengo un taller de ornamentación y mis clientes son conjuntos residenciales”.</p></dd>
+              </div>
+              <div class="term term--core term--key">
+                <dt>Alucinación <span class="badge">Del taller</span></dt>
+                <dd><p>Cuando inventa algo con total seguridad. Es el concepto más importante de todo el taller.</p><p class="term__ex"><b>Ejemplo:</b> te da un versículo con referencia exacta… que no existe, o te cita un libro que nadie escribió.</p></dd>
+              </div>
+              <div class="term term--core">
+                <dt>Agente <span class="badge">Del taller</span></dt>
+                <dd><p>IA que ejecuta tareas por ti, no solo conversa: le das un objetivo, planea, ejecuta pasos y te entrega el resultado.</p><p class="term__ex"><b>Ejemplo:</b> le pides “crea una página para mi negocio” y la construye y la publica.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Inteligencia artificial (IA)</dt>
+                <dd><p>Un sistema que aprendió de millones de ejemplos a reconocer patrones y producir respuestas.</p><p class="term__ex"><b>Ejemplo:</b> el autocompletar del teclado de tu celular o el filtro que manda el correo basura a la carpeta de spam.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Algoritmo</dt>
+                <dd><p>Una serie de pasos ordenados para resolver un problema.</p><p class="term__ex"><b>Ejemplo:</b> una receta de cocina es un algoritmo; también lo es el sistema que decide qué videos ves primero en una red social.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Aprendizaje automático</dt>
+                <dd><p>La forma en que una máquina “aprende” de ejemplos, en lugar de seguir reglas escritas una por una. En inglés, <i lang="en">machine learning</i>.</p><p class="term__ex"><b>Ejemplo:</b> después de ver muchísimos correos marcados como spam, el sistema aprende a reconocer los nuevos.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Datos de entrenamiento</dt>
+                <dd><p>Los textos, imágenes y demás ejemplos con los que se entrenó un modelo. Lo que no estaba ahí, el modelo no lo sabe… o lo adivina.</p><p class="term__ex"><b>Ejemplo:</b> si le preguntas por una noticia de esta semana y no busca en internet, puede responder con información vieja.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Fecha de corte</dt>
+                <dd><p>El momento hasta el cual llegan los datos con los que se entrenó un modelo.</p><p class="term__ex"><b>Ejemplo:</b> un modelo entrenado antes de un cambio de ley no lo conoce, a menos que busque en internet. Por eso las normas y los precios se verifican.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Modelo de lenguaje (LLM)</dt>
+                <dd><p>Un modelo entrenado con enormes cantidades de texto para predecir la siguiente palabra más probable. Es la base de los asistentes que conversan.</p><p class="term__ex"><b>Ejemplo:</b> cuando un asistente te responde, por dentro un modelo de lenguaje está escribiendo palabra por palabra.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Transformer y GPT</dt>
+                <dd><p>El <i lang="en">Transformer</i> es el tipo de modelo inventado en 2017 que hizo posibles los asistentes actuales. Es la “T” de GPT: <i lang="en">Generative Pre-trained Transformer</i> (transformador generativo preentrenado).</p><p class="term__ex"><b>Ejemplo:</b> cuando alguien dice “GPT”, habla de una familia de modelos construidos así.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Chatbot o asistente</dt>
+                <dd><p>Una aplicación con la que conversas por escrito o por voz.</p><p class="term__ex"><b>Ejemplo:</b> Meta AI dentro de WhatsApp, o el asistente que responde en la página de una empresa.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Token</dt>
+                <dd><p>El pedacito de texto con el que trabaja el modelo: puede ser una palabra completa o parte de una. Los límites de uso y de longitud suelen medirse en tokens.</p><p class="term__ex"><b>Ejemplo:</b> una palabra larga como “ornamentación” puede partirse en varios tokens.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Ventana de contexto</dt>
+                <dd><p>La cantidad de texto que el modelo puede “tener en mente” a la vez dentro de una conversación.</p><p class="term__ex"><b>Ejemplo:</b> en una conversación muy larga se le olvida el tono que le pediste al inicio. Repíteselo o abre un chat nuevo con un resumen.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Multimodal</dt>
+                <dd><p>Que entiende o produce varios tipos de contenido: texto, imagen, audio o video.</p><p class="term__ex"><b>Ejemplo:</b> le tomas una foto a una factura y le pides que la pase a una tabla.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Iterar</dt>
+                <dd><p>Mejorar la respuesta conversando: pides, revisas, corriges y vuelves a pedir.</p><p class="term__ex"><b>Ejemplo:</b> “Bien, pero más corto y con un tono más cercano”.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Sesgo</dt>
+                <dd><p>Una inclinación parcial o injusta en las respuestas, heredada de los datos o del diseño del sistema.</p><p class="term__ex"><b>Ejemplo:</b> le pides “una imagen de un líder” y siempre muestra el mismo tipo de persona.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Fuente</dt>
+                <dd><p>El lugar donde se puede comprobar un dato. Una IA puede citar fuentes reales… o inventarlas.</p><p class="term__ex"><b>Ejemplo:</b> te da un enlace a un artículo: ábrelo y confirma que existe y que dice lo que te dijo.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Deepfake</dt>
+                <dd><p>Video, imagen o audio falso, generado con IA, que imita a una persona real.</p><p class="term__ex"><b>Ejemplo:</b> un video de un personaje famoso “recomendando” una inversión que nunca recomendó.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Clonación de voz</dt>
+                <dd><p>Imitar la voz de una persona con IA a partir de grabaciones suyas.</p><p class="term__ex"><b>Ejemplo:</b> una nota de voz que suena igual a tu hijo pidiéndote plata con urgencia. Defensa: la <a href="#palabra-clave">palabra clave familiar</a>.</p></dd>
+              </div>
+              <div class="term">
+                <dt>Datos personales</dt>
+                <dd><p>Información que identifica a una persona o permite identificarla. En Colombia los protege la Ley 1581 de 2012.</p><p class="term__ex"><b>Ejemplo:</b> la lista de tu grupo con nombres, teléfonos y direcciones. No se sube a una IA.</p></dd>
+              </div>
+            </dl>
+          </section>
+        </section>
+
+        <!-- ===================================================== 03 -->
+        <section class="chapter" id="rctf" aria-labelledby="t-rctf" data-title="R·C·T·F">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">03</span><span class="chapter__phase">Entender · Aplicar</span></p>
+            <h2 class="chapter__title" id="t-rctf">La fórmula <span class="t-gold">R·C·T·F</span></h2>
+            <p class="chapter__lede">Cuatro piezas para pedirle bien a cualquier IA: Rol, Contexto, Tarea y Formato. Funciona en todas las herramientas, hoy y cuando cambien.</p>
+            <div class="segbar" style="--n: 3" aria-hidden="true"></div>
+          </header>
+
+          <div class="prose">
+            <p class="pull">Si le hablas como a un empleado nuevo, con contexto y claridad, te responde como uno bueno.</p>
+            <h3>Anatomía de un buen prompt</h3>
+            <p>Imagina que contratas a alguien muy capaz que no te conoce y no sabe nada de tu caso. ¿Qué le dirías? Eso es R·C·T·F.</p>
+          </div>
+
+          <div class="anatomy wide">
+            <article class="anat" data-k="r">
+              <p class="anat__letter" aria-hidden="true">R</p>
+              <h4 class="anat__name">Rol</h4>
+              <p class="anat__q">¿Quién quieres que sea?</p>
+              <p>Le dices desde qué experiencia responder. Orienta el vocabulario, el nivel y el enfoque.</p>
+              <p class="anat__ex">“Eres un asesor comercial amable…”</p>
+              <p class="anat__err"><b>Error común:</b> omitirlo y recibir una respuesta genérica.</p>
+            </article>
+            <article class="anat" data-k="c">
+              <p class="anat__letter" aria-hidden="true">C</p>
+              <h4 class="anat__name">Contexto</h4>
+              <p class="anat__q">¿Qué necesita saber de tu caso?</p>
+              <p>Quién eres, para quién es, qué pasó, qué ya intentaste, qué restricciones hay. Es la pieza que más mejora el resultado y la que más se olvida.</p>
+              <p class="anat__ex">“Tengo un taller de ornamentación…”</p>
+              <p class="anat__err"><b>Error común:</b> dar datos sensibles. El contexto se da sin cédulas, claves ni datos de otras personas.</p>
+            </article>
+            <article class="anat" data-k="t">
+              <p class="anat__letter" aria-hidden="true">T</p>
+              <h4 class="anat__name">Tarea</h4>
+              <p class="anat__q">¿Qué debe hacer, exactamente?</p>
+              <p>Un verbo claro: escribe, resume, compara, propone, corrige, explica. Si son varias cosas, numéralas.</p>
+              <p class="anat__ex">“Escribe un mensaje para…”</p>
+              <p class="anat__err"><b>Error común:</b> pedir “ayúdame con esto” sin decir qué es “esto”.</p>
+            </article>
+            <article class="anat" data-k="f">
+              <p class="anat__letter" aria-hidden="true">F</p>
+              <h4 class="anat__name">Formato</h4>
+              <p class="anat__q">¿Cómo lo quieres recibir?</p>
+              <p>Longitud, tono, estructura (viñetas, tabla, pasos), idioma y canal (WhatsApp, correo, presentación).</p>
+              <p class="anat__ex">“Máximo 4 líneas, tono cordial.”</p>
+              <p class="anat__err"><b>Error común:</b> recibir tres páginas cuando necesitabas tres líneas.</p>
+            </article>
+          </div>
+
+          <div class="prose">
+            <h3>Ejercicio 1 · Prompt pobre vs. prompt R·C·T·F</h3>
+            <p>Es el ejercicio que hicimos todos con el celular. Si no alcanzaste, hazlo ahora: abre Meta AI en WhatsApp (o la IA que tengas) y sigue los pasos.</p>
+          </div>
+          <ol class="steps wide">
+            <li class="step">
+              <p class="step__n">Paso 1 · Escribe esto</p>
+              <div class="xprompt xprompt--poor" data-copy-scope>
+                <p class="xprompt__text" data-copy-src>Escríbeme un mensaje para un cliente.</p>
+                <button class="copy copy--sm" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+              </div>
+            </li>
+            <li class="step">
+              <p class="step__n">Paso 2 · Ahora escribe esto</p>
+              <div class="xprompt xprompt--rctf" data-copy-scope>
+                <p class="xprompt__text" data-copy-src><span data-k="R">Eres un asesor comercial amable.</span> <span data-k="C">Tengo un taller de ornamentación y un cliente lleva dos semanas sin responder una cotización de una reja.</span> <span data-k="T">Escríbele un mensaje de WhatsApp corto y cordial que le recuerde la cotización y le ofrezca resolver dudas.</span> <span data-k="F">Máximo 4 líneas.</span></p>
+                <button class="copy copy--sm" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+              </div>
+            </li>
+            <li class="step">
+              <p class="step__n">Paso 3 · Compara</p>
+              <p>¿Cuál respuesta enviarías sin cambiarle nada? ¿Qué tuvo que adivinar la IA en el primer caso? Quién es el cliente, qué pasó, qué tono, qué tan largo: todo eso lo pusiste tú en el segundo.</p>
+            </li>
+          </ol>
+          <div class="prose">
+            <p class="pull">Misma herramienta, otro resultado. La diferencia la hiciste tú.</p>
+          </div>
+
+          <div class="prose">
+            <h3>Cómo iterar: el primer resultado es un borrador</h3>
+            <p>Casi nunca la primera respuesta es la final. La ventaja de conversar es que puedes corregir sin empezar de cero. Seis movimientos que funcionan:</p>
+          </div>
+          <dl class="moves wide">
+            <div class="move"><dt>Ajusta el tono</dt><dd>“Más cercano y menos formal.” · “Más firme, sin sonar grosero.”</dd></div>
+            <div class="move"><dt>Ajusta la longitud</dt><dd>“La mitad de largo.” · “En 3 viñetas.”</dd></div>
+            <div class="move"><dt>Pide opciones</dt><dd>“Dame 3 versiones distintas y dime cuál recomiendas y por qué.”</dd></div>
+            <div class="move"><dt>Deja que te pregunte</dt><dd>“Antes de responder, hazme las preguntas que necesites para hacerlo bien.”</dd></div>
+            <div class="move"><dt>Pídele que se revise</dt><dd>“Revisa tu respuesta: ¿qué supuestos hiciste? ¿Qué podría estar mal?”</dd></div>
+            <div class="move"><dt>Empieza de nuevo a tiempo</dt><dd>Si la conversación se enredó, abre un chat nuevo y pega un resumen de lo que ya sabes.</dd></div>
+          </dl>
+
+          <div class="prose">
+            <h3>Cómo pedir fuentes (y qué hacer con ellas)</h3>
+            <p>Cuando la respuesta tiene datos, fechas, cifras, normas o citas, agrega una de estas frases a tu prompt:</p>
+            <ul class="ticks">
+              <li>“Cita tus fuentes con nombre y enlace.”</li>
+              <li>“Separa claramente lo que es dato de lo que es interpretación.”</li>
+              <li>“Si no estás seguro de algo, dilo; no lo inventes.”</li>
+              <li>Para la Biblia: “Cita los pasajes con libro, capítulo y versículo”.</li>
+            </ul>
+            <div class="callout callout--warn">
+              <p class="callout__title">Pedir fuentes no garantiza que existan</p>
+              <p>Una IA también puede inventar una fuente con total seguridad. <strong>Abre cada enlace y cada cita.</strong> Si no existe o no dice eso, descártala. Cuando la decisión importa (salud, dinero, ley, doctrina), ve a la fuente original y a una persona que sepa.</p>
+            </div>
+            <p>Algunas herramientas están hechas para buscar con fuentes enlazadas o para trabajar solo sobre tus documentos. Las verás en <a href="#herramientas">Herramientas</a>.</p>
+          </div>
+
+          <div class="prose">
+            <h3>Tu plantilla en blanco</h3>
+            <p>Cópiala, llena cada parte y úsala para cualquier tarea.</p>
+          </div>
+          <div class="xprompt xprompt--template wide" data-copy-scope>
+            <p class="xprompt__text" data-copy-src><span data-k="R">Eres <span class="fill">{{ROL: un asesor, un profesor, un experto en…}}</span>.</span> <span data-k="C"><span class="fill">{{CONTEXTO: quién soy, para quién es, qué pasó, qué ya intenté}}</span>.</span> <span data-k="T"><span class="fill">{{TAREA: verbo + qué necesito}}</span>.</span> <span data-k="F"><span class="fill">{{FORMATO: longitud, tono, estructura, canal}}</span>.</span></p>
+            <button class="copy copy--sm" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar plantilla</span></button>
+          </div>
+
+          <div class="prose">
+            <h3>20 prompts listos para copiar</h3>
+            <p>Cinco por área. Cada uno trae sus cuatro partes marcadas. Cambia lo que está entre <span class="fill">{{LLAVES}}</span> por tus datos —<strong>sin datos sensibles</strong>— y ajusta lo que quieras.</p>
+          </div>
+
+          <!-- Prompts · Trabajo -->
+          <section class="sub" id="prompts-trabajo" aria-labelledby="t-prompts-trabajo">
+            <div class="prose">
+              <h3 class="sub__title" id="t-prompts-trabajo"><span class="sub__tag">Prompts</span> Trabajo y empleo</h3>
+            </div>
+            <div class="pgrid wide">
+              <article class="pcard" id="p-trabajo-1" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">T1</span><h4 class="pcard__title">Responder un mensaje delicado</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> tienes que escribirle a tu jefe, a un cliente o a un compañero sobre un tema incómodo.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un asesor de comunicación profesional, respetuoso y claro.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Trabajo como <span class="fill">{{TU_CARGO}}</span> en <span class="fill">{{TIPO_DE_EMPRESA}}</span>. Necesito responderle a <span class="fill">{{DESTINATARIO: mi jefe, un cliente, un compañero}}</span> sobre <span class="fill">{{SITUACIÓN}}</span>. Quiero mantener una buena relación y dejar claro que <span class="fill">{{LO_QUE_NECESITO}}</span>.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Escribe el mensaje.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Máximo 8 líneas, tono cordial y firme, sin excusas largas. Dame dos versiones: una más formal y otra más cercana.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Antes de enviar:</b> léelo en voz alta. Si no suena a ti, ajústalo.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-trabajo-2" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">T2</span><h4 class="pcard__title">Resumir un documento largo</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> tienes un informe, un acta o un manual extenso y poco tiempo.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un analista que resume documentos para personas ocupadas.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Te voy a pegar <span class="fill">{{TIPO_DE_DOCUMENTO: un informe, un acta, un manual}}</span> de mi trabajo. Lo necesito para <span class="fill">{{PARA_QUÉ: una reunión, tomar una decisión, explicárselo a mi equipo}}</span>. Texto: <span class="fill">{{PEGA_AQUÍ_EL_TEXTO_SIN_DATOS_PERSONALES}}</span></span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Resúmelo y extrae las decisiones, las tareas pendientes (con responsable y fecha, si aparecen) y las dudas que convendría aclarar.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Primero un resumen en 5 viñetas; luego una tabla con columnas Tarea, Responsable y Fecha; al final, máximo 3 preguntas. Si un dato no está en el texto, escribe “no aparece”.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Ojo:</b> revisa la política de tu empresa antes de pegar documentos internos. Quita nombres y cifras confidenciales.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-trabajo-3" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">T3</span><h4 class="pcard__title">Ensayar una entrevista de trabajo</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> tienes una entrevista o una conversación importante y quieres practicar.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un reclutador con experiencia en <span class="fill">{{SECTOR}}</span>.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Tengo una entrevista para el cargo de <span class="fill">{{CARGO}}</span> en <span class="fill">{{TIPO_DE_EMPRESA}}</span>. Mi experiencia, en resumen: <span class="fill">{{TU_EXPERIENCIA_SIN_DATOS_PERSONALES}}</span>.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Hazme una entrevista simulada: una pregunta a la vez, espera mi respuesta y al final dame retroalimentación concreta.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">8 preguntas en total, mezclando técnicas y de comportamiento. La retroalimentación en viñetas: fortalezas, aspectos a mejorar y una mejor forma de responder cada punto débil.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Ojo:</b> no necesita tu cédula, tu teléfono ni tu dirección. No los pongas.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-trabajo-4" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">T4</span><h4 class="pcard__title">Organizar y priorizar la semana</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> tienes más tareas que tiempo y no sabes por dónde empezar.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un asesor de productividad práctico, sin fórmulas mágicas.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Esta semana tengo estas tareas: <span class="fill">{{LISTA_DE_TAREAS}}</span>. Mis horarios fijos son <span class="fill">{{HORARIOS_FIJOS}}</span> y lo más importante ahora es <span class="fill">{{PRIORIDAD}}</span>.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Ayúdame a priorizar las tareas y a armar un plan realista para la semana.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Tabla con Día, Horario y Tarea. Marca con ★ las 3 prioridades y deja espacios libres para imprevistos. Al final, dime qué tareas podría delegar o eliminar, y por qué.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Recuerda:</b> la IA propone el plan; tú conoces a tu jefe, a tu equipo y tus fuerzas.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-trabajo-5" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">T5</span><h4 class="pcard__title">Preparar una capacitación</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> debes explicarle un tema técnico a compañeros, clientes o a tu equipo.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un capacitador que explica temas técnicos con palabras sencillas.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Debo explicarle <span class="fill">{{TEMA}}</span> a <span class="fill">{{QUIÉNES: compañeros nuevos, clientes, mi equipo}}</span>, que <span class="fill">{{NIVEL: no saben nada del tema, saben lo básico}}</span>. Tengo <span class="fill">{{MINUTOS}}</span> minutos.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Prepara el esquema de la explicación, con un ejemplo de la vida diaria y 3 preguntas para comprobar que entendieron.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Esquema en viñetas con el tiempo de cada parte; el ejemplo en un párrafo corto; las preguntas numeradas.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Verifica:</b> confirma los datos técnicos con el manual o con quien sabe. La IA puede sonar segura y equivocarse.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+            </div>
+          </section>
+
+          <!-- Prompts · Negocio -->
+          <section class="sub" id="prompts-negocio" aria-labelledby="t-prompts-negocio">
+            <div class="prose">
+              <h3 class="sub__title" id="t-prompts-negocio"><span class="sub__tag">Prompts</span> Negocio y ventas</h3>
+            </div>
+            <div class="pgrid wide">
+              <article class="pcard" id="p-negocio-1" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">N1</span><h4 class="pcard__title">De una nota de voz a una cotización</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> acordaste algo con un cliente y quieres enviarle un documento ordenado. Dicta tus notas o pega la transcripción de tu audio.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres el asistente administrativo de un negocio de <span class="fill">{{TIPO_DE_NEGOCIO}}</span>.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Estas son mis notas de lo que hablé con un cliente: <span class="fill">{{NOTAS_O_TRANSCRIPCIÓN}}</span>. Mis precios y condiciones son: <span class="fill">{{PRECIOS_Y_CONDICIONES}}</span>. No inventes precios.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Convierte esto en una cotización ordenada, lista para enviar.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Encabezado con el nombre de mi negocio, <span class="fill">{{NOMBRE_NEGOCIO}}</span>; tabla de ítems con cantidad, valor unitario y total; condiciones (tiempo de entrega, forma de pago, vigencia) y un párrafo de cierre cordial. Si falta un dato, escribe [POR COMPLETAR] en vez de inventarlo.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Verifica:</b> revisa cada valor y cada suma tú mismo. La IA puede equivocarse en las cuentas.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-negocio-2" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">N2</span><h4 class="pcard__title">Un mes de ideas de publicaciones</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> quieres publicar con constancia en las redes de tu negocio.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un estratega de contenido para pequeños negocios en Colombia.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Mi negocio es <span class="fill">{{NOMBRE_NEGOCIO}}</span>, un <span class="fill">{{TIPO_DE_NEGOCIO}}</span> en <span class="fill">{{CIUDAD}}</span>. Mis clientes son <span class="fill">{{TIPO_DE_CLIENTES}}</span> y publico en <span class="fill">{{REDES}}</span>. Mi objetivo es <span class="fill">{{OBJETIVO: más mensajes por WhatsApp, más visitas, que me conozcan}}</span>.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Crea un calendario de publicaciones para un mes.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Tabla con Semana, Día, Tema, Idea de la publicación, Texto corto sugerido y Llamado a la acción. Tres publicaciones por semana, variando entre enseñar algo útil, mostrar trabajos y ofertas. No inventes testimonios.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Recuerda:</b> todo lo que publiques debe ser verdad. Las fotos y los testimonios, reales y con permiso.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-negocio-3" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">N3</span><h4 class="pcard__title">Responder a un cliente molesto</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> recibes una queja o una reseña negativa y no quieres responder en caliente.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un experto en servicio al cliente, empático y profesional.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Un cliente me escribió esto: “<span class="fill">{{MENSAJE_DEL_CLIENTE_SIN_SUS_DATOS}}</span>”. Lo que pasó desde mi lado: <span class="fill">{{TU_VERSIÓN}}</span>. Lo que puedo ofrecerle: <span class="fill">{{SOLUCIÓN_POSIBLE}}</span>.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Escribe una respuesta que reconozca su molestia, explique sin excusas y proponga la solución.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Máximo 6 líneas, tono respetuoso, sin culpar al cliente. Dame una versión para WhatsApp y otra para responder una reseña pública.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Ojo:</b> no pegues el nombre completo ni el teléfono del cliente. No los necesita.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-negocio-4" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">N4</span><h4 class="pcard__title">Entender un contrato antes de firmar</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> vas a firmar un arriendo, un contrato de servicios o con un proveedor, y quieres llegar preparado donde tu abogado.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un asistente que ayuda a personas sin formación jurídica a entender documentos. No eres abogado y no das asesoría legal.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Voy a firmar <span class="fill">{{TIPO_DE_CONTRATO: arriendo de local, prestación de servicios, proveedor}}</span>. Este es el texto, sin nombres, cédulas ni datos de las partes: <span class="fill">{{TEXTO_DEL_CONTRATO_SIN_DATOS_PERSONALES}}</span></span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Explícame en palabras sencillas a qué me obliga, a qué obliga a la otra parte, qué plazos, multas o penalidades tiene y cómo se termina. Luego hazme una lista de preguntas para llevarle a mi abogado.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Secciones con títulos cortos y viñetas; las preguntas, numeradas. Si algo es ambiguo, señálalo en vez de interpretarlo.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Amarillo:</b> orienta, pero no reemplaza a tu abogado. La decisión la tomas con un profesional.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-negocio-5" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">N5</span><h4 class="pcard__title">Presentar tu negocio y responder objeciones</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> quieres vender mejor sin presionar a nadie.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un asesor comercial honesto, que vende sin presionar.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Vendo <span class="fill">{{PRODUCTO_O_SERVICIO}}</span> a <span class="fill">{{TIPO_DE_CLIENTES}}</span>. Lo que me diferencia es <span class="fill">{{DIFERENCIAL}}</span>. Las objeciones que más escucho son: <span class="fill">{{OBJECIONES: “está caro”, “lo voy a pensar”, “ya tengo proveedor”}}</span>.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Escribe una presentación corta de mi negocio y una respuesta para cada objeción.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Presentación de máximo 5 líneas para WhatsApp. Luego una tabla con Objeción, Respuesta sugerida y Pregunta para seguir la conversación. Nada de promesas que no pueda cumplir.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Recuerda:</b> usa tus palabras. Una respuesta que no suena a ti se nota.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+            </div>
+          </section>
+
+          <!-- Prompts · Hogar -->
+          <section class="sub" id="prompts-hogar" aria-labelledby="t-prompts-hogar">
+            <div class="prose">
+              <h3 class="sub__title" id="t-prompts-hogar"><span class="sub__tag">Prompts</span> Hogar y finanzas personales</h3>
+            </div>
+            <div class="pgrid wide">
+              <article class="pcard" id="p-hogar-1" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">H1</span><h4 class="pcard__title">Ordenar el presupuesto del mes</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> quieres ver en limpio a dónde se va la plata de la casa.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un asesor de finanzas personales práctico y prudente.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">En mi hogar somos <span class="fill">{{NÚMERO_DE_PERSONAS}}</span>. Los ingresos del mes son <span class="fill">{{INGRESOS}}</span>, los gastos fijos son <span class="fill">{{GASTOS_FIJOS}}</span> y los variables, más o menos, <span class="fill">{{GASTOS_VARIABLES}}</span>. Nuestra meta es <span class="fill">{{META: ahorrar para algo, salir de una deuda, ordenarnos}}</span>.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Organiza un presupuesto mensual y señala dónde podríamos ajustar.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Tabla con Categoría, Monto y Porcentaje del ingreso, en pesos colombianos; luego 5 sugerencias concretas. Usa solo mis cifras y no inventes valores.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Ojo:</b> nunca pegues números de cuenta, tarjetas ni claves. Las cifras redondeadas bastan. Revisa las sumas.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-hogar-2" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">H2</span><h4 class="pcard__title">Menú de la semana y lista de mercado</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> quieres comer bien, gastar menos y no pensar cada día qué cocinar.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un cocinero práctico que planea las comidas de familias colombianas.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">En casa somos <span class="fill">{{NÚMERO_DE_PERSONAS}}</span>, con <span class="fill">{{DETALLES: niños pequeños, alguien que no come azúcar…}}</span>. Tenemos <span class="fill">{{PRESUPUESTO}}</span> para el mercado de la semana y poco tiempo entre semana.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Propón un menú de lunes a domingo y la lista de mercado.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Tabla con Día, Desayuno, Almuerzo y Comida; recetas sencillas de máximo 30 minutos; lista de mercado agrupada por sección (verduras, granos, proteínas, aseo).</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Amarillo:</b> si alguien tiene una condición de salud, la dieta la define su médico.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-hogar-3" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">H3</span><h4 class="pcard__title">Entender tus deudas antes de decidir</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> tienes varias deudas y quieres llegar al banco con preguntas claras.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un educador financiero que explica sin tecnicismos. No vendes productos ni das asesoría financiera personalizada.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Tengo estas deudas: <span class="fill">{{DEUDAS: tipo, saldo aproximado, cuota y tasa si la sabes}}</span>. Puedo destinar <span class="fill">{{MONTO_MENSUAL}}</span> al mes para pagarlas.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Explícame dos o tres estrategias comunes para pagar deudas, cómo se aplicarían a mi caso y qué preguntas debo hacerle a mi banco antes de decidir.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Lenguaje sencillo, una tabla que compare las estrategias y una lista de preguntas para el banco. Si te falta información, pregúntame antes de hacer cuentas.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Amarillo:</b> orienta; decide con tu banco o con un asesor. Verifica cada cálculo.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-hogar-4" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">H4</span><h4 class="pcard__title">Acompañar una tarea sin hacérsela a tu hijo</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> tu hijo se traba en una tarea y quieres ayudarle a pensar, no darle la respuesta.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un tutor paciente que enseña con preguntas, sin dar la respuesta de una vez.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Mi hijo de <span class="fill">{{EDAD}}</span> años está estudiando <span class="fill">{{TEMA}}</span> en <span class="fill">{{MATERIA}}</span> y se trabó en esto: <span class="fill">{{EJERCICIO_O_DUDA}}</span>.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Ayúdame a guiarlo para que llegue él mismo a la respuesta.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">4 o 5 preguntas de pista, de la más general a la más específica. Al final, la explicación completa para mí, en lenguaje sencillo.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Verifica:</b> compara la explicación con el cuaderno o el libro del colegio. El objetivo es que aprenda, no que entregue.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-hogar-5" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">H5</span><h4 class="pcard__title">Planear un paseo o una celebración</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> organizas un plan familiar y quieres que salga bien sin pasarte del presupuesto.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Eres un organizador de planes familiares con buen manejo del presupuesto.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Queremos <span class="fill">{{PLAN: un paseo de fin de semana, un cumpleaños, un aniversario}}</span> para <span class="fill">{{NÚMERO_DE_PERSONAS}}</span> personas en <span class="fill">{{LUGAR_O_CIUDAD}}</span>, con un presupuesto de <span class="fill">{{PRESUPUESTO}}</span>. Las edades son: <span class="fill">{{EDADES}}</span>.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Propón un plan con cronograma, lista de tareas y presupuesto estimado.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Cronograma por horas, lista de tareas con un responsable sugerido y tabla de presupuesto. Marca con [VERIFICAR] los precios y horarios que yo deba confirmar.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Verifica:</b> precios, horarios y disponibilidad cambian. Confírmalos directamente.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+            </div>
+          </section>
+
+          <!-- Prompts · Biblia -->
+          <section class="sub" id="prompts-biblia" aria-labelledby="t-prompts-biblia">
+            <div class="prose">
+              <h3 class="sub__title" id="t-prompts-biblia"><span class="sub__tag">Prompts</span> Investigación bíblica</h3>
+              <p>Investiga con IA. <strong>Verifica con la Biblia.</strong> Todos estos prompts piden referencias y separar dato de interpretación, para que puedas comprobarlo todo. El paso a paso está en el <a href="#investigacion-biblica">capítulo 5</a>.</p>
+            </div>
+            <div class="pgrid wide">
+              <article class="pcard" id="p-biblia-1" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">B1</span><h4 class="pcard__title">Contexto histórico de un libro</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> empiezas a leer o a estudiar un libro de la Biblia.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Actúa como un investigador de historia bíblica.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Estoy estudiando el libro de <span class="fill">{{LIBRO}}</span> para <span class="fill">{{PARA_QUÉ: mi lectura personal, mi grupo}}</span>.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Explícame su contexto: quién lo escribió según la tradición, para quién, cuándo aproximadamente y qué pasaba en ese momento histórico y cultural.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Secciones cortas con títulos. Cita los pasajes con libro, capítulo y versículo. Separa claramente lo que es dato histórico, lo que es tradición y lo que es interpretación. Si hay debate entre estudiosos, dilo.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Verifica:</b> abre cada referencia en tu Biblia y contrasta los datos históricos con un diccionario bíblico o con tu líder.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-biblia-2" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">B2</span><h4 class="pcard__title">Estudio de una palabra en hebreo o griego</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> una palabra de un pasaje te llama la atención y quieres entenderla mejor.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Actúa como un profesor de idiomas bíblicos (hebreo y griego) que explica para principiantes.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">En <span class="fill">{{PASAJE: libro capítulo:versículo}}</span> aparece la palabra “<span class="fill">{{PALABRA}}</span>” y quiero entenderla mejor. Uso la Reina-Valera 1960.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Dime qué palabra hebrea o griega está detrás, su significado básico, en qué otros pasajes aparece y cómo la traducen distintas versiones.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Una tabla con Pasaje, Cómo se traduce y Comentario breve. Si no estás seguro de cuál es la palabra original, dilo en vez de adivinar.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Verifica:</b> comprueba con una concordancia o una Biblia interlineal. Las palabras originales son terreno fácil para las alucinaciones.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-biblia-3" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">B3</span><h4 class="pcard__title">Línea de tiempo y mapa de un personaje</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> quieres ver en orden la vida de un personaje bíblico y dónde ocurrió cada cosa.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Actúa como un investigador de historia bíblica que prepara materiales visuales para grupos.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Quiero entender la vida de <span class="fill">{{PERSONAJE}}</span> para <span class="fill">{{PARA_QUÉ}}</span>.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Arma una línea de tiempo con los principales eventos de su vida y los lugares donde ocurrieron.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Tabla con Momento, Evento, Lugar y Referencia (libro, capítulo y versículo). Al final, describe brevemente cómo se vería en un mapa: de dónde a dónde se movió. Marca las fechas como aproximadas cuando no haya certeza.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Verifica:</b> abre cada referencia. Las fechas antiguas suelen ser aproximadas y debatidas.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-biblia-4" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">B4</span><h4 class="pcard__title">Comparar traducciones de un pasaje</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> notas que un versículo se lee distinto en otra Biblia y quieres saber por qué.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Actúa como un especialista en traducciones de la Biblia al español.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Estoy estudiando <span class="fill">{{PASAJE}}</span>. Uso la Reina-Valera 1960.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Explícame cómo lo traducen otras versiones conocidas en español y por qué difieren: palabras originales, estilo de traducción o decisiones de los traductores.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">Tabla con Versión, Diferencia principal y Explicación. No cites de memoria textos largos: describe las diferencias. Si no tienes certeza del texto exacto de una versión, dilo.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Verifica:</b> abre cada versión en una Biblia o una aplicación y compara el texto real. La IA puede citar mal.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+
+              <article class="pcard" id="p-biblia-5" data-prompt data-copy-scope>
+                <header class="pcard__head"><span class="pcard__code">B5</span><h4 class="pcard__title">Preguntas de discusión para tu grupo</h4></header>
+                <p class="pcard__use"><b>Úsalo cuando</b> preparas la reunión de tu grupo y quieres que todos participen.</p>
+                <div class="pcard__body" data-copy-src>
+                  <p class="part" data-k="r"><span class="part__k"><b>R</b> Rol</span><span class="part__t">Actúa como un facilitador de grupos pequeños que hace buenas preguntas.</span></p>
+                  <p class="part" data-k="c"><span class="part__k"><b>C</b> Contexto</span><span class="part__t">Esta semana mi grupo de <span class="fill">{{TIPO_DE_GRUPO: hombres, jóvenes, parejas}}</span> va a estudiar <span class="fill">{{PASAJE}}</span>. Somos unas <span class="fill">{{NÚMERO}}</span> personas y tenemos <span class="fill">{{MINUTOS}}</span> minutos.</span></p>
+                  <p class="part" data-k="t"><span class="part__k"><b>T</b> Tarea</span><span class="part__t">Propón preguntas de discusión: unas para entender el texto, otras para conectarlo con pasajes relacionados y otras para aplicarlo a la vida diaria.</span></p>
+                  <p class="part" data-k="f"><span class="part__k"><b>F</b> Formato</span><span class="part__t">3 preguntas de observación, 3 de interpretación y 3 de aplicación, numeradas. Incluye la referencia de cada pasaje relacionado que menciones.</span></p>
+                </div>
+                <footer class="pcard__foot"><p class="pcard__tip"><b>Recuerda:</b> es una base. Lee el pasaje y ora antes de usarlas; el contenido y la vida los pones tú.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button></footer>
+              </article>
+            </div>
+          </section>
+        </section>
+
+        <!-- ===================================================== 04 -->
+        <section class="chapter" id="semaforo" aria-labelledby="t-semaforo" data-title="El semáforo">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">04</span><span class="chapter__phase">Discernir</span></p>
+            <h2 class="chapter__title" id="t-semaforo">El semáforo</h2>
+            <p class="chapter__lede">No todo se le pide a la IA. Tres colores para decidir rápido cuándo usarla con confianza, cuándo con cuidado y cuándo no.</p>
+            <div class="segbar" style="--n: 4" aria-hidden="true"></div>
+          </header>
+
+          <ul class="lights wide">
+            <li class="lightcard" data-color="go">
+              <span class="lamp lamp--go lamp--lit" aria-hidden="true"><i></i></span>
+              <p class="lightcard__name">Verde</p>
+              <p class="lightcard__rule">Úsala con confianza</p>
+              <p>Tareas donde un error se ve fácil y se corrige fácil, sin datos sensibles, y donde tú revisas el resultado. Igual se revisa: verde no es “sin mirar”.</p>
+            </li>
+            <li class="lightcard" data-color="wait">
+              <span class="lamp lamp--wait lamp--lit" aria-hidden="true"><i></i></span>
+              <p class="lightcard__name">Amarillo</p>
+              <p class="lightcard__rule">Úsala, pero revisa y complementa</p>
+              <p>Sirve como base o para orientarte, pero el resultado final necesita tu criterio, una fuente confiable o un profesional: salud, dinero, temas legales, enseñanza.</p>
+            </li>
+            <li class="lightcard" data-color="stop">
+              <span class="lamp lamp--stop lamp--lit" aria-hidden="true"><i></i></span>
+              <p class="lightcard__name">Rojo</p>
+              <p class="lightcard__rule">No la uses para esto</p>
+              <p>Cuando delegarías algo que es tuyo (aconsejar, discernir, responder por otros), cuando entregarías datos de otras personas o íntimos, o cuando presentarías como tuyo algo que no lo es.</p>
+            </li>
+          </ul>
+
+          <div class="prose">
+            <h3>Tres preguntas para decidir el color</h3>
+            <ol class="numbered">
+              <li><strong>¿Hay datos de otras personas o información íntima?</strong> Si sí, es rojo, a menos que puedas quitarlos (anonimizar) y preguntar en general.</li>
+              <li><strong>¿Si se equivoca, el daño es grande?</strong> Salud, dinero, ley, personas: mínimo amarillo. Verifica con un profesional.</li>
+              <li><strong>¿Estoy delegando algo que me toca a mí?</strong> Aconsejar, discernir, responder por alguien, crear con propósito: rojo.</li>
+            </ol>
+            <p>Si las tres respuestas son “no”, es verde. Y aun así, revisas.</p>
+          </div>
+
+          <div class="prose">
+            <h3>Ejercicio 2 · ¿Qué color es?</h3>
+            <p>Los ocho casos del taller. Piensa tu respuesta antes de tocar cada caso.</p>
+          </div>
+          <ol class="quiz wide">
+            <li><details class="qcase" data-color="go"><summary><span class="qcase__n">1</span><span class="qcase__text">Resumir un documento largo del trabajo</span><span class="qcase__hint">Ver color</span></summary><div class="qcase__a"><p class="verdict verdict--go"><span class="lamp lamp--go lamp--lit" aria-hidden="true"><i></i></span>Verde</p><p>Ahorra tiempo y puedes comprobar el resumen contra el original. Solo cuida que no tenga información confidencial.</p></div></details></li>
+            <li><details class="qcase" data-color="go"><summary><span class="qcase__n">2</span><span class="qcase__text">Investigar el contexto histórico de un libro de la Biblia</span><span class="qcase__hint">Ver color</span></summary><div class="qcase__a"><p class="verdict verdict--go"><span class="lamp lamp--go lamp--lit" aria-hidden="true"><i></i></span>Verde, verificando</p><p>El contexto histórico es un uso verde, siempre que verifiques cada cita en tu Biblia y contrastes los datos con fuentes confiables.</p></div></details></li>
+            <li><details class="qcase" data-color="go"><summary><span class="qcase__n">3</span><span class="qcase__text">Redactar una cotización para un cliente</span><span class="qcase__hint">Ver color</span></summary><div class="qcase__a"><p class="verdict verdict--go"><span class="lamp lamp--go lamp--lit" aria-hidden="true"><i></i></span>Verde</p><p>Tú pones los precios y las condiciones; la IA les da orden y buena presentación. Revisa cifras y sumas antes de enviar.</p></div></details></li>
+            <li><details class="qcase" data-color="wait"><summary><span class="qcase__n">4</span><span class="qcase__text">Preparar el esquema de una enseñanza para tu grupo</span><span class="qcase__hint">Ver color</span></summary><div class="qcase__a"><p class="verdict verdict--wait"><span class="lamp lamp--wait lamp--lit" aria-hidden="true"><i></i></span>Amarillo</p><p>Es una base; el contenido y la vida los pones tú.</p></div></details></li>
+            <li><details class="qcase" data-color="wait"><summary><span class="qcase__n">5</span><span class="qcase__text">Pedirle orientación sobre un tema médico o legal</span><span class="qcase__hint">Ver color</span></summary><div class="qcase__a"><p class="verdict verdict--wait"><span class="lamp lamp--wait lamp--lit" aria-hidden="true"><i></i></span>Amarillo</p><p>Orienta, pero decide con un profesional. Úsala para entender términos y preparar preguntas, no para diagnosticarte ni para reemplazar a tu abogado.</p></div></details></li>
+            <li><details class="qcase" data-color="stop"><summary><span class="qcase__n">6</span><span class="qcase__text">Pedirle que escriba tu devocional y compartirlo como tuyo</span><span class="qcase__hint">Ver color</span></summary><div class="qcase__a"><p class="verdict verdict--stop"><span class="lamp lamp--stop lamp--lit" aria-hidden="true"><i></i></span>Rojo</p><p>Un devocional nace de tu lectura y de tu oración. Presentar como propio algo que no viviste ni escribiste no es honesto con quien lo recibe.</p></div></details></li>
+            <li><details class="qcase" data-color="stop"><summary><span class="qcase__n">7</span><span class="qcase__text">Contarle la situación de una persona que aconsejas y preguntarle qué decirle</span><span class="qcase__hint">Ver color</span></summary><div class="qcase__a"><p class="verdict verdict--stop"><span class="lamp lamp--stop lamp--lit" aria-hidden="true"><i></i></span>Rojo</p><p>Es el caso más importante del semáforo. Mira por qué <a href="#consejeria">la consejería es roja</a>.</p></div></details></li>
+            <li><details class="qcase" data-color="stop"><summary><span class="qcase__n">8</span><span class="qcase__text">Subir la lista de tu grupo con teléfonos y direcciones</span><span class="qcase__hint">Ver color</span></summary><div class="qcase__a"><p class="verdict verdict--stop"><span class="lamp lamp--stop lamp--lit" aria-hidden="true"><i></i></span>Rojo</p><p>Son datos personales de otras personas, entregados sin su permiso. No es solo un tema ético: la protección de datos ya rige en Colombia (<a href="#marco-legal">Ley 1581 de 2012</a>).</p></div></details></li>
+          </ol>
+
+          <div class="prose">
+            <h3>Más casos, por área</h3>
+            <p>Para que practiques el criterio en tu día a día. Filtra por color si quieres.</p>
+          </div>
+          <div class="filter wide" role="group" aria-label="Filtrar casos por color">
+            <button class="chip is-on" type="button" data-filter="all" aria-pressed="true">Todos</button>
+            <button class="chip" type="button" data-filter="go" aria-pressed="false"><span class="dot dot--go" aria-hidden="true"></span>Verde</button>
+            <button class="chip" type="button" data-filter="wait" aria-pressed="false"><span class="dot dot--wait" aria-hidden="true"></span>Amarillo</button>
+            <button class="chip" type="button" data-filter="stop" aria-pressed="false"><span class="dot dot--stop" aria-hidden="true"></span>Rojo</button>
+            <p class="filter__count" aria-live="polite" data-filter-count></p>
+          </div>
+
+          <div class="cases wide" data-cases>
+            <div class="casegroup">
+              <h4 class="casegroup__title">Trabajo</h4>
+              <ul>
+                <li class="scase" data-color="go"><p class="scase__text">Traducir el correo de un proveedor extranjero</p><p class="scase__why"><b>Verde.</b> Revisa nombres, cifras y fechas en el original.</p></li>
+                <li class="scase" data-color="go"><p class="scase__text">Mejorar la redacción de un informe que escribiste tú</p><p class="scase__why"><b>Verde.</b> El contenido es tuyo; la IA lo pule.</p></li>
+                <li class="scase" data-color="wait"><p class="scase__text">Pedirle una fórmula de Excel o un pedazo de código</p><p class="scase__why"><b>Amarillo.</b> Pruébalo con datos de ejemplo antes de usarlo en serio.</p></li>
+                <li class="scase" data-color="wait"><p class="scase__text">Organizar los criterios de una evaluación de desempeño, sin nombres</p><p class="scase__why"><b>Amarillo.</b> Te ayuda a ser ordenado; la evaluación de cada persona la haces tú.</p></li>
+                <li class="scase" data-color="stop"><p class="scase__text">Pegar la base de datos de clientes de la empresa para “analizarla”</p><p class="scase__why"><b>Rojo.</b> Datos de terceros e información confidencial. Pregunta primero por la política de tu empresa.</p></li>
+                <li class="scase" data-color="stop"><p class="scase__text">Dejar que la IA decida a quién despedir o ascender</p><p class="scase__why"><b>Rojo.</b> Las decisiones sobre personas son tuyas. Ella no conoce a nadie.</p></li>
+              </ul>
+            </div>
+            <div class="casegroup">
+              <h4 class="casegroup__title">Negocio</h4>
+              <ul>
+                <li class="scase" data-color="go"><p class="scase__text">Ideas de nombre, eslogan o publicaciones para tu negocio</p><p class="scase__why"><b>Verde.</b> Es lluvia de ideas; tú eliges.</p></li>
+                <li class="scase" data-color="go"><p class="scase__text">Descripciones de productos para tu catálogo</p><p class="scase__why"><b>Verde.</b> Siempre que todo lo que diga sea cierto.</p></li>
+                <li class="scase" data-color="wait"><p class="scase__text">Redactar términos y condiciones o un contrato</p><p class="scase__why"><b>Amarillo.</b> Sirve como borrador; revísalo con un abogado.</p></li>
+                <li class="scase" data-color="wait"><p class="scase__text">Calcular precios, impuestos o la nómina</p><p class="scase__why"><b>Amarillo.</b> Puede equivocarse en cuentas y normas. Verifícalo con tu contador.</p></li>
+                <li class="scase" data-color="stop"><p class="scase__text">Publicar testimonios o reseñas inventadas por la IA</p><p class="scase__why"><b>Rojo.</b> Es engañar a tus clientes.</p></li>
+                <li class="scase" data-color="stop"><p class="scase__text">Usar la foto o la voz de una persona en tu publicidad sin su permiso</p><p class="scase__why"><b>Rojo.</b> Su imagen y su voz son suyas.</p></li>
+              </ul>
+            </div>
+            <div class="casegroup">
+              <h4 class="casegroup__title">Familia</h4>
+              <ul>
+                <li class="scase" data-color="go"><p class="scase__text">Planear el menú de la semana y la lista de mercado</p><p class="scase__why"><b>Verde.</b> Útil, fácil de revisar y sin datos sensibles.</p></li>
+                <li class="scase" data-color="go"><p class="scase__text">Explicarle a tu hijo un tema del colegio con ejemplos</p><p class="scase__why"><b>Verde.</b> Compara con el cuaderno o el libro del colegio.</p></li>
+                <li class="scase" data-color="go"><p class="scase__text">Ordenar el presupuesto de la casa con cifras redondeadas</p><p class="scase__why"><b>Verde.</b> Sin números de cuenta, tarjetas ni claves.</p></li>
+                <li class="scase" data-color="wait"><p class="scase__text">Pedir ideas generales para mejorar la comunicación en casa</p><p class="scase__why"><b>Amarillo.</b> Ideas generales, sí; el acompañamiento real lo dan personas que los conocen.</p></li>
+                <li class="scase" data-color="stop"><p class="scase__text">Que tu hijo le pida la tarea completa y la entregue como suya</p><p class="scase__why"><b>Rojo.</b> No aprende y no es honesto.</p></li>
+                <li class="scase" data-color="stop"><p class="scase__text">Contarle los detalles íntimos de un problema de pareja y hacer lo que diga</p><p class="scase__why"><b>Rojo.</b> Expones a tu esposa sin su permiso. Busca consejería con alguien que los conozca.</p></li>
+              </ul>
+            </div>
+            <div class="casegroup">
+              <h4 class="casegroup__title">Iglesia y ministerio</h4>
+              <ul>
+                <li class="scase" data-color="go"><p class="scase__text">Organizar la agenda y la logística de un evento de la iglesia</p><p class="scase__why"><b>Verde.</b> Con datos de ejemplo, no con la lista de inscritos.</p></li>
+                <li class="scase" data-color="go"><p class="scase__text">Diseñar la invitación o la pieza gráfica de un evento</p><p class="scase__why"><b>Verde.</b> Revisa fechas, lugar y textos.</p></li>
+                <li class="scase" data-color="go"><p class="scase__text">Preparar preguntas de discusión para tu grupo</p><p class="scase__why"><b>Verde, verificando.</b> Revisa cada referencia antes de usarlas.</p></li>
+                <li class="scase" data-color="wait"><p class="scase__text">Preparar el esquema de una enseñanza</p><p class="scase__why"><b>Amarillo.</b> Es una base; el contenido y la vida los pones tú.</p></li>
+                <li class="scase" data-color="stop"><p class="scase__text">Pedirle una “palabra” o una revelación para una persona</p><p class="scase__why"><b>Rojo.</b> Investigación: sí. Revelación, consejería y devocional: eso es tuyo.</p></li>
+                <li class="scase" data-color="stop"><p class="scase__text">Presentar como tuya una enseñanza completa escrita por la IA</p><p class="scase__why"><b>Rojo.</b> El que enseña responde por lo que enseña.</p></li>
+              </ul>
+            </div>
+            <div class="casegroup">
+              <h4 class="casegroup__title">Salud y legal</h4>
+              <ul>
+                <li class="scase" data-color="go"><p class="scase__text">Preparar las preguntas para tu próxima cita médica</p><p class="scase__why"><b>Verde.</b> Llegas mejor preparado; el médico decide.</p></li>
+                <li class="scase" data-color="wait"><p class="scase__text">Entender un término médico de un examen</p><p class="scase__why"><b>Amarillo.</b> Orienta; tu médico interpreta tus resultados.</p></li>
+                <li class="scase" data-color="wait"><p class="scase__text">Entender un contrato y preparar preguntas para tu abogado</p><p class="scase__why"><b>Amarillo.</b> Te prepara para la conversación; no la reemplaza.</p></li>
+                <li class="scase" data-color="wait"><p class="scase__text">Redactar el borrador de una carta formal a una entidad</p><p class="scase__why"><b>Amarillo.</b> Revisa los requisitos con la entidad o con un abogado.</p></li>
+                <li class="scase" data-color="stop"><p class="scase__text">Empezar o dejar un medicamento por lo que diga la IA</p><p class="scase__why"><b>Rojo.</b> Eso lo decide un médico.</p></li>
+                <li class="scase" data-color="stop"><p class="scase__text">Subir la historia clínica completa de un familiar</p><p class="scase__why"><b>Rojo.</b> Son datos íntimos de otra persona. Pregunta en general, sin sus datos.</p></li>
+              </ul>
+            </div>
+          </div>
+
+          <section class="sub counsel" id="consejeria" aria-labelledby="t-consejeria">
+            <div class="prose">
+              <h3 class="sub__title" id="t-consejeria">Por qué la consejería es roja</h3>
+            </div>
+            <blockquote class="verse verse--big">
+              <p>“Yo soy el buen pastor; y conozco mis ovejas.”</p>
+              <cite>Juan 10:14</cite>
+            </blockquote>
+            <ul class="counsel__list wide">
+              <li><span class="lamp lamp--stop lamp--lit" aria-hidden="true"><i></i></span>La IA no conoce a la persona ni su historia.</li>
+              <li><span class="lamp lamp--stop lamp--lit" aria-hidden="true"><i></i></span>No ora ni responde por el consejo.</li>
+              <li><span class="lamp lamp--stop lamp--lit" aria-hidden="true"><i></i></span>Y estarías entregando información íntima de alguien sin su permiso.</li>
+            </ul>
+            <div class="prose">
+              <p class="pull">La IA te puede ayudar a entender un tema. La persona necesita a alguien que la conozca. Eso no se delega.</p>
+              <p><strong>Lo que sí puedes hacer:</strong> prepararte tú. Pregunta en general, sin datos de nadie (por ejemplo, “¿qué es el duelo y cómo suele vivirse?”), lee, ora y busca a tus líderes. La conversación, la oración y el acompañamiento son tuyos.</p>
+              <p>Si hay riesgo para la vida o la integridad de alguien, no esperes: busca de inmediato ayuda profesional y avisa a tus pastores.</p>
+            </div>
+          </section>
+
+          <div class="yours wide">
+            <p class="yours__title">Lo que es tuyo</p>
+            <ol class="yours__list">
+              <li>Decidir</li>
+              <li>Aconsejar</li>
+              <li>Crear con propósito</li>
+              <li>Discernir</li>
+              <li>Responder</li>
+            </ol>
+            <p class="yours__foot">La IA propone. Tú decides y respondes por lo que decides.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 05 -->
+        <section class="chapter" id="investigacion-biblica" aria-labelledby="t-investigacion" data-title="Investigación bíblica">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">05</span><span class="chapter__phase">Aplicar</span></p>
+            <h2 class="chapter__title" id="t-investigacion">Investigación bíblica con IA</h2>
+            <p class="chapter__lede">La IA puede ser un gran asistente de estudio, siempre que la Biblia vaya en la otra mano.</p>
+            <div class="segbar" style="--n: 5" aria-hidden="true"></div>
+          </header>
+
+          <blockquote class="verse verse--big">
+            <p>“…escudriñando cada día las Escrituras para ver si estas cosas eran así.”</p>
+            <cite>Hechos 17:11</cite>
+          </blockquote>
+          <div class="prose">
+            <p>Los de Berea no creían cualquier cosa: verificaban. Esa es exactamente la actitud correcta con la IA.</p>
+            <p class="pull">Investiga con IA. Verifica con la Biblia.</p>
+          </div>
+
+          <div class="prose">
+            <h3>Checklist de verificación, paso a paso</h3>
+            <p>Úsalo cada vez que estudies con IA. Puedes marcar los pasos mientras avanzas.</p>
+          </div>
+          <ol class="checklist wide">
+            <li><label class="check"><input type="checkbox" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><b>Empieza por tu Biblia, no por la IA.</b> Lee el pasaje completo y lo que va antes y después.</span></label></li>
+            <li><label class="check"><input type="checkbox" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><b>Pregunta con R·C·T·F.</b> Pide libro, capítulo y versículo; que separe dato histórico de interpretación, y que diga cuándo no está seguro.</span></label></li>
+            <li><label class="check"><input type="checkbox" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><b>Abre cada cita.</b> Búscala en tu Biblia (física o en una aplicación). Si no existe o no dice eso, descártala.</span></label></li>
+            <li><label class="check"><input type="checkbox" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><b>Lee el contexto de cada cita.</b> Un versículo real usado fuera de su contexto también engaña.</span></label></li>
+            <li><label class="check"><input type="checkbox" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><b>Compara al menos dos traducciones.</b> Por ejemplo, la Reina-Valera 1960 y otra versión.</span></label></li>
+            <li><label class="check"><input type="checkbox" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><b>Contrasta los datos históricos.</b> Con un diccionario bíblico, un comentario reconocido o tu líder.</span></label></li>
+            <li><label class="check"><input type="checkbox" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><b>Clasifica lo que recibiste.</b> ¿Es dato, es interpretación o es aplicación? Solo el dato se “verifica”; la interpretación se discierne.</span></label></li>
+            <li><label class="check"><input type="checkbox" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><b>Pide la otra cara.</b> “¿Qué otras interpretaciones hay de este pasaje y en qué se apoyan?”</span></label></li>
+            <li><label class="check"><input type="checkbox" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><b>Ora y decide qué compartes.</b> Nada reemplaza tu lectura ni tu oración.</span></label></li>
+            <li><label class="check"><input type="checkbox" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><b>Cuando enseñes, di de dónde sale.</b> Cita tus fuentes; no presentes como tuyo lo que no lo es.</span></label></li>
+          </ol>
+
+          <div class="prose">
+            <h3>Ejemplo guiado: ¿qué era un “talento”?</h3>
+            <p>Es la demostración que hicimos en vivo. Copia el prompt y pruébalo en tu IA.</p>
+          </div>
+          <div class="xprompt xprompt--demo wide" data-copy-scope>
+            <p class="xprompt__label">Demo 1 · Estudio de la palabra “talento”</p>
+            <p class="xprompt__text" data-copy-src>Actúa como un investigador de historia bíblica. Explícame qué era un “talento” en tiempos de Jesús: qué medía, cuánto valía aproximadamente en jornales y cómo se relaciona con Mateo 25:14-30. Cita los pasajes con libro, capítulo y versículo, y separa claramente lo que es dato histórico de lo que es interpretación.</p>
+            <button class="copy copy--sm" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar prompt</span></button>
+          </div>
+          <div class="twocol wide">
+            <div class="panel">
+              <h4 class="panel__title">Lo que suele responder, en términos generales</h4>
+              <ul class="ticks">
+                <li>El talento era una unidad de peso usada para metales preciosos.</li>
+                <li>Equivalía aproximadamente a 6.000 denarios, y un denario era el jornal de un día. Es decir, unos 20 años de trabajo.</li>
+                <li>El sentido moderno de “talento” como habilidad viene de esta parábola.</li>
+              </ul>
+            </div>
+            <div class="panel panel--verify">
+              <h4 class="panel__title">Lo que tú verificas</h4>
+              <ul class="ticks">
+                <li><b>Mateo 20:2.</b> Ábrelo y comprueba qué dice sobre el jornal de un día de trabajo.</li>
+                <li><b>Mateo 25:14-30.</b> Lee la parábola completa en tu Biblia, no solo el resumen de la IA.</li>
+                <li><b>Las equivalencias.</b> Contrasta el valor del talento con un diccionario bíblico: son aproximaciones y pueden variar según la fuente.</li>
+                <li><b>Las citas.</b> Si la respuesta menciona otros versículos, ábrelos todos.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="prose">
+            <h3>Ejercicio 3 · Pon a prueba a la IA</h3>
+            <p>Pregúntale a tu IA, tal cual:</p>
+          </div>
+          <div class="xprompt xprompt--big wide" data-copy-scope>
+            <p class="xprompt__text" data-copy-src>¿En qué versículo dice la Biblia “Dios ayuda a quien se ayuda”?</p>
+            <button class="copy copy--sm" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar pregunta</span></button>
+          </div>
+          <details class="reveal wide">
+            <summary><span>¿Qué te respondió? ¿Cómo lo verificas?</span><span class="reveal__hint">Ver respuesta</span></summary>
+            <div class="reveal__body">
+              <p><strong>La frase no está en la Biblia.</strong> Es un refrán popular.</p>
+              <ul class="ticks">
+                <li><b>Si tu IA respondió bien:</b> puede ayudarte a desmentir mitos, pero igual se verifica.</li>
+                <li><b>Si te dio un versículo:</b> ábrelo. Vas a ver que no dice eso. Acabas de ver una alucinación en vivo. Por eso la Biblia va en la otra mano.</li>
+              </ul>
+            </div>
+          </details>
+
+          <div class="prose">
+            <h3>Cómo detectar un versículo inventado</h3>
+            <p>Estas señales no prueban nada por sí solas, pero te dicen cuándo detenerte a verificar:</p>
+          </div>
+          <ul class="signals wide">
+            <li><b>La referencia no cuadra.</b> El capítulo o el versículo no existe, o el libro no tiene tantos capítulos.</li>
+            <li><b>“Suena bíblico” pero no aparece.</b> Lenguaje antiguo y solemne que no encuentras en tu Biblia.</li>
+            <li><b>Mezcla dos pasajes.</b> Une frases reales de lugares distintos como si fueran una sola cita.</li>
+            <li><b>Es un refrán conocido.</b> Frases populares atribuidas a la Biblia, como la del ejercicio 3.</li>
+            <li><b>Cambia cuando preguntas otra vez.</b> Si le pides la referencia de nuevo y te da otra, desconfía.</li>
+            <li><b>Es demasiado perfecta para tu argumento.</b> Justo lo que querías oír, con referencia exacta. Verifícala dos veces.</li>
+            <li><b>No dice de qué versión es.</b> Pide siempre la versión y compárala con esa versión.</li>
+          </ul>
+          <div class="prose">
+            <p><strong>Cómo comprobarlo:</strong> busca la frase exacta en una Biblia digital o una concordancia, lee el capítulo completo y compara con otra traducción. Si no aparece, no la uses.</p>
+          </div>
+
+          <div class="prose">
+            <h3>Usos verdes en la investigación bíblica</h3>
+          </div>
+          <ul class="greens wide">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check" /></svg>Contexto histórico y cultural</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check" /></svg>Líneas de tiempo y mapas</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check" /></svg>Significado de palabras en griego y hebreo</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check" /></svg>Comparar traducciones</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check" /></svg>Conectar pasajes relacionados</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check" /></svg>Preparar preguntas de discusión para tu grupo</li>
+          </ul>
+          <div class="prose">
+            <p class="pull">Todo verificado. Nada reemplaza tu lectura ni tu oración.</p>
+            <p>Investigación: sí. Revelación, consejería y devocional: eso es tuyo. Encuentra un prompt para cada uso verde en <a href="#prompts-biblia">Prompts · Biblia</a>.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 06 -->
+        <section class="chapter" id="herramientas" aria-labelledby="t-herramientas" data-title="Herramientas">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">06</span><span class="chapter__phase">Aplicar · Crear</span></p>
+            <h2 class="chapter__title" id="t-herramientas">Herramientas por categoría</h2>
+            <p class="chapter__lede">Un mapa para orientarte, no una lista de compras. La herramienta cambia cada mes; la habilidad de pedir bien y verificar se queda.</p>
+            <div class="segbar" style="--n: 6" aria-hidden="true"></div>
+          </header>
+
+          <div class="callout callout--info wide">
+            <p class="callout__title">Antes de empezar</p>
+            <ul class="ticks">
+              <li><b>No es una recomendación de marca.</b> El orden es el mismo del taller; ninguna está por encima de otra.</li>
+              <li><b>Planes y precios cambian con frecuencia.</b> Muchas tienen una versión gratis con límites, pero esos límites cambian. Revisa la página oficial de cada una antes de decidir. <span class="ph">{{VERIFICAR_PLANES_GRATIS}}</span></li>
+              <li><b>Lee qué hace con tus datos.</b> Revisa la configuración de privacidad y del historial antes de pegar información de tu trabajo.</li>
+              <li><b>Empieza por la que ya tienes.</b> Si tienes WhatsApp, quizá ya tienes Meta AI.</li>
+            </ul>
+          </div>
+
+          <div class="toolcats wide">
+            <section class="toolcat" aria-labelledby="tc-1">
+              <h3 class="toolcat__title" id="tc-1"><span class="toolcat__n">1</span>Conversar y escribir</h3>
+              <p class="toolcat__when"><b>Úsalas para:</b> borradores, resúmenes, ideas, explicaciones, traducciones y ordenar información. Es la categoría de los 20 prompts.</p>
+              <dl class="tools">
+                <div class="tool"><dt>ChatGPT</dt><dd>Asistente general de OpenAI. Conversa, escribe, resume, analiza archivos que le subes y crea imágenes desde el chat.</dd></div>
+                <div class="tool"><dt>Claude</dt><dd>Asistente general de Anthropic. Conversa, escribe, analiza documentos que le subes y ayuda a programar.</dd></div>
+                <div class="tool"><dt>Gemini</dt><dd>Asistente general de Google. Conversa, escribe y crea imágenes; según tu cuenta, se conecta con servicios de Google como Gmail, Docs o Drive.</dd></div>
+                <div class="tool"><dt>Meta AI</dt><dd>Asistente de Meta dentro de WhatsApp, Instagram y Facebook: el círculo de colores. Si ya usas WhatsApp, no necesitas instalar nada más. <span class="ph">{{VERIFICAR_META_AI_ACTIVO}}</span></dd></div>
+                <div class="tool"><dt>Copilot</dt><dd>Asistente de Microsoft. Está en Windows y en el navegador Edge y, según tu licencia, dentro de Word, Excel, Outlook y Teams.</dd></div>
+              </dl>
+            </section>
+            <section class="toolcat" aria-labelledby="tc-2">
+              <h3 class="toolcat__title" id="tc-2"><span class="toolcat__n">2</span>Investigar con fuentes</h3>
+              <p class="toolcat__when"><b>Úsalas cuando</b> necesitas saber de dónde sale un dato, o quieres que la IA responda solo con tus documentos.</p>
+              <dl class="tools">
+                <div class="tool"><dt>Perplexity</dt><dd>Buscador conversacional: responde a tus preguntas con enlaces a las fuentes que usó. Igual abre los enlaces.</dd></div>
+                <div class="tool"><dt>NotebookLM</dt><dd>Herramienta de Google que trabaja sobre los documentos que tú le subes y responde citándolos. Útil para estudiar un material concreto: un manual, tus apuntes, un PDF.</dd></div>
+              </dl>
+            </section>
+            <section class="toolcat" aria-labelledby="tc-3">
+              <h3 class="toolcat__title" id="tc-3"><span class="toolcat__n">3</span>Presentaciones y diseño</h3>
+              <p class="toolcat__when"><b>Úsalas para</b> invitaciones, publicaciones, presentaciones y documentos con buena presentación.</p>
+              <dl class="tools">
+                <div class="tool"><dt>Gamma</dt><dd>Genera presentaciones, documentos y páginas sencillas a partir de un texto o una idea.</dd></div>
+                <div class="tool"><dt>Canva</dt><dd>Diseño gráfico con plantillas (invitaciones, publicaciones, presentaciones) y funciones de IA integradas.</dd></div>
+              </dl>
+            </section>
+            <section class="toolcat" aria-labelledby="tc-4">
+              <h3 class="toolcat__title" id="tc-4"><span class="toolcat__n">4</span>Crear páginas y apps</h3>
+              <p class="toolcat__when"><b>Úsalas para</b> pasar de una idea a un primer borrador funcional: la página de tu negocio, la de un evento, una app sencilla.</p>
+              <dl class="tools">
+                <div class="tool"><dt>Lovable</dt><dd>Crea páginas web y aplicaciones a partir de una descripción en lenguaje natural. Es la que usamos en la demo en vivo.</dd></div>
+                <div class="tool"><dt>Bolt</dt><dd>Crea aplicaciones web a partir de una descripción, directamente en el navegador.</dd></div>
+                <div class="tool"><dt>v0</dt><dd>De Vercel. Genera interfaces y páginas web a partir de una descripción.</dd></div>
+              </dl>
+            </section>
+            <section class="toolcat" aria-labelledby="tc-5">
+              <h3 class="toolcat__title" id="tc-5"><span class="toolcat__n">5</span>Voz, imagen y video</h3>
+              <p class="toolcat__when"><b>Úsalas para</b> narraciones, piezas visuales y contenido creativo, con las reglas de <a href="#seguridad">Seguridad</a>.</p>
+              <dl class="tools">
+                <div class="tool"><dt>ElevenLabs</dt><dd>Voz sintética: narraciones, doblaje y clonación de voz. Clona solo tu propia voz, o la de alguien que te dio permiso explícito.</dd></div>
+                <div class="tool"><dt>Generadores integrados en ChatGPT y Gemini</dt><dd>Crean y editan imágenes desde la misma conversación. Las funciones de video y sus límites dependen del plan y cambian con frecuencia.</dd></div>
+              </dl>
+            </section>
+          </div>
+
+          <div class="prose">
+            <h3>Cómo elegir rápido</h3>
+          </div>
+          <dl class="chooser wide">
+            <div><dt>¿Quieres conversar, escribir o resumir?</dt><dd>Categoría 1. Usa la que ya tienes.</dd></div>
+            <div><dt>¿Necesitas saber de dónde sale el dato?</dt><dd>Categoría 2, y abre las fuentes.</dd></div>
+            <div><dt>¿Tienes que presentar o diseñar algo?</dt><dd>Categoría 3.</dd></div>
+            <div><dt>¿Quieres una página o una app?</dt><dd>Categoría 4, con datos de ejemplo.</dd></div>
+            <div><dt>¿Audio, imagen o video?</dt><dd>Categoría 5, con permiso de las personas que aparecen.</dd></div>
+          </dl>
+
+          <div class="prose">
+            <h3>Tres casos que puedes hacer mañana</h3>
+          </div>
+          <div class="cases3 wide">
+            <a class="case3" href="#p-negocio-1"><span class="case3__k">Antes → Después</span><b>Cotización profesional</b><span>De una nota de voz a un documento ordenado.</span><span class="case3__go">Prompt N1 <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></span></a>
+            <a class="case3" href="#p-negocio-2"><span class="case3__k">Antes → Después</span><b>Contenido para tu negocio</b><span>Un mes de ideas de publicaciones en minutos.</span><span class="case3__go">Prompt N2 <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></span></a>
+            <a class="case3" href="#p-negocio-4"><span class="case3__k">Antes → Después</span><b>Entender un contrato</b><span>Resumen y preguntas clave para llevarle a tu abogado (no lo reemplaza).</span><span class="case3__go">Prompt N4 <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></span></a>
+          </div>
+
+          <div class="prose">
+            <h3>Del chat al agente</h3>
+            <p>Hasta hace poco, la IA solo conversaba. Ahora también puede ejecutar.</p>
+          </div>
+          <div class="flow wide">
+            <div class="flow__row">
+              <p class="flow__label">Chat</p>
+              <ol class="flow__nodes"><li>Tú preguntas</li><li>Responde</li></ol>
+            </div>
+            <div class="flow__row flow__row--agent">
+              <p class="flow__label">Agente</p>
+              <ol class="flow__nodes"><li class="is-gold">Tú das un objetivo</li><li>Planea</li><li>Ejecuta pasos</li><li class="is-result">Te entrega el resultado</li></ol>
+            </div>
+          </div>
+          <div class="prose">
+            <p>Con un agente, el criterio importa todavía más: <strong>dale solo los permisos que necesita</strong> y revisa antes de que envíe, publique o pague algo en tu nombre.</p>
+            <p class="pull">El borrador es de la IA. La visión y las decisiones son tuyas.</p>
+          </div>
+
+          <div class="prose">
+            <h3>Prueba tú: de idea a página</h3>
+            <p>Los prompts de la demo en vivo, para que los pruebes en una herramienta de la categoría 4. Usa datos de ejemplo, nunca datos reales de personas.</p>
+          </div>
+          <div class="ideas wide">
+            <div class="xprompt" data-copy-scope>
+              <p class="xprompt__label">Idea A · Página para un negocio</p>
+              <p class="xprompt__text" data-copy-src>Crea una página web de una sola página para <span class="fill">{{NOMBRE_NEGOCIO}}</span>, un <span class="fill">{{TIPO_NEGOCIO}}</span> en <span class="fill">{{CIUDAD}}</span>. Incluye: encabezado con el nombre y una frase de valor, sección de servicios con 3 tarjetas, sección “¿Por qué elegirnos?”, preguntas frecuentes, botón flotante de WhatsApp y pie de página con datos de contacto de ejemplo. Estilo moderno y limpio, colores <span class="fill">{{COLORES}}</span>, tipografía legible, optimizada para celular. Todo el texto en español.</p>
+              <button class="copy copy--sm" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+            </div>
+            <div class="xprompt" data-copy-scope>
+              <p class="xprompt__label">Idea B · Página para un evento</p>
+              <p class="xprompt__text" data-copy-src>Crea una página para un evento llamado <span class="fill">{{NOMBRE_EVENTO}}</span>. Incluye: portada con fecha y lugar, cuenta regresiva, agenda por horas, sección de invitados con fotos de ejemplo, preguntas frecuentes y botón de inscripción. Estilo elegante, fondo oscuro con acentos dorados, optimizada para celular. Todo en español.</p>
+              <button class="copy copy--sm" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+            </div>
+            <div class="xprompt" data-copy-scope>
+              <p class="xprompt__label">Idea C · App para un grupo</p>
+              <p class="xprompt__text" data-copy-src>Crea una app sencilla para organizar las reuniones semanales de un grupo pequeño: calendario de próximas reuniones, tema de cada reunión, lista de quién lleva qué (anfitrión, alimentos, música) y una sección de anuncios. Usa datos de ejemplo ficticios. Diseño amigable y optimizado para celular. Todo en español.</p>
+              <button class="copy copy--sm" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+            </div>
+            <div class="xprompt" data-copy-scope>
+              <p class="xprompt__label">Segunda vuelta · Mejora lo que salió</p>
+              <p class="xprompt__text" data-copy-src>Agrega un formulario de contacto con nombre, servicio de interés y mensaje. Al enviarlo, abre WhatsApp con el mensaje ya armado.</p>
+              <button class="copy copy--sm" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== 07 -->
+        <section class="chapter" id="seguridad" aria-labelledby="t-seguridad" data-title="Seguridad">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">07</span><span class="chapter__phase">Discernir</span></p>
+            <h2 class="chapter__title" id="t-seguridad">Seguridad</h2>
+            <p class="chapter__lede">Estafas con voz clonada, videos falsos, privacidad y los hijos. Sin miedo y sin ingenuidad.</p>
+            <div class="segbar" style="--n: 7" aria-hidden="true"></div>
+          </header>
+
+          <blockquote class="verse">
+            <p>“El simple todo lo cree; mas el avisado mira bien sus pasos.”</p>
+            <cite>Proverbios 14:15</cite>
+          </blockquote>
+
+          <div class="prose">
+            <h3>Estafas con voz clonada y videos falsos</h3>
+            <p>En el juego “¿Humano o IA?” del taller vimos que ya no se puede distinguir a simple vista una imagen, un texto o una voz hechos con IA. Por eso no basta con usar la IA: hay que entenderla.</p>
+            <p>Hoy es posible imitar la voz de una persona a partir de grabaciones suyas, como las notas de voz o los videos que publicamos en redes. Y es posible crear videos falsos (<i lang="en">deepfakes</i>) de personas conocidas diciendo cosas que nunca dijeron.</p>
+            <p><a class="inline-cta" href="/presentacion/#/s03">Vuelve a jugar “¿Humano o IA?” en la presentación <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a></p>
+          </div>
+
+          <div class="twocol wide">
+            <div class="panel panel--alert">
+              <h4 class="panel__title">Señales de alerta</h4>
+              <ul class="ticks ticks--x">
+                <li><b>Urgencia:</b> “es ya”, “no hay tiempo”.</li>
+                <li><b>Dinero:</b> consignar, transferir, comprar tarjetas o enviar códigos.</li>
+                <li><b>Secreto:</b> “no le digas a nadie”, “no llames a mi mamá”.</li>
+                <li><b>Canal raro:</b> número nuevo, “se me dañó el celular”, solo notas de voz.</li>
+                <li><b>Presión emocional:</b> llanto, miedo, un accidente, una detención.</li>
+                <li><b>Ofertas milagrosas:</b> videos de famosos prometiendo ganancias seguras.</li>
+              </ul>
+            </div>
+            <div class="panel panel--verify">
+              <h4 class="panel__title">Qué hacer</h4>
+              <ol class="numbered">
+                <li><b>Respira y no actúes bajo presión.</b> La urgencia es la herramienta del estafador.</li>
+                <li><b>Pide la palabra clave familiar.</b> Si no la sabe, cuelga.</li>
+                <li><b>Cuelga y llama tú</b> al número que ya conoces de esa persona.</li>
+                <li><b>Confirma con otra persona</b> de la familia antes de mover un peso.</li>
+                <li><b>Nunca compartas códigos</b> que te lleguen por mensaje, ni claves.</li>
+                <li><b>Si caíste, actúa rápido:</b> llama a tu banco por su línea oficial y denuncia ante las autoridades.</li>
+              </ol>
+            </div>
+          </div>
+
+          <section class="sub" id="palabra-clave" aria-labelledby="t-palabra-clave">
+            <div class="prose">
+              <h3 class="sub__title" id="t-palabra-clave">Palabra clave familiar, paso a paso</h3>
+              <p>Es el reto 3 del taller y la defensa más sencilla contra las estafas de voz: una palabra que solo tu familia conoce. Si alguien te llama con la voz de tu hijo pidiendo plata, le pides la palabra clave.</p>
+            </div>
+            <ol class="keysteps wide">
+              <li><b>Reúnanse en persona.</b> No la acuerden por chat, por correo ni por llamada.</li>
+              <li><b>Elijan una palabra o frase difícil de adivinar.</b> Nada que esté en redes: ni el nombre de la mascota, ni fechas, ni el equipo de fútbol. Mejor algo absurdo y fácil de recordar.</li>
+              <li><b>No la escriban en ningún lado digital.</b> Ni en WhatsApp, ni en notas del celular, ni en redes. Si necesitan recordarla, que sea de memoria.</li>
+              <li><b>Acuerden cuándo pedirla.</b> Siempre que una llamada, un audio o un video pida dinero, datos o algo urgente, aunque la voz suene idéntica.</li>
+              <li><b>Incluyan a todos.</b> Abuelos, adolescentes y quien maneje plata en la familia.</li>
+              <li><b>Ensáyenla.</b> Hagan un simulacro: uno llama “en apuros” y el otro pide la palabra. Que pedirla se vuelva normal, no una ofensa.</li>
+              <li><b>Tengan un plan B.</b> Una pregunta que solo esa persona sabría responder, por si alguien olvida la palabra.</li>
+              <li><b>Cámbienla si se filtra.</b> Si la usaron frente a otros o creen que alguien la sabe, elijan otra.</li>
+            </ol>
+            <div class="callout callout--gold wide">
+              <p class="callout__title">El guion, para que no dé pena</p>
+              <p>“Te creo y te quiero ayudar. Antes, dime la palabra clave.” Si no la sabe: “Te llamo yo ya mismo a tu número.” Y cuelgas.</p>
+            </div>
+          </section>
+
+          <section class="sub" id="privacidad" aria-labelledby="t-privacidad">
+            <div class="prose">
+              <h3 class="sub__title" id="t-privacidad">Privacidad: qué nunca compartir</h3>
+              <p class="pull">Si no pagas con dinero, muchas veces pagas con datos.</p>
+              <p>Lo que escribes en una IA puede guardarse en tu historial y, según la herramienta y tu configuración, usarse para mejorar el servicio. Trátala como hablarías en un lugar público.</p>
+            </div>
+            <div class="never wide">
+              <p class="never__title">Regla de oro: nunca le entregues</p>
+              <ul class="never__list">
+                <li>Cédulas ni números de documento</li>
+                <li>Claves, PIN ni códigos de verificación</li>
+                <li>Números de tarjetas ni de cuentas</li>
+                <li>Datos de otras personas</li>
+              </ul>
+              <p class="never__foot">Ni los datos de tu familia, ni los de tus clientes, ni los de las personas que lideras.</p>
+            </div>
+            <div class="prose">
+              <h4>Tampoco pegues, sin pensarlo dos veces</h4>
+              <ul class="ticks ticks--x">
+                <li>Listas con nombres, teléfonos y direcciones (de tu grupo, tus clientes, tus empleados).</li>
+                <li>Historias clínicas, exámenes o diagnósticos, tuyos o de otros.</li>
+                <li>Fotos de documentos, facturas con datos personales o extractos bancarios.</li>
+                <li>Contratos o documentos internos de tu empresa sin autorización.</li>
+                <li>Conversaciones privadas de otras personas, capturas de chats incluidas.</li>
+              </ul>
+              <h4>Cómo anonimizar en un minuto</h4>
+              <ol class="numbered">
+                <li>Cambia los nombres por roles: “Cliente A”, “Persona 1”, “mi proveedor”.</li>
+                <li>Borra cédulas, teléfonos, direcciones, correos y números de cuenta.</li>
+                <li>Redondea las cifras sensibles si no necesitas el valor exacto.</li>
+                <li>Pregunta en general cuando se pueda: “¿cómo se maneja este tipo de caso?”.</li>
+              </ol>
+              <h4>Revisa tu configuración</h4>
+              <p>Cada herramienta tiene opciones distintas, y cambian: historial, uso de tus conversaciones para entrenar, conexiones con tu correo o tus archivos. Dedica cinco minutos a revisarlas en la que más usas.</p>
+              <p>Y recuerda: en Colombia la protección de datos personales ya rige (<a href="#marco-legal">Ley 1581 de 2012</a>). Subir datos de otros a una IA puede ser un problema legal, no solo ético.</p>
+            </div>
+          </section>
+
+          <section class="sub" id="ia-y-los-hijos" aria-labelledby="t-ia-hijos">
+            <div class="prose">
+              <h3 class="sub__title" id="t-ia-hijos">IA y los hijos</h3>
+              <p>Tus hijos probablemente ya usan IA, en el celular, en el colegio o dentro de sus aplicaciones. Prohibir sin entender no funciona; acompañar sí.</p>
+            </div>
+            <div class="guides wide">
+              <article class="guide"><h4>Conversa antes de prohibir</h4><p>Pregúntales qué usan, para qué y qué les gusta. Escucha primero. Así sabrás por dónde empezar.</p></article>
+              <article class="guide"><h4>Úsenla juntos</h4><p>Hagan juntos el Ejercicio 1 o el Ejercicio 3. Aprender a verificar en familia vale más que cualquier regla.</p></article>
+              <article class="guide"><h4>Para aprender, no para copiar</h4><p>La IA puede explicar un tema con paciencia. Entregar como propia una tarea hecha por la IA es rojo: no aprenden y no es honesto. Mira el prompt <a href="#p-hogar-4">H4</a>.</p></article>
+              <article class="guide"><h4>Enséñales qué es una alucinación</h4><p>Que sepan que la IA se equivoca con total seguridad y que todo lo importante se verifica.</p></article>
+              <article class="guide"><h4>La IA no es un amigo ni un consejero</h4><p>Algunas aplicaciones conversan como si fueran una persona. Explícales que no las conoce, no las quiere y no responde por lo que dice. Para lo importante están ustedes.</p></article>
+              <article class="guide"><h4>Cuiden sus fotos y su voz</h4><p>Lo que se publica puede usarse para crear imágenes o audios falsos. Piensen dos veces antes de publicar fotos y videos de menores.</p></article>
+              <article class="guide"><h4>Respeten la edad mínima</h4><p>Cada herramienta define en sus términos una edad mínima de uso. Revísala antes de que tus hijos abran una cuenta.</p></article>
+              <article class="guide"><h4>Acuerden reglas de casa</h4><p>Dónde y cuándo se usan las pantallas, qué no se comparte nunca y qué hacer si algo los incomoda: contárselo a ustedes, sin miedo al regaño.</p></article>
+              <article class="guide"><h4>Incluyan la palabra clave</h4><p>Los hijos también deben saberla y usarla. Y deben saber que ustedes nunca les pedirán claves ni códigos por mensaje.</p></article>
+              <article class="guide"><h4>Sé el ejemplo</h4><p>Ellos ven cómo la usas tú: si verificas, si cuidas los datos de otros, si sabes cuándo dejar el celular.</p></article>
+            </div>
+          </section>
+        </section>
+
+        <!-- ===================================================== 08 -->
+        <section class="chapter" id="marco-legal" aria-labelledby="t-marco-legal" data-title="Marco legal">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">08</span><span class="chapter__phase">Discernir</span></p>
+            <h2 class="chapter__title" id="t-marco-legal">Marco legal en Colombia</h2>
+            <p class="chapter__lede">Lo esencial para tener claridad, sin entrar en detalle jurídico.</p>
+            <div class="segbar" style="--n: 8" aria-hidden="true"></div>
+          </header>
+
+          <div class="callout callout--warn wide" role="note">
+            <p class="callout__title">Esto no es asesoría legal</p>
+            <p>Es información general para orientarte, verificada al 1 de octubre de 2026. Las normas cambian. Para tu caso concreto, consulta a un abogado.</p>
+          </div>
+
+          <ol class="laws wide">
+            <li class="law">
+              <p class="law__tag">Política</p>
+              <h3 class="law__name">CONPES 4144 · Política Nacional de IA</h3>
+              <ul class="ticks">
+                <li>Aprobado el 14 de febrero de 2025, con hoja de ruta a 2030.</li>
+                <li><strong>No crea sanciones por sí mismo.</strong></li>
+              </ul>
+            </li>
+            <li class="law">
+              <p class="law__tag law__tag--pending">En trámite</p>
+              <h3 class="law__name">Proyecto de ley de IA · PL 025 de 2026 Cámara</h3>
+              <ul class="ticks">
+                <li>Radicado el 21 de julio de 2026. Sucede al PL 324 de 2025 del cuatrienio anterior.</li>
+                <li>Propone un enfoque por niveles de riesgo, inspirado en el modelo de la Unión Europea.</li>
+                <li><strong>Sin aprobar</strong> al 1 de octubre de 2026. Todavía no hay una ley de IA aprobada en Colombia. <span class="ph">{{VERIFICAR_ESTADO_PL_ANTES_DEL_EVENTO}}</span></li>
+              </ul>
+            </li>
+            <li class="law">
+              <p class="law__tag law__tag--live">Vigente</p>
+              <h3 class="law__name">Ley 1581 de 2012 · Protección de datos personales</h3>
+              <ul class="ticks">
+                <li>Ya aplica, con IA o sin ella.</li>
+                <li>Subir datos de otras personas a una IA puede ser un problema legal, no solo ético.</li>
+              </ul>
+            </li>
+          </ol>
+
+          <div class="rule wide">
+            <p class="rule__label">La regla simple</p>
+            <p class="rule__text">“Lo que no es legal sin IA, tampoco lo es con IA.”</p>
+          </div>
+
+          <div class="prose">
+            <h3>Cómo aplicarla en el día a día</h3>
+            <p>No necesitas ser abogado para usar el sentido común: si algo no lo harías sin IA porque afecta a otra persona, tampoco lo hagas con IA. Antes de usarla, pregúntate:</p>
+            <ul class="ticks">
+              <li>¿Estoy usando datos de otra persona sin su permiso?</li>
+              <li>¿Estoy usando la imagen o la voz de alguien sin su autorización?</li>
+              <li>¿Estoy presentando algo falso como si fuera verdadero?</li>
+              <li>¿Estoy tomando una decisión importante sin el profesional que corresponde?</li>
+            </ul>
+            <p>Si alguna respuesta es “sí”, detente y consulta. La IA no cambia tus responsabilidades: las hace más rápidas.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 09 -->
+        <section class="chapter" id="ruta-30-dias" aria-labelledby="t-ruta" data-title="Ruta de 30 días">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">09</span><span class="chapter__phase">Crear · Decidir</span></p>
+            <h2 class="chapter__title" id="t-ruta">Ruta de 30 días</h2>
+            <p class="chapter__lede">Cuatro semanas, un reto por semana y una acción pequeña cada día. Pensada para unos 15 minutos diarios.</p>
+            <div class="segbar" style="--n: 9" aria-hidden="true"></div>
+          </header>
+
+          <blockquote class="verse">
+            <p>“…entendidos en los tiempos, y que sabían lo que Israel debía hacer.”</p>
+            <cite>1 Crónicas 12:32</cite>
+          </blockquote>
+          <div class="prose">
+            <p>Los hijos de Isacar no eran los más fuertes; eran los que entendían su momento. Y entender el momento lleva a actuar. Esta ruta convierte lo que aprendiste en hábitos.</p>
+            <div class="callout callout--gold">
+              <p class="callout__title">¿Vienes del taller?</p>
+              <p>Los tres retos de la última diapositiva son los retos de las semanas 1, 2 y 3 (marcados con ★). Si te animas, puedes adelantarlos esta misma semana.</p>
+            </div>
+          </div>
+
+          <div class="tracker wide" data-ruta>
+            <div class="tracker__bar">
+              <div class="tracker__meter" aria-hidden="true"><span data-ruta-fill></span></div>
+              <p class="tracker__status" aria-live="polite"><b data-ruta-done>0</b> de <b data-ruta-total>34</b> completados</p>
+              <button class="tbtn tracker__reset" type="button" data-ruta-reset><svg class="ico" aria-hidden="true"><use href="#i-reset" /></svg><span data-ruta-reset-label>Reiniciar</span></button>
+            </div>
+            <p class="tracker__note">Tu avance se guarda solo en este dispositivo y en este navegador. No se envía a ningún lado.</p>
+
+            <div class="weeks">
+              <section class="week" aria-labelledby="w1">
+                <header class="week__head">
+                  <p class="week__n">Semana 1 · Días 1–7 <span class="week__count" data-week-count></span></p>
+                  <h3 class="week__title" id="w1">Entender: pide bien</h3>
+                </header>
+                <label class="check check--challenge"><input type="checkbox" data-ruta="s1" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="week__label">★ Reto de la semana</span>Usa la fórmula <b>R·C·T·F</b> en una tarea real de tu trabajo.</span></label>
+                <ol class="days">
+                  <li><label class="check"><input type="checkbox" data-ruta="d1" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 1</span>Abre la IA que ya tienes y repite el <a href="#rctf">Ejercicio 1</a>: prompt pobre vs. R·C·T·F.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d2" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 2</span>Lee el <a href="#glosario">glosario</a> y explícale a alguien, con tus palabras, qué es una alucinación.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d3" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 3</span>Elige una tarea de tu trabajo que repites cada semana y escribe su prompt R·C·T·F.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d4" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 4</span>Usa ese prompt e itera tres veces: tono, longitud y formato.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d5" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 5</span>Copia uno de los <a href="#prompts-trabajo">prompts de trabajo</a> o de <a href="#prompts-negocio">negocio</a> y adáptalo a tu caso.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d6" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 6</span>Pídele a la IA que te haga preguntas antes de responder. Compara el resultado.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d7" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 7</span>Guarda tus tres mejores prompts en una nota. ¿Qué te ahorró y qué tuviste que corregir?</span></label></li>
+                </ol>
+              </section>
+
+              <section class="week" aria-labelledby="w2">
+                <header class="week__head">
+                  <p class="week__n">Semana 2 · Días 8–14 <span class="week__count" data-week-count></span></p>
+                  <h3 class="week__title" id="w2">Discernir: protégete y protege a los tuyos</h3>
+                </header>
+                <label class="check check--challenge"><input type="checkbox" data-ruta="s2" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="week__label">★ Reto de la semana</span>Acuerda con tu familia una <b>palabra clave</b> contra estafas de voz.</span></label>
+                <ol class="days">
+                  <li><label class="check"><input type="checkbox" data-ruta="d8" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 8</span>Repasa <a href="#semaforo">el semáforo</a> y clasifica cinco tareas tuyas en verde, amarillo o rojo.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d9" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 9</span>Revisa la configuración de privacidad y del historial de la IA que más usas.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d10" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 10</span>Escribe tu lista de lo que nunca vas a pegar en una IA (mira <a href="#privacidad">Privacidad</a>).</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d11" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 11</span>Reúne a tu familia, explícales la clonación de voz y sigan los pasos de la <a href="#palabra-clave">palabra clave</a>.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d12" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 12</span>Habla con tus hijos (o sobrinos, o nietos) sobre cómo usan la IA. Escucha primero.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d13" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 13</span>Practica anonimizar: toma un texto y cambia nombres y datos por “Cliente A”, “Persona 1”.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d14" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 14</span>Lee el <a href="#marco-legal">marco legal</a> y la regla simple. ¿Qué cambia en cómo usas la IA?</span></label></li>
+                </ol>
+              </section>
+
+              <section class="week" aria-labelledby="w3">
+                <header class="week__head">
+                  <p class="week__n">Semana 3 · Días 15–21 <span class="week__count" data-week-count></span></p>
+                  <h3 class="week__title" id="w3">Aplicar: investiga la Palabra</h3>
+                </header>
+                <label class="check check--challenge"><input type="checkbox" data-ruta="s3" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="week__label">★ Reto de la semana</span>Haz un estudio de contexto de un pasaje y <b>verifícalo</b>.</span></label>
+                <ol class="days">
+                  <li><label class="check"><input type="checkbox" data-ruta="d15" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 15</span>Haz el <a href="#investigacion-biblica">Ejercicio 3</a>: “Dios ayuda a quien se ayuda”. ¿Qué te respondió?</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d16" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 16</span>Elige un pasaje y léelo completo en tu Biblia, antes de usar la IA.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d17" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 17</span>Usa el prompt <a href="#p-biblia-1">B1</a> con el libro de ese pasaje.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d18" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 18</span>Verifica cada referencia que te dio. Anota cuáles eran correctas y cuáles no.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d19" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 19</span>Compara el pasaje en dos traducciones (prompt <a href="#p-biblia-4">B4</a>).</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d20" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 20</span>Prepara tres preguntas de discusión para tu grupo y revísalas tú.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d21" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 21</span>Escribe con tus palabras qué aprendiste. Esa parte es tuya: ninguna IA la escribe por ti.</span></label></li>
+                </ol>
+              </section>
+
+              <section class="week" aria-labelledby="w4">
+                <header class="week__head">
+                  <p class="week__n">Semana 4 · Días 22–30 <span class="week__count" data-week-count></span></p>
+                  <h3 class="week__title" id="w4">Multiplicar: crea y enseña</h3>
+                </header>
+                <label class="check check--challenge"><input type="checkbox" data-ruta="s4" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="week__label">Reto de la semana</span>Crea con IA algo útil para tu trabajo, tu negocio o tu grupo, y <b>enséñale a otra persona</b> la fórmula R·C·T·F.</span></label>
+                <ol class="days">
+                  <li><label class="check"><input type="checkbox" data-ruta="d22" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 22</span>Prueba una herramienta nueva de la <a href="#herramientas">lista</a> con una tarea pequeña.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d23" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 23</span>Haz una presentación o una pieza gráfica con IA para algo real.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d24" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 24</span>Crea una página sencilla describiéndola (tu negocio, un evento o tu grupo), con datos de ejemplo.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d25" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 25</span>Revisa lo que hiciste: ¿qué decidiste tú y qué propuso la IA?</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d26" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 26</span>Enséñale la fórmula R·C·T·F a alguien: tu esposa, un compañero, alguien de tu grupo.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d27" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 27</span>Ayuda a un familiar mayor a reconocer las señales de una estafa de voz o de un video falso.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d28" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 28</span>Haz balance: ¿qué tareas se volvieron más fáciles? ¿Qué uso pasó a rojo y lo dejaste?</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d29" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 29</span>Vuelve a los <a href="#bienvenida">niveles</a>: ¿dónde estás hoy? Si quieres, repite el <a href="/test/">diagnóstico</a>.</span></label></li>
+                  <li><label class="check"><input type="checkbox" data-ruta="d30" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="day">Día 30</span>Escribe tu plan para el próximo mes: una habilidad nueva, un uso que vas a multiplicar y una persona a la que vas a enseñar.</span></label></li>
+                </ol>
+              </section>
+            </div>
+            <p class="tracker__done" data-ruta-complete hidden><span class="t-gold">×10</span> Completaste la ruta. Ahora multiplícala: enséñasela a alguien.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 10 -->
+        <section class="chapter" id="recursos" aria-labelledby="t-recursos" data-title="Recursos">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">10</span><span class="chapter__phase">Seguir</span></p>
+            <h2 class="chapter__title" id="t-recursos">Recursos y contacto</h2>
+            <p class="chapter__lede">Para seguir aprendiendo, volver a la presentación y llevarte este material.</p>
+            <div class="segbar" style="--n: 10" aria-hidden="true"></div>
+          </header>
+
+          <div class="links wide">
+            <a class="linkcard" href="/test/">
+              <span class="linkcard__k">Diagnóstico</span>
+              <b>Descubre tu nivel: ×1, ×2, ×5 o ×10</b>
+              <span>Responde el diagnóstico y recibe una recomendación personal.</span>
+              <svg class="ico linkcard__go" aria-hidden="true"><use href="#i-arrow" /></svg>
+            </a>
+            <a class="linkcard" href="/presentacion/">
+              <span class="linkcard__k">Presentación</span>
+              <b>Vuelve a ver las diapositivas</b>
+              <span>La presentación completa del taller.</span>
+              <svg class="ico linkcard__go" aria-hidden="true"><use href="#i-arrow" /></svg>
+            </a>
+            <div class="linkcard linkcard--static">
+              <span class="linkcard__k">Contacto</span>
+              <b>Fabian Zapata</b>
+              <span class="contact" data-config="contacto"><span class="ph">{{CONTACTO_EXPOSITOR}}</span></span>
+            </div>
+          </div>
+
+          <div class="prose">
+            <h3>Guárdalo como PDF</h3>
+            <p>Este playbook está preparado para imprimirse o guardarse como PDF con buen formato: sin menús, con los prompts completos y tu avance de la ruta.</p>
+            <p><button class="btn btn--gold" type="button" data-print><svg class="ico" aria-hidden="true"><use href="#i-print" /></svg><span>Guardar como PDF</span></button></p>
+            <ul class="ticks">
+              <li><b>En computador:</b> usa el botón o presiona Ctrl + P (Cmd + P en Mac) y elige “Guardar como PDF” como destino.</li>
+              <li><b>En Android (Chrome):</b> menú ⋮ → Compartir → Imprimir → elige “Guardar como PDF”.</li>
+              <li><b>En iPhone (Safari):</b> botón Compartir → Imprimir → en la vista previa, toca Compartir otra vez y elige “Guardar en Archivos”.</li>
+              <li><b>O simplemente:</b> agrega esta página a los favoritos o a la pantalla de inicio de tu celular.</li>
+            </ul>
+          </div>
+
+          <div class="pocket wide" aria-labelledby="t-pocket">
+            <h3 class="pocket__title" id="t-pocket"><span class="t-gold">×</span> Tarjeta de bolsillo</h3>
+            <dl class="pocket__grid">
+              <div><dt>Pide bien</dt><dd><b>R·C·T·F:</b> Rol, Contexto, Tarea, Formato. El primer resultado es un borrador.</dd></div>
+              <div><dt>Verifica</dt><dd>Abre cada cita y cada fuente. La IA no sabe si lo que dice es verdad.</dd></div>
+              <div><dt>Discierne</dt><dd><span class="pocket__light"><span class="dot dot--go" aria-hidden="true"></span>Verde: con confianza.</span> <span class="pocket__light"><span class="dot dot--wait" aria-hidden="true"></span>Amarillo: revisa y complementa.</span> <span class="pocket__light"><span class="dot dot--stop" aria-hidden="true"></span>Rojo: no la uses.</span></dd></div>
+              <div><dt>Protege</dt><dd>Nunca cédulas, claves, tarjetas ni datos de otras personas.</dd></div>
+              <div><dt>En familia</dt><dd>Palabra clave contra estafas de voz. Cuelga y llama tú.</dd></div>
+              <div><dt>Recuerda</dt><dd>Lo que no es legal sin IA, tampoco lo es con IA.</dd></div>
+            </dl>
+            <p class="pocket__thesis">La IA acelera. <span class="t-gold">Tú decides.</span></p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <p class="footer__mark"><span class="t-gold">×</span>10</p>
+      <p>Playbook del taller <b>x10 · Multiplica tus talentos con inteligencia artificial</b>. Convención de Hombres MCI 2026 · G12 Centro de Convenciones · 1 al 3 de octubre de 2026.</p>
+      <p>Expositor: Fabian Zapata. Citas bíblicas: Reina-Valera 1960 <span class="ph">{{CONFIRMAR_VERSION}}</span>. Datos legales verificados al 1 de octubre de 2026.</p>
+      <p class="footer__thesis">La IA multiplica; el hombre decide.</p>
+      <p class="footer__links"><a href="/">Inicio del taller</a> · <a href="/presentacion/">Presentación</a> · <a href="/test/">Diagnóstico</a></p>
+    </footer>
+
+    <button class="pill" type="button" data-toc-open aria-controls="indice" aria-expanded="false">
+      <svg class="ico" aria-hidden="true"><use href="#i-list" /></svg>
+      <span class="pill__label"><span class="sr">Abrir índice. Estás en: </span><span data-current>Inicio</span></span>
+    </button>
+    <div class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

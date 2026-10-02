@@ -14,6 +14,8 @@ await mkdir(outDir, { recursive: true });
 
 const targets = {
   playbook: config.urlPlaybook,
+  test: config.urlTest,
+  site: config.urlSite,
   landing: config.urlLanding,
   demo: config.urlDemoApp,
 };

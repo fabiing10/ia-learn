@@ -20,7 +20,15 @@ createServer(async (req, res) => {
     const url = decodeURIComponent(new URL(req.url, 'http://x').pathname);
     let file = normalize(join(root, url));
     if (!file.startsWith(root)) throw new Error('outside root');
-    if ((await stat(file)).isDirectory()) file = join(file, 'index.html');
+    if ((await stat(file)).isDirectory()) {
+      // /presentacion -> /presentacion/ so the deck's relative paths resolve
+      if (!url.endsWith('/')) {
+        res.writeHead(301, { Location: url + '/' });
+        res.end();
+        return;
+      }
+      file = join(file, 'index.html');
+    }
     const body = await readFile(file);
     const range = req.headers.range;
     const type = types[extname(file).toLowerCase()] || 'application/octet-stream';

@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="es-CO" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0B0F1A" />
+    <title>x10 · Multiplica tus talentos con inteligencia artificial</title>
+    <meta name="description" content="Taller práctico de la Convención de Hombres MCI 2026 con Fabian Zapata: entender, desmitificar, discernir, aplicar y crear con inteligencia artificial. La IA acelera. Tú decides." />
+    <meta property="og:title" content="x10 · Multiplica tus talentos con inteligencia artificial" />
+    <meta property="og:description" content="La IA acelera. Tú decides. Taller práctico de la Convención de Hombres MCI 2026." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230B0F1A%22/%3E%3Cpath d=%22M28 28L72 72M72 28L28 72%22 stroke=%22%23E8B53A%22 stroke-width=%2214%22 stroke-linecap=%22round%22/%3E%3C/svg%3E" />
+    <script>
+      // Theme before first paint: saved choice (shared with /test and /playbook),
+      // else the OS preference, else dark. Also flags JS for progressive enhancement.
+      (function () {
+        var d = document.documentElement, t = null;
+        d.classList.add('js');
+        try { t = localStorage.getItem('x10-theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        d.dataset.theme = t;
+      })();
+    </script>
+    <noscript>
+      <style>
+        [role='tablist'], .ask__opts { display: none !important; }
+        [role='tabpanel'][hidden], .ask__a[hidden] { display: block !important; }
+      </style>
+    </noscript>
+    <script type="module" src="./home/main.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#contenido">Saltar al contenido</a>
+
+    <header class="bar" id="bar">
+      <div class="bar__in">
+        <a class="bar__mark" href="#inicio" aria-label="x10, volver al inicio"><span class="t-x" aria-hidden="true">×</span>10</a>
+        <nav class="bar__nav" aria-label="Secciones">
+          <a href="#taller">El taller</a>
+          <a href="#ruta">La ruta</a>
+          <a href="#semaforo">Semáforo</a>
+          <a href="#test">Test x10</a>
+          <a href="#llevatelo">Llévatelo</a>
+        </nav>
+        <div class="bar__end">
+          <button class="theme-btn" id="theme" type="button" aria-label="Cambiar a tema claro">
+            <svg class="theme-btn__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" /><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" /></svg>
+            <svg class="theme-btn__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6Z" /></svg>
+          </button>
+          <a class="btn btn--gold btn--s" href="/test/">Haz el test</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <!-- 1 · Portada -->
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="wrap hero__grid">
+          <div class="hero__main">
+            <p class="hero__event">Convención de Hombres MCI 2026</p>
+            <p class="odo" aria-hidden="true">
+              <span class="odo__x">×</span><span class="odo__n"><span class="odo__ghost">10</span><span class="odo__val" data-odo>10</span></span>
+            </p>
+            <ol class="ticks" aria-hidden="true" data-ticks>
+              <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+            </ol>
+            <h1 class="hero__title" id="hero-title"><span class="sr-only">x10: </span>Multiplica tus talentos con inteligencia artificial</h1>
+            <p class="hero__slogan">La IA acelera. <span class="hero__slogan-you">Tú decides.</span></p>
+            <div class="hero__ctas">
+              <a class="btn btn--gold" href="/test/">Haz el test x10</a>
+              <a class="btn btn--line" href="/presentacion/">Ver la presentación</a>
+            </div>
+          </div>
+
+          <aside class="ask" aria-labelledby="ask-q">
+            <p class="ask__q" id="ask-q">¿Ya usaste inteligencia artificial hoy?</p>
+            <div class="ask__opts" role="group" aria-labelledby="ask-q">
+              <button class="ask__opt" type="button" aria-pressed="false" data-ask="si">Sí</button>
+              <button class="ask__opt" type="button" aria-pressed="false" data-ask="no">No, creo que no</button>
+            </div>
+            <div class="ask__a" id="ask-a" hidden>
+              <p class="ask__big" data-ask-big>Probablemente sí.</p>
+              <p class="ask__text">Está en tu bolsillo, muchas veces gratis. Para entenderla, piensa en el autocompletar de tu WhatsApp… pero gigante.</p>
+              <a class="link" href="#ruta">Así empieza la ruta</a>
+            </div>
+          </aside>
+        </div>
+
+        <dl class="wrap facts">
+          <div class="facts__item"><dt>Cuándo</dt><dd>1 al 3 de octubre de 2026 <span class="ph">{{DIA_Y_HORA_DEL_TALLER}}</span></dd></div>
+          <div class="facts__item"><dt>Dónde</dt><dd>G12 Centro de Convenciones <span class="ph">{{SALON_DEL_TALLER}}</span></dd></div>
+          <div class="facts__item"><dt>Expositor</dt><dd>Fabian Zapata</dd></div>
+          <div class="facts__item"><dt>Duración</dt><dd>60 minutos, con tu celular a la mano</dd></div>
+        </dl>
+      </section>
+
+      <!-- 2 · De qué se trata -->
+      <section class="sec" id="taller" aria-labelledby="taller-t">
+        <div class="wrap taller">
+          <div class="taller__lead">
+            <h2 class="sec__title" id="taller-t">De qué se trata</h2>
+            <p class="thesis">La IA multiplica; el hombre decide.</p>
+            <p class="lead">Un taller práctico, no una prédica ni un curso técnico. En una hora vas a entender una herramienta que ya está en tu bolsillo y a decidir cómo usarla bien en tu trabajo, tu negocio, tu casa y tu servicio.</p>
+            <p class="muted">Da igual si nunca la has usado o si la usas todos los días: hay algo para ti.</p>
+          </div>
+
+          <div class="taller__out">
+            <h3 class="h3">Al salir vas a poder</h3>
+            <ul class="xlist">
+              <li>Explicar con tus palabras qué es la IA y qué no es.</li>
+              <li>Escribir un buen prompt con una fórmula simple.</li>
+              <li>Saber cuándo usarla y cuándo no, especialmente en el ministerio.</li>
+              <li>Ver a la IA crear algo real en minutos.</li>
+            </ul>
+          </div>
+
+          <div class="can" data-tabs>
+            <div class="can__head">
+              <h3 class="h3" id="can-t">La IA es una herramienta. ¿Qué hace y qué no?</h3>
+              <div class="seg" role="tablist" aria-labelledby="can-t">
+                <button class="seg__btn" type="button" role="tab" id="can-yes-tab" aria-controls="can-yes" aria-selected="true">Lo que sí puede</button>
+                <button class="seg__btn" type="button" role="tab" id="can-no-tab" aria-controls="can-no" aria-selected="false" tabindex="-1">Lo que no puede</button>
+              </div>
+            </div>
+            <div class="can__panel" role="tabpanel" id="can-yes" aria-labelledby="can-yes-tab" tabindex="0">
+              <ul class="chips">
+                <li>Escribir</li><li>Resumir</li><li>Traducir</li><li>Analizar</li><li>Crear imágenes y voces</li><li>Programar</li>
+              </ul>
+              <p class="can__foot">La IA acelera lo que sabes hacer.</p>
+            </div>
+            <div class="can__panel can__panel--no" role="tabpanel" id="can-no" aria-labelledby="can-no-tab" tabindex="0" hidden>
+              <ul class="chips chips--no">
+                <li>Sentir</li><li>Creer</li><li>Orar</li><li>Tener conciencia</li><li>Tener criterio moral</li><li>Saber si lo que dice es verdad</li>
+              </ul>
+              <p class="can__foot">Por eso tú sigues siendo el responsable.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 · La ruta -->
+      <section class="sec sec--route" id="ruta" aria-labelledby="ruta-t">
+        <div class="wrap">
+          <header class="sec__head">
+            <h2 class="sec__title" id="ruta-t">La ruta: de entender a crear</h2>
+            <p class="lead">Cinco fases en 60 minutos; cada una prepara la siguiente. Elige una fase para ver qué pasa en ella.</p>
+          </header>
+
+          <div class="route" data-tabs data-route style="--step: 0">
+            <div class="route__steps" role="tablist" aria-label="Fases de la ruta">
+              <span class="route__rail" aria-hidden="true"><span class="route__fill"></span></span>
+              <button class="route__step" type="button" role="tab" id="ph-1-tab" aria-controls="ph-1" aria-selected="true"><span class="route__n">1</span><span class="route__name">Entender</span></button>
+              <button class="route__step" type="button" role="tab" id="ph-2-tab" aria-controls="ph-2" aria-selected="false" tabindex="-1"><span class="route__n">2</span><span class="route__name">Desmitificar</span></button>
+              <button class="route__step" type="button" role="tab" id="ph-3-tab" aria-controls="ph-3" aria-selected="false" tabindex="-1"><span class="route__n">3</span><span class="route__name">Discernir</span></button>
+              <button class="route__step" type="button" role="tab" id="ph-4-tab" aria-controls="ph-4" aria-selected="false" tabindex="-1"><span class="route__n">4</span><span class="route__name">Aplicar</span></button>
+              <button class="route__step" type="button" role="tab" id="ph-5-tab" aria-controls="ph-5" aria-selected="false" tabindex="-1"><span class="route__n">5</span><span class="route__name">Crear</span></button>
+            </div>
+
+            <article class="phase" role="tabpanel" id="ph-1" aria-labelledby="ph-1-tab" tabindex="0">
+              <div class="phase__main">
+                <p class="phase__pos">Fase 1 de 5</p>
+                <h3 class="phase__verb">Entender</h3>
+                <p class="phase__idea">Lo nuevo no es la IA, es la velocidad.</p>
+                <blockquote class="verse"><p>“…entendidos en los tiempos, y que sabían lo que Israel debía hacer.”</p><cite>1 Crónicas 12:32</cite></blockquote>
+              </div>
+              <div class="phase__side">
+                <h4 class="phase__h">En el taller</h4>
+                <ul class="xlist">
+                  <li>De 1950 a hoy: cómo pasamos de preguntar si las máquinas pueden pensar a una IA que ejecuta tareas.</li>
+                  <li>Qué es: un sistema que aprendió de millones de ejemplos a reconocer patrones y producir respuestas.</li>
+                  <li>Las 6 palabras que necesitas: IA generativa, modelo, prompt, contexto, alucinación y agente.</li>
+                  <li>La fórmula del buen prompt, R·C·T·F: rol, contexto, tarea y formato. Ejercicio 1 con tu celular.</li>
+                </ul>
+                <div class="phase__links">
+                  <a class="link" href="/playbook/#rctf">La fórmula R·C·T·F en el playbook</a>
+                  <button class="btn btn--line btn--s" type="button" data-next>Siguiente: Desmitificar</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="phase" role="tabpanel" id="ph-2" aria-labelledby="ph-2-tab" tabindex="0" hidden>
+              <div class="phase__main">
+                <p class="phase__pos">Fase 2 de 5</p>
+                <h3 class="phase__verb">Desmitificar</h3>
+                <p class="phase__idea">Es una herramienta. El uso define el fruto.</p>
+                <blockquote class="verse"><p>“El simple todo lo cree; mas el avisado mira bien sus pasos.”</p><cite>Proverbios 14:15</cite></blockquote>
+              </div>
+              <div class="phase__side">
+                <h4 class="phase__h">¿Mito o realidad? La sala responde antes de revelar</h4>
+                <ul class="myths">
+                  <li><span>“La IA piensa y siente”</span><b class="tag">Mito</b></li>
+                  <li><span>“Si lo dice la IA, es verdad”</span><b class="tag">Mito</b></li>
+                  <li><span>“La IA es mala en sí misma”</span><b class="tag">Mito</b></li>
+                  <li><span>“Me va a reemplazar”</span><b class="tag tag--half">Media verdad</b></li>
+                  <li><span>“Es gratis”</span><b class="tag">Mito</b></li>
+                </ul>
+                <div class="phase__links">
+                  <a class="link" href="/playbook/#que-es-la-ia">Cinco mitos, en limpio, en el playbook</a>
+                  <button class="btn btn--line btn--s" type="button" data-next>Siguiente: Discernir</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="phase" role="tabpanel" id="ph-3" aria-labelledby="ph-3-tab" tabindex="0" hidden>
+              <div class="phase__main">
+                <p class="phase__pos">Fase 3 de 5</p>
+                <h3 class="phase__verb">Discernir</h3>
+                <p class="phase__idea">La IA propone. Tú decides y respondes por lo que decides.</p>
+                <blockquote class="verse"><p>“Yo soy el buen pastor; y conozco mis ovejas.”</p><cite>Juan 10:14</cite></blockquote>
+              </div>
+              <div class="phase__side">
+                <h4 class="phase__h">En el taller</h4>
+                <ul class="xlist">
+                  <li>El semáforo: verde, úsala con confianza; amarillo, úsala pero revisa y complementa; rojo, no la uses para esto.</li>
+                  <li>Por qué la consejería es roja.</li>
+                  <li>Lo que es tuyo: decidir, aconsejar, crear con propósito, discernir y responder.</li>
+                  <li>¿Y la ley? Lo que no es legal sin IA, tampoco lo es con IA.</li>
+                </ul>
+                <div class="phase__links">
+                  <a class="link" href="#semaforo">Pruébalo aquí: ¿qué color es?</a>
+                  <button class="btn btn--line btn--s" type="button" data-next>Siguiente: Aplicar</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="phase" role="tabpanel" id="ph-4" aria-labelledby="ph-4-tab" tabindex="0" hidden>
+              <div class="phase__main">
+                <p class="phase__pos">Fase 4 de 5</p>
+                <h3 class="phase__verb">Aplicar</h3>
+                <p class="phase__idea">Investiga con IA. Verifica con la Biblia.</p>
+                <blockquote class="verse"><p>“…escudriñando cada día las Escrituras para ver si estas cosas eran así.”</p><cite>Hechos 17:11</cite></blockquote>
+              </div>
+              <div class="phase__side">
+                <h4 class="phase__h">En el taller</h4>
+                <ul class="xlist">
+                  <li>Demo: qué era un “talento” en tiempos de Jesús, y cómo verificar lo que responde la IA.</li>
+                  <li>Ejercicio 3: pon a prueba a tu IA con una pregunta trampa.</li>
+                  <li>El mapa de herramientas por categoría. La herramienta cambia; la habilidad de pedir bien y verificar se queda.</li>
+                  <li>Tres casos para mañana: una cotización profesional, contenido para tu negocio y entender un contrato, sin reemplazar a tu abogado.</li>
+                </ul>
+                <div class="phase__links">
+                  <a class="link" href="/playbook/#investigacion-biblica">Guía de investigación bíblica en el playbook</a>
+                  <button class="btn btn--line btn--s" type="button" data-next>Siguiente: Crear</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="phase" role="tabpanel" id="ph-5" aria-labelledby="ph-5-tab" tabindex="0" hidden>
+              <div class="phase__main">
+                <p class="phase__pos">Fase 5 de 5</p>
+                <h3 class="phase__verb">Crear</h3>
+                <p class="phase__idea">El borrador es de la IA. La visión y las decisiones son tuyas.</p>
+              </div>
+              <div class="phase__side">
+                <h4 class="phase__h">Demo en vivo: de idea a app en minutos</h4>
+                <p class="phase__p">La sala vota entre tres ideas y la IA construye la ganadora mientras miras cómo trabaja: lee la idea, planea, escribe código y publica.</p>
+                <ul class="xlist">
+                  <li>Una página web para el negocio de alguien de la sala.</li>
+                  <li>Una página para un evento de la iglesia.</li>
+                  <li>Una app sencilla para organizar las reuniones de un grupo, sin datos reales.</li>
+                </ul>
+                <div class="phase__links">
+                  <a class="link" href="/playbook/#ruta-30-dias">Sigue con la ruta de 30 días</a>
+                  <a class="btn btn--line btn--s" href="/presentacion/">Ver la presentación</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 · Semáforo -->
+      <section class="sec" id="semaforo" aria-labelledby="semaforo-t">
+        <div class="wrap">
+          <header class="sec__head">
+            <h2 class="sec__title" id="semaforo-t">¿Qué color es?</h2>
+            <p class="lead">Los ocho casos del ejercicio 2. Decide tú primero y luego mira cómo lo vemos en el taller.</p>
+          </header>
+
+          <div class="sema">
+            <ul class="lights" aria-label="Qué significa cada color">
+              <li class="lights__item" data-light="verde"><span class="dot" aria-hidden="true"></span><span><b>Verde</b> Úsala con confianza</span></li>
+              <li class="lights__item" data-light="amarillo"><span class="dot" aria-hidden="true"></span><span><b>Amarillo</b> Úsala, pero revisa y complementa</span></li>
+              <li class="lights__item" data-light="rojo"><span class="dot" aria-hidden="true"></span><span><b>Rojo</b> No la uses para esto</span></li>
+            </ul>
+
+            <div class="game" data-game>
+              <!-- Source of truth for the game; shown as a plain list without JS. Order from config.json → semaforoOrden. -->
+              <ol class="cases" data-cases>
+                <li data-light="verde">Resumir un documento largo del trabajo</li>
+                <li data-light="verde" data-note="Verificando lo que te diga.">Investigar el contexto histórico de un libro de la Biblia</li>
+                <li data-light="verde">Redactar una cotización para un cliente</li>
+                <li data-light="amarillo" data-note="Es una base; el contenido y la vida los pones tú.">Preparar el esquema de una enseñanza para tu grupo</li>
+                <li data-light="amarillo" data-note="Orienta, pero decide con un profesional.">Pedirle orientación sobre un tema médico o legal</li>
+                <li data-light="rojo" data-note="Investigación: sí. Revelación, consejería y devocional: eso es tuyo.">Pedirle que escriba tu devocional y compartirlo como tuyo</li>
+                <li data-light="rojo" data-note="Regla de oro: nunca le entregues cédulas, claves, tarjetas ni datos de otras personas. La Ley 1581 de 2012 de protección de datos ya aplica.">Subir la lista de tu grupo con teléfonos y direcciones</li>
+                <li data-light="rojo" data-note="La IA no conoce a la persona ni su historia, no ora ni responde por el consejo, y estarías entregando información íntima de alguien sin su permiso.">Contarle la situación de una persona que aconsejas y preguntarle qué decirle</li>
+              </ol>
+            </div>
+            <p class="sema__more"><a class="link" href="/playbook/#semaforo">Más casos por área en el playbook</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 · Test x10 -->
+      <section class="sec sec--test" id="test" aria-labelledby="test-t">
+        <div class="wrap test">
+          <div class="test__copy">
+            <h2 class="sec__title" id="test-t">¿Qué tan multiplicador eres con la IA?</h2>
+            <p class="lead">El test x10 toma 3 minutos y es anónimo. Al final ves tu nivel y por dónde empezar. Durante el taller vemos, en vivo y como grupo, dónde estamos.</p>
+            <a class="btn btn--gold btn--l" href="/test/">Haz el test x10</a>
+            <p class="fine">No pide correo, teléfono ni documento; el nombre o apodo es opcional. Solo sirve para conocer al público del taller (Ley 1581 de 2012).</p>
+          </div>
+
+          <div class="levels" data-tabs>
+            <p class="levels__h" id="levels-t">Los cuatro niveles. Toca uno.</p>
+            <div class="levels__bars" role="tablist" aria-labelledby="levels-t">
+              <button class="lvl" type="button" role="tab" id="lv-x1-tab" aria-controls="lv-x1" aria-selected="true" style="--m: 1"><span class="lvl__mult"><span class="t-x" aria-hidden="true">×</span>1</span><span class="lvl__bar" aria-hidden="true"></span><span class="lvl__name">Observador</span></button>
+              <button class="lvl" type="button" role="tab" id="lv-x2-tab" aria-controls="lv-x2" aria-selected="false" tabindex="-1" style="--m: 2"><span class="lvl__mult"><span class="t-x" aria-hidden="true">×</span>2</span><span class="lvl__bar" aria-hidden="true"></span><span class="lvl__name">Explorador</span></button>
+              <button class="lvl" type="button" role="tab" id="lv-x5-tab" aria-controls="lv-x5" aria-selected="false" tabindex="-1" style="--m: 5"><span class="lvl__mult"><span class="t-x" aria-hidden="true">×</span>5</span><span class="lvl__bar" aria-hidden="true"></span><span class="lvl__name">Practicante</span></button>
+              <button class="lvl" type="button" role="tab" id="lv-x10-tab" aria-controls="lv-x10" aria-selected="false" tabindex="-1" style="--m: 10"><span class="lvl__mult"><span class="t-x" aria-hidden="true">×</span>10</span><span class="lvl__bar" aria-hidden="true"></span><span class="lvl__name">Multiplicador</span></button>
+            </div>
+            <div class="levels__panel" role="tabpanel" id="lv-x1" aria-labelledby="lv-x1-tab" tabindex="0"><p><b>×1 Observador.</b> Has oído hablar de la IA; la usas poco o nada.</p></div>
+            <div class="levels__panel" role="tabpanel" id="lv-x2" aria-labelledby="lv-x2-tab" tabindex="0" hidden><p><b>×2 Explorador.</b> La pruebas de vez en cuando, con instrucciones básicas.</p></div>
+            <div class="levels__panel" role="tabpanel" id="lv-x5" aria-labelledby="lv-x5-tab" tabindex="0" hidden><p><b>×5 Practicante.</b> La usas cada semana con intención, verificas y conoces sus límites.</p></div>
+            <div class="levels__panel" role="tabpanel" id="lv-x10" aria-labelledby="lv-x10-tab" tabindex="0" hidden><p><b>×10 Multiplicador.</b> La integras a tu trabajo o ministerio, delegas con criterio y enseñas a otros.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 · Llévatelo -->
+      <section class="sec" id="llevatelo" aria-labelledby="llevatelo-t">
+        <div class="wrap">
+          <header class="sec__head">
+            <h2 class="sec__title" id="llevatelo-t">Llévatelo a tu semana</h2>
+            <p class="lead">El taller dura una hora. Lo que haces con él, el resto de la semana.</p>
+          </header>
+
+          <div class="take">
+            <div class="retos" data-retos>
+              <div class="retos__head">
+                <h3 class="h3">Tres retos para esta semana</h3>
+                <p class="retos__count" data-retos-count aria-live="polite">0 de 3 cumplidos</p>
+              </div>
+              <ul class="retos__list">
+                <li class="reto">
+                  <input class="reto__check" type="checkbox" id="reto-1" data-reto="rctf" />
+                  <label class="reto__label" for="reto-1">Usa la fórmula <b>R·C·T·F</b> en una tarea real de tu trabajo</label>
+                  <a class="reto__how" href="/playbook/#rctf">Cómo hacerlo<span class="sr-only">: la fórmula R·C·T·F</span></a>
+                </li>
+                <li class="reto">
+                  <input class="reto__check" type="checkbox" id="reto-2" data-reto="estudio" />
+                  <label class="reto__label" for="reto-2">Haz un estudio de contexto de un pasaje y <b>verifícalo</b></label>
+                  <a class="reto__how" href="/playbook/#investigacion-biblica">Cómo hacerlo<span class="sr-only">: investigación bíblica con IA</span></a>
+                </li>
+                <li class="reto">
+                  <input class="reto__check" type="checkbox" id="reto-3" data-reto="palabra" />
+                  <label class="reto__label" for="reto-3">Acuerda con tu familia una <b>palabra clave</b> contra estafas de voz</label>
+                  <a class="reto__how" href="/playbook/#palabra-clave">Cómo hacerlo<span class="sr-only">: la palabra clave familiar</span></a>
+                </li>
+              </ul>
+              <p class="fine">Tu avance se guarda solo en este dispositivo.</p>
+            </div>
+
+            <div class="go">
+              <a class="go__card go__card--main" href="/playbook/">
+                <span class="go__kind">Playbook x10</span>
+                <span class="go__text">Todo lo de hoy y mucho más, organizado para que lo leas con calma: prompts listos para copiar, el semáforo completo, seguridad y una ruta de 30 días.</span>
+                <span class="go__cta">Abrir el playbook</span>
+              </a>
+              <a class="go__card" href="/presentacion/">
+                <span class="go__kind">La presentación</span>
+                <span class="go__text">Las diapositivas del taller, para repasar lo que viste. Se ven mejor en pantalla horizontal.</span>
+                <span class="go__cta">Ver la presentación</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap foot__in">
+        <p class="foot__slogan">La IA acelera. <span class="foot__you">Tú decides.</span></p>
+        <div class="foot__meta">
+          <p>x10 · Multiplica tus talentos con inteligencia artificial. Fabian Zapata, Convención de Hombres MCI 2026.</p>
+          <p>Contacto: <span class="ph">{{CONTACTO_EXPOSITOR}}</span></p>
+          <p class="fine">“x10” es una metáfora de multiplicación, no una promesa de riqueza ni de resultados mágicos. Citas bíblicas: Reina-Valera 1960.</p>
+          <p class="fine">Esta página es un ejemplo del taller: la construyó una IA a partir de un prompt.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

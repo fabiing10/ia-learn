@@ -13,65 +13,90 @@
 </section>
 
 <section data-block="8" data-start-indexv="0">
-  <section id="s35" data-block="8" data-bg-alpha="0.3" data-ctrl="vote" class="s-vote">
-    <header class="ex__head">
-      <p class="ex__tag" data-in><span class="ex__badge ex__badge--demo">Demo 2</span><span class="ex__who">En vivo · <span data-config="herramientaDemo"></span></span></p>
-      <h2 class="t-h1" data-split="chars">De idea a app en minutos</h2>
+  <section id="s35" data-block="8" data-bg-alpha="0.3" data-ctrl="copy" class="s-case s-tight">
+    <header class="case-head">
+      <div class="case-head__row">
+        <p class="ex__tag" data-in><span class="ex__badge ex__badge--demo">Caso real</span><span class="ex__who">La página de este taller</span></p>
+        <button class="copy" type="button" data-copy data-in><span class="copy__icon" aria-hidden="true"></span><span class="copy__label">Copiar prompt</span></button>
+      </div>
+      <div class="case-head__row">
+        <h2 class="t-h2" data-split="chars">Un solo prompt</h2>
+        <div class="case-prompt__side" data-in>
+          <p class="case-prompt__meta"><span>Herramienta</span><b>Claude Code</b></p>
+          <p class="case-prompt__meta"><span>Modelo</span><b>Claude Opus 5.5</b></p>
+        </div>
+      </div>
     </header>
-    <div class="ideas" data-in="stagger">
-      <button class="idea" type="button" data-idea="A">
-        <span class="idea__key">A</span>
-        <span class="idea__text">Página web para el negocio de alguien de la sala</span>
-      </button>
-      <button class="idea" type="button" data-idea="B">
-        <span class="idea__key">B</span>
-        <span class="idea__text">Página para un evento de la iglesia</span>
-      </button>
-      <button class="idea" type="button" data-idea="C">
-        <span class="idea__key">C</span>
-        <span class="idea__text">App sencilla para organizar las reuniones de un grupo <small>(sin datos reales)</small></span>
-      </button>
+    <div class="case-prompt">
+      <p class="prompt prompt--case" data-copy-src data-in><span data-k="r">Eres un diseñador y desarrollador web senior de landing pages premium.</span> <span data-k="c">Dicto el taller “x10 · Multiplica tus talentos con inteligencia artificial” en la Convención de Hombres MCI 2026 (1 al 3 de octubre, G12 Centro de Convenciones), para 130 hombres de 20 a 50 años. Tesis: “La IA acelera. Tú decides.” El contenido está en el brief del taller y la marca (dorado #E8B53A, motivo ×) en el proyecto.</span> <span data-k="t">Crea la landing del taller, con menos de 8 secciones interactivas: de qué se trata, la ruta entender → desmitificar → discernir → aplicar → crear, y llamados al test x10, al playbook y a la presentación.</span> <span data-k="f">Una página en español, mobile-first, accesible, modo claro y oscuro, animaciones sutiles. No inventes datos: si falta algo, deja {{LLAVES}}.</span></p>
     </div>
     <aside class="notes">
-      <p><strong>S35 · DEMO 2 · De idea a app en minutos</strong> · elección a mano alzada</p>
+      <p><strong>S35 · Caso real: un solo prompt</strong> · bloque 8 · 0:50–0:56</p>
       <ul>
-        <li>Gana la idea más votada (clic sobre la tarjeta para marcarla). Si es A, un voluntario dice nombre y tipo de negocio.</li>
-        <li>Prompts listos en el README (sección "Guiones de demo").</li>
-        <li>Mientras genera (1–3 min), narrar lo que hace: lee la idea → planea → escribe código → publica.</li>
-        <li>Si tarda más de 3 minutos, saltar al respaldo sin disculparse: tecla <strong>4</strong>.</li>
+        <li>"La página que van a ver se construyó con este único prompt. Fíjense: es la misma fórmula R·C·T·F que practicaron con el celular."</li>
+        <li>Señalar las cuatro partes: rol, contexto, tarea y formato. La última línea es la regla del taller: no inventar datos.</li>
+        <li>Si hay tiempo y conexión: "Copiar prompt" y pegarlo en vivo en Lovable o en Claude para que vean cómo arranca. Si tarda más de 3 minutos, seguir al ciclo.</li>
+        <li>El prompt completo también está en el repositorio: x10/docs/caso-landing-prompt.md.</li>
       </ul>
     </aside>
   </section>
 
   <section id="s35b" data-block="8" data-backup="4" data-bg-alpha="0.2" class="s-backup">
-    <p class="backup__tag" data-in>Respaldo · Demo de idea a app</p>
+    <p class="backup__tag" data-in>Respaldo · Video del proceso</p>
     <div class="backup__video media is-contain" data-media="videoDemoLovable" data-ph="VIDEO_DEMO_LOVABLE" data-autoplay data-in="mask"></div>
     <aside class="notes">
-      <p><strong>Respaldo S35</strong> · video de 60–90 s del proceso. <strong>R</strong> vuelve; el clicker sigue hacia S36.</p>
+      <p><strong>Respaldo S35</strong> · video de 60–90 s del proceso. <strong>R</strong> vuelve; el clicker sigue hacia el ciclo.</p>
     </aside>
   </section>
+</section>
+
+<section id="s35c" data-block="8" data-bg-alpha="0.3" class="s-cycle s-tight">
+  <h2 class="t-h2" data-split="chars">Del prompt al resultado</h2>
+  <ol class="cycle" data-in="stagger">
+    <li><b><span class="cycle__n">1</span>Prompt</b><span>R·C·T·F en español</span></li>
+    <li><b><span class="cycle__n">2</span>Herramienta</b><span>Claude Code, un agente</span></li>
+    <li><b><span class="cycle__n">3</span>Modelo</b><span>Claude Opus 5.5</span></li>
+    <li><b><span class="cycle__n">4</span>Contexto</b><span>Brief y marca del taller</span></li>
+    <li><b><span class="cycle__n">5</span>Plan</b><span>6 secciones interactivas</span></li>
+    <li><b><span class="cycle__n">6</span>Construye</b><span>HTML, CSS y JavaScript</span></li>
+    <li><b><span class="cycle__n">7</span>Verifica</b><span>En celular y computador</span></li>
+    <li><b><span class="cycle__n">8</span>Publica</b><span>GitHub + Vercel</span></li>
+  </ol>
+  <p class="cycle__human" data-in><span class="x" aria-hidden="true"></span>Tú defines el qué y el para qué. La IA ejecuta los pasos. Tú revisas y decides.</p>
+  <aside class="notes">
+    <p><strong>S35c · Del prompt al resultado</strong> · el ciclo completo</p>
+    <ul>
+      <li>Conectar con S33 (del chat al agente): aquí se ve un agente de verdad. Se le dio un objetivo, leyó el contexto, planeó, ejecutó pasos y entregó el resultado.</li>
+      <li>Herramienta: Claude Code. Modelo: Claude Opus 5.5. Orquestación: Orca coordinó varios agentes en paralelo (landing, test, playbook) y un humano revisó cada entrega.</li>
+      <li>Publicación: el código vive en GitHub; Vercel lo compila y lo publica en cada cambio.</li>
+      <li>Mensaje: "La IA hizo el trabajo pesado. El criterio, la revisión y la decisión de publicar fueron humanos."</li>
+      <li>Lo que hizo el agente (x10/apps/home/PROCESS.md): leyó el brief, el contrato del proyecto y las slides; eligió 6 secciones con una interacción real cada una (pregunta de entrada, puede/no puede, la ruta de 5 fases, el semáforo de 8 casos, los niveles ×1–×10 y los retos); compiló, probó en celular y computador, en tema claro y oscuro, y corrigió dos errores que encontró en sus propias capturas.</li>
+      <li>Decisiones que tomó solo y vale la pena contar: no reveló Lucas 19:16-17 ni la respuesta del ejercicio 3 para no dañar la sorpresa del taller; dejó como {{LLAVES}} el día y hora exactos, el salón y el contacto.</li>
+    </ul>
+  </aside>
 </section>
 
 <section id="s36" data-block="8" data-bg-alpha="0.3" class="s-result s-tight">
   <div class="result">
     <figure class="browser" data-in="mask">
-      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser__url"></span></div>
-      <div class="browser__view media" data-media="capturaResultadoDemo" data-ph="CAPTURA_O_APP_EN_VIVO"></div>
+      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser__url">x10-presentacion.vercel.app</span></div>
+      <div class="browser__view media" data-media="capturaLanding" data-ph="CAPTURA_LANDING"></div>
     </figure>
     <div class="result__side">
       <p class="result__line t-lead" data-split="lines">Lo que antes tomaba semanas y un equipo, hoy es un borrador en minutos.</p>
       <p class="result__sub t-body" data-in>El borrador es de la IA. <span class="t-gold">La visión y las decisiones son tuyas.</span></p>
       <figure class="result__qr" data-in>
-        <div class="qrbox qrbox--sm" data-qr="demo"></div>
-        <figcaption>Ábrela en tu celular</figcaption>
+        <div class="qrbox qrbox--sm" data-qr="site"></div>
+        <figcaption>Ábrela en tu celular<b>x10-presentacion.vercel.app</b></figcaption>
       </figure>
     </div>
   </div>
   <aside class="notes">
-    <p><strong>S36 · El resultado</strong></p>
+    <p><strong>S36 · El resultado</strong> · la landing del taller, publicada</p>
     <ul>
-      <li>Captura en <code>media/captura-resultado-demo.png</code> o cambiar a la app en vivo.</li>
-      <li>Mostrarla en el celular si se puede: QR al link publicado (<code>config.json → urlDemoApp</code>).</li>
+      <li>Invitar a escanear el QR: lleva a la página principal (x10-presentacion.vercel.app), con el test, el playbook y la presentación.</li>
+      <li>"Lo que antes tomaba semanas y un equipo, hoy es un borrador en minutos. El borrador es de la IA. La visión y las decisiones son tuyas."</li>
+      <li>Si hay conexión, abrirla en vivo en lugar de la captura.</li>
     </ul>
   </aside>
 </section>

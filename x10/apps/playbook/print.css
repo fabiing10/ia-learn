@@ -1,0 +1,281 @@
+/* Print / "Guardar como PDF": light paper, no chrome, nothing cut in half. */
+
+@media print {
+  :root,
+  :root[data-theme='dark'],
+  :root[data-theme='light'] {
+    --bg: #fff;
+    --bg-raise: #fff;
+    --text: #111;
+    --text-2: #333;
+    --text-3: #555;
+    --line: #d4d4d4;
+    --line-strong: #9a9a9a;
+    --gold-text: #6b4c00;
+    --gold-soft: #f7ecd2;
+    --surface: #fff;
+    --surface-2: #f5f5f5;
+    --cyan-text: #0b6a80;
+    --go: #1f9e5a;
+    --wait: #d9a21b;
+    --stop: #d23b40;
+    --shadow: none;
+    --vignette: none;
+    color-scheme: light;
+  }
+
+  @page {
+    margin: 16mm 14mm 18mm;
+  }
+
+  /* rem-based spacing shrinks with the root: denser pages, same proportions */
+  html {
+    font-size: 11px;
+    scroll-behavior: auto;
+  }
+
+  body {
+    font-size: 10pt;
+    line-height: 1.5;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body::before,
+  .hero::before,
+  .sprite,
+  .skip,
+  .progress,
+  .topbar,
+  .scrim,
+  .pill,
+  .toast,
+  .copy,
+  .filter,
+  .anchor,
+  .tracker__reset,
+  .hero__cta,
+  [data-print],
+  .qcase__hint,
+  .reveal__hint,
+  .inline-cta .ico {
+    display: none !important;
+  }
+
+  .layout {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+
+  .hero {
+    padding: 0 0 10mm;
+    border: 0;
+    break-after: page;
+  }
+
+  .hero__inner {
+    display: block;
+  }
+
+  .hero__inner > * {
+    animation: none !important;
+    margin-top: 4mm;
+  }
+
+  .hero__mark {
+    font-size: 72pt;
+  }
+
+  .chapter {
+    padding: 0;
+    border: 0;
+    break-before: page;
+  }
+
+  .chapter:first-child {
+    break-before: auto;
+  }
+
+  .chapter__title {
+    font-size: 28pt;
+  }
+
+  .wide,
+  .pgrid {
+    max-width: none;
+  }
+
+  /* The table of contents prints as a page of its own after the cover */
+  .toc {
+    position: static !important;
+    display: block;
+    width: auto !important;
+    max-height: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    transform: none !important;
+    visibility: visible !important;
+    background: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    break-after: page;
+    font-size: 11pt;
+  }
+
+  .toc__close,
+  .toc__foot {
+    display: none !important;
+  }
+
+  .toc__title {
+    font-size: 14pt;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    margin-bottom: 4mm;
+  }
+
+  .toc__list a {
+    min-height: 0 !important;
+    padding: 1.5mm 0 1.5mm 3mm;
+    color: var(--text);
+    background: none !important;
+  }
+
+  .toc__list ol a {
+    padding-left: 12mm;
+  }
+
+  .btn {
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--gold-text);
+  }
+
+  .btn .ico {
+    display: none;
+  }
+
+  .pcard,
+  .xprompt {
+    padding: 4mm;
+  }
+
+  /* small caps labels keep a legible floor on paper */
+  .part__k,
+  .chapter__kicker,
+  .hero__event,
+  .hero__kicker,
+  .linkcard__k,
+  .case3__k,
+  .week__label,
+  .week__n,
+  .day,
+  .law__tag,
+  .badge,
+  .verse cite,
+  .xprompt__label,
+  .step__n,
+  .flow__label,
+  .pocket__grid dt,
+  .thesis__label,
+  .defbox__label,
+  .rule__label,
+  .yours__title,
+  .never__title,
+  .sub__tag {
+    font-size: 7.5pt !important;
+  }
+
+  .toc__list ol a {
+    font-size: 9.5pt;
+  }
+
+  .hero__mark {
+    margin: 6mm 0 4mm;
+  }
+
+  h2,
+  h3,
+  h4,
+  .chapter__head,
+  .pcard__head,
+  .week__head {
+    break-after: avoid;
+  }
+
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .pcard,
+  .term,
+  .scase,
+  .qcase,
+  .myth,
+  .lightcard,
+  .panel,
+  .law,
+  .guide,
+  .tool,
+  .level,
+  .anat,
+  .move,
+  .xprompt,
+  .callout,
+  .verse,
+  .keysteps li,
+  .signals li,
+  .check,
+  .linkcard,
+  .rule,
+  .never,
+  .thesis,
+  .defbox,
+  .predict,
+  .case3,
+  .pocket {
+    break-inside: avoid;
+  }
+
+  .pcard {
+    box-shadow: none;
+  }
+
+  .tracker__bar {
+    position: static;
+    backdrop-filter: none;
+  }
+
+  .predict__gap {
+    animation: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a[data-print-url]::after {
+    content: ' (' attr(data-print-url) ')';
+    font-size: 0.85em;
+    font-weight: 400;
+    color: #555;
+    word-break: break-all;
+  }
+
+  .qcase__a,
+  .reveal__body {
+    padding-left: 1.1rem;
+  }
+
+  .footer {
+    margin-top: 10mm;
+    padding: 6mm 0 0;
+  }
+}

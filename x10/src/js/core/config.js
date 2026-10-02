@@ -4,10 +4,12 @@ import config from '../../../config.json';
 import qrPlaybook from '../../assets/qr/playbook.svg?raw';
 import qrLanding from '../../assets/qr/landing.svg?raw';
 import qrDemo from '../../assets/qr/demo.svg?raw';
+import qrTest from '../../assets/qr/test.svg?raw';
+import qrSite from '../../assets/qr/site.svg?raw';
 
 export { config };
 
-const QR = { playbook: qrPlaybook, landing: qrLanding, demo: qrDemo };
+const QR = { playbook: qrPlaybook, landing: qrLanding, demo: qrDemo, test: qrTest, site: qrSite };
 
 export const isPlaceholder = (v) => typeof v !== 'string' || /^\s*\{\{.*\}\}\s*$/.test(v);
 
@@ -52,9 +54,16 @@ function mountMedia(box) {
   let el;
   if (VIDEO.test(src)) {
     el = document.createElement('video');
-    el.preload = 'metadata';
     el.playsInline = true;
-    el.controls = true;
+    if (box.hasAttribute('data-loop')) {
+      // game clips: silent loop, no controls, started by the slide controller
+      el.muted = true;
+      el.loop = true;
+      el.preload = 'auto';
+    } else {
+      el.preload = 'metadata';
+      el.controls = true;
+    }
     if (box.hasAttribute('data-autoplay')) el.setAttribute('data-autoplay', '');
   } else if (AUDIO.test(src)) {
     el = document.createElement('audio');
@@ -127,4 +136,14 @@ export function applyConfig(rootEl = document) {
     el.classList.toggle('is-pending', el.querySelector('.qr--pending') !== null);
   });
   rootEl.querySelectorAll('.media[data-media], [data-slot].media').forEach(mountMedia);
+
+  // Attribution for licensed example media (config.creditos: { mediaKey: text })
+  rootEl.querySelectorAll('.opt [data-slot].media').forEach((slot) => {
+    const text = config.creditos?.[slot.dataset.media];
+    if (!text) return;
+    const credit = document.createElement('span');
+    credit.className = 'opt__credit';
+    credit.textContent = text;
+    slot.closest('.opt').appendChild(credit);
+  });
 }

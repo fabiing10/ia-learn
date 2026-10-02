@@ -4,7 +4,7 @@
 import { gsap, defineCtrl } from '../core/motion.js';
 import { readStep } from '../core/stepper.js';
 
-const ROUNDS = ['imagen', 'texto', 'voz'];
+const ROUNDS = ['imagen', 'texto', 'video', 'voz'];
 const BARS = 22;
 
 function parse(name) {
@@ -168,6 +168,12 @@ function render(slide, { animate }) {
     gsap.set(slide.querySelectorAll('.opt__verdict'), { autoAlpha: 0 });
   }
 
+  // Video round: both clips loop muted while the round is on screen
+  slide.querySelectorAll('[data-round="video"] video').forEach((v) => {
+    if (round === 'video') v.play?.().catch(() => {});
+    else v.pause?.();
+  });
+
   // Voice round audio follows the clicker
   if (round !== 'voz') stopAll(slide);
   else if (phase === 'playA') play(slide, 'A');
@@ -196,6 +202,7 @@ defineCtrl('hoia', {
   },
   leave(slide) {
     stopAll(slide);
+    slide.querySelectorAll('[data-round="video"] video').forEach((v) => v.pause());
   },
   print(slide) {
     slide.querySelectorAll('.round').forEach((r) => r.classList.add('is-current', 'is-revealed'));

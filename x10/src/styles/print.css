@@ -54,7 +54,7 @@ html.is-print .wait__a-inner {
 /* S03: the three rounds side by side, answers revealed */
 html.is-print .hoia__stage {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 32px;
 }
 

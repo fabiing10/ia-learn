@@ -41,7 +41,7 @@
 <section id="s03" data-block="1" data-bg-alpha="0.45" data-ctrl="hoia" class="s-hoia">
   <header class="hoia__head">
     <h2 class="t-h1" data-split="chars">¿Humano o IA?</h2>
-    <p class="hoia__round" data-in><span class="hoia__round-n">Ronda <b data-round-n>1</b> de 3</span><span class="hoia__round-kind" data-round-kind>Imagen</span></p>
+    <p class="hoia__round" data-in><span class="hoia__round-n">Ronda <b data-round-n>1</b> de <span data-round-total>4</span></span><span class="hoia__round-kind" data-round-kind>Imagen</span></p>
   </header>
 
   <div class="hoia__stage">
@@ -67,6 +67,19 @@
       <figure class="opt" data-opt="B">
         <span class="opt__key">B</span>
         <p class="opt__body opt__body--text" data-slot data-human="text:textoHumano:TEXTO_HUMANO" data-ai="text:textoIa:TEXTO_IA"></p>
+        <span class="opt__verdict"></span>
+      </figure>
+    </div>
+
+    <div class="round" data-round="video" data-kind="Video">
+      <figure class="opt" data-opt="A">
+        <span class="opt__key">A</span>
+        <div class="opt__body opt__body--media" data-slot data-loop data-human="media:videoReal:VIDEO_REAL" data-ai="media:videoIa:VIDEO_IA"></div>
+        <span class="opt__verdict"></span>
+      </figure>
+      <figure class="opt" data-opt="B">
+        <span class="opt__key">B</span>
+        <div class="opt__body opt__body--media" data-slot data-loop data-human="media:videoReal:VIDEO_REAL" data-ai="media:videoIa:VIDEO_IA"></div>
         <span class="opt__verdict"></span>
       </figure>
     </div>
@@ -102,6 +115,8 @@
   <span class="fragment driver" data-step="imagen:reveal"></span>
   <span class="fragment driver" data-step="texto:show"></span>
   <span class="fragment driver" data-step="texto:reveal"></span>
+  <span class="fragment driver" data-step="video:show"></span>
+  <span class="fragment driver" data-step="video:reveal"></span>
   <span class="fragment driver" data-step="voz:show"></span>
   <span class="fragment driver" data-step="voz:playA"></span>
   <span class="fragment driver" data-step="voz:playB"></span>
@@ -109,7 +124,8 @@
 
   <aside class="notes">
     <p><strong>S03 · Juego: ¿Humano o IA?</strong> · la sala vota levantando la mano por A o por B</p>
-    <p>Clics: ronda 1 (imagen) → revelar → ronda 2 (texto) → revelar → ronda 3 (voz) → suena A → suena B → revelar. También puedes hacer clic en el botón de cada audio.</p>
+    <p>Clics: ronda 1 (imagen) → revelar → ronda 2 (texto) → revelar → ronda 3 (video, se reproducen solos en silencio) → revelar → ronda 4 (voz) → suena A → suena B → revelar. También puedes hacer clic en el botón de cada audio.</p>
+    <p>Imágenes y videos de ejemplo: fuentes y licencias en <code>public/media/CREDITS.md</code>; el crédito aparece bajo cada opción al revelar.</p>
     <ul>
       <li>Clonar <strong>solo tu propia voz</strong>.</li>
       <li>El audio clonado puede decir: "Hola, soy Fabian, estoy en un problema, necesito que me consignes…". Cortarlo ahí.</li>

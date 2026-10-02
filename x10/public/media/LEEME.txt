@@ -1,15 +1,18 @@
 Archivos que el expositor coloca en esta carpeta (los nombres se pueden cambiar en config.json → media).
 
-  img-real.jpg               {{IMG_REAL}}                 S03 ronda 1, foto real
-  img-ia.jpg                 {{IMG_IA}}                   S03 ronda 1, imagen generada por IA
-  audio-real.mp3             {{AUDIO_REAL}}               S03 ronda 3, tu voz real (8 s)
-  audio-clon.mp3             {{AUDIO_CLON}}               S03 ronda 3, tu voz clonada (8 s, solo tu propia voz)
+  img-real.jpg               (incluida, ver CREDITS.md)   S03 ronda 1, foto real
+  img-ia.jpg                 (incluida, ver CREDITS.md)   S03 ronda 1, imagen generada por IA
+  video-real.mp4             (incluido, ver CREDITS.md)   S03 ronda 3, video real
+  video-ia.mp4               (incluido, ver CREDITS.md)   S03 ronda 3, video generado por IA
+  caso-landing.png           (incluida)                   S36, captura de la landing
+  audio-real.mp3             {{AUDIO_REAL}}               S03 ronda 4, tu voz real (8 s)
+  audio-clon.mp3             {{AUDIO_CLON}}               S03 ronda 4, tu voz clonada (8 s, solo tu propia voz)
   captura-prompt-pobre.png   {{CAPTURA_PROMPT_POBRE}}     respaldo S14 (tecla 1)
   captura-prompt-rctf.png    {{CAPTURA_PROMPT_RCTF}}      respaldo S14 (tecla 1)
   video-demo-talento.mp4     {{VIDEO_DEMO_TALENTO}}       respaldo S27 (tecla 2), ≤ 90 s
   captura-alucinacion.png    {{CAPTURA_ALUCINACION_REAL}} respaldo S28 (tecla 3), solo una captura real
   video-demo-lovable.mp4     {{VIDEO_DEMO_LOVABLE}}       respaldo S35 (tecla 4), 60–90 s
-  captura-resultado-demo.png (captura o app en vivo)      S36
 
-Si ya compilaste, puedes copiar los archivos directamente en dist/media/ sin volver a compilar.
+Si ya compilaste, puedes copiar los archivos directamente en dist/presentacion/media/ sin volver a compilar.
 Mientras falte un archivo, la slide muestra un recuadro punteado con el nombre esperado.
+Créditos, licencias y procedencia (real o IA) de img-real.jpg, img-ia.jpg, video-real.mp4 y video-ia.mp4: ver CREDITS.md.

@@ -37,6 +37,9 @@ export default defineConfig({
   base: './',
   plugins: [slideIncludes(), viteSingleFile({ removeViteModuleLoader: true })],
   build: {
+    // The deck lives at /presentacion/; the workshop landing owns /.
+    outDir: 'dist/presentacion',
+    emptyOutDir: true,
     target: 'es2020',
     // Everything (JS, CSS, fonts) is inlined into dist/index.html so the deck
     // opens with a double click, without a server and without internet.

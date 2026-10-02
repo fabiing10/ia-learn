@@ -6,18 +6,30 @@ Reveal.js 5.2.1 maneja la navegación, las notas y el PDF. GSAP 3.15 (SplitText,
 
 ---
 
+## 0. El sitio en línea
+
+| URL | Qué es |
+|---|---|
+| https://x10-presentacion.vercel.app/ | Landing del taller (construida desde un solo prompt, ver `docs/caso-landing-prompt.md`) |
+| https://x10-presentacion.vercel.app/presentacion/ | Esta presentación |
+| https://x10-presentacion.vercel.app/test/ | Test x10: perfil y diagnóstico (Supabase) |
+| https://x10-presentacion.vercel.app/panel/ | Tablero en vivo, solo para el expositor (enlace mágico al correo) |
+| https://x10-presentacion.vercel.app/playbook/ | Playbook del taller |
+
+Cada push a `main` en GitHub se publica solo en Vercel. Supabase: proyecto `x10-presentacion` (organización Zeta Inc); la clave pública va en las variables `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` (en `.env.local` y en Vercel). La slide "¿Dónde estamos?" (después de S37) muestra los resultados agregados en vivo cuando hay internet.
+
 ## 1. Presentar sin internet
 
-La carpeta que se lleva al evento es **`dist/`** (un `index.html` con todo adentro + `media/` con tus archivos).
+La presentación compilada queda en **`dist/presentacion/`** (un `index.html` con todo adentro + `media/` con tus archivos). Esa carpeta es la que se lleva al evento.
 
-**Opción A, doble clic (recomendada).** Abre `dist/index.html` con Chrome o Edge. Funciona con el wifi apagado: JS, CSS, fuentes y QR van dentro del archivo.
+**Opción A, doble clic (recomendada).** Abre `dist/presentacion/index.html` con Chrome o Edge. Funciona con el wifi apagado: JS, CSS, fuentes y QR van dentro del archivo.
 
 **Opción B, servidor local.** Si el navegador del salón bloquea la vista del presentador desde un archivo:
 
 ```bash
 cd x10
 npm run serve          # o: node scripts/serve.js
-# abre http://localhost:8080
+# abre http://localhost:8080/presentacion/
 ```
 
 No necesita dependencias ni internet (Node 18+).
@@ -63,7 +75,7 @@ Las notas incluyen el tiempo de cada bloque, qué hace cada clic, qué recortar 
 
 ## 4. Exportar a PDF (último respaldo)
 
-1. Abre `dist/index.html?print-pdf` (o `http://localhost:8080/?print-pdf`) en **Chrome**.
+1. Abre `dist/presentacion/index.html?print-pdf` (o `http://localhost:8080/presentacion/?print-pdf`) en **Chrome**.
 2. Ctrl/Cmd + P → Guardar como PDF.
 3. Diseño: **Horizontal**. Márgenes: **Ninguno**. Activa **Gráficos de fondo**.
 
@@ -90,8 +102,10 @@ Todo lo que está entre `{{LLAVES}}` se ve en pantalla como un recuadro punteado
 
 Mientras una URL sea un placeholder, el QR muestra "QR pendiente" en lugar de un código que no lleva a ningún lado.
 
-**Archivos** en `public/media/` (o directo en `dist/media/` sin recompilar). La lista está en `public/media/LEEME.txt`:
-`img-real.jpg`, `img-ia.jpg`, `audio-real.mp3`, `audio-clon.mp3`, `captura-prompt-pobre.png`, `captura-prompt-rctf.png`, `video-demo-talento.mp4`, `captura-alucinacion.png`, `video-demo-lovable.mp4`, `captura-resultado-demo.png`.
+**Ejemplos ya incluidos para "¿Humano o IA?"** (rondas imagen y video): `img-real.jpg`, `img-ia.jpg`, `video-real.mp4`, `video-ia.mp4`, de Wikimedia Commons con licencias que permiten publicarlos. Fuentes, licencias y atribuciones en `public/media/CREDITS.md`; el crédito aparece bajo cada opción al revelar (`config.json → creditos`).
+
+**Archivos que sigues poniendo tú** en `public/media/` (o directo en `dist/presentacion/media/` sin recompilar). La lista está en `public/media/LEEME.txt`:
+`audio-real.mp3` y `audio-clon.mp3` (solo tu propia voz; no los subas al repositorio público), `captura-prompt-pobre.png`, `captura-prompt-rctf.png`, `video-demo-talento.mp4`, `captura-alucinacion.png` (solo una captura real tuya) y `video-demo-lovable.mp4` (video del proceso, respaldo de S35).
 
 **Por verificar antes de presentar** (también están en las notas): `{{VERIFICAR_META_AI_ACTIVO}}` (S08), `{{VERIFICAR_PLANES_GRATIS}}` (S31), `{{VERIFICAR_ESTADO_PL_ANTES_DEL_EVENTO}}` (S25), `{{CONFIRMAR_VERSION}}` (citas en Reina-Valera 1960).
 
@@ -150,7 +164,11 @@ Cada slide declara su bloque (`data-block`), su fondo (`data-bg`: `field`, `cros
 
 Claude o ChatGPT en el navegador, sesión ya iniciada. Usa el botón **Copiar prompt** de la slide. Ensayar al menos dos veces. Respaldo: tecla **2**.
 
-### Demo de idea a app (S35)
+### Caso real: la landing desde un solo prompt (S35–S36)
+
+S35 muestra el prompt exacto (también en `docs/caso-landing-prompt.md`), S35c el ciclo y S36 el resultado con QR a https://x10-presentacion.vercel.app/. La landing la construyó un agente (Claude Code, modelo Claude Opus 5.5) a partir de ese prompt; el detalle de cómo lo hizo está en `apps/home/PROCESS.md`. Botón "Copiar prompt" en S35 por si quieres correrlo en vivo.
+
+### Demo en vivo opcional con Lovable
 
 Antes del evento: plan con créditos suficientes (el gratis de Lovable da 5 diarios que se reinician a las 7:00 p. m. hora de Bogotá), versiones de respaldo de A, B y C publicadas, video de 60–90 s, hotspot dedicado. Si tarda más de 3 minutos: tecla **4**, sin disculparse.
 
@@ -170,7 +188,7 @@ Antes del evento: plan con créditos suficientes (el gratis de Lovable da 5 diar
 
 ## 10. Checklist técnico del día
 
-- [ ] `dist/index.html` abre con el wifi apagado.
+- [ ] `dist/presentacion/index.html` abre con el wifi apagado.
 - [ ] Vista del presentador probada (S), notas legibles, reloj visible.
 - [ ] Proyector probado en tema claro y oscuro (T). Elegir uno.
 - [ ] Modo ligero probado (M) por si el equipo del salón no da.
