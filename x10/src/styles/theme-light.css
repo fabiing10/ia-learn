@@ -1,0 +1,27 @@
+/* Light theme (toggle with T). Projectors in bright rooms turn dark
+   backgrounds grey; this keeps contrast. Gold text is deepened to stay legible. */
+:root[data-theme='light'] {
+  --bg: var(--c-paper);
+  --bg-deep: #ebe7dc;
+  --bg-raise: #ffffff;
+  --text: var(--c-text-on-light);
+  --text-2: #3f4555;
+  --text-3: #6b7180;
+  --line: rgba(20, 23, 31, 0.14);
+  --line-strong: rgba(20, 23, 31, 0.34);
+  --gold: var(--c-gold);
+  --gold-text: #7a5600;
+  --gold-soft: rgba(232, 181, 58, 0.22);
+  --cyan: #1597b5;
+  --cyan-text: #0b6a80;
+  --go: #1f9e5a;
+  --wait: #d9a21b;
+  --stop: #d23b40;
+  --surface: rgba(20, 23, 31, 0.035);
+  --surface-2: rgba(20, 23, 31, 0.07);
+  --placeholder: #0b6a80;
+  --grain-opacity: 0.05;
+  --vignette: radial-gradient(120% 90% at 30% 20%, rgba(232, 181, 58, 0.16), transparent 55%),
+    radial-gradient(90% 80% at 90% 100%, rgba(58, 199, 232, 0.1), transparent 60%);
+  color-scheme: light;
+}

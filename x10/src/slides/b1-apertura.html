@@ -1,0 +1,134 @@
+<!-- BLOQUE 1 · Apertura (0:00–0:05) -->
+
+<section id="s01" data-block="1" data-hud="off" data-bg="cross" data-bg-center="4.4,0.9" data-ctrl="odometer cover" class="s-cover">
+  <div class="cover">
+    <div class="odo" data-odometer aria-label="x10"></div>
+    <div class="cover__text">
+      <h1 class="cover__title" data-split="lines">Multiplica tus talentos con inteligencia artificial</h1>
+      <p class="cover__slogan" data-split="words">La IA acelera. Tú decides.</p>
+    </div>
+    <p class="cover__name" data-in><span data-config="expositor"></span></p>
+  </div>
+  <aside class="notes">
+    <p><strong>S01 · Portada</strong> · 0:00</p>
+    <ul>
+      <li>El número cuenta de 1 a 10 y se fija en ×10.</li>
+      <li>Presentación personal en una frase: 13+ años en tecnología, fundador de una empresa de software.</li>
+      <li>No leer el currículum.</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="s02" data-block="1" data-ctrl="hands" class="s-hands">
+  <h2 class="t-h1 hands__title" data-split="chars">Levanta la mano si…</h2>
+  <ol class="hands focus-list">
+    <li class="fragment"><span class="hands__icon" aria-hidden="true"></span><span>…has usado ChatGPT u otra IA</span></li>
+    <li class="fragment"><span class="hands__icon" aria-hidden="true"></span><span>…la usas cada semana</span></li>
+    <li class="fragment"><span class="hands__icon" aria-hidden="true"></span><span>…tienes negocio propio</span></li>
+    <li class="fragment"><span class="hands__icon" aria-hidden="true"></span><span>…eres empleado</span></li>
+    <li class="fragment"><span class="hands__icon" aria-hidden="true"></span><span>…sirves como líder en tu iglesia</span></li>
+  </ol>
+  <aside class="notes">
+    <p><strong>S02 · Levanta la mano si…</strong> · mano alzada, una pregunta por clic</p>
+    <ul>
+      <li>Observar la proporción y ajustar los ejemplos.</li>
+      <li>Si la mayoría tiene negocio: enfatizar los casos de negocio en el bloque 7.</li>
+      <li>Si la mayoría es empleada: enfatizar los casos de trabajo.</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="s03" data-block="1" data-bg-alpha="0.45" data-ctrl="hoia" class="s-hoia">
+  <header class="hoia__head">
+    <h2 class="t-h1" data-split="chars">¿Humano o IA?</h2>
+    <p class="hoia__round" data-in><span class="hoia__round-n">Ronda <b data-round-n>1</b> de 3</span><span class="hoia__round-kind" data-round-kind>Imagen</span></p>
+  </header>
+
+  <div class="hoia__stage">
+    <div class="round" data-round="imagen" data-kind="Imagen">
+      <figure class="opt" data-opt="A">
+        <span class="opt__key">A</span>
+        <div class="opt__body opt__body--media" data-slot data-human="media:imgReal:IMG_REAL" data-ai="media:imgIa:IMG_IA"></div>
+        <span class="opt__verdict"></span>
+      </figure>
+      <figure class="opt" data-opt="B">
+        <span class="opt__key">B</span>
+        <div class="opt__body opt__body--media" data-slot data-human="media:imgReal:IMG_REAL" data-ai="media:imgIa:IMG_IA"></div>
+        <span class="opt__verdict"></span>
+      </figure>
+    </div>
+
+    <div class="round" data-round="texto" data-kind="Texto">
+      <figure class="opt" data-opt="A">
+        <span class="opt__key">A</span>
+        <p class="opt__body opt__body--text" data-slot data-human="text:textoHumano:TEXTO_HUMANO" data-ai="text:textoIa:TEXTO_IA"></p>
+        <span class="opt__verdict"></span>
+      </figure>
+      <figure class="opt" data-opt="B">
+        <span class="opt__key">B</span>
+        <p class="opt__body opt__body--text" data-slot data-human="text:textoHumano:TEXTO_HUMANO" data-ai="text:textoIa:TEXTO_IA"></p>
+        <span class="opt__verdict"></span>
+      </figure>
+    </div>
+
+    <div class="round" data-round="voz" data-kind="Voz">
+      <figure class="opt" data-opt="A">
+        <span class="opt__key">A</span>
+        <div class="opt__body opt__body--audio">
+          <div class="audio" data-slot data-human="media:audioReal:AUDIO_REAL" data-ai="media:audioClon:AUDIO_CLON">
+            <button class="audio__play" type="button" aria-label="Reproducir audio A">
+              <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="audio__ring-bg" cx="50" cy="50" r="46" /><circle class="audio__ring" cx="50" cy="50" r="46" /><path class="audio__icon-play" d="M41 33 L69 50 L41 67 Z" /><path class="audio__icon-stop" d="M38 36 h24 v28 h-24 Z" /></svg>
+            </button>
+            <div class="audio__wave" aria-hidden="true"></div>
+          </div>
+        </div>
+        <span class="opt__verdict"></span>
+      </figure>
+      <figure class="opt" data-opt="B">
+        <span class="opt__key">B</span>
+        <div class="opt__body opt__body--audio">
+          <div class="audio" data-slot data-human="media:audioReal:AUDIO_REAL" data-ai="media:audioClon:AUDIO_CLON">
+            <button class="audio__play" type="button" aria-label="Reproducir audio B">
+              <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="audio__ring-bg" cx="50" cy="50" r="46" /><circle class="audio__ring" cx="50" cy="50" r="46" /><path class="audio__icon-play" d="M41 33 L69 50 L41 67 Z" /><path class="audio__icon-stop" d="M38 36 h24 v28 h-24 Z" /></svg>
+            </button>
+            <div class="audio__wave" aria-hidden="true"></div>
+          </div>
+        </div>
+        <span class="opt__verdict"></span>
+      </figure>
+    </div>
+  </div>
+
+  <span class="fragment driver" data-step="imagen:reveal"></span>
+  <span class="fragment driver" data-step="texto:show"></span>
+  <span class="fragment driver" data-step="texto:reveal"></span>
+  <span class="fragment driver" data-step="voz:show"></span>
+  <span class="fragment driver" data-step="voz:playA"></span>
+  <span class="fragment driver" data-step="voz:playB"></span>
+  <span class="fragment driver" data-step="voz:reveal"></span>
+
+  <aside class="notes">
+    <p><strong>S03 · Juego: ¿Humano o IA?</strong> · la sala vota levantando la mano por A o por B</p>
+    <p>Clics: ronda 1 (imagen) → revelar → ronda 2 (texto) → revelar → ronda 3 (voz) → suena A → suena B → revelar. También puedes hacer clic en el botón de cada audio.</p>
+    <ul>
+      <li>Clonar <strong>solo tu propia voz</strong>.</li>
+      <li>El audio clonado puede decir: "Hola, soy Fabian, estoy en un problema, necesito que me consignes…". Cortarlo ahí.</li>
+      <li>Remate: "Ya no se puede distinguir a simple vista. Por eso no basta con usar la IA: hay que entenderla."</li>
+      <li>Retomamos esto en el cierre con la palabra clave familiar.</li>
+      <li>Qué lado es IA en cada ronda se cambia en <code>config.json → humanoOIa</code>.</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="s04" data-block="1" data-ctrl="promise" class="s-promise">
+  <h2 class="t-h1 promise__title" data-split="chars">En 60 minutos vas a…</h2>
+  <ol class="promise">
+    <li class="fragment"><span class="x" aria-hidden="true"></span><span>Entender qué es (y qué no es)</span></li>
+    <li class="fragment"><span class="x" aria-hidden="true"></span><span>Saber cuándo usarla y cuándo no</span></li>
+    <li class="fragment"><span class="x" aria-hidden="true"></span><span>Verla multiplicar trabajo en vivo</span></li>
+  </ol>
+  <aside class="notes">
+    <p><strong>S04 · La promesa</strong> · tres clics</p>
+    <p>"Da igual si nunca la has usado o si la usas todos los días; hay algo para ti."</p>
+  </aside>
+</section>

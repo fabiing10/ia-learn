@@ -1,0 +1,50 @@
+/* x10 design tokens. Base canvas is 1920×1080; Reveal scales it to the screen,
+   so every size here is a real pixel on a 1080p projector. */
+
+:root {
+  /* Brand palette (brief §3) */
+  --c-ink-dark: #0b0f1a;
+  --c-paper: #f7f5f0;
+  --c-gold: #e8b53a;
+  --c-cyan: #3ac7e8;
+  --c-text-on-dark: #f2f2f2;
+  --c-text-on-light: #14171f;
+
+  /* Traffic light, block 5 only */
+  --c-go: #2fbf71;
+  --c-wait: #f2c14e;
+  --c-stop: #e5484d;
+
+  /* Type */
+  --font-display: 'Space Grotesk', 'Sora', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --fs-mega: 360px;
+  --fs-h1: 124px;
+  --fs-h2: 100px;
+  --fs-lead: 68px;
+  --fs-body: 46px;
+  --fs-small: 40px;
+  --fs-meta: 26px;
+
+  --lh-tight: 0.92;
+  --lh-display: 1.02;
+  --lh-body: 1.28;
+  --track-display: -0.035em;
+  --track-mega: -0.055em;
+
+  /* Layout */
+  --pad-x: 128px;
+  --pad-top: 112px;
+  --pad-bottom: 120px;
+  --gap: 48px;
+  --radius-s: 14px;
+  --radius-m: 28px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --dur-fast: 180ms;
+  --dur: 420ms;
+}

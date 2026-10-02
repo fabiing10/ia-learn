@@ -1,0 +1,27 @@
+/* Dark theme (default). Best in dim rooms. */
+:root,
+:root[data-theme='dark'] {
+  --bg: var(--c-ink-dark);
+  --bg-deep: #05070d;
+  --bg-raise: #121828;
+  --text: var(--c-text-on-dark);
+  --text-2: #b9bfcc;
+  --text-3: #7d8598;
+  --line: rgba(242, 242, 242, 0.14);
+  --line-strong: rgba(242, 242, 242, 0.32);
+  --gold: var(--c-gold);
+  --gold-text: var(--c-gold);
+  --gold-soft: rgba(232, 181, 58, 0.14);
+  --cyan: var(--c-cyan);
+  --cyan-text: var(--c-cyan);
+  --go: var(--c-go);
+  --wait: var(--c-wait);
+  --stop: var(--c-stop);
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-2: rgba(255, 255, 255, 0.07);
+  --placeholder: #3ac7e8;
+  --grain-opacity: 0.06;
+  --vignette: radial-gradient(120% 90% at 30% 20%, rgba(232, 181, 58, 0.07), transparent 55%),
+    radial-gradient(90% 80% at 90% 100%, rgba(58, 199, 232, 0.06), transparent 60%);
+  color-scheme: dark;
+}

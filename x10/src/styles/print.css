@@ -1,0 +1,211 @@
+/* PDF export (?print-pdf): every slide in its final state, no motion layers.
+   Chrome → Print → Save as PDF, landscape, margins none, background graphics on. */
+
+html.is-print #gl,
+html.is-print .curtain,
+html.is-print .toast,
+html.is-print .hud,
+html.is-print .bg-static {
+  display: none !important;
+}
+
+html.is-print,
+html.is-print body {
+  background: var(--bg);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+html.is-print .reveal .pdf-page {
+  background: var(--bg) var(--vignette);
+}
+
+html.is-print .reveal .pdf-page > section {
+  display: flex !important;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 1080px;
+  padding: var(--sp-top, var(--pad-top)) var(--sp-x, var(--pad-x)) var(--sp-bottom, var(--pad-bottom)) !important;
+}
+
+html.is-print .reveal .pdf-page > section.s-what {
+  flex-direction: row;
+}
+
+html.is-print .reveal .slides section .fragment {
+  opacity: 1 !important;
+  visibility: inherit !important;
+  transform: none !important;
+}
+
+html.is-print .focus-list > .fragment {
+  opacity: 1 !important;
+}
+
+html.is-print .reveal .fragment.driver {
+  display: none;
+}
+
+/* S00: the answer is part of the final state */
+html.is-print .wait__a-inner {
+  transform: none !important;
+}
+
+/* S03: the three rounds side by side, answers revealed */
+html.is-print .hoia__stage {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+html.is-print .round {
+  position: static;
+  visibility: visible;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 24px;
+}
+
+html.is-print .opt__key {
+  font-size: 56px;
+  left: 18px;
+  top: 10px;
+}
+
+html.is-print .opt__body--text {
+  padding: 70px 24px 24px;
+  font-size: 22px;
+}
+
+html.is-print .opt__verdict {
+  opacity: 1;
+  font-size: 28px;
+  right: 14px;
+  bottom: 14px;
+}
+
+html.is-print .opt.is-ai {
+  border: 5px solid var(--gold);
+}
+
+html.is-print .audio__play {
+  width: 110px;
+  height: 110px;
+}
+
+html.is-print .audio__wave {
+  display: none;
+}
+
+html.is-print .hoia__round {
+  visibility: hidden;
+}
+
+/* S06: timeline as a static list */
+html.is-print .s-timeline .tl,
+html.is-print .s-timeline .tl__caption {
+  display: none;
+}
+
+html.is-print .reveal .slides section.s-timeline {
+  --sp-x: var(--pad-x);
+}
+
+html.is-print .tl__print {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px 48px;
+  margin-top: 40px;
+}
+
+html.is-print .tl__print li {
+  padding-top: 22px;
+  border-top: 5px solid var(--gold);
+}
+
+html.is-print .tl__print b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 64px;
+  letter-spacing: -0.03em;
+  color: var(--gold-text);
+}
+
+html.is-print .tl__print .tl__text {
+  display: block;
+  margin-top: 10px;
+  font-size: 36px;
+  line-height: 1.25;
+}
+
+html.is-print .tl__print i {
+  font-style: normal;
+}
+
+/* S22: all eight cases with their colour */
+html.is-print .cases {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+html.is-print .case {
+  position: relative;
+  inset: auto;
+  visibility: visible;
+  padding: 22px 24px;
+  border-radius: 22px;
+  border: 5px solid var(--v);
+  justify-content: flex-start;
+}
+
+html.is-print .case__text {
+  font-size: 30px;
+}
+
+html.is-print .case__verdict {
+  opacity: 1;
+  margin-top: 14px;
+  font-size: 24px;
+}
+
+html.is-print .case__verdict .lamp {
+  font-size: 28px;
+}
+
+html.is-print .case__note {
+  opacity: 1;
+  font-size: 22px;
+}
+
+html.is-print .case__frame,
+html.is-print .case__wash,
+html.is-print .cases__count {
+  display: none;
+}
+
+/* Myths: verdict visible */
+html.is-print .s-myth .myth__claim {
+  opacity: 0.45;
+}
+
+html.is-print .s-myth[data-verdict='half'] .myth__claim {
+  opacity: 0.7;
+}
+
+/* Lamps lit */
+html.is-print .light .lamp i {
+  opacity: 1;
+}
+
+/* Timers and buttons are live-only */
+html.is-print .timer,
+html.is-print .copy {
+  display: none;
+}
+
+/* Backup slides are for the live session */
+html.is-print .reveal .pdf-page:has(> section[data-backup]) {
+  display: none;
+}
