@@ -13,7 +13,7 @@ MCI 2026, ~130 men, ages 20–50, very mixed AI knowledge). Read
 no hype, no fear-mongering. User-facing copy in Spanish (Colombia), code and
 comments in English.
 
-Hosting: Vercel project `x10-presentacion`, production https://x10-presentacion.vercel.app.
+Hosting: Vercel project `x10-presentacion`, production https://x10.expert (apex redirects to www; https://x10-presentacion.vercel.app still serves the same build). The workshop landing lives at /x10/; / is the brand portada.
 `npm run build` builds the deck to `dist/` and then every `apps/<name>/index.html`
 to `dist/<name>/index.html` via `vite.apps.config.js` (do not edit either Vite config).
 

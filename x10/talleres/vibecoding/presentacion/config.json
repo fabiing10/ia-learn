@@ -50,13 +50,13 @@
     "forma": "chevron"
   },
   "qr": {
-    "landing": "https://x10-presentacion.vercel.app/vibecoding/",
-    "piezas": "https://x10-presentacion.vercel.app/vibecoding/#cinco-piezas",
-    "spec": "https://x10-presentacion.vercel.app/vibecoding/#spec",
-    "menu": "https://x10-presentacion.vercel.app/vibecoding/#menu",
-    "salida": "https://x10-presentacion.vercel.app/vibecoding/#salida",
-    "playbook": "https://x10-presentacion.vercel.app/vibecoding/playbook/",
-    "plantilla": "https://x10-presentacion.vercel.app/vibecoding/playbook/#plantilla",
+    "landing": "https://x10.expert/vibecoding/",
+    "piezas": "https://x10.expert/vibecoding/#cinco-piezas",
+    "spec": "https://x10.expert/vibecoding/#spec",
+    "menu": "https://x10.expert/vibecoding/#menu",
+    "salida": "https://x10.expert/vibecoding/#salida",
+    "playbook": "https://x10.expert/vibecoding/playbook/",
+    "plantilla": "https://x10.expert/vibecoding/playbook/#plantilla",
     "tablero": "{{URL_TABLERO_LOVABLE}}",
     "proyecto": "{{URL_PROYECTO_CLAUDE_CODE}}"
   },

@@ -48,12 +48,12 @@
     "forma": "brain"
   },
   "qr": {
-    "landing": "https://x10-presentacion.vercel.app/cerebro/",
-    "construir": "https://x10-presentacion.vercel.app/cerebro/#construir",
-    "prueba": "https://x10-presentacion.vercel.app/cerebro/#prueba",
-    "playbook": "https://x10-presentacion.vercel.app/cerebro/playbook/"
+    "landing": "https://x10.expert/cerebro/",
+    "construir": "https://x10.expert/cerebro/#construir",
+    "prueba": "https://x10.expert/cerebro/#prueba",
+    "playbook": "https://x10.expert/cerebro/playbook/"
   },
-  "urlCorta": "x10-presentacion.vercel.app/cerebro",
+  "urlCorta": "x10.expert/cerebro",
   "evento": "Clase abierta · Innovación y tecnología para los servicios jurídicos · Pontificia Universidad Javeriana",
   "expositor": "Fabián Zapata",
   "cargo": "Fundador de Zeta Innovation · Director de Innovación de GLab",

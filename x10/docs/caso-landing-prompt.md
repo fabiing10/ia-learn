@@ -1,7 +1,7 @@
 # Caso de uso: la landing del taller, desde un solo prompt
 
 Este es el prompt exacto que se le entregó al agente (Claude Code, modelo Claude Opus 5.5)
-para construir la landing que vive en https://x10-presentacion.vercel.app/.
+para construir la landing del taller, que hoy vive en https://x10.expert/x10/.
 La presentación lo muestra en el bloque 8 (Crear).
 
 ## El prompt (R·C·T·F)

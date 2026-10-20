@@ -5,7 +5,7 @@ anchors and ownership while several agents work in parallel.
 
 ## Context
 
-The platform (`x10/`, Vite, deployed on Vercel at https://x10-presentacion.vercel.app)
+The platform (`x10/`, Vite, deployed on Vercel at https://x10.expert, project `x10-presentacion`)
 hosts several workshops listed in `x10/talleres.config.js`. The first one, x10, lives in
 `x10/apps/` and `x10/src/` and **must not be touched**. This workshop is **Vibe Coding ·
 Clase 1**: 150 minutes, university students with zero technical background, each with a
@@ -68,7 +68,7 @@ Table `public.workshop_submissions` (RLS: anyone can INSERT, only the presenter
 
 Insert without `.select()` (anon cannot read). Panel login: `supabase.auth.signInWithOtp`
 with `{ shouldCreateUser: false, emailRedirectTo: location.origin + '/vibecoding/panel/' }`.
-The presenter user exists; signups are disabled. Allowed redirects: `https://x10-presentacion.vercel.app/**`
+The presenter user exists; signups are disabled. Allowed redirects: `https://x10-presentacion.vercel.app/**` (add `https://www.x10.expert/**` so the panel login works on the custom domain)
 and `http://localhost:5181/**`, `http://localhost:5182/**` (already configured).
 Never collect more personal data than the plan's exit form asks for.
 

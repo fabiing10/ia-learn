@@ -13,14 +13,16 @@ const BASE = `http://localhost:${PORT}`;
 
 // Each check: route + what must be true once it has loaded.
 const CHECKS = [
-  // x10 (unchanged URLs)
-  { path: '/', expect: { selector: 'main, body', text: 'Multiplica tus talentos' } },
+  // home: logo, 3D brain and quotes
+  { path: '/', expect: { selector: 'html.has-brain canvas.brain', text: 'Andrej Karpathy' } },
+  // x10 workshop (landing moved from / to /x10/)
+  { path: '/x10/', expect: { selector: 'main', text: 'Multiplica tus talentos' } },
   { path: '/presentacion/', expect: { count: ['.reveal .slides section[id]', 47], text: '×10' } },
   { path: '/test/', expect: { selector: '#email' } },
   { path: '/panel/', expect: { text: 'Panel en vivo' } },
   { path: '/playbook/', expect: { selector: '#rctf' } },
   // platform hub
-  { path: '/talleres/', expect: { selector: 'a[href="/cerebro/"]' } },
+  { path: '/talleres/', expect: { selector: 'a[href="/x10/"]', text: 'Cerebro Jurídico' } },
   // Vibe Coding
   { path: '/vibecoding/', expect: { selector: '#salida form' } },
   { path: '/vibecoding/presentacion/', expect: { min: ['.reveal .slides section[id]', 30], text: '›vibe coding', count: ['.hud__bar .segbar__seg', 7] } },

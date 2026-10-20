@@ -410,7 +410,7 @@ export function buildReadme(raw, { extra = [] } = {}) {
     list(NIVELES_MADUREZ),
     '## Tres acciones para mañana',
     TRES_ACCIONES.map((l, i) => `${i + 1}. ${l}`).join('\n'),
-    `---\n\n${DISCLAIMER}\n\nTaller Cerebro Jurídico · Fabián Zapata — Fundador de Zeta Innovation · Director de Innovación de GLab · x10-presentacion.vercel.app/cerebro`,
+    `---\n\n${DISCLAIMER}\n\nTaller Cerebro Jurídico · Fabián Zapata — Fundador de Zeta Innovation · Director de Innovación de GLab · x10.expert/cerebro`,
   ]);
 }
 

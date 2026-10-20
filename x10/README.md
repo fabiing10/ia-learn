@@ -10,14 +10,15 @@ Reveal.js 5.2.1 maneja la navegación, las notas y el PDF. GSAP 3.15 (SplitText,
 
 | URL | Qué es |
 |---|---|
-| https://x10-presentacion.vercel.app/ | Landing del taller (construida desde un solo prompt, ver `docs/caso-landing-prompt.md`) |
-| https://x10-presentacion.vercel.app/presentacion/ | Esta presentación |
-| https://x10-presentacion.vercel.app/test/ | Test x10: perfil y diagnóstico (Supabase) |
-| https://x10-presentacion.vercel.app/panel/ | Tablero en vivo, solo para el expositor (enlace mágico al correo) |
-| https://x10-presentacion.vercel.app/playbook/ | Playbook del taller |
-| https://x10-presentacion.vercel.app/talleres/ | Índice de todos los talleres de la plataforma |
-| https://x10-presentacion.vercel.app/vibecoding/ | Vibe Coding · Clase 1: landing, presentación (`/vibecoding/presentacion/`), playbook y panel |
-| https://x10-presentacion.vercel.app/cerebro/ | Cerebro Jurídico: generador de los cinco archivos y de la bóveda de Obsidian (sin servidor), presentación (`/cerebro/presentacion/`), playbook y copia sin conexión (`/cerebro/offline/`) |
+| https://x10.expert/ | Portada: cerebro 3D interactivo y frases de referentes de la IA (`apps/index.html`, `apps/brain/`) |
+| https://x10.expert/x10/ | Landing del taller x10 (construida desde un solo prompt, ver `docs/caso-landing-prompt.md`) |
+| https://x10.expert/presentacion/ | Esta presentación |
+| https://x10.expert/test/ | Test x10: perfil y diagnóstico (Supabase) |
+| https://x10.expert/panel/ | Tablero en vivo, solo para el expositor (enlace mágico al correo) |
+| https://x10.expert/playbook/ | Playbook del taller |
+| https://x10.expert/talleres/ | Índice de todos los talleres de la plataforma |
+| https://x10.expert/vibecoding/ | Vibe Coding · Clase 1: landing, presentación (`/vibecoding/presentacion/`), playbook y panel |
+| https://x10.expert/cerebro/ | Cerebro Jurídico: generador de los cinco archivos y de la bóveda de Obsidian (sin servidor), presentación (`/cerebro/presentacion/`), playbook y copia sin conexión (`/cerebro/offline/`) |
 
 Cada push a `main` en GitHub se publica solo en Vercel. Supabase: proyecto `x10-presentacion` (organización Zeta Inc); la clave pública va en las variables `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` (en `.env.local` y en Vercel). La slide "¿Dónde estamos?" (después de S37) muestra los resultados agregados en vivo cuando hay internet.
 
@@ -185,7 +186,7 @@ Claude o ChatGPT en el navegador, sesión ya iniciada. Usa el botón **Copiar pr
 
 ### Caso real: la landing desde un solo prompt (S35–S36)
 
-S35 muestra el prompt exacto (también en `docs/caso-landing-prompt.md`), S35c el ciclo y S36 el resultado con QR a https://x10-presentacion.vercel.app/. La landing la construyó un agente (Claude Code, modelo Claude Opus 5.5) a partir de ese prompt; el detalle de cómo lo hizo está en `apps/home/PROCESS.md`. Botón "Copiar prompt" en S35 por si quieres correrlo en vivo.
+S35 muestra el prompt exacto (también en `docs/caso-landing-prompt.md`), S35c el ciclo y S36 el resultado con QR a https://x10.expert/x10/. La landing la construyó un agente (Claude Code, modelo Claude Opus 5.5) a partir de ese prompt; el detalle de cómo lo hizo está en `apps/home/PROCESS.md`. Botón "Copiar prompt" en S35 por si quieres correrlo en vivo.
 
 ### Demo en vivo opcional con Lovable
 

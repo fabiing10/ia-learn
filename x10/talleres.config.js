@@ -22,7 +22,7 @@ export const TALLERES = [
     resumen: 'Taller de IA para la Convención de Hombres MCI 2026: entender, desmitificar, discernir, aplicar y crear.',
     fecha: '1 al 3 de octubre de 2026',
     marca: { acento: '×', color: '#E8B53A' },
-    enlaces: { landing: '/', presentacion: '/presentacion/', playbook: '/playbook/', test: '/test/' },
+    enlaces: { landing: '/x10/', presentacion: '/presentacion/', playbook: '/playbook/', test: '/test/' },
     deck: {
       slides: 'src/slides',
       config: 'config.json',

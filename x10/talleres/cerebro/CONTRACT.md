@@ -5,7 +5,7 @@ anchors and ownership while several agents work in parallel.
 
 ## Context
 
-The platform (`x10/`, Vite, deployed on Vercel at https://x10-presentacion.vercel.app)
+The platform (`x10/`, Vite, deployed on Vercel at https://x10.expert, project `x10-presentacion`)
 hosts several workshops listed in `x10/talleres.config.js`. x10 (`x10/apps/`, `x10/src/`)
 and Vibe Coding (`x10/talleres/vibecoding/`) **must not be touched**. This workshop is
 **Cerebro Jurídico**: a 30-minute workshop for ~94 Colombian lawyers (litigants, firm,
