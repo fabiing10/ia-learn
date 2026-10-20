@@ -5,7 +5,6 @@ Archivos que el expositor coloca aquí (rutas en presentacion/config.json → me
   resultado-perezoso.png     Apertura A/B: resultado del prompt perezoso (respaldo, tomado la víspera)
   tablero-desde-spec.png     Apertura A/B: el tablero construido desde la spec de una página
   caja-abierta-4-min.mp4     Bloque 3: video de 4 minutos del tablero en Claude Code
-  base44-exportar.png        Bloque 3: captura de la exportación de Base44 (mención)
 
 Mientras falte un archivo, la slide muestra un recuadro punteado con el nombre esperado.
 

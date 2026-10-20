@@ -231,7 +231,7 @@
   color: var(--gold-text);
 }
 
-/* Big statement slides (V06, V13, V24) */
+/* Big statement slides (V06, V24) */
 .reveal .slides section.vc-thesis {
   justify-content: center;
   gap: 36px;
@@ -500,60 +500,6 @@
 .vc-piece__eg {
   font: 600 32px/1.2 var(--font-display);
   color: var(--cyan-text);
-}
-
-/* V12 · activity */
-.vc-act__body {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 72px;
-  flex: 1;
-  margin-top: 40px;
-}
-
-.vc-steps-plain {
-  display: flex;
-  flex-direction: column;
-  gap: 34px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: st;
-}
-
-.vc-steps-plain li {
-  position: relative;
-  padding-left: 96px;
-  font-size: 50px;
-  line-height: 1.22;
-  counter-increment: st;
-}
-
-.vc-steps-plain li::before {
-  content: counter(st);
-  position: absolute;
-  left: 0;
-  top: 2px;
-  display: grid;
-  place-items: center;
-  width: 66px;
-  height: 66px;
-  border-radius: 50%;
-  border: 3px solid var(--gold);
-  font: 700 36px/1 var(--font-display);
-  color: var(--gold-text);
-}
-
-.vc-steps-plain b {
-  font-family: var(--font-display);
-  font-weight: 700;
-}
-
-.vc-act__side {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
 }
 
 /* V14 · prompt vs spec */
@@ -1041,31 +987,6 @@
 
 .vc-onmap__note {
   max-width: 1500px;
-}
-
-/* V23 · Base44 */
-.reveal .slides section.vc-mention {
-  flex-direction: row;
-  align-items: stretch;
-  gap: 72px;
-}
-
-.vc-mention__text {
-  flex: 1;
-}
-
-.vc-mention__shot {
-  flex: 0 0 760px;
-}
-
-.vc-mention__text {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.vc-mention__shot {
-  height: 100%;
 }
 
 /* V25 · agent loop */

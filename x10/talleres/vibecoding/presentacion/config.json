@@ -71,15 +71,13 @@
     "proyectoClaudeCode": "media/proyecto-claude-code.png",
     "resultadoPerezoso": "media/resultado-perezoso.png",
     "tableroDesdeSpec": "media/tablero-desde-spec.png",
-    "videoCajaAbierta": "media/caja-abierta-4-min.mp4",
-    "capturaBase44": "media/base44-exportar.png"
+    "videoCajaAbierta": "media/caja-abierta-4-min.mp4"
   },
   "whatsapp": {
     "numero": "573143666151",
     "mensaje": "Hola Fabian, soy estudiante de Vibe Coding (clase 1). Mi nombre es "
   },
   "fuentes": {
-    "lovableGithub": "docs.lovable.dev/integrations/github · docs.lovable.dev/features/publish (consultadas el 19 de octubre de 2026)",
-    "base44Github": "docs.base44.com/developers/app-code/local-development/github (consultada el 19 de octubre de 2026) · capgo.app, guía de exportación de Base44"
+    "lovableGithub": "docs.lovable.dev/integrations/github · docs.lovable.dev/features/publish (consultadas el 19 de octubre de 2026)"
   }
 }
