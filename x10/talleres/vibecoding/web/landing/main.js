@@ -3,8 +3,8 @@
 // shared/content.test.mjs); this file wires them together.
 
 import { bindThemeToggle, ICONS } from '../shared/ui.js';
-import { TESIS, SIN_CUENTAS, CLASE_2, whatsappUrl } from '../shared/content.js';
-import { initAntes } from './antes.js';
+import { TESIS, CLASE_2, whatsappUrl } from '../shared/content.js';
+import { initEncuesta } from './encuesta.js';
 import { initPiezas } from './piezas.js';
 import { initBuilder } from './builder.js';
 import { initMenu } from './menu.js';
@@ -15,9 +15,6 @@ const $ = (sel) => document.querySelector(sel);
 
 function fillStatic() {
   $('[data-tesis]').textContent = TESIS;
-  document.querySelectorAll('[data-sin-cuentas]').forEach((el) => {
-    el.textContent = SIN_CUENTAS[el.dataset.sinCuentas] ?? '';
-  });
   $('[data-clase2]').textContent = `Cómo funciona la clase 2: no es otra clase magistral. ${CLASE_2}`;
   $('#wa-link').href = whatsappUrl();
 }
@@ -62,7 +59,7 @@ fillStatic();
 bindThemeToggle($('#theme'));
 
 const builder = initBuilder();
-initAntes({ onFrase: builder.showFrase });
+initEncuesta();
 initPiezas();
 initMenu({ builder });
 initReglas();

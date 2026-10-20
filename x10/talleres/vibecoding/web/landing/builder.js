@@ -410,14 +410,5 @@ export function initBuilder() {
       statusEl.textContent = '';
       toast(`Bloques 1 a 3 llenos con «${row.proyecto}». Ahora escribe quién hace cada acción.`);
     },
-    showFrase(frase) {
-      const el = $('frase');
-      if (!frase) {
-        el.hidden = true;
-        return;
-      }
-      el.innerHTML = `<b>Tu frase:</b> Quiero una app que ${esc(frase.que)} para ${esc(frase.para)}.`;
-      el.hidden = false;
-    },
   };
 }

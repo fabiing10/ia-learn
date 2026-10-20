@@ -8,3 +8,8 @@ Archivos que el expositor coloca aquí (rutas en presentacion/config.json → me
   base44-exportar.png        Bloque 3: captura de la exportación de Base44 (mención)
 
 Mientras falte un archivo, la slide muestra un recuadro punteado con el nombre esperado.
+
+Las cuatro capturas de apertura ya están: tablero-lovable.png, tablero-desde-spec.png y
+resultado-perezoso.png son recreaciones ilustrativas (fuentes y script en ../../media-src/);
+proyecto-claude-code.png es la portada real de x10.expert. Reemplázalas por capturas propias
+cuando las tengas, con el mismo nombre.

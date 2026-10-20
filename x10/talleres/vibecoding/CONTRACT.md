@@ -24,6 +24,7 @@ User-facing copy in Spanish (Colombia, tú), practical and plain. Code and comme
 |---|---|---|
 | `/vibecoding/` | `index.html` + `landing/` (CSS/JS) | worker A |
 | `/vibecoding/panel/` | `panel/` | worker A |
+| `/vibecoding/encuesta/` | `encuesta/` (encuesta de entrada, anónima) | coordinator |
 | shared web code | `shared/` (except `theme.css`) | worker A |
 | `/vibecoding/playbook/` | `playbook/` | worker B |
 | `/vibecoding/presentacion/` | `../presentacion/` (the deck) | coordinator |
@@ -66,6 +67,12 @@ Table `public.workshop_submissions` (RLS: anyone can INSERT, only the presenter
 | `payload` | `{ nombre, url_app, url_repo, duda, punto_control }` (`punto_control` integer 1–5) |
 | `consent_at` | ISO timestamp, required when the student submits (Ley 1581 de 2012 consent) |
 
+Encuesta de entrada (`/vibecoding/encuesta/`): same table, `form` `'intro'`, no `consent_at`
+(anonymous: no name, no email). `payload` = `{ entidad, sector, rol, nivel (0–4), frecuencia,
+herramientas[], favorita, construido[], creadores[] }`, options in `web/shared/encuesta.js`.
+Aggregates for the survey page and the deck slide `#/sala` come from the public function
+`vc_intro_summary(p_session)` (migration `20261020170000_vc_intro_summary.sql`), never from rows.
+
 Insert without `.select()` (anon cannot read). Panel login: `supabase.auth.signInWithOtp`
 with `{ shouldCreateUser: false, emailRedirectTo: location.origin + '/vibecoding/panel/' }`.
 The presenter user exists; signups are disabled. Allowed redirects: `https://x10-presentacion.vercel.app/**` (add `https://www.x10.expert/**` so the panel login works on the custom domain)
@@ -74,7 +81,7 @@ Never collect more personal data than the plan's exit form asks for.
 
 ## Landing anchors (worker A must create these ids; the deck's QR codes point to them)
 
-`#antes` (pre-class checklist) · `#cinco-piezas` (hoja "Mi app en 5 piezas") · `#spec` (spec builder) ·
+`#encuesta` (encuesta de entrada) · `#cinco-piezas` (hoja "Mi app en 5 piezas") · `#spec` (spec builder) ·
 `#menu` (menú de proyectos) · `#reglas` (reglas de mesa + protocolo de error) · `#salida` (exit form)
 
 ## Playbook anchors (worker B must create exactly these ids; landing and deck link to them)

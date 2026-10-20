@@ -36,7 +36,7 @@ export const TALLERES = [
     slug: 'vibecoding',
     nombre: 'Vibe Coding · Clase 1',
     resumen: 'De idea a app publicada: la spec de una página, caja cerrada y caja abierta, y la primera versión en una URL con su repositorio.',
-    fecha: '{{FECHA_CLASE_1}}',
+    fecha: '20 de octubre de 2026 · Virtual',
     marca: { acento: '›', color: '#3AC7E8' },
     enlaces: {
       landing: '/vibecoding/',

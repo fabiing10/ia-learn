@@ -25,6 +25,7 @@ const CHECKS = [
   { path: '/talleres/', expect: { selector: 'a[href="/x10/"]', text: 'Cerebro Jurídico' } },
   // Vibe Coding
   { path: '/vibecoding/', expect: { selector: '#salida form' } },
+  { path: '/vibecoding/encuesta/', expect: { selector: '#start', text: '¿Dónde estás con la IA?' } },
   { path: '/vibecoding/presentacion/', expect: { min: ['.reveal .slides section[id]', 30], text: '›vibe coding', count: ['.hud__bar .segbar__seg', 7] } },
   { path: '/vibecoding/playbook/', expect: { selector: '#ruta-a' } },
   { path: '/vibecoding/panel/', expect: { text: 'Panel' } },

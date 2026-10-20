@@ -17,7 +17,7 @@ Reveal.js 5.2.1 maneja la navegación, las notas y el PDF. GSAP 3.15 (SplitText,
 | https://x10.expert/panel/ | Tablero en vivo, solo para el expositor (enlace mágico al correo) |
 | https://x10.expert/playbook/ | Playbook del taller |
 | https://x10.expert/talleres/ | Índice de todos los talleres de la plataforma |
-| https://x10.expert/vibecoding/ | Vibe Coding · Clase 1: landing, presentación (`/vibecoding/presentacion/`), playbook y panel |
+| https://x10.expert/vibecoding/ | Vibe Coding · Clase 1: landing, encuesta de entrada (`/vibecoding/encuesta/`), presentación (`/vibecoding/presentacion/`), playbook y panel |
 | https://x10.expert/cerebro/ | Cerebro Jurídico: generador de los cinco archivos y de la bóveda de Obsidian (sin servidor), presentación (`/cerebro/presentacion/`), playbook y copia sin conexión (`/cerebro/offline/`) |
 
 Cada push a `main` en GitHub se publica solo en Vercel. Supabase: proyecto `x10-presentacion` (organización Zeta Inc); la clave pública va en las variables `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` (en `.env.local` y en Vercel). La slide "¿Dónde estamos?" (después de S37) muestra los resultados agregados en vivo cuando hay internet.

@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#0B0F1A" />
     <title>Vibe Coding · Clase 1</title>
-    <meta name="description" content="Vibe Coding · Clase 1 con Fabian Zapata: de idea a app publicada. Checklist, hoja de 5 piezas, constructor de la spec de una página, menú de proyectos, reglas de mesa y formulario de salida." />
+    <meta name="description" content="Vibe Coding · Clase 1 con Fabian Zapata: de idea a app publicada. Encuesta de entrada, hoja de 5 piezas, constructor de la spec de una página, menú de proyectos para el sector público, reglas de mesa y formulario de salida." />
     <meta property="og:title" content="Vibe Coding · Clase 1" />
     <meta property="og:description" content="Vibe coding no es pedir una app. Es describirla tan bien que la IA no tenga que adivinar." />
     <meta property="og:type" content="website" />
@@ -34,7 +34,7 @@
       <div class="bar__in">
         <a class="mark bar__mark" href="#inicio" aria-label="Vibe Coding, volver al inicio"><span class="mark__chev" aria-hidden="true">›</span>vibe coding</a>
         <nav class="bar__nav" aria-label="Secciones">
-          <a href="#antes">Antes</a>
+          <a href="#encuesta">Encuesta</a>
           <a href="#cinco-piezas">5 piezas</a>
           <a href="#spec">Spec</a>
           <a href="#menu">Menú</a>
@@ -57,7 +57,8 @@
               <p data-tesis></p>
             </blockquote>
             <div class="hero__ctas">
-              <a class="btn btn--primary" href="#spec">Armar mi spec <span data-icon="down"></span></a>
+              <a class="btn btn--primary" href="/vibecoding/encuesta/" data-encuesta-link>Responder la encuesta <span data-icon="arrow"></span></a>
+              <a class="btn btn--ghost" href="#spec">Armar mi spec <span data-icon="down"></span></a>
               <a class="btn btn--ghost" href="/vibecoding/presentacion/"><span data-icon="play"></span>Ver la presentación</a>
               <a class="btn btn--ghost" href="/vibecoding/playbook/"><span data-icon="book"></span>Abrir el playbook</a>
             </div>
@@ -92,15 +93,15 @@
         </div>
 
         <dl class="wrap facts">
-          <div class="facts__item"><dt>Cuándo</dt><dd><span class="ph">{{FECHA_CLASE_1}}</span></dd></div>
-          <div class="facts__item"><dt>Dónde</dt><dd><span class="ph">{{LUGAR}}</span></dd></div>
+          <div class="facts__item"><dt>Cuándo</dt><dd>Martes 20 de octubre de 2026</dd></div>
+          <div class="facts__item"><dt>Dónde</dt><dd>Virtual</dd></div>
           <div class="facts__item"><dt>Duración</dt><dd>150 minutos; 70 de ellos construyendo</dd></div>
-          <div class="facts__item"><dt>Trae</dt><dd>Portátil con cargador y Chrome</dd></div>
+          <div class="facts__item"><dt>Necesitas</dt><dd>Computador con Chrome. Las cuentas las creamos juntos.</dd></div>
         </dl>
 
         <nav class="wrap route" aria-label="La clase, paso a paso">
           <ol class="route__list">
-            <li><a href="#antes"><span class="route__when">Antes</span><span class="route__what">Cuentas y frase</span></a></li>
+            <li><a href="#encuesta"><span class="route__when">Antes</span><span class="route__what">Encuesta de entrada</span></a></li>
             <li><a href="#cinco-piezas"><span class="route__when">Bloque 2</span><span class="route__what">Mi app en 5 piezas</span></a></li>
             <li><a href="#spec"><span class="route__when">Bloque 4</span><span class="route__what">La spec</span></a></li>
             <li><a href="#reglas"><span class="route__when">Bloque 5</span><span class="route__what">Construir</span></a></li>
@@ -109,31 +110,25 @@
         </nav>
       </section>
 
-      <!-- Antes de la clase -->
-      <section class="sec" id="antes" aria-labelledby="antes-t">
+      <!-- Encuesta de entrada -->
+      <section class="sec" id="encuesta" aria-labelledby="encuesta-t">
         <div class="wrap">
-          <header class="sec__head">
-            <p class="eyebrow">Antes de llegar</p>
-            <h2 class="sec__title" id="antes-t">Llega con esto listo</h2>
-            <p class="sec__lead">Sin cuentas creadas, los primeros 20 minutos se van en registros y correos de verificación. Marca lo que ya tienes: queda guardado en este navegador.</p>
-          </header>
-          <div class="antes">
-            <div class="antes__main surface">
-              <div class="progress" id="antes-progress">
-                <p class="progress__text" id="antes-progress-text" aria-live="polite"></p>
-                <div class="progress__track" aria-hidden="true"><i id="antes-progress-bar"></i></div>
+          <div class="encuesta surface">
+            <div class="encuesta__text">
+              <p class="eyebrow">Antes de empezar · 1 minuto</p>
+              <h2 class="sec__title" id="encuesta-t">¿Dónde estás con la IA?</h2>
+              <p class="sec__lead">Nueve preguntas de un toque: tu entidad, tu rol, qué tanto usas la IA, con qué herramientas y qué has construido. Es anónima. Las respuestas de todos se proyectan en vivo al inicio de la clase.</p>
+              <div class="encuesta__go">
+                <a class="btn btn--primary" href="/vibecoding/encuesta/" data-encuesta-link><span data-encuesta-cta>Responder la encuesta</span> <span data-icon="arrow"></span></a>
+                <p class="encuesta__count" id="encuesta-count" aria-live="polite"></p>
               </div>
-              <ul class="checklist" id="checklist"></ul>
             </div>
-            <aside class="antes__aside">
-              <div class="note">
-                <h3 class="note__title">¿Llegas sin cuentas?</h3>
-                <p data-sin-cuentas="bloque1"></p>
-                <p data-sin-cuentas="pareja"></p>
-                <a class="link" href="/vibecoding/playbook/#ruta-a">Ruta A en el playbook <span data-icon="arrow"></span></a>
-              </div>
-              <p class="antes__quote">No necesitas saber programar. Necesitas saber qué quieres resolver.</p>
-            </aside>
+            <ol class="encuesta__preview" aria-label="Algunas de las preguntas">
+              <li><span>¿Dónde trabajas?</span><small>Gobierno nacional · territorial · rama judicial · control…</small></li>
+              <li><span>¿Qué tanto sabes de IA?</span><i class="encuesta__meter" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b></i></li>
+              <li><span>¿Qué asistentes usas?</span><small>ChatGPT · Gemini · Copilot · Claude…</small></li>
+              <li><span>¿Has probado herramientas para crear apps?</span><small>Lovable · Base44 · Bolt · v0…</small></li>
+            </ol>
           </div>
         </div>
       </section>
@@ -164,7 +159,6 @@
             <p class="eyebrow">Bloque 4 · Taller: la spec</p>
             <h2 class="sec__title" id="spec-t">Mi spec de una página</h2>
             <p class="sec__lead">Siete bloques. Antes de enviar, pregúntate qué tendría que adivinar la IA: la lista de lo que adivina es la lista de lo que falta en la spec. ¿No traes idea? Elige uno del <a href="#menu">menú de proyectos</a>.</p>
-            <p class="frase" id="frase" hidden></p>
           </header>
 
           <div class="builder" id="builder">
@@ -212,7 +206,7 @@
           <header class="sec__head">
             <p class="eyebrow">Para quien no trae idea</p>
             <h2 class="sec__title" id="menu-t">Menú de proyectos</h2>
-            <p class="sec__lead">Elige uno y úsalo en tu spec: los bloques 1 a 3 quedan escritos. Tú completas quién hace cada acción, qué NO hace y los tres escenarios.</p>
+            <p class="sec__lead">Casos pequeños del sector público: problemas que se repiten en cualquier entidad y que caben en una primera versión. Elige uno y úsalo en tu spec: los bloques 1 a 3 quedan escritos. Tú completas quién hace cada acción, qué NO hace y los tres escenarios.</p>
           </header>
           <ul class="menu" id="menu-list"></ul>
         </div>
@@ -334,8 +328,13 @@
         <div class="foot__brand">
           <a class="mark" href="#inicio"><span class="mark__chev" aria-hidden="true">›</span>vibe coding</a>
           <p class="foot__line">Clase 1 · Expositor: <b>Fabian Zapata</b></p>
-          <a class="btn btn--ghost btn--sm foot__wa" id="wa-link" href="https://wa.me/573143666151" target="_blank" rel="noopener noreferrer"><span data-icon="chat"></span>WhatsApp 314 366 6151</a>
-          <p class="foot__privacy">Tu checklist, tu hoja de 5 piezas y tu spec se guardan solo en este navegador. El formulario de salida se envía a Fabian.</p>
+          <ul class="foot__contact" aria-label="Contacto">
+            <li><a id="wa-link" href="https://wa.me/573143666151" target="_blank" rel="noopener noreferrer"><span data-icon="chat"></span>WhatsApp 314 366 6151</a></li>
+            <li><a href="mailto:fabiing10@gmail.com"><span data-icon="mail"></span>fabiing10@gmail.com</a></li>
+            <li><a href="https://www.instagram.com/fabiing10/" target="_blank" rel="noopener noreferrer"><span data-icon="instagram"></span>Instagram @fabiing10</a></li>
+            <li><a href="https://www.linkedin.com/in/fabian-alexander-zapata-gracia-30408646/" target="_blank" rel="noopener noreferrer"><span data-icon="linkedin"></span>LinkedIn · Fabian Zapata</a></li>
+          </ul>
+          <p class="foot__privacy">Tu hoja de 5 piezas y tu spec se guardan solo en este navegador. La encuesta de entrada es anónima. El formulario de salida se envía a Fabian.</p>
         </div>
         <nav class="foot__nav" aria-labelledby="foot-pb">
           <h2 class="foot__h" id="foot-pb">Playbook</h2>
@@ -365,6 +364,6 @@
       </div>
       <p class="wrap foot__last">La herramienta va a cambiar de nombre el año entrante. La spec, el mapa y las reglas de mesa, no.</p>
     </footer>
-    <noscript><p class="noscript">Esta página necesita JavaScript para la checklist, la spec y el formulario. El <a href="/vibecoding/playbook/">playbook</a> tiene todo el material.</p></noscript>
+    <noscript><p class="noscript">Esta página necesita JavaScript para la encuesta, la spec y el formulario. El <a href="/vibecoding/playbook/">playbook</a> tiene todo el material.</p></noscript>
   </body>
 </html>

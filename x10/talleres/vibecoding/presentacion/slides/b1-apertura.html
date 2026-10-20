@@ -11,16 +11,53 @@
   </aside>
 </section>
 
+<section id="sala" data-block="1" data-bg-alpha="0.3" data-ctrl="vc-sala" class="vc-sala s-tight">
+  <header class="vc-sala__head">
+    <h2 class="t-h2" data-split="chars">¿Quiénes llegaron hoy?</h2>
+    <p class="vc-sala__count"><b data-sala-total>0</b><span>respuestas<br />en vivo</span></p>
+    <figure class="vc-sala__qr">
+      <div class="qrbox qrbox--vc-xs" data-qr="encuesta"></div>
+      <figcaption>¿Aún no respondes?<b>x10.expert/vibecoding/encuesta</b></figcaption>
+    </figure>
+  </header>
+  <div class="vc-sala__grid">
+    <div class="vc-sala__kpis">
+      <div class="vc-kpi"><p class="vc-kpi__v" data-sala-kpi="activos">–</p><p class="vc-kpi__k">usa IA cada semana o más</p></div>
+      <div class="vc-kpi"><p class="vc-kpi__v vc-kpi__v--text" data-sala-kpi="favorita">–</p><p class="vc-kpi__k" data-sala-kpi="favorita-k">el asistente que más usan</p></div>
+      <div class="vc-kpi"><p class="vc-kpi__v" data-sala-kpi="creadores">–</p><p class="vc-kpi__k">ya probó una herramienta para crear apps</p></div>
+    </div>
+    <div class="vc-sala__levels">
+      <p class="vc-sala__label">Qué tanto saben de IA</p>
+      <ol class="vc-bars" data-sala-bars="nivel"></ol>
+    </div>
+  </div>
+  <div class="vc-sala__lists">
+    <div><p class="vc-sala__label">Dónde trabajan</p><ol data-sala-list="entidad"></ol></div>
+    <div><p class="vc-sala__label">Qué han hecho con IA</p><ol data-sala-list="construido"></ol></div>
+    <div><p class="vc-sala__label">Herramientas para crear apps</p><ol data-sala-list="creadores"></ol></div>
+  </div>
+  <p class="vc-sala__status" data-sala-status aria-live="polite"></p>
+  <aside class="notes">
+    <p><strong>Sala · ¿Quiénes llegaron hoy?</strong> · 0:01 · 2 min · resultados en vivo de la encuesta de entrada</p>
+    <ul>
+      <li>Se actualiza cada pocos segundos mientras la slide está en pantalla. Solo totales del grupo: nadie queda señalado. Sin internet muestra un aviso y sigues.</li>
+      <li>Lee tres cosas: cuántos usan IA cada semana, el asistente favorito y cuántos ya probaron Lovable, Base44 u otra herramienta para crear apps.</li>
+      <li>Conecta con lo que sigue: "Hoy todos salen con una app publicada, sin importar en qué barra están."</li>
+      <li>Sesión: <code>config.json → encuesta.sesion</code> (por defecto <code>clase-1</code>; la encuesta usa la misma con <code>?s=</code>).</li>
+    </ul>
+  </aside>
+</section>
+
 <section id="v02" data-block="1" data-bg-alpha="0.35" class="vc-two">
   <h2 class="t-h2" data-split="chars">Dos productos terminados</h2>
   <div class="vc-pair">
     <figure class="vc-frame" data-in="mask">
-      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser__url">tablero de solicitudes</span></div>
+      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser__url">solicitudes-villa-clara.lovable.app</span></div>
       <div class="vc-frame__view media" data-media="tableroLovable" data-ph="URL_TABLERO_LOVABLE"></div>
       <figcaption><b>Hoy</b><span>Al final de la clase tienen uno así, publicado.</span></figcaption>
     </figure>
     <figure class="vc-frame" data-in="mask">
-      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser__url">proyecto propio</span></div>
+      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser__url">x10.expert</span></div>
       <div class="vc-frame__view media" data-media="proyectoClaudeCode" data-ph="URL_PROYECTO_CLAUDE_CODE"></div>
       <figcaption><b>Después</b><span>A dónde lleva este camino.</span></figcaption>
     </figure>
@@ -28,7 +65,8 @@
   <aside class="notes">
     <p><strong>V02 · Dos productos terminados</strong> · 0:01</p>
     <ul>
-      <li>Izquierda: el tablero de solicitudes hecho en Lovable (URL pública). Derecha: un proyecto tuyo hecho con Claude Code. Sin explicar cómo.</li>
+      <li>Izquierda: el tablero de solicitudes de una alcaldía, como queda hecho en Lovable. Derecha: x10.expert, el sitio de este curso, hecho con Claude Code. Sin explicar cómo.</li>
+      <li>La captura del tablero es una recreación ilustrativa hecha para la clase (fuentes en <code>presentacion/media-src/</code>); si publicas el tuyo en Lovable, reemplaza <code>media/tablero-lovable.png</code>.</li>
       <li>"Al final de hoy tienen el primero publicado. El segundo es a dónde lleva este camino."</li>
       <li>Si hay conexión, abre las dos URL en vivo: <code>config.json → qr.tablero / qr.proyecto</code>.</li>
     </ul>
@@ -56,6 +94,7 @@
       <li>Abre el resultado del prompt perezoso (o la captura de la víspera) al lado del tablero construido desde la spec.</li>
       <li>"Misma herramienta, mismo día. ¿Qué cambió?" (clic: aparece la pregunta).</li>
       <li>Plan B: el A/B no depende de que la generación corra en vivo; depende de que vean los dos resultados juntos.</li>
+      <li>Las dos capturas son recreaciones ilustrativas hechas para la clase: a la izquierda, el resultado típico de un prompt perezoso (campos, cifras y etiquetas que nadie pidió, sin roles); a la derecha, el mismo tablero de la slide anterior construido desde la spec. Si generas los tuyos en Lovable, reemplaza <code>media/resultado-perezoso.png</code> y <code>media/tablero-desde-spec.png</code>.</li>
     </ul>
   </aside>
 </section>

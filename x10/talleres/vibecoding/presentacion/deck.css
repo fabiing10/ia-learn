@@ -2218,3 +2218,223 @@ html.is-print .vc-plan__list > .fragment,
 html.is-print .vc-cp__list > .fragment {
   opacity: 1 !important;
 }
+
+/* Screenshots keep their top (the app header) when the frame crops them. */
+.vc-frame__view img {
+  object-position: top center;
+}
+
+.vc-wait__url {
+  font: 600 40px/1 var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--gold-text);
+}
+
+/* =========================================================
+   Sala · live results of the intro survey
+   ========================================================= */
+
+.reveal .slides section.vc-sala {
+  justify-content: flex-start;
+}
+
+.vc-sala__head {
+  display: flex;
+  align-items: center;
+  gap: 44px;
+}
+
+.vc-sala__head h2 {
+  flex: 1;
+  font-size: 84px;
+  white-space: nowrap;
+}
+
+.vc-sala__count {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font: 600 26px/1.15 var(--font-display);
+  color: var(--text-2);
+}
+
+.vc-sala__count b {
+  font-size: 112px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--gold-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.vc-sala__qr {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+}
+
+.qrbox.qrbox--vc-xs {
+  width: 150px;
+  height: 150px;
+  padding: 10px;
+  border-radius: 18px;
+}
+
+.vc-sala__qr figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 250px;
+  font: 600 22px/1.25 var(--font-display);
+  color: var(--text-2);
+}
+
+.vc-sala__qr figcaption b {
+  font-size: 22px;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.vc-sala__grid {
+  display: grid;
+  grid-template-columns: 700px 1fr;
+  gap: 72px;
+  margin-top: 36px;
+}
+
+.vc-sala__kpis {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vc-kpi {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 24px;
+  padding: 20px 28px;
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  border: 2px solid var(--line);
+}
+
+.vc-kpi__v {
+  margin: 0;
+  min-width: 3.1em;
+  font: 700 72px/1 var(--font-display);
+  letter-spacing: -0.04em;
+  color: var(--gold-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.vc-kpi__v--text {
+  min-width: 0;
+  font-size: 52px;
+  color: var(--text);
+}
+
+.vc-kpi__k {
+  flex: 1;
+  min-width: 260px;
+  margin: 0;
+  font: 600 28px/1.2 var(--font-display);
+  color: var(--text-2);
+}
+
+.vc-sala__label {
+  margin: 0 0 18px;
+  font: 600 30px/1 var(--font-display);
+  color: var(--text-2);
+}
+
+.vc-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vc-bars li {
+  display: grid;
+  grid-template-columns: 230px 1fr 110px;
+  align-items: center;
+  gap: 22px;
+  font: 600 34px/1.1 var(--font-display);
+  white-space: nowrap;
+}
+
+.vc-bars__bar {
+  height: 32px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.vc-bars__bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--line-strong);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.vc-bars li.is-top .vc-bars__bar i {
+  background: var(--gold);
+}
+
+.vc-bars__pct {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.vc-sala__lists {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+  margin-top: 40px;
+}
+
+.vc-sala__lists ol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vc-sala__lists li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--line);
+  font: 500 30px/1.2 var(--font-body);
+  white-space: nowrap;
+}
+
+.vc-sala__lists li span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vc-sala__lists li b {
+  font-family: var(--font-display);
+  color: var(--gold-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.vc-sala__lists li.is-empty {
+  border: 0;
+  color: var(--text-3);
+}
+
+.vc-sala__status {
+  margin-top: 22px;
+  font: 500 24px/1.2 var(--font-body);
+  color: var(--placeholder);
+}

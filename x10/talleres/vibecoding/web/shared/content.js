@@ -2,47 +2,6 @@
 // Pure data: content.test.mjs parses the plan and checks every string here
 // against it, so edit the plan first and then this file.
 
-/** Checklist del estudiante (Antes de la clase). Details come from the plan's pre-class email. */
-export const CHECKLIST = [
-  {
-    id: 'lovable',
-    text: 'Cuenta en Lovable activa (ya entré una vez)',
-    detail: 'En lovable.dev, creada con el correo que usarás en clase. Plan gratuito.',
-    href: 'https://lovable.dev',
-  },
-  {
-    id: 'github',
-    text: 'Cuenta en GitHub activa',
-    detail: 'En github.com. Elige un nombre de usuario sencillo; lo vas a usar.',
-    href: 'https://github.com',
-  },
-  {
-    id: 'equipo',
-    text: 'Portátil, cargador, Chrome',
-    detail: 'Chrome actualizado. No sirve tablet ni celular.',
-  },
-  {
-    id: 'frase',
-    text: 'Mi frase: "Quiero una app que ___ para ___"',
-    detail: 'Escrita. Si no tienes idea, en clase hay un menú.',
-  },
-  {
-    id: 'claude',
-    text: 'cuenta en claude.ai',
-    detail: 'La usaremos para la segunda ruta del playbook.',
-    href: 'https://claude.ai',
-    optional: true,
-  },
-];
-
-/** Qué hacer con quien llega sin cuentas (plan, "Antes de la clase"). */
-export const SIN_CUENTAS = {
-  bloque1:
-    'Regístrate durante el bloque 1: los primeros 10 minutos son demo, no necesitas teclado.',
-  pareja:
-    'Si a la 0:35 sigues sin Lovable, trabajas en pareja con alguien que sí tenga, y haces tu propio proyecto en casa con la ruta A del playbook.',
-};
-
 /** El mapa de 5 piezas (bloque 2.2). `lahace`: hoy lo resuelve la herramienta. */
 export const PIECES = [
   { id: 'front', name: 'Front', clase: 'Lo que la persona ve y toca', domicilios: 'El menú, el carrito, el botón "pedir"', pregunta: '¿Qué ve el usuario?' },
@@ -54,49 +13,63 @@ export const PIECES = [
 
 export const LA_HERRAMIENTA = '(hoy lo resuelve la herramienta)';
 
-/** Menú de proyectos (para quien no trae idea). */
+/** Menú de proyectos: casos pequeños del sector público, para quien no trae idea. */
 export const MENU = [
   {
     id: 'tablero',
     proyecto: 'Tablero de solicitudes',
-    paraQuien: 'Un equipo que recibe pedidos por chat (mantenimiento, RR.HH., jurídico)',
+    paraQuien: 'Una dependencia que recibe pedidos por correo o chat (sistemas, mantenimiento, jurídica)',
     acciones: ['Registrar solicitud', 'cambiar estado', 'ver lista con filtro'],
-    guarda: 'Solicitud: título, descripción, área, fecha, estado, solicitante',
+    guarda: 'Solicitud: título, descripción, dependencia, fecha, estado, solicitante',
   },
   {
-    id: 'evento',
-    proyecto: 'Registro a un evento con cupo',
-    paraQuien: 'Quien organiza un evento con asistentes limitados',
-    acciones: ['Inscribirse', 'ver cupos disponibles', 'ver lista de confirmados'],
-    guarda: 'Inscripción: nombre, correo, fecha; evento: cupo máximo',
+    id: 'pqrsd',
+    proyecto: 'Control de PQRSD',
+    paraQuien: 'La ventanilla de atención al ciudadano de una alcaldía o entidad',
+    acciones: ['Radicar PQRSD', 'ver cuántos días faltan para el vencimiento', 'marcar como respondida'],
+    guarda: 'PQRSD: radicado, tipo, asunto, fecha de radicación, fecha límite, estado',
   },
   {
-    id: 'directorio',
-    proyecto: 'Directorio con búsqueda',
-    paraQuien: 'Un gremio, un edificio, una comunidad',
-    acciones: ['Agregar entrada', 'buscar por nombre o categoría', 'ver ficha'],
-    guarda: 'Entrada: nombre, categoría, contacto, descripción',
+    id: 'prestamo',
+    proyecto: 'Préstamo de equipos',
+    paraQuien: 'Una oficina o un colegio público que comparte portátiles, videobeam o vehículo',
+    acciones: ['Registrar préstamo', 'registrar devolución', 'ver qué está prestado y a quién'],
+    guarda: 'Préstamo: equipo, responsable, fecha de salida, fecha de devolución, estado',
   },
   {
-    id: 'reserva',
-    proyecto: 'Reserva de un recurso',
-    paraQuien: 'Quien comparte una sala, un equipo o una agenda',
-    acciones: ['Reservar franja', 'ver calendario del día', 'cancelar reserva'],
-    guarda: 'Reserva: recurso, fecha, hora inicio, hora fin, quién reserva',
+    id: 'turnos',
+    proyecto: 'Turnos de atención',
+    paraQuien: 'Una ventanilla de trámites o la recepción de un hospital público',
+    acciones: ['Tomar turno', 'llamar al siguiente', 'ver turnos en espera'],
+    guarda: 'Turno: número, trámite, hora de llegada, estado',
   },
   {
-    id: 'encuesta',
-    proyecto: 'Encuesta con panel de respuestas',
-    paraQuien: 'Quien necesita recoger opiniones y verlas juntas',
-    acciones: ['Responder', 'ver resumen por pregunta', 'exportar respuestas'],
-    guarda: 'Respuesta: fecha, respuestas a cada pregunta',
+    id: 'inventario',
+    proyecto: 'Inventario de insumos',
+    paraQuien: 'El almacén de una secretaría o de un centro de salud',
+    acciones: ['Registrar entrada', 'registrar salida a una dependencia', 'ver insumos bajo el mínimo'],
+    guarda: 'Insumo: nombre, existencias, mínimo; movimiento: tipo, cantidad, dependencia, fecha',
   },
   {
-    id: 'casos',
-    proyecto: 'Seguimiento de casos',
-    paraQuien: 'Quien lleva varios asuntos con responsable y estado',
-    acciones: ['Crear caso', 'asignar responsable', 'cambiar estado y ver historial'],
-    guarda: 'Caso: título, responsable, estado, fecha, notas',
+    id: 'compromisos',
+    proyecto: 'Compromisos de reunión',
+    paraQuien: 'Un comité, un consejo directivo o un equipo de despacho',
+    acciones: ['Registrar compromiso', 'asignar responsable y fecha', 'marcar como cumplido'],
+    guarda: 'Compromiso: descripción, responsable, fecha límite, estado, reunión',
+  },
+  {
+    id: 'visitas',
+    proyecto: 'Agenda de visitas de campo',
+    paraQuien: 'Un equipo de inspección, vigilancia y control o de visitas domiciliarias',
+    acciones: ['Programar visita', 'registrar resultado', 'ver visitas de la semana'],
+    guarda: 'Visita: dirección, fecha, responsable, resultado, estado',
+  },
+  {
+    id: 'tramites',
+    proyecto: 'Directorio de trámites',
+    paraQuien: 'Ciudadanos que no saben a qué dependencia ir ni qué documentos llevar',
+    acciones: ['Agregar trámite', 'buscar por nombre o dependencia', 'ver requisitos'],
+    guarda: 'Trámite: nombre, dependencia, requisitos, horario, costo',
   },
 ];
 
@@ -169,7 +142,7 @@ export const MESAS = [
 ];
 
 /** Section ids the deck's QR codes point to (CONTRACT.md). */
-export const LANDING_ANCHORS = ['antes', 'cinco-piezas', 'spec', 'menu', 'reglas', 'salida'];
+export const LANDING_ANCHORS = ['encuesta', 'cinco-piezas', 'spec', 'menu', 'reglas', 'salida'];
 
 /** Playbook ids owned by the playbook page (CONTRACT.md). Link only to these. */
 export const PLAYBOOK_ANCHORS = [

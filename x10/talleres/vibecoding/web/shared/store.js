@@ -3,7 +3,7 @@
 
 export const KEYS = {
   theme: 'vc-theme',
-  antes: 'vc-antes',
+  encuesta: 'vc-encuesta',
   piezas: 'vc-piezas',
   spec: 'vc-spec',
   salidaDraft: 'vc-salida-draft',

@@ -294,14 +294,18 @@ Cuando termines, dime cómo pruebo cada uno de los tres escenarios de la secció
 
 ### Menú de proyectos (para quien no trae idea)
 
+Casos pequeños del sector público: problemas que se repiten en cualquier entidad (nacional o territorial, de cualquier rama) y que caben en una V1.
+
 | Proyecto | Para quién | Tres acciones de V1 | Qué guarda |
 | --- | --- | --- | --- |
-| Tablero de solicitudes | Un equipo que recibe pedidos por chat (mantenimiento, RR.HH., jurídico) | Registrar solicitud; cambiar estado; ver lista con filtro | Solicitud: título, descripción, área, fecha, estado, solicitante |
-| Registro a un evento con cupo | Quien organiza un evento con asistentes limitados | Inscribirse; ver cupos disponibles; ver lista de confirmados | Inscripción: nombre, correo, fecha; evento: cupo máximo |
-| Directorio con búsqueda | Un gremio, un edificio, una comunidad | Agregar entrada; buscar por nombre o categoría; ver ficha | Entrada: nombre, categoría, contacto, descripción |
-| Reserva de un recurso | Quien comparte una sala, un equipo o una agenda | Reservar franja; ver calendario del día; cancelar reserva | Reserva: recurso, fecha, hora inicio, hora fin, quién reserva |
-| Encuesta con panel de respuestas | Quien necesita recoger opiniones y verlas juntas | Responder; ver resumen por pregunta; exportar respuestas | Respuesta: fecha, respuestas a cada pregunta |
-| Seguimiento de casos | Quien lleva varios asuntos con responsable y estado | Crear caso; asignar responsable; cambiar estado y ver historial | Caso: título, responsable, estado, fecha, notas |
+| Tablero de solicitudes | Una dependencia que recibe pedidos por correo o chat (sistemas, mantenimiento, jurídica) | Registrar solicitud; cambiar estado; ver lista con filtro | Solicitud: título, descripción, dependencia, fecha, estado, solicitante |
+| Control de PQRSD | La ventanilla de atención al ciudadano de una alcaldía o entidad | Radicar PQRSD; ver cuántos días faltan para el vencimiento; marcar como respondida | PQRSD: radicado, tipo, asunto, fecha de radicación, fecha límite, estado |
+| Préstamo de equipos | Una oficina o un colegio público que comparte portátiles, videobeam o vehículo | Registrar préstamo; registrar devolución; ver qué está prestado y a quién | Préstamo: equipo, responsable, fecha de salida, fecha de devolución, estado |
+| Turnos de atención | Una ventanilla de trámites o la recepción de un hospital público | Tomar turno; llamar al siguiente; ver turnos en espera | Turno: número, trámite, hora de llegada, estado |
+| Inventario de insumos | El almacén de una secretaría o de un centro de salud | Registrar entrada; registrar salida a una dependencia; ver insumos bajo el mínimo | Insumo: nombre, existencias, mínimo; movimiento: tipo, cantidad, dependencia, fecha |
+| Compromisos de reunión | Un comité, un consejo directivo o un equipo de despacho | Registrar compromiso; asignar responsable y fecha; marcar como cumplido | Compromiso: descripción, responsable, fecha límite, estado, reunión |
+| Agenda de visitas de campo | Un equipo de inspección, vigilancia y control o de visitas domiciliarias | Programar visita; registrar resultado; ver visitas de la semana | Visita: dirección, fecha, responsable, resultado, estado |
+| Directorio de trámites | Ciudadanos que no saben a qué dependencia ir ni qué documentos llevar | Agregar trámite; buscar por nombre o dependencia; ver requisitos | Trámite: nombre, dependencia, requisitos, horario, costo |
 
 ### Reglas de mesa
 

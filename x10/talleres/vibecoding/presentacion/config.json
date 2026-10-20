@@ -1,6 +1,6 @@
 {
   "titulo": "Vibe Coding · Clase 1 · De idea a app publicada",
-  "fecha": "{{FECHA_CLASE_1}}",
+  "fecha": "20 de octubre de 2026 · virtual",
   "marca": {
     "acento": "›",
     "texto": "vibe coding"
@@ -58,7 +58,11 @@
     "playbook": "https://x10.expert/vibecoding/playbook/",
     "plantilla": "https://x10.expert/vibecoding/playbook/#plantilla",
     "tablero": "{{URL_TABLERO_LOVABLE}}",
-    "proyecto": "{{URL_PROYECTO_CLAUDE_CODE}}"
+    "proyecto": "https://x10.expert/",
+    "encuesta": "https://x10.expert/vibecoding/encuesta/"
+  },
+  "encuesta": {
+    "sesion": "clase-1"
   },
   "expositor": "Fabian Zapata",
   "contacto": "WhatsApp 314 366 6151",

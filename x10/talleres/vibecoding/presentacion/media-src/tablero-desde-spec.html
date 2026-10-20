@@ -1,0 +1,177 @@
+<!doctype html>
+<!-- Mock for slide v03 (right): the same app, built from the one-page spec. Shows the three
+     differences of v04: the fields the spec asked for, two roles, states that really change.
+     Shot by shoot.mjs at 960x426 @2x. -->
+<html lang="es-CO">
+  <head>
+    <meta charset="utf-8" />
+    <title>Solicitudes internas</title>
+    <link rel="stylesheet" href="./app.css" />
+    <style>
+      .nav {
+        height: 56px;
+      }
+      .page {
+        padding: 16px 24px;
+      }
+      .head {
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .chips {
+        display: flex;
+        gap: 8px;
+      }
+      .chip {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 6px 11px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--card);
+        font-size: 13.5px;
+        color: var(--muted);
+      }
+      .chip b {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .chip i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+      .is-changed td {
+        background: #f0fdf4;
+      }
+      .is-changed td:first-child {
+        box-shadow: inset 3px 0 0 #22c55e;
+      }
+      td {
+        height: 52px;
+        font-size: 15px;
+      }
+      .undo {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .now {
+        align-self: center;
+        font-size: 12px;
+        color: var(--green);
+        font-weight: 500;
+      }
+      .toast {
+        position: fixed;
+        right: 24px;
+        bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px 12px 13px;
+        border-radius: 12px;
+        background: #0f172a;
+        color: #fff;
+        box-shadow: 0 12px 28px -8px rgb(15 23 42 / 0.45);
+      }
+      .toast__icon {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #22c55e;
+        color: #fff;
+      }
+      .toast b {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .toast span {
+        font-size: 13.5px;
+        color: #cbd5e1;
+      }
+      .toast em {
+        font-style: normal;
+        color: #86efac;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="brand">
+        <span class="brand__logo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
+        </span>
+        <div>
+          <div class="brand__name">Solicitudes internas</div>
+          <div class="brand__org">Alcaldía de Villa Clara · Secretaría General</div>
+        </div>
+      </div>
+      <div class="roles">
+        <span class="roles__label">Ver como</span>
+        <div class="seg"><span>Funcionario</span><span class="is-on">Jefe de área</span></div>
+      </div>
+      <div class="user">
+        <span class="avatar">MR</span>
+        <div><b>Marta Ríos</b><small>Jefa de área</small></div>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="head">
+        <h1>Solicitudes por revisar</h1>
+        <div class="chips">
+          <span class="chip"><i style="background:#f59e0b"></i><b>2</b> pendientes</span>
+          <span class="chip"><i style="background:#22c55e"></i><b>8</b> aprobadas</span>
+          <span class="chip"><i style="background:#ef4444"></i><b>1</b> rechazada</span>
+        </div>
+      </div>
+
+      <section class="card">
+        <table>
+          <thead>
+            <tr><th>Título</th><th>Dependencia</th><th>Fecha</th><th>Solicitante</th><th>Estado</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr class="is-changed">
+              <td class="t-title"><span class="t-id">SOL-021</span>Préstamo de videobeam</td>
+              <td class="t-muted">Talento Humano</td>
+              <td class="t-muted">20 oct</td>
+              <td>Andrés Peña</td>
+              <td><span class="pill pill--ok">Aprobada</span></td>
+              <td><div class="acts"><span class="undo">Deshacer</span></div></td>
+            </tr>
+            <tr>
+              <td class="t-title"><span class="t-id">SOL-020</span>Tóner impresora piso 2</td>
+              <td class="t-muted">Archivo Central</td>
+              <td class="t-muted">19 oct</td>
+              <td>Laura Gómez</td>
+              <td><span class="pill pill--pend">Pendiente</span></td>
+              <td><div class="acts"><span class="btn btn--primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Aprobar</span><span class="btn btn--icon btn--danger" title="Rechazar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></div></td>
+            </tr>
+            <tr>
+              <td class="t-title"><span class="t-id">SOL-019</span>Acceso a red compartida</td>
+              <td class="t-muted">Jurídica</td>
+              <td class="t-muted">19 oct</td>
+              <td>Camilo Rueda</td>
+              <td><span class="pill pill--pend">Pendiente</span></td>
+              <td><div class="acts"><span class="btn btn--primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Aprobar</span><span class="btn btn--icon btn--danger" title="Rechazar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <div class="toast" role="status">
+      <span class="toast__icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <div><b>Estado actualizado</b><span>SOL-021 · Pendiente → <em>Aprobada</em></span></div>
+    </div>
+  </body>
+</html>

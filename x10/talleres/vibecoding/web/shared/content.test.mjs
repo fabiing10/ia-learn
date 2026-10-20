@@ -5,7 +5,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
-  CHECKLIST, PIECES, MENU, REGLAS, PROTOCOLO, SEGURIDAD, CHECKPOINTS, MESAS, PLAYBOOK_ANCHORS,
+  PIECES, MENU, REGLAS, PROTOCOLO, SEGURIDAD, CHECKPOINTS, MESAS, PLAYBOOK_ANCHORS,
   LANDING_ANCHORS, CONTACT, whatsappUrl, TAREA, FRASE_DATOS, TESIS, CLASE_2,
 } from './content.js';
 
@@ -43,16 +43,6 @@ const unescape = (s) => s.replace(/\\_/g, '_').replace(/\\\[/g, '[').replace(/\\
 
 console.log('\nPlan fidelity');
 
-test('checklist = the plan checklist, five items, the last one optional', () => {
-  const planItems = [...section('**Checklist del estudiante**').matchAll(/^- \[ \] (.+)$/gm)].map((m) => unescape(m[1]));
-  assert.equal(planItems.length, 5);
-  assert.deepEqual(
-    CHECKLIST.map((c) => (c.optional ? `Opcional: ${c.text}` : c.text)),
-    planItems,
-  );
-  assert.deepEqual(CHECKLIST.map((c) => !!c.optional), [false, false, false, false, true]);
-});
-
 test('five pieces = the plan map, with the domicilios example per piece', () => {
   const rows = tableRows(section('### 2.2 El mapa de 5 piezas'));
   assert.equal(rows.length, 5);
@@ -63,9 +53,9 @@ test('five pieces = the plan map, with the domicilios example per piece', () => 
   assert.deepEqual(PIECES.filter((p) => p.lahace).map((p) => p.id), ['dominio', 'repositorio']);
 });
 
-test('menu = the six backup projects of the plan, column by column', () => {
+test('menu = the eight public-sector projects of the plan, column by column', () => {
   const rows = tableRows(section('### Menú de proyectos'));
-  assert.equal(rows.length, 6);
+  assert.equal(rows.length, 8);
   assert.deepEqual(
     MENU.map((m) => [m.proyecto, m.paraQuien, m.acciones.join('; '), m.guarda]),
     rows,

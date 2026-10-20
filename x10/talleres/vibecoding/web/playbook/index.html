@@ -73,7 +73,7 @@
           <span class="hero__chev" aria-hidden="true">›</span>De idea a app publicada<span class="hero__caret" aria-hidden="true"></span>
         </h1>
         <p class="hero__slogan">Vibe coding no es pedir una app. <b>Es describirla tan bien que la IA no tenga que adivinar.</b></p>
-        <p class="hero__by">Fabian Zapata · <span class="ph">{{FECHA_CLASE_1}}</span> · <span class="ph">{{LUGAR}}</span></p>
+        <p class="hero__by">Fabian Zapata · 20 de octubre de 2026 · Virtual</p>
         <div class="hero__cta">
           <a class="btn btn--accent" href="#empieza-aqui"><span>Empezar a leer</span><svg class="ico" aria-hidden="true"><use href="#i-down" /></svg></a>
           <a class="btn" href="#plantilla"><span>Ir a la plantilla de spec</span><svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a>
@@ -856,12 +856,12 @@ Cuando termines, dime cómo pruebo cada uno de los tres escenarios de la secció
           <header class="chapter__head">
             <p class="chapter__kicker"><span class="chapter__n">08</span><span>Describir</span></p>
             <h2 class="chapter__title" id="t-menu-de-proyectos">Menú de proyectos</h2>
-            <p class="chapter__lede">Para quien no trae idea, o quiere practicar con algo que ya cabe en una V1. Cada proyecto ya respeta la regla de alcance: un usuario principal, tres acciones y lo que guarda.</p>
+            <p class="chapter__lede">Para quien no trae idea, o quiere practicar con algo que ya cabe en una V1. Son casos pequeños del sector público: problemas que se repiten en cualquier entidad, nacional o territorial, de cualquier rama. Cada proyecto ya respeta la regla de alcance: un usuario principal, tres acciones y lo que guarda.</p>
           </header>
 
           <div class="prose">
             <h3 id="como-elegir">Cómo elegir y cómo pasar a la spec</h3>
-            <p>Elige el que se parezca a un problema que conoces de cerca: el de un familiar, una oficina, un grupo de la universidad. Después, cada parte de la tarjeta va a un bloque de la <a href="#plantilla">plantilla</a>:</p>
+            <p>Elige el que se parezca a un problema que ves de cerca en tu entidad: una ventanilla, una dependencia, un comité. Después, cada parte de la tarjeta va a un bloque de la <a href="#plantilla">plantilla</a>:</p>
             <ul>
               <li><strong>Para quién</strong> → bloque 1. Agrega el problema concreto: qué pasa hoy sin la app.</li>
               <li><strong>Tres acciones</strong> → bloque 2. Ponle a cada una su rol: <span class="fill">[Rol] puede [acción]</span>.</li>
@@ -876,61 +876,81 @@ Cuando termines, dime cómo pruebo cada uno de los tres escenarios de la secció
               <p class="card__k">Proyecto 1</p>
               <h3 class="card__title">Tablero de solicitudes</h3>
               <dl class="dl-mini">
-                <dt>Para quién</dt><dd>Un equipo que recibe pedidos por chat (mantenimiento, RR.&nbsp;HH., jurídico).</dd>
+                <dt>Para quién</dt><dd>Una dependencia que recibe pedidos por correo o chat (sistemas, mantenimiento, jurídica).</dd>
                 <dt>Tres acciones de V1</dt><dd>Registrar solicitud; cambiar estado; ver lista con filtro.</dd>
-                <dt>Qué guarda</dt><dd>Solicitud: título, descripción, área, fecha, estado, solicitante.</dd>
+                <dt>Qué guarda</dt><dd>Solicitud: título, descripción, dependencia, fecha, estado, solicitante.</dd>
               </dl>
               <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No envía correos ni notificaciones cuando cambia un estado.</p>
             </article>
             <article class="card">
               <p class="card__k">Proyecto 2</p>
-              <h3 class="card__title">Registro a un evento con cupo</h3>
+              <h3 class="card__title">Control de PQRSD</h3>
               <dl class="dl-mini">
-                <dt>Para quién</dt><dd>Quien organiza un evento con asistentes limitados.</dd>
-                <dt>Tres acciones de V1</dt><dd>Inscribirse; ver cupos disponibles; ver lista de confirmados.</dd>
-                <dt>Qué guarda</dt><dd>Inscripción: nombre, correo, fecha. Evento: cupo máximo.</dd>
+                <dt>Para quién</dt><dd>La ventanilla de atención al ciudadano de una alcaldía o entidad.</dd>
+                <dt>Tres acciones de V1</dt><dd>Radicar PQRSD; ver cuántos días faltan para el vencimiento; marcar como respondida.</dd>
+                <dt>Qué guarda</dt><dd>PQRSD: radicado, tipo, asunto, fecha de radicación, fecha límite, estado.</dd>
               </dl>
-              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No cobra la inscripción: los pagos van a «después».</p>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No calcula días hábiles ni festivos: la fecha límite la escribe quien radica. No se conecta al sistema de gestión documental.</p>
             </article>
             <article class="card">
               <p class="card__k">Proyecto 3</p>
-              <h3 class="card__title">Directorio con búsqueda</h3>
+              <h3 class="card__title">Préstamo de equipos</h3>
               <dl class="dl-mini">
-                <dt>Para quién</dt><dd>Un gremio, un edificio, una comunidad.</dd>
-                <dt>Tres acciones de V1</dt><dd>Agregar entrada; buscar por nombre o categoría; ver ficha.</dd>
-                <dt>Qué guarda</dt><dd>Entrada: nombre, categoría, contacto, descripción.</dd>
+                <dt>Para quién</dt><dd>Una oficina o un colegio público que comparte portátiles, videobeam o vehículo.</dd>
+                <dt>Tres acciones de V1</dt><dd>Registrar préstamo; registrar devolución; ver qué está prestado y a quién.</dd>
+                <dt>Qué guarda</dt><dd>Préstamo: equipo, responsable, fecha de salida, fecha de devolución, estado.</dd>
               </dl>
-              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No sube fotos ni logos de las entradas.</p>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No envía recordatorios de devolución ni bloquea a quien no devuelve.</p>
             </article>
             <article class="card">
               <p class="card__k">Proyecto 4</p>
-              <h3 class="card__title">Reserva de un recurso</h3>
+              <h3 class="card__title">Turnos de atención</h3>
               <dl class="dl-mini">
-                <dt>Para quién</dt><dd>Quien comparte una sala, un equipo o una agenda.</dd>
-                <dt>Tres acciones de V1</dt><dd>Reservar franja; ver calendario del día; cancelar reserva.</dd>
-                <dt>Qué guarda</dt><dd>Reserva: recurso, fecha, hora inicio, hora fin, quién reserva.</dd>
+                <dt>Para quién</dt><dd>Una ventanilla de trámites o la recepción de un hospital público.</dd>
+                <dt>Tres acciones de V1</dt><dd>Tomar turno; llamar al siguiente; ver turnos en espera.</dd>
+                <dt>Qué guarda</dt><dd>Turno: número, trámite, hora de llegada, estado.</dd>
               </dl>
-              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No se sincroniza con calendarios externos ni envía recordatorios.</p>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No envía el turno por mensaje de texto ni maneja una pantalla de llamado en la sala.</p>
             </article>
             <article class="card">
               <p class="card__k">Proyecto 5</p>
-              <h3 class="card__title">Encuesta con panel de respuestas</h3>
+              <h3 class="card__title">Inventario de insumos</h3>
               <dl class="dl-mini">
-                <dt>Para quién</dt><dd>Quien necesita recoger opiniones y verlas juntas.</dd>
-                <dt>Tres acciones de V1</dt><dd>Responder; ver resumen por pregunta; exportar respuestas.</dd>
-                <dt>Qué guarda</dt><dd>Respuesta: fecha, respuestas a cada pregunta.</dd>
+                <dt>Para quién</dt><dd>El almacén de una secretaría o de un centro de salud.</dd>
+                <dt>Tres acciones de V1</dt><dd>Registrar entrada; registrar salida a una dependencia; ver insumos bajo el mínimo.</dd>
+                <dt>Qué guarda</dt><dd>Insumo: nombre, existencias, mínimo. Movimiento: tipo, cantidad, dependencia, fecha.</dd>
               </dl>
-              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No envía la encuesta por correo: se comparte el enlace.</p>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No genera órdenes de compra ni se conecta al sistema contable.</p>
             </article>
             <article class="card">
               <p class="card__k">Proyecto 6</p>
-              <h3 class="card__title">Seguimiento de casos</h3>
+              <h3 class="card__title">Compromisos de reunión</h3>
               <dl class="dl-mini">
-                <dt>Para quién</dt><dd>Quien lleva varios asuntos con responsable y estado.</dd>
-                <dt>Tres acciones de V1</dt><dd>Crear caso; asignar responsable; cambiar estado y ver historial.</dd>
-                <dt>Qué guarda</dt><dd>Caso: título, responsable, estado, fecha, notas.</dd>
+                <dt>Para quién</dt><dd>Un comité, un consejo directivo o un equipo de despacho.</dd>
+                <dt>Tres acciones de V1</dt><dd>Registrar compromiso; asignar responsable y fecha; marcar como cumplido.</dd>
+                <dt>Qué guarda</dt><dd>Compromiso: descripción, responsable, fecha límite, estado, reunión.</dd>
               </dl>
-              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No adjunta documentos a los casos.</p>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No redacta el acta completa ni envía recordatorios por correo.</p>
+            </article>
+            <article class="card">
+              <p class="card__k">Proyecto 7</p>
+              <h3 class="card__title">Agenda de visitas de campo</h3>
+              <dl class="dl-mini">
+                <dt>Para quién</dt><dd>Un equipo de inspección, vigilancia y control o de visitas domiciliarias.</dd>
+                <dt>Tres acciones de V1</dt><dd>Programar visita; registrar resultado; ver visitas de la semana.</dd>
+                <dt>Qué guarda</dt><dd>Visita: dirección, fecha, responsable, resultado, estado.</dd>
+              </dl>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No usa mapas ni ubicación del celular: la dirección es un texto.</p>
+            </article>
+            <article class="card">
+              <p class="card__k">Proyecto 8</p>
+              <h3 class="card__title">Directorio de trámites</h3>
+              <dl class="dl-mini">
+                <dt>Para quién</dt><dd>Ciudadanos que no saben a qué dependencia ir ni qué documentos llevar.</dd>
+                <dt>Tres acciones de V1</dt><dd>Agregar trámite; buscar por nombre o dependencia; ver requisitos.</dd>
+                <dt>Qué guarda</dt><dd>Trámite: nombre, dependencia, requisitos, horario, costo.</dd>
+              </dl>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No permite hacer el trámite en línea ni pagar: solo informa.</p>
             </article>
           </div>
           <p class="src">Las sugerencias de «qué NO hace» son eso, sugerencias: si una de ellas es justo tu acción principal, cámbiala por otra cosa que quieras dejar para después.</p>

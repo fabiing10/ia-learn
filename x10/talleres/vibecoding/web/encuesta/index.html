@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es-CO" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0B0F1A" />
+    <title>Encuesta de entrada · Vibe Coding</title>
+    <meta name="description" content="Un minuto, anónima: cuéntanos dónde estás con la IA antes de empezar Vibe Coding. Al final ves cómo llega la sala." />
+    <meta property="og:title" content="¿Dónde estás con la IA? · Vibe Coding" />
+    <meta property="og:description" content="Encuesta de entrada de un minuto. Anónima. Al final ves cómo llega la sala." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230B0F1A%22/%3E%3Cpath d=%22M36 26l26 24-26 24%22 fill=%22none%22 stroke=%22%233AC7E8%22 stroke-width=%2214%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E" />
+    <script>
+      // Theme before first paint: saved choice, else the OS preference, else dark.
+      (function () {
+        var d = document.documentElement, t = null;
+        d.classList.add('js');
+        try { t = localStorage.getItem('vc-theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        d.dataset.theme = t;
+      })();
+    </script>
+    <link rel="stylesheet" href="./encuesta.css" />
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <header class="ebar">
+      <a class="mark" href="/vibecoding/" aria-label="Vibe Coding, ir a la página del curso"><span class="mark__chev" aria-hidden="true">›</span>vibe coding</a>
+      <div class="ebar__progress" id="progress" hidden>
+        <span class="ebar__step" id="step" aria-live="polite"></span>
+        <div class="ebar__track" aria-hidden="true"><i id="bar"></i></div>
+      </div>
+      <button class="icon-btn" id="theme" type="button" aria-label="Cambiar a tema claro"></button>
+    </header>
+
+    <main class="stage" id="stage" tabindex="-1">
+      <!-- Start -->
+      <section class="screen screen--intro" id="intro" aria-labelledby="intro-t">
+        <p class="eyebrow">Encuesta de entrada · 1 minuto</p>
+        <h1 class="screen__title" id="intro-t">¿Dónde estás con la IA?</h1>
+        <p class="screen__lead">Nueve preguntas de un toque. Es anónima: no pedimos nombre ni correo. Al final ves cómo llega la sala, y el resumen se proyecta al inicio de la clase.</p>
+        <ul class="intro__chips" aria-hidden="true">
+          <li>Tu entidad</li><li>Tu rol</li><li>Qué tanto sabes</li><li>Qué herramientas usas</li><li>Qué has construido</li>
+        </ul>
+        <div class="intro__go">
+          <button class="btn btn--primary btn--lg" id="start" type="button">Empezar <span data-icon="arrow"></span></button>
+          <p class="intro__count" id="intro-count" aria-live="polite"></p>
+        </div>
+        <noscript><p class="noscript">Esta encuesta necesita JavaScript.</p></noscript>
+      </section>
+
+      <!-- One question at a time (main.js) -->
+      <section class="screen screen--q" id="q" hidden aria-labelledby="q-t">
+        <p class="eyebrow" id="q-n"></p>
+        <h1 class="screen__title" id="q-t" tabindex="-1"></h1>
+        <p class="screen__lead" id="q-help"></p>
+        <div class="opts" id="opts"></div>
+        <p class="q__error" id="q-error" role="alert" hidden></p>
+        <div class="q__nav">
+          <button class="btn btn--quiet" id="back" type="button"><span class="flip" data-icon="arrow"></span>Atrás</button>
+          <p class="q__hint" id="q-hint" aria-hidden="true"></p>
+          <button class="btn btn--primary" id="next" type="button" hidden>Siguiente <span data-icon="arrow"></span></button>
+        </div>
+      </section>
+
+      <!-- Sending / sent: how the room arrives -->
+      <section class="screen screen--done" id="done" hidden aria-labelledby="done-t">
+        <p class="eyebrow" id="done-k">Gracias</p>
+        <h1 class="screen__title" id="done-t" tabindex="-1">Así llega la sala</h1>
+        <p class="screen__lead" id="done-status" role="status"></p>
+        <div class="room" id="room" aria-live="polite"></div>
+        <div class="done__actions">
+          <a class="btn btn--primary" href="/vibecoding/">Ir a la página del curso <span data-icon="arrow"></span></a>
+          <button class="btn btn--quiet btn--sm" id="retry" type="button" hidden>Reintentar el envío</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

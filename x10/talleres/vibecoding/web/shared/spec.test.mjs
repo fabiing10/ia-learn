@@ -312,14 +312,14 @@ console.log('\nMenú → spec');
 
 test('prefill fills blocks 1–3 from the menu row and leaves 4–7 alone', () => {
   const start = with_({ paraQuien: '', acciones: [], guarda: [] });
-  const row = MENU.find((m) => m.proyecto === 'Registro a un evento con cupo');
+  const row = MENU.find((m) => m.proyecto === 'Inventario de insumos');
   const out = prefillFromMenu(start, row);
   assert.equal(out.paraQuien, row.paraQuien);
-  assert.deepEqual(out.acciones.map((a) => a.accion), ['inscribirse', 'ver cupos disponibles', 'ver lista de confirmados']);
+  assert.deepEqual(out.acciones.map((a) => a.accion), ['registrar entrada', 'registrar salida a una dependencia', 'ver insumos bajo el mínimo']);
   assert.ok(out.acciones.every((a) => a.rol === ''), 'the menu has no roles: the student writes them');
   assert.deepEqual(out.guarda, [
-    { cosa: 'Inscripción', datos: 'nombre, correo, fecha' },
-    { cosa: 'Evento', datos: 'cupo máximo' },
+    { cosa: 'Insumo', datos: 'nombre, existencias, mínimo' },
+    { cosa: 'Movimiento', datos: 'tipo, cantidad, dependencia, fecha' },
   ]);
   assert.deepEqual(out.roles, start.roles);
   assert.deepEqual(out.noHace, start.noHace);

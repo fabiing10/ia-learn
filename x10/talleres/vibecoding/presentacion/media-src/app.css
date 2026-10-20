@@ -1,0 +1,378 @@
+/* Shared look of the mock "Tablero de solicitudes" app (shadcn/ui-like). */
+@font-face {
+  font-family: 'Inter';
+  font-weight: 400;
+  src: url('../../../../node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: 500;
+  src: url('../../../../node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: 600;
+  src: url('../../../../node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: 700;
+  src: url('../../../../node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2') format('woff2');
+}
+
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --soft: #f1f5f9;
+  --primary: #4f46e5;
+  --primary-soft: #eef2ff;
+  --amber: #b45309;
+  --amber-bg: #fef3c7;
+  --green: #15803d;
+  --green-bg: #dcfce7;
+  --red: #b91c1c;
+  --red-bg: #fee2e2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 15px/1.4 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+svg {
+  display: block;
+  flex: none;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 60px;
+  padding: 0 24px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-right: auto;
+}
+
+.brand__logo {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--primary);
+  color: #fff;
+}
+
+.brand__name {
+  font-weight: 700;
+  font-size: 15.5px;
+  letter-spacing: -0.01em;
+}
+
+.brand__org {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.roles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.roles__label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.seg {
+  display: flex;
+  padding: 3px;
+  border-radius: 9px;
+  background: var(--soft);
+  border: 1px solid var(--border);
+}
+
+.seg span {
+  padding: 5px 12px;
+  border-radius: 7px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.seg .is-on {
+  background: var(--card);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.1), 0 0 0 1px rgb(15 23 42 / 0.04);
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding-left: 14px;
+  border-left: 1px solid var(--border);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e0e7ff;
+  color: #3730a3;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.user b {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.user small {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.page {
+  padding: 20px 24px;
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.head h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.head p {
+  margin: 3px 0 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.tools {
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+
+.stat span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.stat i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.stat b {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 10px 12px;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: left;
+  color: var(--muted);
+}
+
+td {
+  padding: 0 12px;
+  height: 44px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+tr:last-child td {
+  border-bottom: 0;
+}
+
+.t-title {
+  font-weight: 500;
+}
+
+.t-id {
+  margin-right: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.t-muted {
+  color: var(--muted);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.pill--pend {
+  color: var(--amber);
+  background: var(--amber-bg);
+}
+
+.pill--ok {
+  color: var(--green);
+  background: var(--green-bg);
+}
+
+.pill--no {
+  color: var(--red);
+  background: var(--red-bg);
+}
+
+.acts {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--ink);
+}
+
+.btn--primary {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn--danger {
+  color: var(--red);
+}
+
+.btn--icon {
+  justify-content: center;
+  width: 30px;
+  padding: 0;
+}
+
+.tfoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.pager {
+  display: flex;
+  gap: 6px;
+}
