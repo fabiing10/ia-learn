@@ -1,0 +1,381 @@
+/* Print / "Descargar PDF": A4, light paper whatever the theme, no navigation
+   chrome, cover → index → DOTS, one chapter per page, figures in their final
+   state, the address of every external link printed after it. */
+
+@media print {
+  :root,
+  :root[data-theme='dark'],
+  :root[data-theme='light'] {
+    --bg: #fff;
+    --bg-raise: #fff;
+    --bg-deep: #fff;
+    --text: #111;
+    --text-2: #333;
+    --text-3: #555;
+    --line: #d6d6d6;
+    --line-strong: #9a9a9a;
+    --gold: #6b52e0;
+    --gold-text: #4a32c4;
+    --gold-soft: #efebff;
+    --cyan: #0b7a63;
+    --cyan-text: #0a6a56;
+    --surface: #fff;
+    --surface-2: #f4f4f6;
+    --code-bg: #fafafa;
+    --good: #1f9e5a;
+    --good-text: #146c34;
+    --good-soft: #eef8f2;
+    --bad: #d23b40;
+    --bad-text: #b42318;
+    --bad-soft: #fdf0f0;
+    --wait: #c48a0e;
+    --accent-bg: #4a32c4;
+    --accent-ink: #fff;
+    --shadow: none;
+    --vignette: none;
+    color-scheme: light;
+  }
+
+  @page {
+    size: A4;
+    margin: 16mm 14mm 18mm;
+  }
+
+  html {
+    font-size: 11px;
+    scroll-behavior: auto;
+    background: #fff;
+  }
+
+  body {
+    font-size: 10.5pt;
+    line-height: 1.5;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body::before,
+  .hero__net,
+  .fig::before,
+  .sprite,
+  .skip,
+  .progress,
+  .topbar,
+  .scrim,
+  .pill,
+  .toast,
+  .copy,
+  .anchor,
+  .reset,
+  .meter,
+  .hero__cta,
+  .gfilter,
+  .glossary__empty,
+  .checklist__note,
+  .toc__close,
+  .toc__foot,
+  .switch,
+  .grid-tools,
+  .inside,
+  .caret,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Every variant prints (both configs, every skill) */
+  [data-variant] {
+    display: block !important;
+  }
+
+  .hero {
+    padding: 22mm 0 0;
+    border: 0;
+    break-after: page;
+  }
+
+  .hero__title {
+    font-size: 44pt;
+  }
+
+  .hero__thesis {
+    font-size: 17pt;
+  }
+
+  .hero__facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero__facts b {
+    font-size: 20pt;
+  }
+
+  .layout {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+
+  /* The index prints as a page of its own after the cover */
+  .toc {
+    position: static !important;
+    display: block;
+    width: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    transform: none !important;
+    visibility: visible !important;
+    background: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    break-after: page;
+    font-size: 10.5pt;
+  }
+
+  .toc__title {
+    font-size: 15pt;
+    color: var(--text);
+    margin-bottom: 4mm;
+  }
+
+  .toc__list a {
+    min-height: 0 !important;
+    padding: 0.7mm 0 0.7mm 2mm !important;
+    color: var(--text) !important;
+    background: none !important;
+  }
+
+  .toc__sub {
+    columns: 2;
+    column-gap: 8mm;
+  }
+
+  .toc__sub a {
+    font-size: 9pt !important;
+    color: var(--text-2) !important;
+  }
+
+  .chapter {
+    padding: 0;
+    border: 0;
+    break-before: page;
+  }
+
+  .chapter--flow {
+    break-before: auto;
+    padding-top: 8mm;
+  }
+
+  .chapter__title {
+    font-size: 24pt;
+  }
+
+  .chapter__lede {
+    font-size: 11.5pt;
+  }
+
+  .prose,
+  .chapter__lede,
+  .callout,
+  .kv,
+  .analogy,
+  .implica,
+  .next,
+  .flow__content p {
+    max-width: none;
+  }
+
+  .wide,
+  .table-wrap,
+  .vs,
+  .code,
+  .msg,
+  .cards,
+  .checklist,
+  .pull,
+  .glossary,
+  .fig,
+  .concept,
+  .routes,
+  .qlist,
+  .actions {
+    max-width: none;
+  }
+
+  .concept {
+    padding-top: 6mm;
+  }
+
+  .code pre,
+  .code--tall pre,
+  .code--nowrap pre {
+    max-height: none;
+    overflow: visible;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 8.3pt;
+  }
+
+  .table-wrap {
+    overflow: visible;
+    break-inside: avoid;
+  }
+
+  .rtable {
+    font-size: 9pt;
+  }
+
+  .rtable th,
+  .rtable td {
+    padding: 1.8mm 2.6mm;
+  }
+
+  .chapter__head,
+  .concept__head {
+    break-inside: avoid;
+  }
+
+  .btn {
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  /* Small mono labels keep a legible floor on paper */
+  .chapter__kicker,
+  .hero__event,
+  .fig__label,
+  .pull__label,
+  .vs__label,
+  .card__k,
+  .code__title,
+  .msg__title,
+  .kv dt,
+  .analogy__k,
+  .implica__k,
+  .verify,
+  .rtable caption,
+  .step__tag,
+  .k {
+    font-size: 7.5pt !important;
+  }
+
+  .verify {
+    border-width: 0.8pt;
+  }
+
+  /* Figures: final state, no motion, on one page when they can */
+  .fig,
+  .fig * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .fig {
+    padding: 4mm;
+    background: #fff;
+  }
+
+  .dots--wide {
+    display: block !important;
+  }
+
+  .dots--narrow {
+    display: none !important;
+  }
+
+  .vs,
+  .persist,
+  .ba,
+  .why,
+  .abc,
+  .skill,
+  .mant,
+  .conf {
+    break-inside: avoid;
+  }
+
+  h2,
+  h3,
+  h4,
+  .chapter__head,
+  .concept__head,
+  .code__head,
+  .msg__head,
+  .checklist__bar,
+  .fig__label {
+    break-after: avoid;
+  }
+
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .fig,
+  .card,
+  .term,
+  .callout,
+  .pull,
+  .msg,
+  .analogy,
+  .implica,
+  .route,
+  .q,
+  .action,
+  .flow__step,
+  .check,
+  .rtable tr,
+  .gate,
+  .layer,
+  .tree__f {
+    break-inside: avoid;
+  }
+
+  .checklist {
+    break-inside: auto;
+  }
+
+  .check__box {
+    border-color: #777;
+  }
+
+  .grid-fill input {
+    border: 0;
+    border-bottom: 0.6pt solid #999;
+    border-radius: 0;
+    min-height: 7mm;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  main a[data-print-url]::after,
+  .hero a[data-print-url]::after {
+    content: ' (' attr(data-print-url) ')';
+    font-size: 0.82em;
+    font-weight: 400;
+    color: #555;
+    word-break: break-all;
+  }
+
+  /* In-page links already have their target on paper */
+  main a[href^='#']::after {
+    content: none;
+  }
+
+  .footer {
+    margin-top: 8mm;
+    padding: 5mm 0 0;
+  }
+
+  .footer a::after {
+    content: none;
+  }
+}

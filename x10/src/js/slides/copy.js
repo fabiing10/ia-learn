@@ -31,6 +31,7 @@ defineCtrl('copy', {
     const src = slide.querySelector('[data-copy-src]');
     if (!btn || !src) return;
     const label = btn.querySelector('.copy__label');
+    const idle = label.textContent;
     btn.addEventListener('click', async (e) => {
       e.stopPropagation();
       const ok = await copyText(src.textContent.trim());
@@ -41,7 +42,7 @@ defineCtrl('copy', {
       clearTimeout(btn._t);
       btn._t = setTimeout(() => {
         btn.classList.remove('is-done');
-        label.textContent = 'Copiar prompt';
+        label.textContent = idle;
       }, 2600);
     });
   },

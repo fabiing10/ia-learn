@@ -1,0 +1,152 @@
+{
+  "titulo": "Cerebro Jurídico · Arquitectura, IA y automatización aplicadas a los servicios jurídicos",
+  "fecha": "Miércoles 21 de octubre de 2026 · 15:30",
+  "marca": {
+    "acento": "§",
+    "texto": "cerebro jurídico"
+  },
+  "segmentos": 6,
+  "bloques": {
+    "0": {
+      "num": "00",
+      "name": "Antes de empezar"
+    },
+    "1": {
+      "num": "01",
+      "name": "Gancho y tesis"
+    },
+    "2": {
+      "num": "02",
+      "name": "Paso 1 · Su cerebro"
+    },
+    "3": {
+      "num": "03",
+      "name": "Paso 2 · La bóveda"
+    },
+    "4": {
+      "num": "04",
+      "name": "Modelos y verificación"
+    },
+    "5": {
+      "num": "05",
+      "name": "Cierre"
+    }
+  },
+  "tema": {
+    "particulas": {
+      "dark": {
+        "gold": "#9D86FF",
+        "cyan": "#4FE0C0",
+        "form": 0.62
+      },
+      "light": {
+        "gold": "#5A3FD6",
+        "cyan": "#0B7A63",
+        "form": 0.95
+      }
+    },
+    "forma": "brain"
+  },
+  "qr": {
+    "landing": "https://x10-presentacion.vercel.app/cerebro/",
+    "construir": "https://x10-presentacion.vercel.app/cerebro/#construir",
+    "prueba": "https://x10-presentacion.vercel.app/cerebro/#prueba",
+    "playbook": "https://x10-presentacion.vercel.app/cerebro/playbook/"
+  },
+  "urlCorta": "x10-presentacion.vercel.app/cerebro",
+  "evento": "Clase abierta · Innovación y tecnología para los servicios jurídicos · Pontificia Universidad Javeriana",
+  "expositor": "Fabián Zapata",
+  "cargo": "Fundador de Zeta Innovation · Director de Innovación de GLab",
+  "contacto": "WhatsApp 314 366 6151",
+  "media": {},
+  "fuentes": {
+    "cifras": "Clio, Legal Trends Report 2025 (1.702 profesionales, EE. UU.) · Thomson Reuters, Future of Professionals 2025 (2.275 profesionales) · Damien Charlotin, AI Hallucination Cases, consultada el 19 de octubre de 2026",
+    "hebb": "Regla de Hebb (1949): cuando una neurona ayuda repetidamente a activar a otra, la conexión entre ambas se fortalece.",
+    "casos": "Mata v. Avianca (S.D.N.Y., 22 jun. 2023): multa de USD 5.000 por seis sentencias inexistentes generadas por ChatGPT. Chakma v. Sushi Katsuei (S.D.N.Y., 19 may. 2026): la abogada reconoció haber usado la IA de LexisNexis sin revisar. La herramienta no sustituye el protocolo."
+  },
+  "marco": {
+    "t323": "Fija doce principios para usar IA en la justicia; entre ellos, transparencia, responsabilidad, privacidad, no sustitución de la racionalidad humana, seriedad y verificación.",
+    "pcsja": "Lineamientos para magistrados, jueces y empleados: verificación humana de todo resultado, informar el uso de IA y no ingresar datos confidenciales en herramientas que los retengan o reentrenen con ellos."
+  },
+  "grilla": {
+    "modelos": [
+      "Claude",
+      "ChatGPT",
+      "Gemini",
+      "Modelo local"
+    ],
+    "antes": [
+      {
+        "respuesta": "{{SIN_CEREBRO_CLAUDE}}",
+        "ok": null
+      },
+      {
+        "respuesta": "{{SIN_CEREBRO_CHATGPT}}",
+        "ok": null
+      },
+      {
+        "respuesta": "{{SIN_CEREBRO_GEMINI}}",
+        "ok": null
+      },
+      {
+        "respuesta": "{{SIN_CEREBRO_LOCAL}}",
+        "ok": null
+      }
+    ],
+    "despues": [
+      {
+        "respuesta": "{{CON_CEREBRO_CLAUDE}}",
+        "ok": null
+      },
+      {
+        "respuesta": "{{CON_CEREBRO_CHATGPT}}",
+        "ok": null
+      },
+      {
+        "respuesta": "{{CON_CEREBRO_GEMINI}}",
+        "ok": null
+      },
+      {
+        "respuesta": "{{CON_CEREBRO_LOCAL}}",
+        "ok": null
+      }
+    ],
+    "criterios": [
+      "10 días",
+      "Ley 1755 de 2015, art. 14, num. 1",
+      "Trampa: Decreto 491 → Ley 2207",
+      "Silencio: aceptada, entrega en 3 días",
+      "Cierra con «Verificación pendiente»"
+    ],
+    "marcas": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ]
+  }
+}

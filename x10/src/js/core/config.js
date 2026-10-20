@@ -1,14 +1,9 @@
 // Pours config.json into the slides before Reveal starts:
 // text values, QR codes, media files, slide order tweaks and cuts.
-import config from '../../../config.json';
-import qrPlaybook from '../../assets/qr/playbook.svg?raw';
-import qrTest from '../../assets/qr/test.svg?raw';
-import qrSite from '../../assets/qr/site.svg?raw';
-import qrWhatsapp from '../../assets/qr/whatsapp.svg?raw';
+// Which workshop is being built decides the data (scripts/vite-deck.js).
+import { config, qr as QR } from 'virtual:deck';
 
 export { config };
-
-const QR = { playbook: qrPlaybook, test: qrTest, site: qrSite, whatsapp: qrWhatsapp };
 
 export const isPlaceholder = (v) => typeof v !== 'string' || /^\s*\{\{.*\}\}\s*$/.test(v);
 

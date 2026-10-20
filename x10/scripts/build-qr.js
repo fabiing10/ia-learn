@@ -1,25 +1,15 @@
-// Generates the QR codes used in the slides from config.json.
-// Runs automatically before `npm run dev` and `npm run build`.
+// Generates the QR codes a deck shows, from its config.json.
+// Targets: config.qr = { name: url }, plus legacy x10 keys and config.whatsapp.
 // A value that is still a {{PLACEHOLDER}} produces a visible "pending" tile
 // instead of a QR, so nobody scans a code that points nowhere.
+// CLI: node scripts/build-qr.js [taller]   (default: every workshop)
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import QRCode from 'qrcode';
+import { TALLERES, tallerBySlug } from '../talleres.config.js';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const config = JSON.parse(await readFile(resolve(root, 'config.json'), 'utf8'));
-const outDir = resolve(root, 'src/assets/qr');
-await mkdir(outDir, { recursive: true });
-
-const wa = config.whatsapp;
-const targets = {
-  playbook: config.urlPlaybook,
-  test: config.urlTest,
-  site: config.urlSite,
-  // WhatsApp chat with the presenter, pre-filled so the message says who wrote
-  whatsapp: wa?.numero ? `https://wa.me/${wa.numero}?text=${encodeURIComponent(wa.mensaje || '')}` : '',
-};
+const ROOT = resolve(import.meta.dirname, '..');
 
 const isPlaceholder = (v) => !v || /^\s*\{\{.*\}\}\s*$/.test(v);
 
@@ -34,20 +24,45 @@ function placeholderSvg(token) {
 `;
 }
 
-for (const [name, value] of Object.entries(targets)) {
-  let svg;
-  if (isPlaceholder(value)) {
-    svg = placeholderSvg(value || `{{URL_${name.toUpperCase()}}}`);
-  } else {
-    svg = await QRCode.toString(value, {
-      type: 'svg',
-      // Long WhatsApp links need fewer modules to scan from the back row
-      errorCorrectionLevel: name === 'whatsapp' ? 'L' : 'M',
-      margin: 2,
-      color: { dark: '#0B0F1A', light: '#FFFFFF' },
-    });
-    svg = svg.replace('<svg ', '<svg class="qr" role="img" aria-label="Código QR" ');
+function targetsOf(config) {
+  const wa = config.whatsapp;
+  const legacy = {
+    playbook: config.urlPlaybook,
+    test: config.urlTest,
+    site: config.urlSite,
+  };
+  const targets = Object.fromEntries(Object.entries(legacy).filter(([, v]) => v !== undefined));
+  Object.assign(targets, config.qr || {});
+  // WhatsApp chat with the presenter, pre-filled so the message says who wrote
+  if (wa?.numero) targets.whatsapp = `https://wa.me/${wa.numero}?text=${encodeURIComponent(wa.mensaje || '')}`;
+  return targets;
+}
+
+export async function buildQr(t) {
+  const config = JSON.parse(await readFile(resolve(ROOT, t.deck.config), 'utf8'));
+  const outDir = resolve(ROOT, t.deck.qr);
+  await mkdir(outDir, { recursive: true });
+  for (const [name, value] of Object.entries(targetsOf(config))) {
+    let svg;
+    if (isPlaceholder(value)) {
+      svg = placeholderSvg(value || `{{URL_${name.toUpperCase()}}}`);
+    } else {
+      svg = await QRCode.toString(value, {
+        type: 'svg',
+        // Long links (WhatsApp) need fewer modules to scan from the back row
+        errorCorrectionLevel: value.length > 80 ? 'L' : 'M',
+        margin: 2,
+        color: { dark: '#0B0F1A', light: '#FFFFFF' },
+      });
+      svg = svg.replace('<svg ', '<svg class="qr" role="img" aria-label="Código QR" ');
+    }
+    await writeFile(resolve(outDir, `${name}.svg`), svg);
+    console.log(`qr ${t.slug}: ${name}.svg ${isPlaceholder(value) ? '(pendiente)' : '→ ' + value}`);
   }
-  await writeFile(resolve(outDir, `${name}.svg`), svg);
-  console.log(`qr: ${name}.svg ${isPlaceholder(value) ? '(pendiente)' : '→ ' + value}`);
+}
+
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const slug = process.argv[2];
+  const list = slug ? [tallerBySlug(slug)] : TALLERES.filter((t) => t.deck);
+  for (const t of list) await buildQr(t);
 }

@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="es-CO" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0B0F1A" />
+    <title>Vibe Coding · Clase 1</title>
+    <meta name="description" content="Vibe Coding · Clase 1 con Fabian Zapata: de idea a app publicada. Checklist, hoja de 5 piezas, constructor de la spec de una página, menú de proyectos, reglas de mesa y formulario de salida." />
+    <meta property="og:title" content="Vibe Coding · Clase 1" />
+    <meta property="og:description" content="Vibe coding no es pedir una app. Es describirla tan bien que la IA no tenga que adivinar." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230B0F1A%22/%3E%3Cpath d=%22M36 26l26 24-26 24%22 fill=%22none%22 stroke=%22%233AC7E8%22 stroke-width=%2214%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E" />
+    <script>
+      // Theme before first paint: saved choice, else the OS preference, else dark.
+      (function () {
+        var d = document.documentElement, t = null;
+        d.classList.add('js');
+        try { t = localStorage.getItem('vc-theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        d.dataset.theme = t;
+      })();
+    </script>
+    <link rel="stylesheet" href="./landing/landing.css" />
+    <script type="module" src="./landing/main.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#contenido">Saltar al contenido</a>
+
+    <header class="bar" id="bar">
+      <div class="bar__in">
+        <a class="mark bar__mark" href="#inicio" aria-label="Vibe Coding, volver al inicio"><span class="mark__chev" aria-hidden="true">›</span>vibe coding</a>
+        <nav class="bar__nav" aria-label="Secciones">
+          <a href="#antes">Antes</a>
+          <a href="#cinco-piezas">5 piezas</a>
+          <a href="#spec">Spec</a>
+          <a href="#menu">Menú</a>
+          <a href="#reglas">Reglas</a>
+          <a href="#salida">Salida</a>
+        </nav>
+        <button class="icon-btn bar__theme" id="theme" type="button" aria-label="Cambiar a tema claro"></button>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <!-- Hero -->
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="wrap hero__grid">
+          <div class="hero__main">
+            <p class="eyebrow">Curso de vibe coding · con Fabian Zapata</p>
+            <h1 class="hero__title" id="hero-title">Vibe Coding<span class="sr-only"> · </span> <span class="hero__class">Clase 1</span></h1>
+            <p class="hero__lead">De idea a app publicada: la spec de una página, caja cerrada y caja abierta, y la primera versión en una URL con su repositorio.</p>
+            <blockquote class="tesis">
+              <p data-tesis></p>
+            </blockquote>
+            <div class="hero__ctas">
+              <a class="btn btn--primary" href="#spec">Armar mi spec <span data-icon="down"></span></a>
+              <a class="btn btn--ghost" href="/vibecoding/presentacion/"><span data-icon="play"></span>Ver la presentación</a>
+              <a class="btn btn--ghost" href="/vibecoding/playbook/"><span data-icon="book"></span>Abrir el playbook</a>
+            </div>
+          </div>
+
+          <aside class="leave surface" aria-labelledby="leave-title">
+            <h2 class="leave__title" id="leave-title">Al salir tienes</h2>
+            <ol class="leave__list">
+              <li>
+                <span class="leave__icon" data-icon="doc"></span>
+                <div>
+                  <h3>Spec V1</h3>
+                  <p>Tu plantilla de una página, llena. Base para cualquier cambio que pidas.</p>
+                </div>
+              </li>
+              <li>
+                <span class="leave__icon" data-icon="globe"></span>
+                <div>
+                  <h3>App publicada en una URL</h3>
+                  <p>La primera versión, en una URL pública de Lovable. Tres usuarios reales la prueban en la semana.</p>
+                </div>
+              </li>
+              <li>
+                <span class="leave__icon" data-icon="branch"></span>
+                <div>
+                  <h3>Repositorio propio</h3>
+                  <p>El código en tu GitHub, conectado en dos direcciones. Es la caja que se abre en la clase 2.</p>
+                </div>
+              </li>
+            </ol>
+          </aside>
+        </div>
+
+        <dl class="wrap facts">
+          <div class="facts__item"><dt>Cuándo</dt><dd><span class="ph">{{FECHA_CLASE_1}}</span></dd></div>
+          <div class="facts__item"><dt>Dónde</dt><dd><span class="ph">{{LUGAR}}</span></dd></div>
+          <div class="facts__item"><dt>Duración</dt><dd>150 minutos; 70 de ellos construyendo</dd></div>
+          <div class="facts__item"><dt>Trae</dt><dd>Portátil con cargador y Chrome</dd></div>
+        </dl>
+
+        <nav class="wrap route" aria-label="La clase, paso a paso">
+          <ol class="route__list">
+            <li><a href="#antes"><span class="route__when">Antes</span><span class="route__what">Cuentas y frase</span></a></li>
+            <li><a href="#cinco-piezas"><span class="route__when">Bloque 2</span><span class="route__what">Mi app en 5 piezas</span></a></li>
+            <li><a href="#spec"><span class="route__when">Bloque 4</span><span class="route__what">La spec</span></a></li>
+            <li><a href="#reglas"><span class="route__when">Bloque 5</span><span class="route__what">Construir</span></a></li>
+            <li><a href="#salida"><span class="route__when">Bloque 6</span><span class="route__what">Formulario de salida</span></a></li>
+          </ol>
+        </nav>
+      </section>
+
+      <!-- Antes de la clase -->
+      <section class="sec" id="antes" aria-labelledby="antes-t">
+        <div class="wrap">
+          <header class="sec__head">
+            <p class="eyebrow">Antes de llegar</p>
+            <h2 class="sec__title" id="antes-t">Llega con esto listo</h2>
+            <p class="sec__lead">Sin cuentas creadas, los primeros 20 minutos se van en registros y correos de verificación. Marca lo que ya tienes: queda guardado en este navegador.</p>
+          </header>
+          <div class="antes">
+            <div class="antes__main surface">
+              <div class="progress" id="antes-progress">
+                <p class="progress__text" id="antes-progress-text" aria-live="polite"></p>
+                <div class="progress__track" aria-hidden="true"><i id="antes-progress-bar"></i></div>
+              </div>
+              <ul class="checklist" id="checklist"></ul>
+            </div>
+            <aside class="antes__aside">
+              <div class="note">
+                <h3 class="note__title">¿Llegas sin cuentas?</h3>
+                <p data-sin-cuentas="bloque1"></p>
+                <p data-sin-cuentas="pareja"></p>
+                <a class="link" href="/vibecoding/playbook/#ruta-a">Ruta A en el playbook <span data-icon="arrow"></span></a>
+              </div>
+              <p class="antes__quote">No necesitas saber programar. Necesitas saber qué quieres resolver.</p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mi app en 5 piezas -->
+      <section class="sec sec--alt" id="cinco-piezas" aria-labelledby="piezas-t">
+        <div class="wrap">
+          <header class="sec__head">
+            <p class="eyebrow">Bloque 2 · Fundamentos</p>
+            <h2 class="sec__title" id="piezas-t">Mi app en 5 piezas</h2>
+            <p class="sec__lead">Toda app, de la más simple a la más grande, son cinco cosas. Escribe una línea por pieza para tu idea. Dominio y repositorio, hoy los resuelve la herramienta.</p>
+          </header>
+          <div class="piezas__head" aria-hidden="true">
+            <span>Pieza</span><span>En una app de domicilios</span><span>Mi app</span>
+          </div>
+          <ol class="piezas" id="piezas"></ol>
+          <div class="piezas__foot">
+            <p class="piezas__test"><b>Prueba rápida:</b> ubica una función de tu app («el jefe ve la lista y aprueba») en una pieza. Si dudas entre front y lógica, bien: esa duda es la que la spec resuelve.</p>
+            <p class="piezas__close">Ninguna de las cinco la construyes tú. Tu trabajo es decidir qué hace cada una. Eso se escribe, y se llama spec. <a class="link" href="#spec">Armar mi spec <span data-icon="down"></span></a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Spec builder -->
+      <section class="sec" id="spec" aria-labelledby="spec-t">
+        <div class="wrap wrap--wide">
+          <header class="sec__head">
+            <p class="eyebrow">Bloque 4 · Taller: la spec</p>
+            <h2 class="sec__title" id="spec-t">Mi spec de una página</h2>
+            <p class="sec__lead">Siete bloques. Antes de enviar, pregúntate qué tendría que adivinar la IA: la lista de lo que adivina es la lista de lo que falta en la spec. ¿No traes idea? Elige uno del <a href="#menu">menú de proyectos</a>.</p>
+            <p class="frase" id="frase" hidden></p>
+          </header>
+
+          <div class="builder" id="builder">
+            <form class="builder__form" id="spec-form" novalidate aria-label="Spec de una página">
+              <div class="block block--name">
+                <label class="field__label" for="spec-nombre">Nombre de la app</label>
+                <input class="input input--title" id="spec-nombre" data-path="nombre" type="text" maxlength="120" autocomplete="off" placeholder="Ej.: Tablero de solicitudes" />
+                <ul class="hints" data-hints="0"></ul>
+              </div>
+              <div id="blocks"></div>
+            </form>
+
+            <aside class="out" aria-labelledby="out-title">
+              <div class="out__in surface">
+                <div class="out__head">
+                  <h3 class="out__title" id="out-title">Primer mensaje</h3>
+                  <p class="out__saved" id="spec-saved" aria-live="polite"></p>
+                </div>
+                <div id="adivino"></div>
+                <p class="sr-only" id="adivino-live" aria-live="polite"></p>
+                <pre class="out__pre" id="spec-out" tabindex="0" aria-label="Vista previa del primer mensaje"></pre>
+                <div class="out__actions">
+                  <button class="btn btn--primary" id="spec-copy" type="button"><span data-icon="copy"></span><span data-label>Copiar primer mensaje</span></button>
+                  <button class="btn btn--ghost btn--sm" id="spec-download" type="button"><span data-icon="download"></span>Descargar .md</button>
+                  <button class="btn btn--quiet btn--sm" id="spec-reset" type="button" aria-expanded="false" aria-controls="spec-reset-confirm"><span data-icon="reset"></span>Empezar de cero</button>
+                </div>
+                <p class="out__status" id="spec-status" role="status"></p>
+                <div class="confirm" id="spec-reset-confirm" hidden>
+                  <p><b>¿Borrar toda tu spec?</b> Se borra de este navegador y no se puede deshacer.</p>
+                  <div class="confirm__actions">
+                    <button class="btn btn--danger btn--sm" id="spec-reset-yes" type="button">Sí, borrar</button>
+                    <button class="btn btn--ghost btn--sm" id="spec-reset-no" type="button">Cancelar</button>
+                  </div>
+                </div>
+                <p class="out__note">Pega el mensaje completo en Lovable en el bloque 5. La instrucción de cabecera va arriba: le pide a la herramienta que pregunte en vez de adivinar. <a href="/vibecoding/playbook/#cabecera">Más en el playbook</a>.</p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- Menú de proyectos -->
+      <section class="sec sec--alt" id="menu" aria-labelledby="menu-t">
+        <div class="wrap">
+          <header class="sec__head">
+            <p class="eyebrow">Para quien no trae idea</p>
+            <h2 class="sec__title" id="menu-t">Menú de proyectos</h2>
+            <p class="sec__lead">Elige uno y úsalo en tu spec: los bloques 1 a 3 quedan escritos. Tú completas quién hace cada acción, qué NO hace y los tres escenarios.</p>
+          </header>
+          <ul class="menu" id="menu-list"></ul>
+        </div>
+      </section>
+
+      <!-- Reglas de mesa -->
+      <section class="sec" id="reglas" aria-labelledby="reglas-t">
+        <div class="wrap">
+          <header class="sec__head">
+            <p class="eyebrow">Bloque 5 · Taller: construir</p>
+            <h2 class="sec__title" id="reglas-t">Reglas de mesa</h2>
+            <p class="sec__lead">Cuarenta minutos en Lovable, guiados por cinco puntos de control. Cada punto es una prueba que haces como usuario, no como programador; la app avanza solo cuando pasa la prueba.</p>
+          </header>
+
+          <div class="reglas">
+            <div class="reglas__mesa surface">
+              <h3 class="h3">Reglas de mesa</h3>
+              <ol class="bignum" id="reglas-list"></ol>
+            </div>
+            <div class="reglas__puntos">
+              <h3 class="h3">Cinco puntos de control</h3>
+              <ol class="puntos" id="puntos-list"></ol>
+            </div>
+          </div>
+
+          <div class="reglas__pair">
+            <div class="reglas__proto surface">
+              <h3 class="h3">Protocolo de error</h3>
+              <ol class="steps" id="protocolo-list"></ol>
+              <a class="link" href="/vibecoding/playbook/#protocolo-de-error">Protocolo de error en el playbook <span data-icon="arrow"></span></a>
+            </div>
+            <div class="reglas__safe" aria-labelledby="safe-t">
+              <h3 class="h3" id="safe-t"><span class="reglas__safe-icon" data-icon="shield"></span>Qué no hacer</h3>
+              <p class="reglas__safe-lead">Seguridad, una lectura de dos minutos.</p>
+              <ul class="safe" id="seguridad-list"></ul>
+              <a class="link" href="/vibecoding/playbook/#seguridad">Seguridad en el playbook <span data-icon="arrow"></span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formulario de salida -->
+      <section class="sec sec--alt" id="salida" aria-labelledby="salida-t">
+        <div class="wrap salida">
+          <header class="sec__head salida__head">
+            <p class="eyebrow">Bloque 6 · Cierre</p>
+            <h2 class="sec__title" id="salida-t">Formulario de salida</h2>
+            <p class="sec__lead">Tu nombre, la URL de tu app, el enlace del repositorio, tu principal duda y hasta dónde llegaste. Con esto se arman los grupos de la clase 2 antes de llegar, no en el salón.</p>
+            <p class="salida__meta"><span class="badge" id="salida-session"></span><span class="badge badge--demo" id="salida-demo" hidden>Modo demo · se guarda solo en este navegador</span></p>
+            <p class="salida__queue" id="salida-queue" role="status" hidden></p>
+          </header>
+
+          <div class="salida__card surface">
+            <form class="salida__form" id="salida-form" novalidate>
+              <div class="field">
+                <label class="field__label" for="f-nombre">Nombre</label>
+                <input class="input" id="f-nombre" name="nombre" type="text" autocomplete="name" maxlength="80" aria-describedby="f-nombre-err" />
+                <p class="field__error" id="f-nombre-err" hidden></p>
+              </div>
+
+              <fieldset class="field fieldset" aria-describedby="f-punto-err">
+                <legend class="field__label">¿Hasta qué punto de control llegaste?</legend>
+                <div class="radios" id="f-puntos"></div>
+                <p class="field__error" id="f-punto-err" hidden></p>
+              </fieldset>
+
+              <div class="field">
+                <label class="field__label" for="f-app">URL de la app</label>
+                <input class="input" id="f-app" name="url_app" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" maxlength="300" placeholder="La URL publicada de tu app" aria-describedby="f-app-hint f-app-err" />
+                <p class="field__hint" id="f-app-hint">Si no llegaste al punto 4, pega el enlace de tu proyecto o déjalo vacío.</p>
+                <p class="field__error" id="f-app-err" hidden></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="f-repo">Enlace del repositorio</label>
+                <input class="input" id="f-repo" name="url_repo" type="text" inputmode="url" autocapitalize="off" spellcheck="false" maxlength="300" placeholder="github.com/tu-usuario/tu-app" aria-describedby="f-repo-hint f-repo-err f-repo-warn" />
+                <p class="field__hint" id="f-repo-hint">Si no llegaste al punto 5, déjalo vacío: es tarea para la semana.</p>
+                <p class="field__error" id="f-repo-err" hidden></p>
+                <p class="field__warn" id="f-repo-warn" hidden></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="f-duda">Tu principal duda</label>
+                <textarea class="textarea" id="f-duda" name="duda" rows="3" maxlength="1000" aria-describedby="f-duda-hint f-duda-err"></textarea>
+                <p class="field__hint" id="f-duda-hint">Por tonta que parezca. Las tontas son las que todos tienen.</p>
+                <p class="field__error" id="f-duda-err" hidden></p>
+              </div>
+
+              <div class="consent">
+                <input class="check" id="f-consent" name="consent" type="checkbox" aria-describedby="f-consent-err" />
+                <label for="f-consent">Autorizo a Fabian Zapata a tratar estos datos (nombre, enlaces y duda) para armar los grupos de la clase 2 y contactarme sobre el curso, según la Ley 1581 de 2012. Puedo pedir que se corrijan o se borren escribiendo al WhatsApp 314 366 6151.</label>
+                <p class="field__error" id="f-consent-err" hidden></p>
+              </div>
+
+              <div class="salida__submit">
+                <button class="btn btn--primary" id="f-send" type="submit"><span data-label>Enviar</span></button>
+                <p class="salida__status" id="salida-status" role="status"></p>
+              </div>
+            </form>
+
+            <div class="done" id="salida-done" hidden tabindex="-1" aria-labelledby="done-title">
+              <p class="done__icon" data-icon="check"></p>
+              <h3 class="done__title" id="done-title"></h3>
+              <p class="done__text" id="done-text"></p>
+              <div class="done__next">
+                <h4>Tarea para la clase 2</h4>
+                <ol id="tarea-list"></ol>
+                <p class="done__clase2" data-clase2></p>
+              </div>
+              <button class="btn btn--ghost btn--sm" id="salida-again" type="button">Enviar otra respuesta</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap foot__grid">
+        <div class="foot__brand">
+          <a class="mark" href="#inicio"><span class="mark__chev" aria-hidden="true">›</span>vibe coding</a>
+          <p class="foot__line">Clase 1 · Expositor: <b>Fabian Zapata</b></p>
+          <a class="btn btn--ghost btn--sm foot__wa" id="wa-link" href="https://wa.me/573143666151" target="_blank" rel="noopener noreferrer"><span data-icon="chat"></span>WhatsApp 314 366 6151</a>
+          <p class="foot__privacy">Tu checklist, tu hoja de 5 piezas y tu spec se guardan solo en este navegador. El formulario de salida se envía a Fabian.</p>
+        </div>
+        <nav class="foot__nav" aria-labelledby="foot-pb">
+          <h2 class="foot__h" id="foot-pb">Playbook</h2>
+          <ul>
+            <li><a href="/vibecoding/playbook/#empieza-aqui">Empieza aquí</a></li>
+            <li><a href="/vibecoding/playbook/#cinco-piezas">Las 5 piezas</a></li>
+            <li><a href="/vibecoding/playbook/#prueba-del-adivino">Prueba del adivino</a></li>
+            <li><a href="/vibecoding/playbook/#plantilla">Plantilla de la spec</a></li>
+            <li><a href="/vibecoding/playbook/#cabecera">Instrucción de cabecera</a></li>
+            <li><a href="/vibecoding/playbook/#menu-de-proyectos">Menú de proyectos</a></li>
+            <li><a href="/vibecoding/playbook/#reglas-de-mesa">Reglas de mesa</a></li>
+            <li><a href="/vibecoding/playbook/#protocolo-de-error">Protocolo de error</a></li>
+          </ul>
+        </nav>
+        <nav class="foot__nav" aria-labelledby="foot-sigue">
+          <h2 class="foot__h" id="foot-sigue">Para seguir</h2>
+          <ul>
+            <li><a href="/vibecoding/playbook/#ruta-a">Ruta A: caja cerrada</a></li>
+            <li><a href="/vibecoding/playbook/#ruta-b">Ruta B: caja abierta</a></li>
+            <li><a href="/vibecoding/playbook/#caja-cerrada-o-abierta">¿Caja cerrada o abierta?</a></li>
+            <li><a href="/vibecoding/playbook/#seguridad">Seguridad</a></li>
+            <li><a href="/vibecoding/playbook/#clase-2">Clase 2</a></li>
+            <li><a href="/vibecoding/playbook/#glosario">Glosario</a></li>
+            <li><a href="/vibecoding/presentacion/">La presentación</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="wrap foot__last">La herramienta va a cambiar de nombre el año entrante. La spec, el mapa y las reglas de mesa, no.</p>
+    </footer>
+    <noscript><p class="noscript">Esta página necesita JavaScript para la checklist, la spec y el formulario. El <a href="/vibecoding/playbook/">playbook</a> tiene todo el material.</p></noscript>
+  </body>
+</html>

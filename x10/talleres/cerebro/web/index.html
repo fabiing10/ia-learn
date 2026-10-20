@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="es-CO" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0B0F1A" />
+    <title>Cerebro Jurídico · Construye el tuyo</title>
+    <meta name="description" content="Describe tu práctica y recibe tu cerebro jurídico: cinco archivos que le dicen a cualquier IA quién eres, cómo trabajas, qué nunca hace y cómo se verifica. Nada se envía a ningún servidor." />
+    <meta property="og:title" content="Cerebro Jurídico" />
+    <meta property="og:description" content="La IA no es tu abogado junior; es tu sistema. Y los sistemas se diseñan." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230B0F1A%22/%3E%3Ctext x=%2250%22 y=%2272%22 font-family=%22Georgia,serif%22 font-size=%2266%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22%239D86FF%22%3E%C2%A7%3C/text%3E%3C/svg%3E" />
+    <script>
+      // Theme before first paint: saved choice, else the OS preference, else dark.
+      (function () {
+        var d = document.documentElement, t = null;
+        d.classList.add('js');
+        try { t = localStorage.getItem('cj-theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        d.dataset.theme = t;
+        if (t === 'light') {
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute('content', '#F7F5F0');
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="./landing/landing.css" />
+    <script type="module" src="./landing/main.js"></script>
+  </head>
+  <body>
+    <script>
+      // First thing in <body>: a parser-inserted script runs only once the head's
+      // stylesheets have loaded, so the @font-face rules exist here. Holds the first
+      // paint until the brand fonts are ready (600 ms at most), so the font swap
+      // never moves visible text.
+      (function () {
+        var d = document.documentElement, f = document.fonts;
+        if (!f || !f.load || !window.Promise) return;
+        d.classList.add('fonts-wait');
+        var done = function () { d.classList.remove('fonts-wait'); };
+        Promise.all([
+          f.load('700 1em "Space Grotesk"'), f.load('600 1em "Space Grotesk"'),
+          f.load('400 1em Inter'), f.load('600 1em Inter')
+        ]).then(done, done);
+        setTimeout(done, 600);
+      })();
+    </script>
+    <a class="skip" href="#construir">Saltar al constructor</a>
+
+    <header class="bar" id="bar">
+      <div class="bar__in">
+        <a class="mark bar__mark" href="#inicio" aria-label="Cerebro jurídico, volver al inicio"><span class="mark__sec" aria-hidden="true">§</span>cerebro jurídico</a>
+        <nav class="bar__nav" aria-label="Secciones">
+          <a href="#construir">Construir</a>
+          <a href="#cargar">Cargar</a>
+          <a href="#prueba">Prueba</a>
+          <a href="#boveda">Bóveda</a>
+          <a href="/cerebro/playbook/">Playbook</a>
+        </nav>
+        <button class="icon-btn bar__theme" id="theme" type="button" aria-label="Cambiar a tema claro"></button>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <!-- Inicio -->
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="hero__glyph" aria-hidden="true">§</div>
+        <div class="wrap hero__grid">
+          <div class="hero__main">
+            <p class="eyebrow">Arquitectura, IA y automatización aplicadas a los servicios jurídicos</p>
+            <h1 class="hero__title" id="hero-title">
+              <span class="hero__line">La IA no es tu abogado junior;</span>
+              <span class="hero__line hero__line--accent">es tu sistema.</span>
+              <span class="hero__line hero__line--soft">Y los sistemas se diseñan.</span>
+            </h1>
+            <p class="hero__lead">Describe tu práctica en ocho campos y recibe tu <b>cerebro jurídico</b>: cinco archivos que le dicen a cualquier IA quién eres, cómo trabajas, qué nunca hace y cómo se verifica.</p>
+            <p class="hero__promise"><span data-icon="lock"></span>Funciona en celular y en computador. Nada se envía a ningún servidor.</p>
+            <div class="hero__ctas">
+              <a class="btn btn--primary btn--lg" href="#construir">Construir mi cerebro <span data-icon="down"></span></a>
+              <a class="link" href="/cerebro/playbook/"><span data-icon="book"></span>Abrir el playbook</a>
+            </div>
+          </div>
+
+          <aside class="leave" aria-labelledby="leave-title">
+            <h2 class="leave__title" id="leave-title">Te llevas cinco archivos</h2>
+            <ol class="leave__list">
+              <li><code>00_ADN.md</code><span>Quién soy y qué es un buen trabajo para mí</span></li>
+              <li><code>01_LINEAS_ROJAS.md</code><span>Lo que nunca pasa</span></li>
+              <li><code>02_PLAYBOOK.md</code><span>Cómo hago cada tarea</span></li>
+              <li><code>03_FUENTES.md</code><span>Con qué razona la IA</span></li>
+              <li><code>04_VERIFICACION.md</code><span>Cómo sé que puedo usarlo</span></li>
+            </ol>
+            <p class="leave__foot">Más un <code>README.md</code> para cargarlo y mantenerlo. Sirven en Claude, ChatGPT, Gemini, Copilot o un modelo local.</p>
+          </aside>
+        </div>
+
+        <nav class="wrap steps" aria-label="El ejercicio en tres pasos">
+          <ol class="steps__list">
+            <li><a href="#construir"><span class="steps__n">1</span><span class="steps__what">Construye</span><span class="steps__how">Tu perfil, 4 minutos</span></a></li>
+            <li><a href="#cargar"><span class="steps__n">2</span><span class="steps__what">Carga</span><span class="steps__how">Copia y pega en tu IA</span></a></li>
+            <li><a href="#prueba"><span class="steps__n">3</span><span class="steps__what">Prueba</span><span class="steps__how">La pregunta del derecho de petición</span></a></li>
+          </ol>
+        </nav>
+      </section>
+
+      <!-- Construir -->
+      <section class="sec sec--build" id="construir" aria-labelledby="construir-t">
+        <div class="wrap wrap--wide">
+          <header class="sec__head">
+            <p class="eyebrow">Paso 1 · Construye</p>
+            <h2 class="sec__title" id="construir-t">Tu perfil escribe tus archivos</h2>
+            <p class="sec__lead">Ocho campos. Mientras respondes, tus archivos se reescriben al lado. Arranca con el ejemplo de Laura, litigante: cámbialo por lo tuyo.</p>
+          </header>
+
+          <div class="toolbar" role="group" aria-label="Perfil">
+            <p class="toolbar__state" id="perfil-estado" aria-live="polite"></p>
+            <div class="toolbar__actions">
+              <button class="btn btn--ghost btn--sm" id="perfil-blanco" type="button"><span data-icon="blank"></span>Empezar en blanco</button>
+              <button class="btn btn--ghost btn--sm" id="perfil-laura" type="button"><span data-icon="reset"></span>Volver al ejemplo de Laura</button>
+            </div>
+          </div>
+
+          <div class="build">
+            <form class="build__form" id="perfil" novalidate aria-label="Tu perfil"></form>
+
+            <div class="build__out">
+              <figure class="mapa surface" id="mapa" aria-labelledby="mapa-t">
+                <figcaption class="mapa__cap">
+                  <span class="mapa__title" id="mapa-t">Campo → archivo</span>
+                  <span class="mapa__hint">Cada campo alimenta uno o más archivos</span>
+                </figcaption>
+                <div class="mapa__stage" id="mapa-stage" aria-hidden="true"></div>
+                <p class="sr-only" id="mapa-live" aria-live="polite"></p>
+              </figure>
+
+              <div class="files surface" id="archivos">
+                <div class="files__tabs" role="tablist" aria-label="Tus archivos" id="archivos-tabs"></div>
+                <div class="files__panel" role="tabpanel" id="archivos-panel">
+                  <div class="files__bar">
+                    <p class="files__meta" id="archivos-meta"></p>
+                    <div class="files__actions">
+                      <button class="btn btn--quiet btn--xs" id="archivo-copiar" type="button"><span data-icon="copy"></span><span data-label>Copiar</span></button>
+                      <button class="btn btn--quiet btn--xs" id="archivo-bajar" type="button"><span data-icon="download"></span>.md</button>
+                    </div>
+                  </div>
+                  <pre class="files__pre" id="archivos-pre" tabindex="0" aria-label="Contenido del archivo"></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cargar -->
+      <section class="sec sec--alt" id="cargar" aria-labelledby="cargar-t">
+        <div class="wrap">
+          <header class="sec__head">
+            <p class="eyebrow">Paso 2 · Carga</p>
+            <h2 class="sec__title" id="cargar-t">Pégalo en la IA que ya usas</h2>
+            <p class="sec__lead">Un botón copia los cinco archivos con una instrucción al inicio. Abre un chat nuevo, pega y envía.</p>
+          </header>
+
+          <div class="load">
+            <div class="load__main surface">
+              <button class="btn btn--primary btn--xl" id="copiar-todo" type="button"><span data-icon="copy"></span><span data-label>Copiar todo para pegar en un chat</span></button>
+              <ol class="load__steps">
+                <li>Abre un <b>chat nuevo</b> en la IA que usas.</li>
+                <li>Pega y envía. No escribas nada más todavía.</li>
+                <li>Si funcionó, te responde con <b>tres líneas</b>:</li>
+              </ol>
+              <ol class="confirm3" aria-label="La confirmación que esperas">
+                <li><span class="confirm3__n">1</span><span><b>Quién eres</b>: tu rol, tus áreas, cómo te llama.</span></li>
+                <li><span class="confirm3__n">2</span><span><b>Tus líneas rojas</b>: confidencialidad y lo que nunca delegas.</span></li>
+                <li><span class="confirm3__n">3</span><span><b>Cómo va a verificar</b>: fuentes, "no tengo la fuente exacta" y el cierre "Verificación pendiente".</span></li>
+              </ol>
+              <p class="load__why">La confirmación obliga al modelo a procesar el paquete antes de tu primera pregunta y te muestra en diez segundos si la carga funcionó. Si responde otra cosa, vuelve a pegar en un chat nuevo.</p>
+            </div>
+
+            <div class="load__side">
+              <div class="dl surface">
+                <h3 class="h3">Descárgalo</h3>
+                <p class="dl__lead">Para subirlo a un Proyecto o una Gem, o guardarlo en tu equipo.</p>
+                <button class="btn btn--ghost" id="bajar-zip" type="button"><span data-icon="zip"></span>Descargar todo (.zip)</button>
+                <ul class="dl__files" id="bajar-archivos" aria-label="Descargar un archivo"></ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="routes surface">
+            <div class="routes__head">
+              <h3 class="h3">Para dejarlo fijo y no pegarlo cada vez</h3>
+              <button class="btn btn--ghost btn--sm" id="copiar-sistema" type="button"><span data-icon="copy"></span><span data-label>Copiar bloque de sistema</span></button>
+            </div>
+            <p class="routes__lead">Los pasos dicen "bloque de sistema": es el bloque de instrucciones que está al final de <code>00_ADN.md</code>. Tus herramientas salen primero. <span id="rutas-verificadas"></span></p>
+            <div class="routes__tabs" role="tablist" aria-label="Rutas de carga por herramienta" id="rutas-tabs"></div>
+            <div class="routes__panel" role="tabpanel" id="rutas-panel" tabindex="0"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Prueba -->
+      <section class="sec" id="prueba" aria-labelledby="prueba-t">
+        <div class="wrap">
+          <header class="sec__head">
+            <p class="eyebrow">Paso 3 · Prueba</p>
+            <h2 class="sec__title" id="prueba-t">La pregunta de prueba</h2>
+            <p class="sec__lead">Hazla con tu cerebro y, si te da tiempo, en un chat limpio. Luego compara el fondo, la fuente citada y el cierre.</p>
+          </header>
+
+          <figure class="question surface">
+            <blockquote class="question__text" id="pregunta"></blockquote>
+            <button class="btn btn--primary" id="copiar-pregunta" type="button"><span data-icon="copy"></span><span data-label>Copiar pregunta</span></button>
+          </figure>
+
+          <div class="compare" role="table" aria-label="Sin cerebro y con cerebro">
+            <div class="compare__head" role="row">
+              <span role="columnheader" class="compare__h compare__h--sin">Sin cerebro: lo que suele pasar</span>
+              <span role="columnheader" class="compare__h compare__h--con">Con cerebro: lo que debe pasar</span>
+            </div>
+            <div id="comparacion" role="rowgroup"></div>
+          </div>
+
+          <details class="reserve surface">
+            <summary><span>¿Respondió bien incluso sin cerebro? Usa la pregunta de reserva</span><span class="reserve__chev" aria-hidden="true"></span></summary>
+            <div class="reserve__body">
+              <blockquote class="question__text question__text--sm" id="pregunta-reserva"></blockquote>
+              <button class="btn btn--ghost btn--sm" id="copiar-reserva" type="button"><span data-icon="copy"></span><span data-label>Copiar pregunta de reserva</span></button>
+              <p class="reserve__why">Las preguntas que piden una sentencia específica con cita textual casi siempre producen al menos un dato inventado en frío. Con el cerebro, la regla 3 obliga a decir "no tengo la fuente exacta".</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- Bóveda -->
+      <section class="sec sec--alt" id="boveda" aria-labelledby="boveda-t">
+        <div class="wrap vault">
+          <div class="vault__text">
+            <header class="sec__head">
+              <p class="eyebrow">Para escalar · Nivel 2</p>
+              <h2 class="sec__title" id="boveda-t">Del archivo a la bóveda</h2>
+            </header>
+            <p class="vault__lead">Obsidian es una aplicación de notas gratuita, también para uso comercial, que trabaja sobre una carpeta de archivos en tu propio equipo. Sin cuenta, sin servidor. Tus cinco archivos van en la raíz y alrededor crecen tus casos y tus fuentes, enlazados entre sí.</p>
+            <ul class="vault__parts">
+              <li><b>Templater</b> llena sola la ficha de un expediente nuevo: código de cliente, radicado, jurisdicción y un término a diez días.</li>
+              <li><b>Dataview</b> consulta tus fichas: términos que vencen en los próximos siete días, casos por etapa, fuentes sin verificar.</li>
+              <li><b>CLIENTE-01</b>, una petición de documentos sin respuesta, viene de ejemplo con su término a cinco días de hoy, para que lo veas en el tablero.</li>
+            </ul>
+            <div class="vault__ctas">
+              <button class="btn btn--primary" id="bajar-boveda" type="button"><span data-icon="vault"></span>Descargar bóveda (.zip)</button>
+              <a class="link" href="/cerebro/playbook/#obsidian">Paso a paso en el playbook <span data-icon="arrow"></span></a>
+            </div>
+            <p class="vault__note">Se arma con tu perfil actual. No trae complementos instalados: el <code>README.md</code> de la bóveda te dice cómo activar Dataview y Templater. Templater puede ejecutar código en tu equipo: instálalo solo desde la lista oficial de complementos de Obsidian y usa solo plantillas en las que confíes.</p>
+          </div>
+          <figure class="vault__tree surface">
+            <figcaption>Lo que trae la bóveda</figcaption>
+            <pre id="arbol-boveda" tabindex="0" aria-label="Estructura de carpetas de la bóveda"></pre>
+          </figure>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap foot__grid">
+        <div class="foot__brand">
+          <a class="mark" href="#inicio"><span class="mark__sec" aria-hidden="true">§</span>cerebro jurídico</a>
+          <p class="foot__who"><b>Fabián Zapata</b> — Fundador de Zeta Innovation · Director de Innovación de GLab</p>
+          <a class="link" href="/cerebro/playbook/"><span data-icon="book"></span>Abrir el playbook</a>
+        </div>
+        <div class="foot__privacy">
+          <h2 class="foot__h"><span data-icon="shield"></span>Tu privacidad</h2>
+          <p>Nada de lo que escribes sale de este navegador: los archivos se arman aquí mismo, sin servidor y sin analítica. Tu perfil se guarda solo en el almacenamiento local de este navegador, para que no lo pierdas si recargas.</p>
+          <button class="btn btn--ghost btn--sm" id="borrar-datos" type="button"><span data-icon="trash"></span>Borrar mis datos</button>
+        </div>
+        <div class="foot__legal">
+          <h2 class="foot__h">Aviso</h2>
+          <p>Las normas citadas son semilla para verificación en fuente oficial; no constituyen asesoría jurídica.</p>
+          <p class="foot__last">La herramienta va a cambiar el año entrante. Tu cerebro, no.</p>
+        </div>
+      </div>
+    </footer>
+
+    <div class="dock" id="dock" aria-hidden="true" hidden>
+      <div class="dock__files" id="dock-files"></div>
+      <a class="dock__go" href="#cargar" tabindex="-1">Cargar <span data-icon="down"></span></a>
+    </div>
+
+    <noscript><p class="noscript">Esta página arma tus archivos con JavaScript, en tu propio navegador. Actívalo, o abre el <a href="/cerebro/playbook/">playbook</a>.</p></noscript>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+<!-- BLOQUE 3 · Herramientas y A/B (0:35–1:00) -->
+
+<section id="v20" data-block="3" data-hud="off" data-bg="mark" data-bg-center="5.2,0.6" data-ctrl="separator" class="sep">
+  <span class="sep__num" data-in>03</span>
+  <div class="sep__main">
+    <h2 class="sep__word t-mega" data-split="chars" data-fit>HERRAMIENTAS</h2>
+    <p class="sep__sub t-lead t-muted" data-in>Caja cerrada · Caja abierta · Misma spec, dos cajas</p>
+  </div>
+  <div class="sep__bar" data-segbar></div>
+  <aside class="notes">
+    <p><strong>V20 · Separador: HERRAMIENTAS</strong> · 0:35–1:00 (25 min)</p>
+    <p>Si a la 1:00 vas tarde: Base44 a una mención (salta V23) y tabla A/B a tres filas (control, cuando se rompe, salida del código).</p>
+  </aside>
+</section>
+
+<section id="v21" data-block="3" data-bg-alpha="0.3" data-ctrl="vc-boxes" class="vc-boxes">
+  <h2 class="t-h2" data-split="chars">Dos familias de herramientas</h2>
+  <div class="vc-boxes__grid">
+    <figure class="vc-box vc-box--closed" data-in>
+      <div class="vc-box__art" aria-hidden="true">
+        <div class="vc-box__lid"></div>
+        <div class="vc-box__body"><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <figcaption>
+        <b>Caja cerrada</b>
+        <span>Entrega todo armado y esconde las piezas.</span>
+        <small>Lovable · Base44</small>
+      </figcaption>
+    </figure>
+    <figure class="vc-box vc-box--open" data-in>
+      <div class="vc-box__art" aria-hidden="true">
+        <div class="vc-box__lid"></div>
+        <div class="vc-box__body"><i>Front</i><i>Lógica</i><i>Datos</i><i>Dominio</i><i>Repo</i></div>
+      </div>
+      <figcaption>
+        <b>Caja abierta</b>
+        <span>Muestra todo y te hace responsable.</span>
+        <small>Claude Code · Codex</small>
+      </figcaption>
+    </figure>
+  </div>
+  <p class="vc-boxes__foot t-body t-muted fragment" data-in>Reemplaza “no-code vs código”.</p>
+  <aside class="notes">
+    <p><strong>V21 · Caja cerrada / caja abierta</strong> · 0:35</p>
+    <p>"Caja cerrada / caja abierta" reemplaza "no-code vs código": la cerrada entrega todo armado y esconde las piezas; la abierta muestra todo y te hace responsable.</p>
+  </aside>
+</section>
+
+<!-- 3.1 Caja cerrada (8 min) -->
+<section id="v22" data-block="3" data-bg-alpha="0.3" class="vc-onmap s-tight">
+  <header>
+    <p class="vc-kicker" data-in>Caja cerrada</p>
+    <h2 class="t-h2" data-split="chars">Lovable sobre el mapa</h2>
+  </header>
+  <ol class="vc-strip" data-in="stagger">
+    <li class="is-in"><b>Front</b><span>Lo genera</span></li>
+    <li class="is-in"><b>Lógica</b><span>La genera</span></li>
+    <li class="is-cloud"><b>Base de datos</b><span>Su propia nube: Lovable Cloud</span></li>
+    <li class="is-cloud"><b>Dominio</b><span>Publica en …lovable.app</span></li>
+    <li class="is-out"><b>Repositorio</b><span>GitHub, en dos direcciones</span></li>
+  </ol>
+  <p class="vc-onmap__note t-body" data-in>Recibe la descripción, construye front, lógica y base de datos, y publica. Las cinco piezas están, pero adentro.</p>
+  <p class="vc-src" data-in>Fuente: <span data-config="fuentes.lovableGithub" data-ph="VERIFICAR_LOVABLE_GITHUB"></span></p>
+  <aside class="notes">
+    <p><strong>V22 · Lovable sobre el mapa</strong> · 0:37 · luego demo de 3 minutos</p>
+    <ul>
+      <li>Demo: abres el tablero, muestras el historial de versiones, el botón de publicar y la conexión a GitHub.</li>
+      <li>Verificado el 19 oct 2026 en docs.lovable.dev: la sincronización con GitHub en dos direcciones está en todos los planes, incluido el gratis, y el repositorio queda privado por defecto. Publicar desde el diálogo Publish es gratis. El dominio propio es de planes pagos; el gratis publica en <code>…lovable.app</code>.</li>
+      <li>Ojo: Git sync lleva el código, no los datos. La base de datos sigue en Lovable Cloud aunque el código salga.</li>
+      <li>El enlace del plan (lovable.dev/faq/code-export/…) ahora redirige; cita docs.lovable.dev/integrations/github. Revisa nombres de botones la semana de la clase: Lovable los cambia seguido.</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="v23" data-block="3" data-bg-alpha="0.3" class="vc-mention">
+  <div class="vc-mention__text">
+    <p class="vc-kicker" data-in>Caja cerrada · solo una mención</p>
+    <h2 class="t-h2" data-split="chars">Base44</h2>
+    <ul class="vc-list" data-in="stagger">
+      <li>Igual de empaquetado.</li>
+      <li>Sincronizar con GitHub exige el plan Builder o superior.</li>
+      <li>La app exportada puede seguir dependiendo del backend alojado en Base44.</li>
+    </ul>
+    <p class="vc-src" data-in>Fuente: <span data-config="fuentes.base44Github" data-ph="VERIFICAR_BASE44_GITHUB"></span></p>
+  </div>
+  <figure class="vc-frame vc-mention__shot" data-in="mask">
+    <div class="vc-frame__view media" data-media="capturaBase44" data-ph="CAPTURA_BASE44_EXPORTAR"></div>
+  </figure>
+  <aside class="notes">
+    <p><strong>V23 · Base44</strong> · 0:42 · captura, no demo · RECORTABLE (30 segundos si vas tarde)</p>
+    <p>Verificado el 19 oct 2026: "GitHub 2 way sync requires the Builder plan or higher" (docs.base44.com/developers/app-code/local-development/github). La dependencia del backend de Base44 viene de la guía de capgo.app que cita el plan; no es documentación oficial.</p>
+  </aside>
+</section>
+
+<section id="v24" data-block="3" data-hud="off" data-bg="field" class="vc-thesis">
+  <p class="vc-thesis__a t-h1" data-split="words">El criterio que importa: ¿se puede abrir la caja después, y a qué precio?</p>
+  <p class="vc-thesis__c t-lead fragment" data-split="words">Por eso hoy se construye en Lovable. No porque sea mejor en todo: porque la salida es gratis y en dos direcciones.</p>
+  <aside class="notes">
+    <p><strong>V24 · El criterio</strong> · 0:43</p>
+  </aside>
+</section>
+
+<!-- 3.2 Caja abierta (7 min) -->
+<section id="v25" data-block="3" data-bg-alpha="0.3" data-ctrl="vc-loop" class="vc-agent">
+  <div class="vc-agent__text">
+    <p class="vc-kicker" data-in>Caja abierta</p>
+    <h2 class="t-h2" data-split="words">Un agente de código no es un chat.</h2>
+    <p class="vc-agent__eq t-lead" data-in>Agente = <b>modelo</b> + <b>herramientas</b></p>
+    <p class="t-body t-muted fragment" data-in>Las cinco piezas están a la vista: tú eliges la base de datos, dónde se publica y el dominio. Más control, más decisiones, más responsabilidad.</p>
+  </div>
+  <ol class="vc-loop" data-in="fade" aria-label="Ciclo del agente">
+    <li>Lee tus archivos</li>
+    <li>Escribe código</li>
+    <li>Lo ejecuta</li>
+    <li>Prueba el resultado</li>
+    <li>Vuelve a intentar</li>
+  </ol>
+  <aside class="notes">
+    <p><strong>V25 · Caja abierta</strong> · 0:45</p>
+    <p>El ciclo se ilumina solo: lee, escribe, ejecuta, prueba, vuelve a intentar. Clic: las cinco piezas a la vista.</p>
+  </aside>
+</section>
+
+<section id="v26" data-block="3" data-bg-alpha="0.2" class="vc-video s-tight">
+  <header class="vc-video__head">
+    <h2 class="t-h2" data-split="chars">Misma spec, en Claude Code</h2>
+    <p class="vc-kicker" data-in>Caja abierta · video grabado de 4 minutos</p>
+  </header>
+  <div class="vc-video__grid">
+    <div class="vc-frame vc-video__player" data-in="mask">
+      <div class="vc-frame__view media is-contain" data-media="videoCajaAbierta" data-ph="VIDEO_CAJA_ABIERTA_4_MIN"></div>
+    </div>
+    <ol class="vc-chapters" data-in="stagger">
+      <li>Lee la spec</li>
+      <li>Pregunta lo que no está claro</li>
+      <li>Crea archivos</li>
+      <li>Ejecuta</li>
+      <li>Prueba un escenario</li>
+      <li>Corrige un error</li>
+    </ol>
+  </div>
+  <aside class="notes">
+    <p><strong>V26 · Video: caja abierta</strong> · 0:47 · 4 min</p>
+    <p>Grabado, no en vivo: en vivo cualquier espera de 90 segundos mata el bloque. Archivo: public/media/caja-abierta-4-min.mp4.</p>
+  </aside>
+</section>
+
+<section id="v27" data-block="3" data-bg-alpha="0.3" class="vc-bridge">
+  <h2 class="t-h2" data-split="chars">El puente</h2>
+  <div class="vc-bridge__row">
+    <div class="vc-bridge__doc" data-in>
+      <p class="vc-bridge__name">Spec V1</p>
+      <i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <svg class="vc-bridge__arrow" viewBox="0 0 220 60" aria-hidden="true" data-in="draw"><path d="M6 30 H200 M180 12 L204 30 L180 48" /></svg>
+    <div class="vc-bridge__tree" data-in>
+      <p>mi-app/</p>
+      <p class="is-key">├─ CLAUDE.md <small>o AGENTS.md</small></p>
+      <p>├─ src/</p>
+      <p>└─ …</p>
+    </div>
+  </div>
+  <p class="vc-bridge__foot t-lead fragment" data-split="words">La spec deja de ser un documento aparte y pasa a vivir con el código.</p>
+  <aside class="notes">
+    <p><strong>V27 · El puente</strong> · 0:51</p>
+    <p>La spec de una página se convierte en el archivo de instrucciones del proyecto (CLAUDE.md o AGENTS.md).</p>
+    <p>Verificado el 19 oct 2026: Claude Code lee <code>CLAUDE.md</code> (y <code>AGENTS.md</code> si no hay CLAUDE.md); <code>/init</code> genera uno inicial (code.claude.com/docs/en/memory). Codex lee <code>AGENTS.md</code> antes de trabajar (learn.chatgpt.com/docs/agent-configuration/agents-md).</p>
+  </aside>
+</section>
+
+<!-- 3.3 A/B: misma spec, dos cajas (7 min) -->
+<section id="v28" data-block="3" data-bg-alpha="0.2" class="vc-ab-table s-tight">
+  <h2 class="t-h2" data-split="chars">Misma spec, dos cajas</h2>
+  <div class="vc-table" role="table" aria-label="Caja cerrada frente a caja abierta">
+    <div class="vc-table__head" role="row" data-in>
+      <span role="columnheader">Criterio</span>
+      <span role="columnheader">Caja cerrada <small>Lovable</small></span>
+      <span role="columnheader">Caja abierta <small>Claude Code / Codex</small></span>
+    </div>
+    <div class="vc-table__body focus-list">
+      <div class="vc-table__row fragment" role="row"><span role="cell">Tiempo a primera versión</span><span role="cell">Minutos, sin instalar nada</span><span role="cell">Minutos de generación, más instalación y decisiones previas</span></div>
+      <div class="vc-table__row fragment is-core" role="row"><span role="cell">Control sobre las piezas</span><span role="cell">Bajo: la herramienta decide base de datos, hosting y estructura</span><span role="cell">Total: tú decides cada pieza</span></div>
+      <div class="vc-table__row fragment" role="row"><span role="cell">Costo</span><span role="cell">Créditos por mensaje dentro de un plan mensual</span><span role="cell">Suscripción o consumo por uso, más hosting y base de datos aparte</span></div>
+      <div class="vc-table__row fragment" role="row"><span role="cell">Un cambio que la caja no previó</span><span role="cell">Depende de las integraciones que ofrezca</span><span role="cell">Se construye; el límite es tu spec</span></div>
+      <div class="vc-table__row fragment is-core" role="row"><span role="cell">Cuando se rompe</span><span role="cell">Volver a la versión anterior; poco diagnóstico</span><span role="cell">El error se ve y se corrige; exige leerlo</span></div>
+      <div class="vc-table__row fragment is-core" role="row"><span role="cell">Salida del código</span><span role="cell">GitHub en dos direcciones</span><span role="cell">Es tuyo desde el primer archivo</span></div>
+      <div class="vc-table__row fragment" role="row"><span role="cell">Quién lo mantiene</span><span role="cell">Tú, dentro de la herramienta</span><span role="cell">Tú o un ingeniero, con el código en la mano</span></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><strong>V28 · Tabla A/B</strong> · 0:53 · un clic por fila</p>
+    <ul>
+      <li>Criterio por criterio, sin calificar cuál gana: cada fila gana una distinta.</li>
+      <li>"Un cambio que la caja no previó": exportar a Excel, enviar correo.</li>
+      <li>Si vas tarde, quédate con las tres filas resaltadas: control, cuando se rompe, salida del código.</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- 3.4 Decisión para hoy (3 min) -->
+<section id="v29" data-block="3" data-hud="off" data-bg="mark" data-bg-center="5.4,0.4" class="vc-decide">
+  <p class="vc-kicker" data-in>Decisión para hoy</p>
+  <h2 class="vc-decide__title t-h1" data-split="words">Todos construyen en caja cerrada.</h2>
+  <p class="t-lead" data-split="lines">El objetivo de hoy es su primera versión publicada, y la caja cerrada no requiere instalar nada.</p>
+  <p class="vc-decide__next t-body t-muted fragment" data-in>La caja abierta está en la ruta B del playbook. En la clase 2 la abrimos con el proyecto de uno de ustedes.</p>
+  <aside class="notes">
+    <p><strong>V29 · Decisión para hoy</strong> · 0:57</p>
+    <p>Dicho así, nadie siente que le negaron el camino difícil: le dieron el orden correcto.</p>
+  </aside>
+</section>
+
+<!-- Pausa (5 min) -->
+<section id="v30" data-block="3" data-hud="off" data-bg="multiply" data-ctrl="vc-clock" data-clock="pausa" data-clock-min="5" class="vc-pause">
+  <h2 class="t-mega vc-pause__word" data-split="chars" data-fit data-fit-max="300">Pausa</h2>
+  <p class="t-lead t-muted" data-in>Volvemos a la 1:05 con la plantilla abierta.</p>
+  <aside class="notes">
+    <p><strong>V30 · Pausa</strong> · 1:00 · 5 min</p>
+    <p>El reloj de arriba arranca solo. Clic para pausar, doble clic para reiniciar.</p>
+  </aside>
+</section>

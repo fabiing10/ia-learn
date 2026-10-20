@@ -1,5 +1,9 @@
-// Persistent chrome: brand mark, current block, 10-segment progress (one per block).
-export const BLOCKS = {
+// Persistent chrome: brand mark, current block, segmented progress (one per block).
+// Blocks, brand and segment count come from the workshop config; x10 values are
+// the defaults so its config can stay as it was.
+import { config } from './config.js';
+
+const X10_BLOCKS = {
   0: { num: '00', name: 'Antes de empezar' },
   1: { num: '01', name: 'Apertura' },
   2: { num: '02', name: 'Entender' },
@@ -13,6 +17,10 @@ export const BLOCKS = {
   10: { num: '+', name: 'Bloque opcional' },
 };
 
+export const BLOCKS = config.bloques || X10_BLOCKS;
+const SEGMENTS = config.segmentos || 10;
+const MARK = config.marca || { acento: '×', texto: '10' };
+
 export function blockOf(slide) {
   const own = slide?.dataset.block ?? slide?.parentElement?.dataset?.block;
   return Number(own ?? 0);
@@ -20,7 +28,7 @@ export function blockOf(slide) {
 
 export function segbarHTML(block) {
   let html = '';
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < SEGMENTS; i++) {
     const cls = i < block ? 'is-done' : i === block ? 'is-current' : '';
     html += `<span class="segbar__seg ${cls}"><span class="segbar__fill"></span></span>`;
   }
@@ -34,13 +42,18 @@ export function mountHud(slidesEl) {
   hud.className = 'hud';
   hud.setAttribute('aria-hidden', 'true');
   hud.innerHTML = `
-    <div class="hud__mark brandmark"><span class="times">×</span>10</div>
+    <div class="hud__mark brandmark"><span class="times"></span></div>
     <div class="hud__block"><span class="hud__num"></span><span class="hud__name"></span></div>
     <div class="hud__bar segbar"></div>`;
+  const mark = hud.querySelector('.hud__mark');
+  mark.firstChild.textContent = MARK.acento;
+  mark.append(MARK.texto);
+  hud.querySelector('.hud__bar').style.setProperty('--segs', SEGMENTS);
   slidesEl.appendChild(hud);
   // Separator slides carry a large version of the same bar
   document.querySelectorAll('[data-segbar]').forEach((el) => {
     el.classList.add('segbar');
+    el.style.setProperty('--segs', SEGMENTS);
     el.innerHTML = segbarHTML(blockOf(el.closest('section')));
   });
 }
@@ -52,5 +65,5 @@ export function updateHud(slide) {
   hud.classList.toggle('is-off', slide.dataset.hud === 'off');
   hud.querySelector('.hud__num').textContent = info.num;
   hud.querySelector('.hud__name').textContent = info.name;
-  hud.querySelector('.hud__bar').innerHTML = segbarHTML(Math.min(block, 9 + (block > 9 ? 1 : 0)));
+  hud.querySelector('.hud__bar').innerHTML = segbarHTML(Math.min(block, SEGMENTS));
 }

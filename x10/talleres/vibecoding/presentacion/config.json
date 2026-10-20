@@ -1,0 +1,81 @@
+{
+  "titulo": "Vibe Coding · Clase 1 · De idea a app publicada",
+  "fecha": "{{FECHA_CLASE_1}}",
+  "marca": {
+    "acento": "›",
+    "texto": "vibe coding"
+  },
+  "segmentos": 7,
+  "bloques": {
+    "0": {
+      "num": "00",
+      "name": "Antes de empezar"
+    },
+    "1": {
+      "num": "01",
+      "name": "Apertura"
+    },
+    "2": {
+      "num": "02",
+      "name": "Fundamentos"
+    },
+    "3": {
+      "num": "03",
+      "name": "Herramientas"
+    },
+    "4": {
+      "num": "04",
+      "name": "Taller: la spec"
+    },
+    "5": {
+      "num": "05",
+      "name": "Taller: construir"
+    },
+    "6": {
+      "num": "06",
+      "name": "Cierre"
+    }
+  },
+  "tema": {
+    "particulas": {
+      "dark": {
+        "gold": "#3AC7E8",
+        "cyan": "#E8B53A"
+      },
+      "light": {
+        "gold": "#1597B5",
+        "cyan": "#B07A0C"
+      }
+    },
+    "forma": "chevron"
+  },
+  "qr": {
+    "landing": "https://x10-presentacion.vercel.app/vibecoding/",
+    "piezas": "https://x10-presentacion.vercel.app/vibecoding/#cinco-piezas",
+    "spec": "https://x10-presentacion.vercel.app/vibecoding/#spec",
+    "menu": "https://x10-presentacion.vercel.app/vibecoding/#menu",
+    "salida": "https://x10-presentacion.vercel.app/vibecoding/#salida",
+    "playbook": "https://x10-presentacion.vercel.app/vibecoding/playbook/",
+    "plantilla": "https://x10-presentacion.vercel.app/vibecoding/playbook/#plantilla",
+    "tablero": "{{URL_TABLERO_LOVABLE}}",
+    "proyecto": "{{URL_PROYECTO_CLAUDE_CODE}}"
+  },
+  "expositor": "Fabian Zapata",
+  "contacto": "WhatsApp 314 366 6151",
+  "media": {
+    "tableroLovable": "media/tablero-lovable.png",
+    "proyectoClaudeCode": "media/proyecto-claude-code.png",
+    "resultadoPerezoso": "media/resultado-perezoso.png",
+    "tableroDesdeSpec": "media/tablero-desde-spec.png",
+    "videoCajaAbierta": "media/caja-abierta-4-min.mp4",
+    "capturaBase44": "media/base44-exportar.png"
+  },
+  "whatsapp": {
+    "numero": "573143666151",
+    "mensaje": "Hola Fabian, soy estudiante de Vibe Coding (clase 1). Mi nombre es "
+  },
+  "fuentes": {
+    "lovableGithub": "docs.lovable.dev/integrations/github · docs.lovable.dev/features/publish (consultadas el 19 de octubre de 2026)",
+    "base44Github": "docs.base44.com/developers/app-code/local-development/github (consultada el 19 de octubre de 2026) · capgo.app, guía de exportación de Base44"
+  }
+}

@@ -1,0 +1,11 @@
+/* Base for every Cerebro Jurídico page: platform tokens, both themes, the
+   Cerebro accent, self-hosted fonts. Import this first from each page's stylesheet. */
+@import '@fontsource/space-grotesk/latin-600.css';
+@import '@fontsource/space-grotesk/latin-700.css';
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@platform/src/styles/tokens.css';
+@import '@platform/src/styles/theme-dark.css';
+@import '@platform/src/styles/theme-light.css';
+@import '../../accent.css';

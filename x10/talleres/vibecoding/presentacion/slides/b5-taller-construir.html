@@ -1,0 +1,184 @@
+<!-- BLOQUE 5 · Taller parte 2: construir (1:35–2:15) · reloj de 40 minutos -->
+
+<section id="v37" data-block="5" data-hud="off" data-bg="mark" data-bg-center="5.2,0.6" data-ctrl="separator" class="sep">
+  <span class="sep__num" data-in>05</span>
+  <div class="sep__main">
+    <h2 class="sep__word t-mega" data-split="chars" data-fit>CONSTRUIR</h2>
+    <p class="sep__sub t-lead t-muted" data-in>Taller · 40 minutos en Lovable · cinco puntos de control</p>
+  </div>
+  <div class="sep__bar" data-segbar></div>
+  <aside class="notes">
+    <p><strong>V37 · Separador: CONSTRUIR</strong> · 1:35–2:15</p>
+    <p>Cada punto de control es una prueba que el estudiante hace como usuario, no como programador; la app avanza solo cuando pasa la prueba.</p>
+  </aside>
+</section>
+
+<section id="v38" data-block="5" data-bg-alpha="0.3" class="vc-safe">
+  <div class="vc-safe__head">
+    <p class="vc-kicker" data-in>Antes de enviar · dos minutos</p>
+    <h2 class="t-h2" data-split="chars">Qué no hacer</h2>
+  </div>
+  <ul class="vc-safe__list" data-in="stagger">
+    <li><b>No pegar datos reales</b> de personas, clientes ni de la empresa. Inventar nombres.</li>
+    <li><b>No publicar información sensible sin inicio de sesión.</b> V1 no lo tiene; por eso V1 no lleva datos sensibles.</li>
+    <li><b>No pegar contraseñas ni llaves</b> de otros servicios en un mensaje a la herramienta.</li>
+    <li><b>No conectar la app a cuentas reales</b> (correo, pagos, bases de datos de la empresa) en esta etapa.</li>
+  </ul>
+  <aside class="notes">
+    <p><strong>V38 · Qué no hacer (seguridad)</strong> · 1:35 · obligatorio antes del primer mensaje</p>
+  </aside>
+</section>
+
+<section id="v39" data-block="5" data-bg-alpha="0.3" data-ctrl="vc-clock vc-build" data-clock="construir" data-clock-min="40" class="vc-send">
+  <div class="vc-send__text">
+    <p class="vc-kicker" data-in>1:35 · Todos a la vez</p>
+    <h2 class="t-h1" data-split="words">Envíen el primer mensaje.</h2>
+    <p class="t-lead t-muted" data-in>Mientras genera (2 a 5 minutos), miren el mapa.</p>
+  </div>
+  <ol class="vc-mini" data-in="stagger" aria-label="Mapa de 5 piezas">
+    <li data-piece="front"><b>Front</b><span>Está creando lo que vas a ver</span></li>
+    <li data-piece="logica"><b>Lógica</b><span>Lo que pasa al tocar</span></li>
+    <li data-piece="datos"><b>Base de datos</b><span>Cuando pidamos guardar, la creará</span></li>
+    <li data-piece="dominio"><b>Dominio</b><span>Al publicar</span></li>
+    <li data-piece="repo"><b>Repositorio</b><span>Al conectar GitHub</span></li>
+  </ol>
+  <aside class="notes">
+    <p><strong>V39 · Enviar el primer mensaje</strong> · 1:35 · el reloj de 40 minutos arranca aquí</p>
+    <ul>
+      <li>Narra en el mapa: "está creando el front; cuando pidamos guardar, creará la base de datos".</li>
+      <li>Si la generación supera 6 minutos, revisa la red del salón antes de culpar a la herramienta. Plan B: escalonar el envío por filas; tus demos por hotspot.</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="v40" data-block="5" data-bg-alpha="0.2" data-ctrl="vc-clock" data-clock="construir" data-clock-min="40" class="vc-cp s-tight">
+  <h2 class="vc-cp__title t-h2" data-split="chars">Puntos de control</h2>
+  <div class="vc-cp__grid">
+    <ol class="vc-cp__list focus-list">
+      <li class="fragment">
+        <span class="vc-cp__n">1</span><b>Carga la primera versión</b>
+        <div class="vc-cp__detail">
+          <p><em>Cómo se prueba</em>La vista previa abre y se ve algo parecido a la spec.</p>
+          <p><em>Si falla</em>Copia el mensaje de error tal cual y pide que lo arregle. Dos intentos máximo; luego, versión anterior.</p>
+        </div>
+      </li>
+      <li class="fragment">
+        <span class="vc-cp__n">2</span><b>La acción principal funciona</b>
+        <div class="vc-cp__detail">
+          <p><em>Cómo se prueba</em>Ejecuta el escenario 1 de tu spec, paso a paso.</p>
+          <p><em>Si falla</em>Describe lo que ves, no lo que crees que falla: “al presionar Enviar no pasa nada”, no “el botón está mal programado”.</p>
+        </div>
+      </li>
+      <li class="fragment">
+        <span class="vc-cp__n">3</span><b>Guarda datos</b>
+        <div class="vc-cp__detail">
+          <p><em>Cómo se prueba</em>La prueba de la pestaña: cierra la pestaña, vuelve a abrir. ¿Sigue ahí lo que registraste?</p>
+          <p><em>Si falla</em>“Los datos deben guardarse en la base de datos, no en la memoria del navegador.”</p>
+        </div>
+      </li>
+      <li class="fragment">
+        <span class="vc-cp__n">4</span><b>Publicada</b>
+        <div class="vc-cp__detail">
+          <p><em>Cómo se prueba</em>Botón de publicar; copia la URL; ábrela desde el celular.</p>
+          <p><em>Si falla</em>Si la publicación tarda, sigue al punto 5 y vuelve.</p>
+        </div>
+      </li>
+      <li class="fragment">
+        <span class="vc-cp__n">5</span><b>Conectada a GitHub</b>
+        <div class="vc-cp__detail">
+          <p><em>Cómo se prueba</em>Configuración del proyecto, conectar GitHub, ver el repositorio creado.</p>
+          <p><em>Si falla</em>Si no alcanza el tiempo, es tarea para la semana: el playbook lo explica paso a paso.</p>
+        </div>
+      </li>
+    </ol>
+    <aside class="vc-rules vc-rules--rail" aria-label="Reglas de mesa">
+      <p class="vc-rules__title">Reglas de mesa</p>
+      <ol>
+        <li>Un cambio por mensaje.</li>
+        <li>Describe lo que ves, no lo que crees que falla.</li>
+        <li>Prueba antes de pedir lo siguiente.</li>
+        <li>Si se rompió, vuelve a la versión anterior antes de arreglar.</li>
+        <li>Nunca pegues datos reales.</li>
+      </ol>
+    </aside>
+  </div>
+  <aside class="notes">
+    <p><strong>V40 · Puntos de control</strong> · 1:40–2:15 · este slide queda en pantalla casi todo el bloque</p>
+    <ul>
+      <li>Clic al llegar a cada punto: 1:40 punto 1 · 1:48 punto 2 · 1:55 punto 3 · 2:05 punto 4 · 2:12 punto 5.</li>
+      <li>En cada punto, mano alzada: "¿quién ya pasó el 2?". Con más de 15 estudiantes necesitas un asistente; con 25 o más, dos. Un estudiante atascado 8 minutos pierde el resto del bloque.</li>
+      <li>Si a alguien se le acaban los créditos: se sienta con el vecino, hace los puntos que falten en el proyecto del vecino y termina el suyo en casa con la ruta A.</li>
+      <li>Recortes si vas tarde: el punto 5 (GitHub) pasa a tarea con capturas en el playbook.</li>
+      <li>Punto 4: publicar desde el botón Publish es gratis y funciona aunque se acaben los créditos; los cambios posteriores se suben con "Publish changes". Punto 5: Project settings → Git → GitHub → Connect (docs.lovable.dev, 19 oct 2026; los nombres de botones cambian seguido).</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="v41" data-block="5" data-bg-alpha="0.3" data-ctrl="copy vc-clock vc-tab" data-clock="construir" data-clock-min="40" class="vc-phrase">
+  <div class="vc-phrase__text">
+    <p class="vc-kicker" data-in>Punto 3 · la frase que más vas a oír</p>
+    <p class="vc-phrase__quote t-h1" data-split="words">Los datos deben guardarse en la base de datos, no en la memoria del navegador.</p>
+    <span class="vc-hidden" data-copy-src hidden>Los datos deben guardarse en la base de datos, no en la memoria del navegador.</span>
+    <button class="copy" type="button" data-copy data-in><span class="copy__icon" aria-hidden="true"></span><span class="copy__label">Copiar frase</span></button>
+  </div>
+  <figure class="vc-tabtest" data-in="fade" aria-label="La prueba de la pestaña">
+    <div class="vc-tabtest__win">
+      <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser__url"></span></div>
+      <ul class="vc-tabtest__rows"><li></li><li></li><li class="is-new"></li></ul>
+    </div>
+    <figcaption>La prueba de la pestaña: cierra, vuelve a abrir, ¿sigue ahí?</figcaption>
+  </figure>
+  <aside class="notes">
+    <p><strong>V41 · La frase</strong> · 1:55 · punto de control 3</p>
+    <p>Mensaje exacto para quien no pasa la prueba de la pestaña. Es la frase que más repetirás.</p>
+  </aside>
+</section>
+
+<section id="v42" data-block="5" data-bg-alpha="0.3" data-ctrl="vc-clock" data-clock="construir" data-clock-min="40" class="vc-say">
+  <h2 class="t-h2" data-split="chars">Describe lo que ves</h2>
+  <div class="vc-say__grid">
+    <p class="vc-say__bad" data-in><span aria-hidden="true">✕</span>“El botón está mal programado.”</p>
+    <p class="vc-say__good fragment" data-in><span aria-hidden="true">✓</span>“Al presionar Enviar no pasa nada.”</p>
+  </div>
+  <p class="t-lead t-muted fragment" data-split="words">Lo que ves, la herramienta lo puede reproducir. Lo que crees, lo tiene que adivinar.</p>
+  <aside class="notes">
+    <p><strong>V42 · Describe lo que ves</strong> · regla de mesa 2</p>
+  </aside>
+</section>
+
+<section id="v43" data-block="5" data-bg-alpha="0.3" data-ctrl="vc-clock" data-clock="construir" data-clock-min="40" class="vc-proto">
+  <h2 class="t-h2" data-split="chars">Protocolo de error</h2>
+  <ol class="vc-proto__list" data-in="stagger">
+    <li><b>Lee</b> lo que dice la herramienta. Casi siempre dice qué pasó.</li>
+    <li><b>Copia el mensaje de error tal cual</b> y pídele que lo arregle. Sin interpretarlo.</li>
+    <li><b>Dos intentos.</b> Si no lo arregla, vuelve a la versión anterior y pide el mismo cambio de otra forma, más pequeño.</li>
+    <li><b>Si vuelve a fallar,</b> anótalo para la clase 2 y sigue con el siguiente punto de control.</li>
+  </ol>
+  <aside class="notes">
+    <p><strong>V43 · Protocolo de error</strong></p>
+  </aside>
+</section>
+
+<section id="v44" data-block="5" data-bg-alpha="0.3" data-ctrl="vc-clock" data-clock="construir" data-clock-min="40" class="vc-bonus">
+  <div class="vc-bonus__col" data-in>
+    <p class="vc-kicker">Bonus para quien va adelante <small>en este orden</small></p>
+    <ol class="vc-bonus__list">
+      <li>Filtro por estado</li>
+      <li>Vista separada por rol</li>
+      <li>Exportar la lista a CSV</li>
+      <li>Ajustar textos y nombres</li>
+    </ol>
+  </div>
+  <div class="vc-bonus__col vc-bonus__col--out" data-in>
+    <p class="vc-kicker">Fuera de hoy</p>
+    <ul class="vc-bonus__list">
+      <li>Envío de correos</li>
+      <li>Inicio de sesión con Google</li>
+      <li>Pagos</li>
+    </ul>
+    <p class="t-small t-muted">Son integraciones: consumen el bloque entero y fallan por razones ajenas a la spec.</p>
+  </div>
+  <aside class="notes">
+    <p><strong>V44 · Bonus y fuera de hoy</strong> · RECORTABLE (el bonus desaparece si vas tarde)</p>
+  </aside>
+</section>

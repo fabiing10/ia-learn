@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es-CO" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230B0F1A%22/%3E%3Cpath d=%22M36 26l26 24-26 24%22 fill=%22none%22 stroke=%22%233AC7E8%22 stroke-width=%2214%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E" />
+    <title>Vibe Coding · Panel de salida</title>
+    <script>
+      // Theme and big-type mode before first paint.
+      (function () {
+        var d = document.documentElement, t = null;
+        try {
+          t = localStorage.getItem('vc-theme');
+          if (localStorage.getItem('vc-panel-big') === '1') d.classList.add('is-big');
+        } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        d.dataset.theme = t;
+      })();
+    </script>
+    <link rel="stylesheet" href="./panel.css" />
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <header class="pbar">
+      <div class="pbar__brand">
+        <a class="mark" href="/vibecoding/" aria-label="Vibe Coding, ir a la landing"><span class="mark__chev" aria-hidden="true">›</span>vibe coding</a>
+        <span class="pbar__title">Panel · formulario de salida</span>
+      </div>
+      <form class="sess" id="sess-form" hidden>
+        <label for="sess-input">Sesión</label>
+        <input class="input" id="sess-input" name="s" list="sess-list" autocomplete="off" spellcheck="false" maxlength="40" />
+        <datalist id="sess-list"></datalist>
+        <button class="btn btn--ghost btn--sm" type="submit">Ver</button>
+      </form>
+      <p class="status" id="status" data-state="idle" role="status"><i aria-hidden="true"></i><span></span></p>
+      <div class="pbar__tools" id="tools" hidden>
+        <button class="btn btn--ghost btn--sm" id="big" type="button" aria-pressed="false">Letra grande</button>
+        <button class="btn btn--ghost btn--sm" id="csv" type="button">Exportar CSV</button>
+        <button class="icon-btn" id="logout" type="button" aria-label="Cerrar sesión" title="Cerrar sesión" hidden></button>
+      </div>
+      <button class="icon-btn" id="theme" type="button"></button>
+    </header>
+    <main id="view" class="view"></main>
+  </body>
+</html>

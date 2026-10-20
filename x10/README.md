@@ -15,6 +15,9 @@ Reveal.js 5.2.1 maneja la navegación, las notas y el PDF. GSAP 3.15 (SplitText,
 | https://x10-presentacion.vercel.app/test/ | Test x10: perfil y diagnóstico (Supabase) |
 | https://x10-presentacion.vercel.app/panel/ | Tablero en vivo, solo para el expositor (enlace mágico al correo) |
 | https://x10-presentacion.vercel.app/playbook/ | Playbook del taller |
+| https://x10-presentacion.vercel.app/talleres/ | Índice de todos los talleres de la plataforma |
+| https://x10-presentacion.vercel.app/vibecoding/ | Vibe Coding · Clase 1: landing, presentación (`/vibecoding/presentacion/`), playbook y panel |
+| https://x10-presentacion.vercel.app/cerebro/ | Cerebro Jurídico: generador de los cinco archivos y de la bóveda de Obsidian (sin servidor), presentación (`/cerebro/presentacion/`), playbook y copia sin conexión (`/cerebro/offline/`) |
 
 Cada push a `main` en GitHub se publica solo en Vercel. Supabase: proyecto `x10-presentacion` (organización Zeta Inc); la clave pública va en las variables `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` (en `.env.local` y en Vercel). La slide "¿Dónde estamos?" (después de S37) muestra los resultados agregados en vivo cuando hay internet.
 
@@ -156,7 +159,23 @@ x10/
     assets/qr/             QR generados
 ```
 
-Cada slide declara su bloque (`data-block`), su fondo (`data-bg`: `field`, `cross`, `ten`, `multiply`) y su comportamiento (`data-ctrl`). Los textos que entran animados usan `data-split` (chars, words, lines) o `data-in`. Los pasos con clic son fragments de Reveal; el estado visible siempre se deriva de ellos, así que ir hacia atrás o saltar con **G** muestra la slide correcta.
+### Plataforma de varios talleres
+
+x10 fue el primer taller; el motor de la presentación (`src/js`, `src/styles`) y el pipeline sirven para cualquier otro. Cada taller se registra en `talleres.config.js` con su deck (carpeta de slides, `config.json`, QR, controladores y CSS propios) y su sitio (carpeta web y URL base).
+
+```bash
+npm run build                          # todos los talleres (borra y regenera dist/)
+node scripts/build.mjs vibecoding      # solo un taller
+npm run dev:vc                         # deck de Vibe Coding con recarga en vivo
+npm run dev:vc:web                     # landing, playbook y panel de Vibe Coding
+TALLER=cerebro npx vite                # deck de Cerebro Jurídico con recarga en vivo
+TALLER=cerebro npx vite -c vite.apps.config.js   # landing y playbook de Cerebro Jurídico
+npm run smoke                          # prueba de humo de todas las rutas sobre dist/
+```
+
+Para agregar un taller: crea `talleres/<slug>/` con `presentacion/` (slides, `config.json`, `js/`, `deck.css`, `public/`) y `web/`, regístralo en `talleres.config.js` y agrega sus rutas a `scripts/smoke.mjs`. El `config.json` del deck define `titulo`, `marca` (acento y texto del HUD), `segmentos` y `bloques` (barra de progreso), `tema.particulas` (colores; `form` ajusta el brillo de las formaciones) y `tema.forma` (`cross` = ×, `chevron` = ›, `brain` = un cerebro de perfil, cinco neuronas en cadena y una red de sinapsis con impulsos viajando). Con `web.offline` una página se publica también como un solo archivo en `<out>/offline/`, para abrirla sin internet. Los formularios de todos los talleres guardan en la tabla `workshop_submissions` de Supabase (columna `workshop` = slug).
+
+Cada slide declara su bloque (`data-block`), su fondo (`data-bg`: `field`, `cross`, `ten`, `multiply`; `mark` y `marks` son `cross` y `ten` con la forma del taller; en Cerebro también `brain` y `neurons`) y su comportamiento (`data-ctrl`). Los textos que entran animados usan `data-split` (chars, words, lines) o `data-in`. Los pasos con clic son fragments de Reveal; el estado visible siempre se deriva de ellos, así que ir hacia atrás o saltar con **G** muestra la slide correcta.
 
 ## 9. Guiones de demo
 

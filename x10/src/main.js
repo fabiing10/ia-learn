@@ -20,7 +20,7 @@ import Reveal from 'reveal.js';
 import RevealNotes from 'reveal.js/plugin/notes/notes.esm.js';
 
 import { state, onModeChange, watchReducedMotion } from './js/core/state.js';
-import { applyConfig } from './js/core/config.js';
+import { applyConfig, config } from './js/core/config.js';
 import { createNavPlugin } from './js/core/nav.js';
 import { mountHud } from './js/core/hud.js';
 import { buildSlides, initSlides, printSlide, fragmentsChanged, enterSlide } from './js/core/motion.js';
@@ -28,8 +28,10 @@ import { fx } from './js/core/fxhub.js';
 import { createTransitions } from './js/core/transitions.js';
 import { createBackground } from './js/fx/background.js';
 
-// Slide controllers register themselves (data-ctrl="…")
+// Slide controllers register themselves (data-ctrl="…"): shared ones first,
+// then the workshop's own controllers and stylesheet.
 import.meta.glob('./js/slides/*.js', { eager: true });
+import 'virtual:deck-controllers';
 
 const fontsReady = () =>
   Promise.race([document.fonts?.ready ?? Promise.resolve(), new Promise((r) => setTimeout(r, 1500))]);
@@ -81,7 +83,7 @@ async function boot() {
   let bg = null;
   const ensureBg = () => {
     if (bg || state.lite) return bg;
-    bg = createBackground(document.getElementById('gl'));
+    bg = createBackground(document.getElementById('gl'), config.tema?.particulas, config.tema?.forma);
     bg?.setTheme(state.theme);
     fx.bg = bg;
     return bg;

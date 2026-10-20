@@ -1,0 +1,26 @@
+/* Vibe Coding accent: same platform identity as x10, cyan leads instead of gold.
+   The shared tokens call the accent "gold"; here it is cyan, and gold becomes
+   the secondary accent. Used by the deck (deck.css) and the web (shared/theme.css). */
+:root {
+  --c-gold: #3ac7e8;
+}
+
+:root,
+:root[data-theme='dark'] {
+  --gold-soft: rgba(58, 199, 232, 0.14);
+  --cyan: #e8b53a;
+  --cyan-text: #e8b53a;
+  --placeholder: #e8b53a;
+  --vignette: radial-gradient(120% 90% at 30% 20%, rgba(58, 199, 232, 0.08), transparent 55%),
+    radial-gradient(90% 80% at 90% 100%, rgba(232, 181, 58, 0.05), transparent 60%);
+}
+
+:root[data-theme='light'] {
+  --gold-text: #0b6a80;
+  --gold-soft: rgba(58, 199, 232, 0.2);
+  --cyan: #b07a0c;
+  --cyan-text: #7a5600;
+  --placeholder: #7a5600;
+  --vignette: radial-gradient(120% 90% at 30% 20%, rgba(58, 199, 232, 0.16), transparent 55%),
+    radial-gradient(90% 80% at 90% 100%, rgba(232, 181, 58, 0.1), transparent 60%);
+}

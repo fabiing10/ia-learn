@@ -330,7 +330,7 @@ body {
 /* 10-segment progress: one segment per block (0–9) */
 .segbar {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(var(--segs, 10), 1fr);
   gap: 10px;
   height: 6px;
 }

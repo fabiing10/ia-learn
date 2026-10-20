@@ -1,0 +1,1893 @@
+<!doctype html>
+<html lang="es-CO" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0B0F1A" />
+    <meta name="description" content="Playbook de Vibe Coding · Clase 1: el mapa de 5 piezas, la spec de una página, la prueba del adivino, las reglas de mesa y dos rutas para seguir solo: caja cerrada (Lovable) y caja abierta (Claude Code o Codex)." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230B0F1A%22/%3E%3Cpath d=%22M38 26l26 24-26 24%22 stroke=%22%233AC7E8%22 stroke-width=%2213%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E" />
+    <title>Playbook · Vibe Coding · Clase 1</title>
+    <script>
+      // Theme before first paint: saved choice (vc-theme), then the system preference, then dark.
+      (function () {
+        var d = document.documentElement;
+        var t = null;
+        try { t = localStorage.getItem('vc-theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        d.dataset.theme = t;
+        d.classList.add('js');
+      })();
+    </script>
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <svg class="sprite" aria-hidden="true" focusable="false">
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2.5" /><path d="M15.5 5.5v-.5a2 2 0 0 0-2-2H6a2.5 2.5 0 0 0-2.5 2.5v7.5a2 2 0 0 0 2 2h.5" /></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></symbol>
+      <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1" /><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1" /></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4" /></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" /></symbol>
+      <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9" /><rect x="3.5" y="9" width="17" height="8" rx="2" /><path d="M7 14.5h10v6H7z" /></symbol>
+      <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6.5h11M9 12h11M9 17.5h11" /><path d="M4.5 6.5h.01M4.5 12h.01M4.5 17.5h.01" /></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4.5v15M6 13.5l6 6 6-6" /></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6" /></symbol>
+      <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7" /><path d="M4 4.5V9h4.5" /></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3.5H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.5z" /><path d="M14 3.5v5h5M12 11.5v6M9.5 15l2.5 2.5 2.5-2.5" /></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17" /></symbol>
+      <symbol id="i-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" /><path d="M16 16l4.5 4.5" /></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4l9 16H3z" /><path d="M12 10v4.5M12 17.5h.01" /></symbol>
+    </svg>
+
+    <a class="skip" href="#contenido">Saltar al contenido</a>
+    <div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
+
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Vibe coding, playbook: volver al inicio">
+        <span class="brand__mark"><span class="brand__chev" aria-hidden="true">›</span>vibe coding</span>
+        <span class="brand__name">Playbook · Clase 1</span>
+      </a>
+      <div class="topbar__actions">
+        <button class="tbtn tbtn--toc" type="button" data-toc-open aria-controls="indice" aria-expanded="false">
+          <svg class="ico" aria-hidden="true"><use href="#i-list" /></svg><span class="tbtn__label">Índice</span>
+        </button>
+        <button class="tbtn" type="button" data-print>
+          <svg class="ico" aria-hidden="true"><use href="#i-print" /></svg><span class="tbtn__label">Guardar PDF</span>
+        </button>
+        <button class="tbtn tbtn--icon" type="button" data-theme-toggle aria-label="Cambiar a tema claro">
+          <svg class="ico ico--sun" aria-hidden="true"><use href="#i-sun" /></svg>
+          <svg class="ico ico--moon" aria-hidden="true"><use href="#i-moon" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="hero" id="top">
+      <div class="hero__inner">
+        <p class="hero__event">Vibe Coding · Clase 1 · Material para llevar</p>
+        <h1 class="hero__title">
+          <span class="hero__kicker">Playbook</span>
+          <span class="hero__chev" aria-hidden="true">›</span>De idea a app publicada<span class="hero__caret" aria-hidden="true"></span>
+        </h1>
+        <p class="hero__slogan">Vibe coding no es pedir una app. <b>Es describirla tan bien que la IA no tenga que adivinar.</b></p>
+        <p class="hero__by">Fabian Zapata · <span class="ph">{{FECHA_CLASE_1}}</span> · <span class="ph">{{LUGAR}}</span></p>
+        <div class="hero__cta">
+          <a class="btn btn--accent" href="#empieza-aqui"><span>Empezar a leer</span><svg class="ico" aria-hidden="true"><use href="#i-down" /></svg></a>
+          <a class="btn" href="#plantilla"><span>Ir a la plantilla de spec</span><svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+        </div>
+        <ul class="hero__facts" aria-label="Qué hay en este playbook">
+          <li><b>5</b> piezas de toda app</li>
+          <li><b>7</b> bloques de una spec</li>
+          <li><b>5</b> puntos de control</li>
+          <li><b>2</b> rutas para seguir solo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="scrim" data-toc-close hidden></div>
+      <nav class="toc" id="indice" aria-label="Índice del playbook">
+        <div class="toc__head">
+          <p class="toc__title">Índice</p>
+          <button class="tbtn tbtn--icon toc__close" type="button" data-toc-close aria-label="Cerrar índice">
+            <svg class="ico" aria-hidden="true"><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <p class="toc__part" id="toc-p1">Entender</p>
+        <ol class="toc__list" aria-labelledby="toc-p1">
+          <li><a href="#empieza-aqui"><span class="toc__n">01</span><span>Empieza aquí</span></a></li>
+          <li><a href="#vibe-coding"><span class="toc__n">02</span><span>Qué es vibe coding</span></a></li>
+          <li><a href="#cinco-piezas"><span class="toc__n">03</span><span>El mapa de 5 piezas</span></a></li>
+        </ol>
+        <p class="toc__part" id="toc-p2">Describir</p>
+        <ol class="toc__list" aria-labelledby="toc-p2">
+          <li><a href="#spec"><span class="toc__n">04</span><span>La spec de una página</span></a></li>
+          <li><a href="#prueba-del-adivino"><span class="toc__n">05</span><span>La prueba del adivino</span></a></li>
+          <li><a href="#plantilla"><span class="toc__n">06</span><span>Plantilla y spec de ejemplo</span></a></li>
+          <li><a href="#cabecera"><span class="toc__n">07</span><span>La cabecera del primer mensaje</span></a></li>
+          <li><a href="#menu-de-proyectos"><span class="toc__n">08</span><span>Menú de proyectos</span></a></li>
+        </ol>
+        <p class="toc__part" id="toc-p3">Construir con criterio</p>
+        <ol class="toc__list" aria-labelledby="toc-p3">
+          <li><a href="#reglas-de-mesa"><span class="toc__n">09</span><span>Reglas de mesa</span></a></li>
+          <li><a href="#protocolo-de-error"><span class="toc__n">10</span><span>Protocolo de error</span></a></li>
+          <li><a href="#seguridad"><span class="toc__n">11</span><span>Seguridad: qué no hacer</span></a></li>
+        </ol>
+        <p class="toc__part" id="toc-p4">Seguir solo</p>
+        <ol class="toc__list" aria-labelledby="toc-p4">
+          <li><a href="#ruta-a"><span class="toc__n">12</span><span>Ruta A · caja cerrada</span></a></li>
+          <li><a href="#ruta-b"><span class="toc__n">13</span><span>Ruta B · caja abierta</span></a></li>
+          <li><a href="#caja-cerrada-o-abierta"><span class="toc__n">14</span><span>¿Caja cerrada o abierta?</span></a></li>
+        </ol>
+        <p class="toc__part" id="toc-p5">Lo que sigue</p>
+        <ol class="toc__list" aria-labelledby="toc-p5">
+          <li><a href="#clase-2"><span class="toc__n">15</span><span>Tarea y clase 2</span></a></li>
+          <li><a href="#glosario"><span class="toc__n">16</span><span>Glosario</span></a></li>
+        </ol>
+        <div class="toc__foot">
+          <p><span data-read-pct>0</span>&nbsp;% leído</p>
+          <a href="/vibecoding/#spec">Constructor de spec <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+          <a href="/vibecoding/#salida">Formulario de salida <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+        </div>
+      </nav>
+
+      <main id="contenido" tabindex="-1">
+        <!-- ===================================================== 01 -->
+        <section class="chapter" id="empieza-aqui" aria-labelledby="t-empieza-aqui" data-title="Empieza aquí">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">01</span><span>Entender</span></p>
+            <h2 class="chapter__title" id="t-empieza-aqui">Empieza aquí</h2>
+            <p class="chapter__lede">Este playbook es la versión larga de la Clase 1. Lo que vimos en 150 minutos, escrito para que lo sigas sin nadie al lado: en la casa, en la semana, cuando la herramienta haga algo que no esperabas.</p>
+          </header>
+
+          <div class="prose">
+            <h3 id="el-curso">Qué es este curso</h3>
+            <p><strong>Vibe Coding</strong> es un curso para construir software con inteligencia artificial sin saber programar. No vas a aprender a escribir código. Vas a aprender lo que la IA no puede hacer por ti: <strong>decidir qué quieres, describirlo sin ambigüedad y comprobar que salió</strong>.</p>
+            <p>La Clase 1 va de una idea a una app publicada. La Clase 2 no vuelve a explicar: acompaña. Parte de lo que construiste y de lo que falló en la semana.</p>
+          </div>
+
+          <div class="pull">
+            <p class="pull__label">La tesis del curso</p>
+            <p class="pull__text">Vibe coding no es pedir una app. Es describirla tan bien que la IA no tenga que adivinar.</p>
+            <p class="pull__sub">Por eso este playbook dedica más páginas a describir que a construir. Construir es lo que hace la herramienta. Describir, elegir la herramienta e iterar es lo que haces tú.</p>
+          </div>
+
+          <div class="prose">
+            <h3 id="con-que-sales">Con qué sales de la Clase 1</h3>
+            <p>Si llegaste al final de la clase, tienes cinco cosas. Si te falta alguna, este playbook te dice cómo conseguirla por tu cuenta.</p>
+          </div>
+          <div class="table-wrap">
+            <table class="rtable rtable--stack">
+              <caption>Entregables de la Clase 1</caption>
+              <thead>
+                <tr><th scope="col">Entregable</th><th scope="col">Dónde queda</th><th scope="col">Para qué sirve en la Clase 2</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Spec V1 (la plantilla llena)</th><td>Este playbook o tu hoja impresa</td><td>Es la base de cualquier cambio que pidas</td></tr>
+                <tr><th scope="row">App publicada</th><td>Una dirección pública de Lovable</td><td>Tres usuarios reales la prueban en la semana</td></tr>
+                <tr><th scope="row">Repositorio</th><td>GitHub, conectado en dos direcciones</td><td>Es la caja que se abre en la Clase 2</td></tr>
+                <tr><th scope="row">Lista de fallos y dudas</th><td>El <a href="/vibecoding/#salida">formulario de salida</a></td><td>Define los grupos de la Clase 2</td></tr>
+                <tr><th scope="row">Este playbook</th><td>La página del curso</td><td>Ruta A (caja cerrada) y ruta B (caja abierta) para seguir solo</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="prose">
+            <h3 id="lo-que-puedes-hacer">Lo que puedes hacer al terminar</h3>
+            <ol>
+              <li>Nombrar las 5 piezas de una app (front, lógica, base de datos, dominio, repositorio) y ubicarlas en cualquier herramienta.</li>
+              <li>Escribir una spec de una página que pase la prueba del adivino: nada que la IA tenga que suponer.</li>
+              <li>Distinguir caja cerrada (Lovable, Base44) de caja abierta (Claude Code, Codex) y explicar cuándo conviene cada una.</li>
+              <li>Iterar con la herramienta siguiendo las reglas de mesa: un cambio por mensaje, probar, describir lo que ves.</li>
+            </ol>
+
+            <h3 id="por-donde-empiezo">Por dónde empiezo</h3>
+            <p>No tienes que leerlo de corrido. Elige la situación que se parece a la tuya.</p>
+          </div>
+          <div class="cards cards--2">
+            <a class="card" href="#spec">
+              <span class="card__k">Todavía no tengo spec</span>
+              <span class="card__title">Escribe tu spec de una página</span>
+              <span>Los siete bloques, uno por uno, con ejemplos buenos y malos. Si no tienes idea, elige una del <span class="t-accent">menú de proyectos</span>.</span>
+              <span class="card__go">Ir a la spec <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></span>
+            </a>
+            <a class="card" href="#ruta-a">
+              <span class="card__k">Tengo spec, me falta la app</span>
+              <span class="card__title">Sigue la ruta A</span>
+              <span>De la spec a la app publicada en Lovable, con los cinco puntos de control. También sirve si te quedaste a mitad de camino o sin créditos.</span>
+              <span class="card__go">Ir a la ruta A <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></span>
+            </a>
+            <a class="card" href="#clase-2">
+              <span class="card__k">Tengo la app publicada</span>
+              <span class="card__title">Haz la tarea de la semana</span>
+              <span>Tres usuarios reales, una lista de fallos y una lista de dudas. Eso es lo que trabajamos en la Clase 2.</span>
+              <span class="card__go">Ir a la tarea <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></span>
+            </a>
+            <a class="card" href="#ruta-b">
+              <span class="card__k">Quiero abrir la caja</span>
+              <span class="card__title">Sigue la ruta B</span>
+              <span>Qué es un agente de código, cómo se instala y una primera sesión guiada reconstruyendo el tablero desde la misma spec.</span>
+              <span class="card__go">Ir a la ruta B <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></span>
+            </a>
+          </div>
+
+          <div class="prose">
+            <h3 id="como-usarlo">Cómo usar este playbook</h3>
+            <ul>
+              <li><strong>Copia y adapta.</strong> La plantilla, la cabecera y cada mensaje de ejemplo tienen un botón <em>Copiar</em>. Lo que está entre corchetes, como <span class="fill">[Rol]</span>, lo cambias por lo tuyo.</li>
+              <li><strong>Marca tu avance.</strong> Las listas de chequeo (prueba del adivino, puntos de control, seguridad, tarea) guardan lo que marques en este navegador. Nadie más lo ve.</li>
+              <li><strong>Guárdalo.</strong> El botón <em>Guardar PDF</em> de arriba genera una versión para imprimir o tener sin internet.</li>
+              <li><strong>Comparte una sección.</strong> Cada título tiene un ícono de enlace: tócalo y se copia la dirección directa a esa parte.</li>
+            </ul>
+          </div>
+
+          <div class="callout callout--verify">
+            <p class="callout__title">Qué significan las etiquetas punteadas</p>
+            <p>Las herramientas cambian de precios, planes y nombres de botones con frecuencia. Cuando este playbook menciona algo así, lo marca con una etiqueta como <span class="verify">{{VERIFICAR_CREDITOS_LOVABLE}}</span> y te deja el enlace a la documentación oficial. Antes de contar con ese dato, ábrelo y confírmalo. Las etiquetas como <span class="ph">{{FECHA_CLASE_1}}</span> son datos que el profesor completa.</p>
+            <p>Los datos de herramientas que no tienen etiqueta se verificaron contra la documentación oficial el 19 de octubre de 2026, y cada uno lleva su enlace.</p>
+          </div>
+
+          <div class="prose">
+            <h3 id="herramientas-del-curso">Las herramientas del curso</h3>
+            <ul>
+              <li><a href="/vibecoding/">La página del curso</a>: la lista de lo que necesitas antes de clase, la hoja «Mi app en 5 piezas», el menú de proyectos y las reglas de mesa.</li>
+              <li><a href="/vibecoding/#spec">El constructor de spec</a>: te ayuda a llenar los siete bloques en clase.</li>
+              <li><a href="/vibecoding/#salida">El formulario de salida</a>: nombre, dirección de tu app, enlace del repositorio, tu duda principal y hasta qué punto de control llegaste. Con eso se arman los grupos de la Clase 2.</li>
+              <li><a href="/vibecoding/presentacion/">La presentación de la clase</a>, por si quieres repasar las diapositivas.</li>
+              <li>El tablero de solicitudes de la demo, publicado en Lovable: <span class="ph">{{URL_TABLERO_LOVABLE}}</span>. El mismo tablero hecho en caja abierta: <span class="ph">{{URL_PROYECTO_CLAUDE_CODE}}</span>.</li>
+            </ul>
+          </div>
+
+          <div class="pull">
+            <p class="pull__label">La frase con la que cerramos</p>
+            <p class="pull__text">La herramienta va a cambiar de nombre el año entrante. La spec, el mapa y las reglas de mesa, no.</p>
+            <p class="pull__sub">Por eso las tres primeras partes de este playbook no dependen de ninguna herramienta. Las rutas A y B sí, y por eso tienen enlaces a la documentación oficial y etiquetas para verificar.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 02 -->
+        <section class="chapter" id="vibe-coding" aria-labelledby="t-vibe-coding" data-title="Qué es vibe coding">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">02</span><span>Entender</span></p>
+            <h2 class="chapter__title" id="t-vibe-coding">Qué es vibe coding (y qué no)</h2>
+            <p class="chapter__lede">Una definición que sirve para trabajar, de dónde viene el nombre, qué cambió y qué sigue igual. Y el fallo que este curso existe para evitar.</p>
+          </header>
+
+          <div class="prose">
+            <h3 id="definicion">La definición que usamos</h3>
+            <p><strong>Vibe coding es construir software describiendo lo que quieres, dejando que la IA escriba el código, mientras tú diriges, pruebas y decides.</strong></p>
+            <p>Los tres verbos del final son tu trabajo:</p>
+            <ul>
+              <li><strong>Diriges.</strong> Tú decides qué se construye, en qué orden y qué queda por fuera. La IA no sabe qué necesita tu equipo; tú sí.</li>
+              <li><strong>Pruebas.</strong> Usas la app como la usaría una persona real y compruebas que hace lo que dijiste. No miras el código: miras el resultado.</li>
+              <li><strong>Decides.</strong> Aceptas el cambio, pides otro o vuelves a la versión anterior. La última palabra es tuya.</li>
+            </ul>
+
+            <h3 id="origen">De dónde viene el nombre</h3>
+            <p>El término lo puso Andrej Karpathy en febrero de 2025. Lo que describía ya era práctica común: el nombre la hizo visible.</p>
+
+            <h3 id="que-cambio">Qué cambió y qué no</h3>
+          </div>
+          <div class="vs">
+            <div class="vs__item vs__item--good">
+              <p class="vs__label">Lo que cambió</p>
+              <p class="vs__msg">Escribir código dejó de ser el cuello de botella. Lo que antes tomaba semanas de programación, una herramienta lo genera en minutos a partir de una descripción.</p>
+            </div>
+            <div class="vs__item">
+              <p class="vs__label">Lo que no cambió</p>
+              <p class="vs__msg">Alguien tiene que saber qué quiere y verificar que salió. Si nadie lo sabe, la herramienta llena el vacío adivinando.</p>
+            </div>
+          </div>
+
+          <div class="prose">
+            <h3 id="la-app-que-nadie-entiende">El fallo típico: la app que nadie entiende</h3>
+            <p>La app funciona hasta que deja de funcionar, y nadie sabe por qué. Pasa así: pides algo vago, la herramienta adivina, el resultado se ve bien y sigues pidiendo cambios encima de cambios. Cada mensaje arregla una cosa y mueve otra. Después de veinte mensajes hay una app que nadie diseñó: ni tú, porque no lo escribiste, ni la herramienta, porque solo respondía al último mensaje.</p>
+            <p>Esta clase existe para que eso no te pase. Las herramientas contra ese fallo son tres, y todas están en este playbook:</p>
+            <ul>
+              <li><a href="#spec">La spec</a>: una sola descripción del producto a la que se refieren todos los mensajes.</li>
+              <li><a href="#cinco-piezas">El mapa de 5 piezas</a>: para saber en qué parte de la app está lo que pides y lo que falla.</li>
+              <li><a href="#reglas-de-mesa">Las reglas de mesa</a>: un cambio por mensaje, probar y volver atrás cuando algo se rompe.</li>
+            </ul>
+
+            <h3 id="lo-que-si-entiendes">Lo que tú sí entiendes</h3>
+            <p>No entiendes el código, y no hace falta. Entiendes el producto: <strong>qué hace, qué guarda, quién lo usa y cómo se prueba</strong>. Esas cuatro preguntas son, casi palabra por palabra, los bloques de la spec. Quien sabe responderlas dirige el proyecto, aunque no haya escrito una línea de código.</p>
+
+            <h3 id="la-apertura">Lo que viste en la apertura</h3>
+            <p>La clase empezó con un experimento. En la misma herramienta y el mismo día, se pidió la misma app de dos formas:</p>
+          </div>
+          <div class="vs">
+            <div class="vs__item vs__item--bad">
+              <p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Prompt perezoso</p>
+              <p class="vs__msg"><q>Hazme una app para gestionar las solicitudes de mi equipo.</q></p>
+              <p class="vs__why">Una línea. La herramienta tuvo que decidir sola qué es una solicitud, quién la usa y qué pasa con ella.</p>
+            </div>
+            <div class="vs__item vs__item--good">
+              <p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Spec de una página</p>
+              <p class="vs__msg">Para quién y qué problema, tres acciones con verbo, qué guarda, dos roles, qué NO hace, tres escenarios y pantallas.</p>
+              <p class="vs__why">Es la <a href="#spec-tablero">spec del tablero de solicitudes</a> que está completa en este playbook.</p>
+            </div>
+          </div>
+          <div class="prose">
+            <p>Las diferencias fueron tres, y las tres se pueden ver sin mirar el código:</p>
+            <ol>
+              <li><strong>Campos inventados contra campos pedidos.</strong> Sin spec, la herramienta decidió qué datos tenía una solicitud. Con spec, tenía exactamente los que se pidieron.</li>
+              <li><strong>Sin roles contra dos roles.</strong> Sin spec, todo el mundo podía hacer todo. Con spec, quien pide y quien decide eran distintos.</li>
+              <li><strong>Estados decorativos contra estados que cambian de verdad.</strong> Sin spec, había etiquetas de colores que no hacían nada. Con spec, el estado cambiaba y se quedaba guardado.</li>
+            </ol>
+            <p>La herramienta no se equivocó. Adivinó, porque le tocó. La pregunta que hicimos en clase vale para cualquier proyecto: <strong>¿cuál de los dos tendrías que rehacer mañana?</strong></p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 03 -->
+        <section class="chapter" id="cinco-piezas" aria-labelledby="t-cinco-piezas" data-title="El mapa de 5 piezas">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">03</span><span>Entender</span></p>
+            <h2 class="chapter__title" id="t-cinco-piezas">El mapa de 5 piezas</h2>
+            <p class="chapter__lede">Toda app, de la más simple a la más grande, son cinco cosas. Cada herramienta, cada demo y cada error se ubica en este mapa.</p>
+          </header>
+
+          <figure class="map5" aria-labelledby="map5-cap">
+            <figcaption id="map5-cap" class="map5__cap">El mapa: la dirección arriba, las tres piezas de adentro y el repositorio como plano de todo.</figcaption>
+            <ul class="map5__app">
+              <li class="piece piece--domain">
+                <span class="piece__n">04</span><span class="piece__name">Dominio <span class="map5__url">la-app.com</span></span><span class="piece__desc">La dirección donde la gente la encuentra.</span>
+              </li>
+              <li class="piece piece--front"><span class="piece__n">01</span><span class="piece__name">Front</span><span class="piece__desc">Lo que la persona ve y toca.</span></li>
+              <li class="piece piece--logic"><span class="piece__n">02</span><span class="piece__name">Lógica</span><span class="piece__desc">Lo que pasa cuando toca algo.</span></li>
+              <li class="piece piece--data"><span class="piece__n">03</span><span class="piece__name">Base de datos</span><span class="piece__desc">Lo que la app recuerda cuando cierras la pestaña.</span></li>
+              <li class="piece piece--repo">
+                <span class="piece__n">05</span><span class="piece__name">Repositorio</span><span class="piece__desc">El plano y el historial: lo que hace que la app sea tuya.</span>
+                <span class="map5__repo" aria-hidden="true"><span class="map5__commit"></span><span class="map5__line"></span><span class="map5__commit"></span><span class="map5__line"></span><span class="map5__commit"></span><span class="map5__line"></span><span class="map5__commit map5__commit--now"></span><span>versiones</span></span>
+              </li>
+            </ul>
+          </figure>
+
+          <div class="table-wrap">
+            <table class="rtable rtable--stack">
+              <caption>Las 5 piezas en una app de domicilios</caption>
+              <thead>
+                <tr><th scope="col">Pieza</th><th scope="col">En palabras de la clase</th><th scope="col">En una app de domicilios</th><th scope="col">Pregunta que responde</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Front</th><td>Lo que la persona ve y toca</td><td>El menú, el carrito, el botón «pedir»</td><td>¿Qué ve el usuario?</td></tr>
+                <tr><th scope="row">Lógica</th><td>Lo que pasa cuando toca algo</td><td>Calcula el total, asigna el domiciliario</td><td>¿Qué hace la app por dentro?</td></tr>
+                <tr><th scope="row">Base de datos</th><td>Lo que la app recuerda cuando cierras la pestaña</td><td>Pedidos, direcciones, usuarios</td><td>¿Qué guarda?</td></tr>
+                <tr><th scope="row">Dominio</th><td>La dirección donde la gente la encuentra</td><td>la-app.com</td><td>¿Dónde vive?</td></tr>
+                <tr><th scope="row">Repositorio</th><td>El plano y el historial; lo que hace que sea tuya</td><td>Cada versión del código, con fecha y autor</td><td>¿De quién es y cómo se deshace un cambio?</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="prose">
+            <h3 id="ubicar-una-funcion">Cómo ubicar cualquier función en el mapa</h3>
+            <p>Toma algo que quieras que haga tu app y hazle tres preguntas, en este orden:</p>
+            <ol>
+              <li><strong>¿Se ve o se toca?</strong> Un botón, una lista, un formulario, un color: eso es <strong>front</strong>.</li>
+              <li><strong>¿Pasa algo cuando lo tocas?</strong> Calcular, decidir, cambiar un estado, ordenar, filtrar: eso es <strong>lógica</strong>.</li>
+              <li><strong>¿Tiene que seguir ahí mañana?</strong> Si al cerrar la pestaña y volver debe estar, vive en la <strong>base de datos</strong>.</li>
+            </ol>
+            <p>Casi ninguna función vive en una sola pieza. Mira esta, que usamos en clase: <em>«el jefe ve la lista y aprueba»</em>.</p>
+          </div>
+          <div class="table-wrap">
+            <table class="rtable rtable--stack">
+              <caption>Una función, tres piezas</caption>
+              <thead>
+                <tr><th scope="col">Parte de la función</th><th scope="col">Pieza</th><th scope="col">Por qué</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">La lista y el botón «aprobar»</th><td>Front</td><td>Es lo que el jefe ve y toca</td></tr>
+                <tr><th scope="row">Al tocar «aprobar», el estado cambia a aprobada</th><td>Lógica</td><td>Es lo que pasa cuando toca algo</td></tr>
+                <tr><th scope="row">Mañana la solicitud sigue aprobada</th><td>Base de datos</td><td>Es lo que la app recuerda</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="prose">
+            <p>Si dudas entre front y lógica, bien: <strong>esa duda es la que la spec resuelve</strong>. Una spec que dice «el responsable puede cambiar el estado: nueva, en proceso, resuelta» no deja espacio para la duda: hay un control que se ve (front), un cambio que pasa (lógica) y un estado que se guarda (base de datos).</p>
+            <p>El mapa también sirve cuando algo falla. «El botón no aparece» es un problema de front. «Toco el botón y no pasa nada» es de lógica. «Lo registré ayer y hoy no está» es de base de datos. Saber en qué pieza está el problema te ayuda a describirlo bien (lo verás en las <a href="#reglas-de-mesa">reglas de mesa</a>).</p>
+
+            <h3 id="mi-app-en-5-piezas">Ejercicio: «Mi app en 5 piezas»</h3>
+            <p>Escribe una línea por pieza para tu idea. Dominio y repositorio los dejas en blanco: en la Clase 1 los resuelve la herramienta. Aquí tienes el ejemplo del tablero de solicitudes; la hoja para llenar está en la <a href="/vibecoding/#cinco-piezas">página del curso</a>.</p>
+          </div>
+          <div class="table-wrap">
+            <table class="rtable rtable--stack">
+              <caption>Hoja «Mi app en 5 piezas», con el tablero como ejemplo</caption>
+              <thead>
+                <tr><th scope="col">Pieza</th><th scope="col">Ejemplo: tablero de solicitudes</th><th scope="col">Mi app</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Front: lo que la persona ve y toca</th><td>Un formulario para registrar una solicitud y una lista con el estado de cada una</td><td>&nbsp;</td></tr>
+                <tr><th scope="row">Lógica: lo que pasa cuando toca algo</th><td>Al registrar, la solicitud queda en estado Nueva con la fecha de hoy; el responsable cambia el estado</td><td>&nbsp;</td></tr>
+                <tr><th scope="row">Base de datos: lo que recuerda</th><td>Solicitudes: título, descripción, área, fecha, estado, solicitante</td><td>&nbsp;</td></tr>
+                <tr><th scope="row">Dominio</th><td>Hoy lo resuelve la herramienta</td><td>Hoy lo resuelve la herramienta</td></tr>
+                <tr><th scope="row">Repositorio</th><td>Hoy lo resuelve la herramienta</td><td>Hoy lo resuelve la herramienta</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="prose">
+            <p><strong>Prueba rápida, como en clase:</strong> pídele a otra persona que ubique una función de tu app en una pieza. Si duda, anótalo: es una pista de lo que tu spec todavía no dice.</p>
+
+            <h3 id="piezas-en-cada-caja">Dónde están las piezas en cada herramienta</h3>
+            <p>Las cinco piezas existen siempre. Lo que cambia es quién decide sobre ellas:</p>
+            <ul>
+              <li><strong>En una caja cerrada (Lovable)</strong>, la herramienta genera el front y la lógica; la base de datos y la publicación las resuelve su propia nube; el repositorio se conecta a GitHub. Las cinco piezas están, pero adentro.</li>
+              <li><strong>En una caja abierta (Claude Code, Codex)</strong>, las cinco están a la vista: tú eliges la base de datos, dónde se publica y el dominio. Más control, más decisiones, más responsabilidad.</li>
+            </ul>
+            <p>Lo comparamos fila por fila en <a href="#caja-cerrada-o-abierta">¿Caja cerrada o abierta?</a></p>
+          </div>
+
+          <div class="pull">
+            <p class="pull__label">El cierre del mapa</p>
+            <p class="pull__text">Ninguna de las cinco la construyes tú. Tu trabajo es decidir qué hace cada una.</p>
+            <p class="pull__sub">Eso se escribe, y se llama spec.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 04 -->
+        <section class="chapter" id="spec" aria-labelledby="t-spec" data-title="La spec de una página">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">04</span><span>Describir</span></p>
+            <h2 class="chapter__title" id="t-spec">La spec de una página</h2>
+            <p class="chapter__lede">Un prompt es un mensaje. Una spec es la descripción del producto a la que todos los mensajes se refieren. Este capítulo explica sus siete bloques, uno por uno.</p>
+          </header>
+
+          <div class="prose">
+            <h3 id="prompt-vs-spec">Prompt contra spec</h3>
+            <p>Un <strong>prompt</strong> es lo que le escribes a la herramienta en un momento: «agrega un filtro», «cambia el color del botón». Una <strong>spec</strong> (de <em>specification</em>, especificación) es el documento que dice qué es tu app: para quién, qué hace, qué guarda, quién puede hacer qué, qué no hace y cómo sabes que funciona.</p>
+            <p>El prompt perezoso de la apertura era un mensaje sin spec. Por eso la herramienta adivinó. Con una spec, cada mensaje posterior se apoya en algo fijo: «agrega el filtro por estado que dice la pantalla Lista de la spec» no deja nada a la imaginación.</p>
+            <p>¿Por qué <strong>una página</strong>? Porque cabe en un mensaje, se lee en dos minutos y te obliga a decidir. Si tu spec necesita tres páginas, tu V1 es demasiado grande.</p>
+          </div>
+          <div class="vs">
+            <div class="vs__item vs__item--bad">
+              <p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Un prompt suelto</p>
+              <p class="vs__msg"><q>Hazme una app para gestionar las solicitudes de mi equipo.</q></p>
+              <p class="vs__why">¿Qué es una solicitud? ¿Quién la crea? ¿Quién la aprueba? ¿Qué estados tiene? Todo eso lo decide la herramienta.</p>
+            </div>
+            <div class="vs__item vs__item--good">
+              <p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>El comienzo de una spec</p>
+              <p class="vs__msg"><q>El equipo de mantenimiento recibe solicitudes por WhatsApp y las pierde. Esta app las recibe en un solo lugar y muestra en qué estado van.</q></p>
+              <p class="vs__why">Ya se sabe quién la usa, qué problema resuelve y qué debe mostrar. Y es solo el bloque 1.</p>
+            </div>
+          </div>
+
+          <div class="prose">
+            <h3 id="siete-bloques">Los siete bloques</h3>
+            <p>Cada bloque responde una pregunta que, si no respondes tú, responde la IA adivinando. Abajo de cada uno verás qué adivina la herramienta cuando el bloque falta.</p>
+          </div>
+
+          <div class="blocks">
+            <article class="block" id="bloque-1" aria-labelledby="t-bloque-1">
+              <div class="block__head"><span class="block__n" aria-hidden="true">1</span><h4 class="block__title" id="t-bloque-1">Para quién y qué problema</h4></div>
+              <div class="block__body">
+                <p>Un párrafo. Quién usa la app y qué le resuelve. Piensa en una persona concreta y en lo que le pasa hoy, antes de tu app.</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Flojo</p><p class="vs__msg"><q>Una app para mi equipo.</q></p><p class="vs__why">¿Qué equipo? ¿Qué problema? La herramienta inventa el público y el tono.</p></div>
+                <div class="vs__item vs__item--good"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Claro</p><p class="vs__msg"><q>El equipo de mantenimiento recibe solicitudes por WhatsApp y las pierde. Esta app las recibe en un solo lugar y muestra en qué estado van.</q></p></div>
+              </div>
+              <p class="block__miss"><b>Si falta, la IA adivina</b> para quién es, qué tan formal debe verse y qué información importa.</p>
+            </article>
+
+            <article class="block" id="bloque-2" aria-labelledby="t-bloque-2">
+              <div class="block__head"><span class="block__n" aria-hidden="true">2</span><h4 class="block__title" id="t-bloque-2">Qué hace: de 3 a 5 acciones, con verbo</h4></div>
+              <div class="block__body">
+                <p>Cada acción con la forma <span class="fill">[Rol] puede [acción]</span>. Usa verbos que se puedan probar: <em>registrar, cambiar, ver, buscar, filtrar, inscribirse, reservar, cancelar, exportar</em>. Evita verbos que no se pueden probar: <em>gestionar, administrar, manejar, optimizar</em>.</p>
+                <p>Mínimo tres, máximo cinco. Si te salen más de cinco, lo que sobra baja al bloque 5.</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Flojo</p><p class="vs__msg"><q>Gestionar solicitudes.</q> <q>Una página con un formulario bonito.</q></p><p class="vs__why">«Gestionar» no dice si se crean, se aprueban o se borran. Y la segunda describe una pantalla, no qué pasa al enviar.</p></div>
+                <div class="vs__item vs__item--good"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Claro</p><p class="vs__msg"><q>Cualquier persona puede registrar una solicitud con título, descripción y área.</q><br /><q>El responsable puede cambiar el estado: nueva, en proceso, resuelta.</q><br /><q>Cualquier persona puede ver la lista de solicitudes y su estado.</q></p></div>
+              </div>
+              <p class="block__miss"><b>Si falta, la IA adivina</b> qué botones existen y qué pasa al tocarlos. Es el origen de los «estados decorativos» de la apertura.</p>
+            </article>
+
+            <article class="block" id="bloque-3" aria-labelledby="t-bloque-3">
+              <div class="block__head"><span class="block__n" aria-hidden="true">3</span><h4 class="block__title" id="t-bloque-3">Qué guarda</h4></div>
+              <div class="block__body">
+                <p>Las «cosas» que la app recuerda y los datos de cada una, con la forma <span class="fill">[Cosa]: [sus datos]</span>. Si un dato tiene opciones fijas, escríbelas (los estados, por ejemplo). Es la pieza <a href="#cinco-piezas">base de datos</a> del mapa.</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Flojo</p><p class="vs__msg"><q>Guarda la información de las solicitudes.</q></p><p class="vs__why">¿Cuál información? La herramienta decide los campos.</p></div>
+                <div class="vs__item vs__item--good"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Claro</p><p class="vs__msg"><q>Solicitud: título, descripción, área, fecha de creación, estado, nombre de quien la pidió.</q></p></div>
+              </div>
+              <p class="block__miss"><b>Si falta, la IA adivina</b> los campos. Son los «campos inventados» de la apertura.</p>
+            </article>
+
+            <article class="block" id="bloque-4" aria-labelledby="t-bloque-4">
+              <div class="block__head"><span class="block__n" aria-hidden="true">4</span><h4 class="block__title" id="t-bloque-4">Quién puede hacer qué (máximo dos roles)</h4></div>
+              <div class="block__body">
+                <p>Un <strong>rol</strong> es un tipo de persona que usa la app. Para cada rol: qué ve y qué puede hacer. La pregunta que lo resuelve: <strong>¿quién llena y quién decide?</strong> Si es la misma persona, un rol basta, y lo escribes.</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Flojo</p><p class="vs__msg"><q>Administradores y usuarios.</q></p><p class="vs__why">Nombra roles, pero no dice qué hace cada uno.</p></div>
+                <div class="vs__item vs__item--good"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Claro</p><p class="vs__msg"><q>Solicitante: registra solicitudes y ve la lista. Responsable: ve la lista y cambia el estado.</q></p></div>
+              </div>
+              <p class="block__miss"><b>Si falta, la IA adivina</b> y casi siempre deja que todos hagan todo: «sin roles», como en la apertura.</p>
+            </article>
+
+            <article class="block" id="bloque-5" aria-labelledby="t-bloque-5">
+              <div class="block__head"><span class="block__n" aria-hidden="true">5</span><h4 class="block__title" id="t-bloque-5">Qué NO hace (mínimo tres cosas, van a «después»)</h4></div>
+              <div class="block__body">
+                <p>Es la herramienta de alcance. Escribe al menos tres cosas que <strong>sí quisieras</strong> y que decides dejar para después. Si tu lista no te duele un poco, no estás recortando de verdad.</p>
+                <p>Es el bloque que más se salta y el que más cuesta saltarse: sin él, la herramienta agrega lo que «toda app de este tipo tiene».</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Flojo</p><p class="vs__msg"><q>No hace cosas complicadas.</q></p><p class="vs__why">No recorta nada concreto. La herramienta no sabe qué evitar.</p></div>
+                <div class="vs__item vs__item--good"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Claro</p><p class="vs__msg"><q>No envía correos ni notificaciones.</q><br /><q>No tiene inicio de sesión; el responsable entra por una URL aparte.</q><br /><q>No adjunta archivos.</q></p></div>
+              </div>
+              <p class="block__miss"><b>Si falta, la IA adivina</b> qué extras agregar, y cada extra es algo más que puede fallar en tu primera versión.</p>
+            </article>
+
+            <article class="block" id="bloque-6" aria-labelledby="t-bloque-6">
+              <div class="block__head"><span class="block__n" aria-hidden="true">6</span><h4 class="block__title" id="t-bloque-6">Cómo sé que funciona (tres escenarios)</h4></div>
+              <div class="block__body">
+                <p>Con la forma <span class="fill">Cuando [rol] hace [acción], pasa [resultado]</span>. Uno por cada acción principal. El resultado tiene que ser algo que se ve en la pantalla, no una intención.</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Flojo</p><p class="vs__msg"><q>Que funcione bien.</q> <q>Cuando registro, se guarda.</q></p><p class="vs__why">¿Cómo compruebas «bien»? ¿Dónde ves que se guardó?</p></div>
+                <div class="vs__item vs__item--good"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Claro</p><p class="vs__msg"><q>Cuando una persona registra una solicitud, aparece en la lista con estado Nueva y la fecha de hoy.</q></p></div>
+              </div>
+              <p class="block__miss"><b>Si falta, no hay forma de saber</b> si la app está lista. Se ve bonita, pero nadie comprobó que hace lo que debe.</p>
+            </article>
+
+            <article class="block" id="bloque-7" aria-labelledby="t-bloque-7">
+              <div class="block__head"><span class="block__n" aria-hidden="true">7</span><h4 class="block__title" id="t-bloque-7">Pantallas <span class="tag-opt">opcional</span></h4></div>
+              <div class="block__body">
+                <p>Una frase por pantalla, con la forma <span class="fill">[Pantalla]: [qué muestra]</span>. Es opcional: nadie se detiene por él. La herramienta ya hace pantallas razonables.</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Flojo</p><p class="vs__msg"><q>Que sea bonita y moderna.</q></p><p class="vs__why">No es una acción ni dice qué se muestra.</p></div>
+                <div class="vs__item vs__item--good"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Claro</p><p class="vs__msg"><q>Lista: todas las solicitudes, la más reciente arriba, con filtro por estado.</q></p></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="prose">
+            <h3 id="regla-de-alcance">La regla de alcance</h3>
+          </div>
+          <div class="pull">
+            <p class="pull__label">V1 =</p>
+            <p class="pull__text">Un tipo de usuario principal, tres acciones y una cosa que se guarda.</p>
+            <p class="pull__sub">Todo lo demás va a una lista llamada «después». Sin esa lista, intentas construir una empresa en 40 minutos.</p>
+          </div>
+          <div class="prose">
+            <p>La regla no dice que tu idea sea pequeña. Dice que la <strong>primera versión</strong> lo es. Una V1 pequeña que funciona se puede hacer crecer. Una V1 grande que funciona a medias hay que rehacerla.</p>
+            <p><strong>Cómo se recorta sin pelear con la idea:</strong> no discutes si la idea es buena. Escribes las acciones, y si pasan de cinco, las que sobran bajan al bloque 5. En clase, «quiero Uber para veterinarias» se convirtió en «registro de citas con estado» por esa vía.</p>
+
+            <h3 id="escenarios-como-pruebas">Los escenarios son las pruebas</h3>
+            <p>Los tres escenarios del bloque 6 no son decoración: son la forma de saber si la app está lista. Al construir se verifican uno por uno. <strong>Si no pasa el escenario, no está listo, por bonita que se vea.</strong></p>
+            <p>Así se prueba un escenario, como usuario y no como programador:</p>
+            <ol>
+              <li>Lee el escenario en voz alta: «Cuando una persona registra una solicitud, aparece en la lista con estado Nueva y la fecha de hoy».</li>
+              <li>Haz lo que dice la primera parte, con datos inventados: registra una solicitud de prueba.</li>
+              <li>Compara lo que ves con la segunda parte: ¿aparece en la lista? ¿Dice Nueva? ¿Tiene la fecha de hoy?</li>
+              <li>Si todo coincide, pasó. Si algo no coincide, describe lo que ves (lo explica la <a href="#regla-2">regla de mesa 2</a>) y vuelve a probar después del arreglo.</li>
+            </ol>
+
+            <h3 id="trampas-frecuentes">Trampas frecuentes y qué responder</h3>
+            <p>Estas son las frases que más aparecen al escribir una spec. Si te salen, esto es lo que se responde:</p>
+          </div>
+          <div class="table-wrap table-wrap--2">
+            <table class="rtable rtable--stack">
+              <caption>Trampas frecuentes</caption>
+              <thead>
+                <tr><th scope="col">Si escribes…</th><th scope="col">Qué hacer</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">«Que sea bonita»</th><td>No es una acción. Va a pantallas (bloque 7), y la herramienta ya la hace razonable.</td></tr>
+                <tr><th scope="row">«Y que tenga IA»</th><td>Va a «después», salvo que sea la acción principal. Primero se construye la base.</td></tr>
+                <tr><th scope="row">«Que mande correos»</th><td>Es una integración: va a «después». En una primera versión no cabe.</td></tr>
+                <tr><th scope="row">Sin roles</th><td>Pregúntate «¿quién llena y quién decide?». Si es la misma persona, un rol basta, y lo escribes.</td></tr>
+                <tr><th scope="row">Sin «qué NO hace»</th><td>La spec no está lista. Es el bloque que más se salta y el que más cuesta saltarse.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="prose">
+            <h3 id="escribirla-en-30-minutos">Cómo escribirla en 30 minutos</h3>
+            <p>En clase la escribimos con reloj. Si la escribes sola o solo, usa el mismo orden:</p>
+          </div>
+          <div class="table-wrap">
+            <table class="rtable rtable--stack">
+              <caption>La spec, bloque por bloque</caption>
+              <thead>
+                <tr><th scope="col">Tiempo</th><th scope="col">Paso</th><th scope="col">Qué haces</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">2 min</th><td>Arranque</td><td>Escribe tu frase: «Quiero una app que ___ para ___». Sin frase no se empieza. Si no tienes idea, elige una del <a href="#menu-de-proyectos">menú de proyectos</a>.</td></tr>
+                <tr><th scope="row">5 min</th><td>Bloques 1 y 2</td><td>Para quién y qué problema, en un párrafo. Tres acciones con verbo; máximo cinco.</td></tr>
+                <tr><th scope="row">5 min</th><td>Bloques 3 y 4</td><td>Las cosas que se guardan y sus datos. Dos roles como máximo.</td></tr>
+                <tr><th scope="row">3 min</th><td>Bloque 5</td><td>Mínimo tres cosas que quisieras y que van a «después».</td></tr>
+                <tr><th scope="row">5 min</th><td>Bloque 6</td><td>Tres escenarios con rol, acción y resultado, uno por acción principal.</td></tr>
+                <tr><th scope="row">5 min</th><td>Prueba del adivino</td><td>Busca lo que la IA tendría que adivinar y corrígelo. Ver la <a href="#prueba-del-adivino">sección siguiente</a>.</td></tr>
+                <tr><th scope="row">5 min</th><td>Primer mensaje</td><td>Pega la spec debajo de la <a href="#cabecera">cabecera</a>. El bloque 7 es opcional.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout">
+            <p class="callout__title">Señal de que tu spec está lista</p>
+            <p>Tiene al menos tres cosas en «qué NO hace» y tres escenarios con rol, acción y resultado. Si al leer tu «qué NO hace» ves algo que claramente querías incluir, vas bien.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 05 -->
+        <section class="chapter" id="prueba-del-adivino" aria-labelledby="t-prueba-del-adivino" data-title="La prueba del adivino">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">05</span><span>Describir</span></p>
+            <h2 class="chapter__title" id="t-prueba-del-adivino">La prueba del adivino</h2>
+            <p class="chapter__lede">Antes de enviar, pregúntate qué tendría que adivinar la IA. La lista de lo que adivina es la lista de lo que falta en tu spec.</p>
+          </header>
+
+          <div class="prose">
+            <h3 id="adivino-en-parejas">Cómo se hace en parejas (como en clase)</h3>
+            <ol>
+              <li>Intercambia tu spec con otra persona.</li>
+              <li>Cada uno lee la spec del otro y escribe <strong>tres cosas que la IA tendría que adivinar</strong>. Por ejemplo: «no dice quién cambia el estado», «no dice qué datos pide el formulario».</li>
+              <li>Devuelve la lista. Cada uno corrige su spec en el momento: cada adivinanza se convierte en una frase nueva en el bloque que corresponde.</li>
+            </ol>
+            <p>Funciona porque la otra persona no tiene tu idea en la cabeza. Lee solo lo que escribiste, igual que la herramienta.</p>
+
+            <h3 id="adivino-solo">Cómo se hace si estás solo</h3>
+            <ul>
+              <li><strong>Déjala reposar.</strong> Léela al otro día, como si no fuera tuya.</li>
+              <li><strong>Pídeselo a alguien</strong> que no conozca tu idea: un familiar, un compañero. Si te hace una pregunta, la respuesta va a la spec.</li>
+              <li><strong>Pídeselo a la IA, sin que construya.</strong> En Lovable, el modo chat (<em>Chat mode</em>) conversa sin cambiar tu proyecto (<a href="https://docs.lovable.dev/features/chat-mode" rel="noopener">documentación de Lovable</a>; su costo en créditos: <span class="verify">{{VERIFICAR_COSTO_CHAT_LOVABLE}}</span>). También sirve cualquier chat de IA. Usa este mensaje:</li>
+            </ul>
+          </div>
+          <div class="msg" data-copy-scope>
+            <div class="msg__head">
+              <p class="msg__title" id="msg-adivino">Mensaje · prueba del adivino con IA</p>
+              <button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+            </div>
+            <p class="msg__body" data-copy-src>Lee esta spec. No construyas nada todavía.
+Haz una lista de todo lo que tendrías que adivinar o suponer para construirla, ordenada por bloque de la spec. Para cada punto, hazme una pregunta concreta que yo pueda responder en una frase.
+
+[pega aquí tu spec completa]</p>
+            <p class="msg__note">La IA te ayuda a encontrar huecos, pero las respuestas las decides tú. Escríbelas en la spec, no solo en el chat.</p>
+          </div>
+
+          <div class="prose">
+            <h3 id="checklist-adivino">La lista de chequeo</h3>
+            <p>Marca cada punto cuando tu spec lo cumpla. Se guarda en este navegador, así que puedes volver mañana.</p>
+          </div>
+          <div class="checklist" data-checklist="adivino">
+            <div class="checklist__bar">
+              <p class="checklist__title" id="cl-adivino">Mi spec pasa la prueba del adivino</p>
+              <div class="checklist__meta">
+                <span class="checklist__count" data-check-count aria-live="polite">0/9</span>
+                <span class="meter" aria-hidden="true"><span class="meter__fill" data-check-fill></span></span>
+                <button class="reset" type="button" data-check-reset><svg class="ico" aria-hidden="true"><use href="#i-reset" /></svg><span data-reset-label>Reiniciar</span></button>
+              </div>
+            </div>
+            <ul class="checklist__items" aria-labelledby="cl-adivino">
+              <li><label class="check"><input type="checkbox" data-check="adivino-1" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Se entiende para quién es y qué problema resuelve, en un párrafo.</span><span class="check__how">Bloque 1. Alguien que no te conoce sabría a quién le sirve.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="adivino-2" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Tiene entre 3 y 5 acciones, cada una con rol y un verbo que se puede probar.</span><span class="check__how">Bloque 2. Ningún «gestionar» ni «administrar».</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="adivino-3" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Cada cosa que se guarda tiene su lista de datos.</span><span class="check__how">Bloque 3. Los datos con opciones fijas (como los estados) tienen sus opciones escritas.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="adivino-4" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Los datos que pide cada acción coinciden con lo que se guarda.</span><span class="check__how">Bloques 2 y 3. Si se guarda «nombre de quien la pidió», alguna acción tiene que pedir ese nombre.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="adivino-5" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Está claro quién llena y quién decide (uno o dos roles).</span><span class="check__how">Bloque 4. Para cada rol: qué ve y qué puede hacer.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="adivino-6" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">«Qué NO hace» tiene al menos tres cosas que de verdad querías.</span><span class="check__how">Bloque 5. Si nada te duele, no estás recortando.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="adivino-7" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Hay tres escenarios con rol, acción y un resultado que se ve en pantalla.</span><span class="check__how">Bloque 6. Uno por cada acción principal.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="adivino-8" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">No quedaron trampas: «bonita», «con IA» o «que mande correos» no aparecen como acciones.</span><span class="check__how">Si aparecen, van a pantallas o a «después».</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="adivino-9" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">No tiene datos reales de personas, clientes ni de la empresa.</span><span class="check__how">Los ejemplos usan nombres inventados. Ver <a href="#seguridad">seguridad</a>.</span></span></label></li>
+            </ul>
+            <p class="checklist__done" data-check-done hidden>Tu spec pasó la prueba del adivino. Siguiente paso: pégala debajo de la <a href="#cabecera">cabecera</a>.</p>
+            <p class="checklist__note">Se guarda solo en este navegador.</p>
+          </div>
+
+          <div class="prose">
+            <h3 id="preguntas-del-adivino">Preguntas que destapan adivinanzas</h3>
+            <p>Si no sabes por dónde empezar, hazle estas preguntas a tu spec. Cada «no lo dice» es un hueco:</p>
+            <ul>
+              <li>¿Qué pasa justo después de que alguien toca el botón principal?</li>
+              <li>¿Qué estados existen, y quién puede cambiarlos?</li>
+              <li>¿En qué orden aparece la lista?</li>
+              <li>¿Qué ve una persona que no es el responsable?</li>
+              <li>¿De dónde sale cada dato que se guarda: lo escribe alguien o lo pone la app (como la fecha)?</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ===================================================== 06 -->
+        <section class="chapter" id="plantilla" aria-labelledby="t-plantilla" data-title="Plantilla y spec de ejemplo">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">06</span><span>Describir</span></p>
+            <h2 class="chapter__title" id="t-plantilla">La plantilla y una spec llena</h2>
+            <p class="chapter__lede">La plantilla vacía para tu proyecto y la spec completa del tablero de solicitudes: la misma que produjo el resultado bueno de la apertura.</p>
+          </header>
+
+          <div class="prose">
+            <h3 id="plantilla-vacia">La plantilla</h3>
+            <p>Cópiala en un documento, en tus notas o en el <a href="/vibecoding/#spec">constructor de spec</a>. Reemplaza lo que está entre corchetes. Los ejemplos que trae son del tablero: bórralos cuando escribas los tuyos.</p>
+          </div>
+          <div class="code code--tall" data-copy-scope>
+            <div class="code__head">
+              <p class="code__title" id="code-plantilla">spec-v1.md · plantilla</p>
+              <div class="code__actions">
+                <button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+                <button class="copy copy--ghost" type="button" data-download="spec-v1-plantilla.md"><svg class="ico" aria-hidden="true"><use href="#i-file" /></svg><span>Descargar</span></button>
+              </div>
+            </div>
+<pre data-copy-src><span class="h"># [Nombre de la app] — Spec V1</span>
+
+<span class="h">## 1. Para quién y qué problema</span>
+[Un párrafo. Quién la usa y qué le resuelve. Ej.: "El equipo de mantenimiento recibe solicitudes por WhatsApp y las pierde. Esta app las recibe en un solo lugar y muestra en qué estado van."]
+
+<span class="h">## 2. Qué hace (3 a 5 acciones, con verbo)</span>
+- [Rol] puede [acción]. Ej.: "Cualquier persona puede registrar una solicitud con título, descripción y área."
+- [Rol] puede [acción]. Ej.: "El responsable puede cambiar el estado: nueva, en proceso, resuelta."
+- [Rol] puede [acción]. Ej.: "Cualquier persona puede ver la lista de solicitudes y su estado."
+
+<span class="h">## 3. Qué guarda</span>
+- [Cosa]: [sus datos]. Ej.: "Solicitud: título, descripción, área, fecha de creación, estado, nombre de quien la pidió."
+
+<span class="h">## 4. Quién puede hacer qué (máximo dos roles)</span>
+- [Rol 1]: [qué ve y qué puede hacer]
+- [Rol 2]: [qué ve y qué puede hacer]
+
+<span class="h">## 5. Qué NO hace (mínimo tres cosas, van a "después")</span>
+- [Ej.: no envía correos ni notificaciones]
+- [Ej.: no tiene inicio de sesión; el responsable entra por una URL aparte]
+- [Ej.: no adjunta archivos]
+
+<span class="h">## 6. Cómo sé que funciona (tres escenarios)</span>
+- Cuando [rol] hace [acción], pasa [resultado]. Ej.: "Cuando una persona registra una solicitud, aparece en la lista con estado Nueva y la fecha de hoy."
+- Cuando ... , pasa ...
+- Cuando ... , pasa ...
+
+<span class="h">## 7. Pantallas (opcional, una frase cada una)</span>
+- [Pantalla]: [qué muestra]. Ej.: "Lista: todas las solicitudes, la más reciente arriba, con filtro por estado."</pre>
+          </div>
+
+          <div class="prose">
+            <h3 id="spec-tablero">La spec llena: tablero de solicitudes</h3>
+            <p>Esta es la spec de la demo de clase, escrita solo con los ejemplos del curso. Es la que se construyó en Lovable y la que se usa en la ruta B para reconstruir el mismo tablero en caja abierta.</p>
+          </div>
+          <div class="code code--tall" data-copy-scope>
+            <div class="code__head">
+              <p class="code__title" id="code-tablero">tablero-de-solicitudes.md · spec V1</p>
+              <div class="code__actions">
+                <button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+                <button class="copy copy--ghost" type="button" data-download="tablero-de-solicitudes-spec-v1.md"><svg class="ico" aria-hidden="true"><use href="#i-file" /></svg><span>Descargar</span></button>
+              </div>
+            </div>
+<pre data-copy-src><span class="h"># Tablero de solicitudes — Spec V1</span>
+
+<span class="h">## 1. Para quién y qué problema</span>
+El equipo de mantenimiento recibe solicitudes por WhatsApp y las pierde. Esta app las recibe en un solo lugar y muestra en qué estado van.
+
+<span class="h">## 2. Qué hace (3 a 5 acciones, con verbo)</span>
+- Cualquier persona puede registrar una solicitud con su nombre, título, descripción y área.
+- El responsable puede cambiar el estado de una solicitud: nueva, en proceso, resuelta.
+- Cualquier persona puede ver la lista de solicitudes con su estado y filtrarla por estado.
+
+<span class="h">## 3. Qué guarda</span>
+- Solicitud: título, descripción, área (la escribe quien registra), fecha de creación (la pone la app), estado (empieza en Nueva), nombre de quien la pidió.
+
+<span class="h">## 4. Quién puede hacer qué (máximo dos roles)</span>
+- Solicitante (cualquier persona): registra solicitudes y ve la lista con su estado. No cambia estados.
+- Responsable: ve la misma lista y cambia el estado de cada solicitud. Entra por una URL aparte.
+
+<span class="h">## 5. Qué NO hace (van a "después")</span>
+- No envía correos ni notificaciones.
+- No tiene inicio de sesión; el responsable entra por una URL aparte.
+- No adjunta archivos.
+
+<span class="h">## 6. Cómo sé que funciona (tres escenarios)</span>
+- Cuando una persona registra una solicitud, aparece en la lista con estado Nueva y la fecha de hoy.
+- Cuando el responsable cambia el estado de una solicitud a En proceso, la lista muestra el estado nuevo, y sigue así al cerrar la pestaña y volver a abrirla.
+- Cuando alguien filtra la lista por Resuelta, solo ve las solicitudes con ese estado.
+
+<span class="h">## 7. Pantallas (opcional, una frase cada una)</span>
+- Lista: todas las solicitudes, la más reciente arriba, con filtro por estado.
+- Registro: los campos de la solicitud y un botón Enviar.
+- Vista del responsable (URL aparte): la misma lista, con un control para cambiar el estado de cada solicitud.</pre>
+          </div>
+
+          <div class="callout">
+            <p class="callout__title">Lo que la prueba del adivino encontró en esta spec</p>
+            <p>La primera versión de esta spec tenía tres huecos. Así se cerraron:</p>
+            <ul>
+              <li><strong>¿De dónde sale el nombre?</strong> El bloque 3 guardaba el «nombre de quien la pidió», pero la acción de registrar solo pedía título, descripción y área. Se agregó «su nombre» a la acción.</li>
+              <li><strong>¿El área es una lista o se escribe?</strong> No lo decía. Se escribió: la escribe quien registra. Una lista fija de áreas puede ir a «después».</li>
+              <li><strong>¿Quién ve el control para cambiar estados?</strong> Se aclaró en el bloque 4: solo el responsable, en su URL aparte.</li>
+            </ul>
+            <p>Ninguno de los tres arreglos agregó funciones. Solo quitaron adivinanzas.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 07 -->
+        <section class="chapter" id="cabecera" aria-labelledby="t-cabecera" data-title="La cabecera del primer mensaje">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">07</span><span>Describir</span></p>
+            <h2 class="chapter__title" id="t-cabecera">La cabecera del primer mensaje</h2>
+            <p class="chapter__lede">Cuatro líneas que se pegan encima de la spec. Le dicen a la herramienta que pregunte en vez de adivinar.</p>
+          </header>
+
+          <div class="code" data-copy-scope>
+            <div class="code__head">
+              <p class="code__title" id="code-cabecera">Cabecera · primer mensaje</p>
+              <div class="code__actions">
+                <button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+              </div>
+            </div>
+<pre data-copy-src>Construye la versión 1 de esta app exactamente como está descrita abajo.
+No agregues funciones que no estén en la spec. Si algo no está claro, pregúntame antes de construir.
+Los datos deben guardarse en una base de datos, no en la memoria del navegador.
+Cuando termines, dime cómo pruebo cada uno de los tres escenarios de la sección 6.
+
+[pegar aquí la spec completa]</pre>
+          </div>
+
+          <div class="prose">
+            <h3 id="por-que-cada-linea">Por qué existe cada línea</h3>
+          </div>
+          <div class="table-wrap table-wrap--2">
+            <table class="rtable rtable--stack">
+              <caption>La cabecera, línea por línea</caption>
+              <thead>
+                <tr><th scope="col">Línea</th><th scope="col">Qué evita</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">«Construye la versión 1 de esta app exactamente como está descrita abajo.»</th><td>Que la herramienta tome la spec como inspiración. Fija el alcance: V1, y la spec es la referencia.</td></tr>
+                <tr><th scope="row">«No agregues funciones que no estén en la spec. Si algo no está claro, pregúntame antes de construir.»</th><td>Los campos inventados y los extras de la apertura. Convierte cada adivinanza en una pregunta para ti.</td></tr>
+                <tr><th scope="row">«Los datos deben guardarse en una base de datos, no en la memoria del navegador.»</th><td>El fallo más común: una app que parece funcionar pero olvida todo al cerrar la pestaña (punto de control 3).</td></tr>
+                <tr><th scope="row">«Cuando termines, dime cómo pruebo cada uno de los tres escenarios de la sección 6.»</th><td>Terminar sin forma de comprobar. Convierte tus escenarios en un plan de prueba paso a paso.</td></tr>
+                <tr><th scope="row">«[pegar aquí la spec completa]»</th><td>Mandar una parte. Va la spec entera, los siete bloques (el 7 si lo tienes).</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="prose">
+            <h3 id="armar-el-mensaje">Cómo armar y enviar el primer mensaje</h3>
+            <ol>
+              <li>Copia la cabecera con el botón de arriba y pégala en tus notas.</li>
+              <li>Borra la línea <span class="fill">[pegar aquí la spec completa]</span> y pega en su lugar tu spec, los siete bloques.</li>
+              <li>Léelo una vez completo. Si encuentras un dato real de una persona o de tu empresa, cámbialo por uno inventado.</li>
+              <li>Pégalo en la herramienta y envíalo una sola vez. Mientras genera, no envíes nada más.</li>
+            </ol>
+            <p><strong>Si la herramienta responde con preguntas, es buena señal:</strong> está haciendo lo que pide la cabecera. Antes de contestar en el chat, escribe la respuesta en tu spec. Así la spec sigue siendo la descripción completa del producto, y la próxima vez que la uses (por ejemplo, en la <a href="#ruta-b">ruta B</a>) no se pierde nada.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 08 -->
+        <section class="chapter" id="menu-de-proyectos" aria-labelledby="t-menu-de-proyectos" data-title="Menú de proyectos">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">08</span><span>Describir</span></p>
+            <h2 class="chapter__title" id="t-menu-de-proyectos">Menú de proyectos</h2>
+            <p class="chapter__lede">Para quien no trae idea, o quiere practicar con algo que ya cabe en una V1. Cada proyecto ya respeta la regla de alcance: un usuario principal, tres acciones y lo que guarda.</p>
+          </header>
+
+          <div class="prose">
+            <h3 id="como-elegir">Cómo elegir y cómo pasar a la spec</h3>
+            <p>Elige el que se parezca a un problema que conoces de cerca: el de un familiar, una oficina, un grupo de la universidad. Después, cada parte de la tarjeta va a un bloque de la <a href="#plantilla">plantilla</a>:</p>
+            <ul>
+              <li><strong>Para quién</strong> → bloque 1. Agrega el problema concreto: qué pasa hoy sin la app.</li>
+              <li><strong>Tres acciones</strong> → bloque 2. Ponle a cada una su rol: <span class="fill">[Rol] puede [acción]</span>.</li>
+              <li><strong>Qué guarda</strong> → bloque 3.</li>
+              <li><strong>Qué NO hace</strong> → bloque 5. La tarjeta trae una sugerencia; tú agregas al menos dos más.</li>
+            </ul>
+            <p>Los bloques 4 (roles) y 6 (escenarios) los escribes tú: dependen de quién llena y quién decide en tu caso.</p>
+          </div>
+
+          <div class="cards cards--2">
+            <article class="card">
+              <p class="card__k">Proyecto 1</p>
+              <h3 class="card__title">Tablero de solicitudes</h3>
+              <dl class="dl-mini">
+                <dt>Para quién</dt><dd>Un equipo que recibe pedidos por chat (mantenimiento, RR.&nbsp;HH., jurídico).</dd>
+                <dt>Tres acciones de V1</dt><dd>Registrar solicitud; cambiar estado; ver lista con filtro.</dd>
+                <dt>Qué guarda</dt><dd>Solicitud: título, descripción, área, fecha, estado, solicitante.</dd>
+              </dl>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No envía correos ni notificaciones cuando cambia un estado.</p>
+            </article>
+            <article class="card">
+              <p class="card__k">Proyecto 2</p>
+              <h3 class="card__title">Registro a un evento con cupo</h3>
+              <dl class="dl-mini">
+                <dt>Para quién</dt><dd>Quien organiza un evento con asistentes limitados.</dd>
+                <dt>Tres acciones de V1</dt><dd>Inscribirse; ver cupos disponibles; ver lista de confirmados.</dd>
+                <dt>Qué guarda</dt><dd>Inscripción: nombre, correo, fecha. Evento: cupo máximo.</dd>
+              </dl>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No cobra la inscripción: los pagos van a «después».</p>
+            </article>
+            <article class="card">
+              <p class="card__k">Proyecto 3</p>
+              <h3 class="card__title">Directorio con búsqueda</h3>
+              <dl class="dl-mini">
+                <dt>Para quién</dt><dd>Un gremio, un edificio, una comunidad.</dd>
+                <dt>Tres acciones de V1</dt><dd>Agregar entrada; buscar por nombre o categoría; ver ficha.</dd>
+                <dt>Qué guarda</dt><dd>Entrada: nombre, categoría, contacto, descripción.</dd>
+              </dl>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No sube fotos ni logos de las entradas.</p>
+            </article>
+            <article class="card">
+              <p class="card__k">Proyecto 4</p>
+              <h3 class="card__title">Reserva de un recurso</h3>
+              <dl class="dl-mini">
+                <dt>Para quién</dt><dd>Quien comparte una sala, un equipo o una agenda.</dd>
+                <dt>Tres acciones de V1</dt><dd>Reservar franja; ver calendario del día; cancelar reserva.</dd>
+                <dt>Qué guarda</dt><dd>Reserva: recurso, fecha, hora inicio, hora fin, quién reserva.</dd>
+              </dl>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No se sincroniza con calendarios externos ni envía recordatorios.</p>
+            </article>
+            <article class="card">
+              <p class="card__k">Proyecto 5</p>
+              <h3 class="card__title">Encuesta con panel de respuestas</h3>
+              <dl class="dl-mini">
+                <dt>Para quién</dt><dd>Quien necesita recoger opiniones y verlas juntas.</dd>
+                <dt>Tres acciones de V1</dt><dd>Responder; ver resumen por pregunta; exportar respuestas.</dd>
+                <dt>Qué guarda</dt><dd>Respuesta: fecha, respuestas a cada pregunta.</dd>
+              </dl>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No envía la encuesta por correo: se comparte el enlace.</p>
+            </article>
+            <article class="card">
+              <p class="card__k">Proyecto 6</p>
+              <h3 class="card__title">Seguimiento de casos</h3>
+              <dl class="dl-mini">
+                <dt>Para quién</dt><dd>Quien lleva varios asuntos con responsable y estado.</dd>
+                <dt>Tres acciones de V1</dt><dd>Crear caso; asignar responsable; cambiar estado y ver historial.</dd>
+                <dt>Qué guarda</dt><dd>Caso: título, responsable, estado, fecha, notas.</dd>
+              </dl>
+              <p class="suggest"><span class="suggest__k">Sugerencia · qué NO hace</span>No adjunta documentos a los casos.</p>
+            </article>
+          </div>
+          <p class="src">Las sugerencias de «qué NO hace» son eso, sugerencias: si una de ellas es justo tu acción principal, cámbiala por otra cosa que quieras dejar para después.</p>
+        </section>
+
+        <!-- ===================================================== 09 -->
+        <section class="chapter" id="reglas-de-mesa" aria-labelledby="t-reglas-de-mesa" data-title="Reglas de mesa">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">09</span><span>Construir con criterio</span></p>
+            <h2 class="chapter__title" id="t-reglas-de-mesa">Reglas de mesa</h2>
+            <p class="chapter__lede">Cinco reglas para iterar con cualquier herramienta. Estuvieron en pantalla todo el taller y valen igual en la casa, en Lovable o con un agente de código.</p>
+          </header>
+
+          <ol class="rules">
+            <li class="rule" id="regla-1">
+              <div class="rule__head"><span class="rule__n" aria-hidden="true">1</span><h3 class="rule__title">Un cambio por mensaje</h3></div>
+              <div class="rule__body">
+                <p>Cada mensaje pide una sola cosa. Si quieres cuatro cambios, son cuatro mensajes, con una prueba entre uno y otro.</p>
+                <p><strong>Por qué:</strong> si pides cuatro cosas y algo se rompe, no sabes cuál lo rompió. Y si vuelves a la versión anterior, pierdes también las tres que sí funcionaban. La guía oficial de Lovable da el mismo consejo: un cambio significativo a la vez, revisar el resultado y seguir (<a href="https://docs.lovable.dev/prompting/prompting-one" rel="noopener">Lovable, prompting</a>).</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Así no</p><p class="vs__msg"><q>Agrega un filtro por estado, cambia los colores a azul, pon un logo y haz que el responsable vea solo sus solicitudes.</q></p><p class="vs__why">Cuatro cambios en tres piezas distintas del mapa.</p></div>
+                <div class="vs__item vs__item--good" data-copy-scope><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Así sí</p><p class="vs__msg" data-copy-src>Agrega arriba de la lista un filtro por estado con estas opciones: Todas, Nueva, En proceso, Resuelta. No cambies nada más.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+              </div>
+            </li>
+
+            <li class="rule" id="regla-2">
+              <div class="rule__head"><span class="rule__n" aria-hidden="true">2</span><h3 class="rule__title">Describe lo que ves, no lo que crees que falla</h3></div>
+              <div class="rule__body">
+                <p>Cuenta qué hiciste, qué esperabas y qué pasó en la pantalla. No adivines la causa: no puedes ver adentro, y una causa equivocada manda a la herramienta a arreglar lo que no está roto.</p>
+                <p><strong>Por qué:</strong> lo que ves es un hecho; lo que crees que falla es una suposición. La guía de Lovable para resolver errores pide lo mismo: qué está roto, dónde, qué esperabas y qué pasó en su lugar, con una captura si puedes (<a href="https://docs.lovable.dev/prompting/prompting-debugging" rel="noopener">Lovable, depurar</a>).</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Así no</p><p class="vs__msg"><q>El botón está mal programado, arregla la base de datos.</q></p><p class="vs__why">Dos suposiciones y ningún hecho.</p></div>
+                <div class="vs__item vs__item--good" data-copy-scope><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Así sí</p><p class="vs__msg" data-copy-src>Al presionar Enviar en el formulario de registro no pasa nada: el formulario sigue lleno y la solicitud no aparece en la lista. Esperaba que apareciera con estado Nueva y la fecha de hoy (escenario 1).</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+              </div>
+              <div class="msg" data-copy-scope>
+                <div class="msg__head">
+                  <p class="msg__title" id="msg-veo">Plantilla · reporte de lo que veo</p>
+                  <button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+                </div>
+                <p class="msg__body" data-copy-src>Hice: [los pasos, en orden]
+Esperaba: [el resultado del escenario de la spec]
+Pasó: [lo que ves en la pantalla, tal cual]</p>
+              </div>
+            </li>
+
+            <li class="rule" id="regla-3">
+              <div class="rule__head"><span class="rule__n" aria-hidden="true">3</span><h3 class="rule__title">Prueba antes de pedir lo siguiente</h3></div>
+              <div class="rule__body">
+                <p>Después de cada cambio, abre la vista previa y prueba el escenario que ese cambio toca. Si tienes un minuto más, repasa los otros dos. Solo entonces envías el siguiente mensaje.</p>
+                <p><strong>Por qué:</strong> un error que encuentras justo después de su cambio tiene una causa obvia. El mismo error encontrado cinco cambios después es un misterio. Así empieza «la app que nadie entiende».</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Así no</p><p class="vs__msg"><q>Ahora agrega el filtro.</q> → <q>Ahora cambia los textos.</q> → <q>Y la vista del responsable.</q></p><p class="vs__why">Tres mensajes seguidos sin abrir la vista previa.</p></div>
+                <div class="vs__item vs__item--good" data-copy-scope><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Así sí</p><p class="vs__msg" data-copy-src>Probé los tres escenarios de la sección 6 y pasan. Siguiente cambio: agrega un filtro por estado arriba de la lista. No cambies nada más.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+              </div>
+            </li>
+
+            <li class="rule" id="regla-4">
+              <div class="rule__head"><span class="rule__n" aria-hidden="true">4</span><h3 class="rule__title">Si se rompió, vuelve a la versión anterior antes de arreglar</h3></div>
+              <div class="rule__body">
+                <p>Cuando un cambio daña algo que ya funcionaba, no sigas pidiendo arreglos encima. Vuelve a la última versión que funcionaba y pide el cambio otra vez, más pequeño o de otra forma.</p>
+                <p><strong>Por qué:</strong> cada arreglo sobre una versión rota agrega más enredo. La guía de Lovable lo dice así: si una serie de arreglos enredó el código, volver atrás suele ser más rápido que desenredar (<a href="https://docs.lovable.dev/prompting/prompting-debugging" rel="noopener">Lovable, depurar</a>). Cómo volver atrás en Lovable está en la <a href="#historial-de-versiones">ruta A</a>.</p>
+                <p><strong>Ojo:</strong> en Lovable, volver a una versión anterior restaura el código, no los datos guardados en la base de datos (<a href="https://docs.lovable.dev/features/projects/history" rel="noopener">Lovable, historial</a>). Por eso pruebas con datos inventados.</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Así no</p><p class="vs__msg"><q>Arréglalo.</q> <q>Sigue sin funcionar, arréglalo.</q> <q>Ahora se dañó la lista, arréglala también.</q></p><p class="vs__why">Cinco parches sobre una versión rota.</p></div>
+                <div class="vs__item vs__item--good" data-copy-scope><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Así sí</p><p class="vs__msg">Vuelves a la versión anterior en el historial y pides algo más pequeño:</p><p class="vs__msg" data-copy-src>Agrega solo un selector de estado en la vista del responsable. Todavía no cambies la lista principal.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+              </div>
+            </li>
+
+            <li class="rule rule--stop" id="regla-5">
+              <div class="rule__head"><span class="rule__n" aria-hidden="true">5</span><h3 class="rule__title">Nunca pegues datos reales</h3></div>
+              <div class="rule__body">
+                <p>Ni de personas, ni de clientes, ni de tu empresa. Para probar, inventa: nombres, correos, solicitudes.</p>
+                <p><strong>Por qué:</strong> lo que pegas queda en la herramienta y puede terminar en tu app publicada, que abre cualquiera que tenga la dirección. Lo desarrollamos en <a href="#seguridad">seguridad</a>.</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Así no</p><p class="vs__msg">Pegar en el chat la lista de clientes de la empresa, con nombres, cédulas y celulares, «para que se vea real».</p></div>
+                <div class="vs__item vs__item--good" data-copy-scope><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Así sí</p><p class="vs__msg" data-copy-src>Crea cinco solicitudes de ejemplo con nombres y áreas inventados para probar la lista y el filtro.</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <!-- ===================================================== 10 -->
+        <section class="chapter" id="protocolo-de-error" aria-labelledby="t-protocolo-de-error" data-title="Protocolo de error">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">10</span><span>Construir con criterio</span></p>
+            <h2 class="chapter__title" id="t-protocolo-de-error">Protocolo de error</h2>
+            <p class="chapter__lede">Cuatro pasos, en orden, para cuando algo falla. Su objetivo no es que arregles todo: es que no pierdas la tarde en un solo error.</p>
+          </header>
+
+          <ol class="flow">
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">1</span>
+              <div class="flow__content">
+                <h3 class="flow__title">Lee lo que dice la herramienta</h3>
+                <p>Casi siempre dice qué pasó. El mensaje puede aparecer en la vista previa, en el chat o en una franja de color. Aunque tenga palabras técnicas, suele traer una frase entendible: «no se pudo guardar», «falta un campo», «no se encontró la página».</p>
+              </div>
+            </li>
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">2</span>
+              <div class="flow__content">
+                <h3 class="flow__title">Copia el error tal cual y pide que lo arregle</h3>
+                <p>Sin interpretarlo y sin resumirlo. La herramienta entiende el mensaje técnico mejor que tu versión de él. Dile también qué estabas haciendo cuando apareció.</p>
+                <div class="msg" data-copy-scope>
+                  <div class="msg__head">
+                    <p class="msg__title" id="msg-error">Mensaje · arreglar un error</p>
+                    <button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+                  </div>
+                  <p class="msg__body" data-copy-src>Al [lo que estaba haciendo] aparece este error. Arréglalo sin cambiar nada más.
+
+[pega aquí el mensaje de error tal cual]</p>
+                </div>
+                <p>Lovable a veces muestra un botón para intentar el arreglo automático (<em>Try to fix</em>). Cuenta como uno de tus dos intentos. Según su documentación, solo unos cuantos de esos arreglos son gratis y después consumen créditos (<a href="https://docs.lovable.dev/prompting/prompting-debugging" rel="noopener">Lovable, depurar</a>; <span class="verify">{{VERIFICAR_ARREGLOS_GRATIS_LOVABLE}}</span>).</p>
+              </div>
+            </li>
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">3</span>
+              <div class="flow__content">
+                <h3 class="flow__title">Dos intentos sin arreglo: versión anterior y otra forma, más pequeña</h3>
+                <p>Si en dos intentos no lo arregla, vuelve a la versión anterior y pide el mismo cambio de otra forma, más pequeño. Partir un cambio en dos suele bastar.</p>
+              </div>
+            </li>
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">4</span>
+              <div class="flow__content">
+                <h3 class="flow__title">Si vuelve a fallar: anótalo y sigue</h3>
+                <p>Anótalo para la Clase 2 y sigue con el siguiente punto de control. Un error anotado es material de clase; un error perseguido toda la tarde es una tarde perdida.</p>
+                <div class="msg" data-copy-scope>
+                  <div class="msg__head">
+                    <p class="msg__title" id="msg-bitacora">Plantilla · bitácora de fallos</p>
+                    <button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+                  </div>
+                  <p class="msg__body" data-copy-src>Punto de control: [1 a 5]
+Qué pedí: [el cambio, en una frase]
+Qué esperaba: [el escenario de la spec]
+Qué pasó: [lo que vi en la pantalla]
+Mensaje de error: [tal cual, si hubo]
+Qué intenté: [los dos intentos y la versión anterior]</p>
+                </div>
+              </div>
+            </li>
+          </ol>
+
+          <div class="prose">
+            <h3 id="errores-que-ya-conoces">Dos situaciones que ya conoces</h3>
+            <p><strong>La app olvida lo que registraste.</strong> Cierras la pestaña, vuelves y la solicitud ya no está. No es un error con mensaje: es que la app guardó en la memoria del navegador y no en una base de datos. La frase que más se repite en el taller:</p>
+          </div>
+          <div class="msg" data-copy-scope>
+            <div class="msg__head">
+              <p class="msg__title" id="msg-guardar">Mensaje · cuando no guarda</p>
+              <button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+            </div>
+            <p class="msg__body" data-copy-src>Los datos deben guardarse en la base de datos, no en la memoria del navegador.</p>
+          </div>
+          <div class="prose">
+            <p><strong>La generación no termina.</strong> Si una respuesta tarda más de seis minutos, revisa tu conexión a internet antes de culpar a la herramienta. En un salón con muchas personas generando al tiempo, la red suele ser el cuello de botella.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 11 -->
+        <section class="chapter" id="seguridad" aria-labelledby="t-seguridad" data-title="Seguridad: qué no hacer">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">11</span><span>Construir con criterio</span></p>
+            <h2 class="chapter__title" id="t-seguridad">Seguridad: qué no hacer</h2>
+            <p class="chapter__lede">Una lectura de dos minutos. Cuatro cosas que no se hacen en esta etapa, y por qué. Aplican en las dos rutas.</p>
+          </header>
+
+          <ol class="rules">
+            <li class="rule rule--stop" id="seguridad-1">
+              <div class="rule__head"><span class="rule__n" aria-hidden="true">1</span><h3 class="rule__title">No pegar datos reales de personas, clientes ni de la empresa</h3></div>
+              <div class="rule__body">
+                <p>Inventa los nombres. Todo lo que escribes en el chat de la herramienta sale de tu computador y queda en un servicio de terceros. Si lo usas para probar, puede quedar guardado en tu app.</p>
+                <p>En Colombia, los datos personales de otras personas están protegidos por la Ley 1581 de 2012: recogerlos y usarlos exige su autorización. Una V1 de práctica no es el lugar para eso.</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Así no</p><p class="vs__msg"><q>Usa estos datos para las pruebas:</q> y la base de clientes real de la empresa.</p></div>
+                <div class="vs__item vs__item--good"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Así sí</p><p class="vs__msg"><q>Usa nombres inventados como Ana Prueba y Luis Ejemplo.</q></p></div>
+              </div>
+            </li>
+            <li class="rule rule--stop" id="seguridad-2">
+              <div class="rule__head"><span class="rule__n" aria-hidden="true">2</span><h3 class="rule__title">No publicar una app con información sensible sin inicio de sesión</h3></div>
+              <div class="rule__body">
+                <p>V1 no tiene inicio de sesión. Por eso V1 no lleva datos sensibles. Una app publicada la abre cualquiera que tenga la dirección, y «el responsable entra por una URL aparte» es una comodidad, no un candado: quien conozca esa URL, entra.</p>
+                <p>En Lovable, una app publicada es pública por defecto; los planes Free y Pro permiten limitarla a personas invitadas (<em>Invite only</em>) (<a href="https://docs.lovable.dev/features/publish" rel="noopener">Lovable, publicar</a>; <span class="verify">{{VERIFICAR_VISIBILIDAD_LOVABLE}}</span>).</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Así no</p><p class="vs__msg">Un registro de pacientes con diagnósticos, publicado en una URL abierta.</p></div>
+                <div class="vs__item vs__item--good"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Así sí</p><p class="vs__msg">Un tablero de solicitudes de mantenimiento («la luz del pasillo no prende»), donde nada es privado.</p></div>
+              </div>
+            </li>
+            <li class="rule rule--stop" id="seguridad-3">
+              <div class="rule__head"><span class="rule__n" aria-hidden="true">3</span><h3 class="rule__title">No pegar contraseñas ni llaves de otros servicios en un mensaje</h3></div>
+              <div class="rule__body">
+                <p>Una <strong>llave</strong> (en inglés, <em>API key</em>) es un código largo que permite a un programa usar tu cuenta en otro servicio. Quien la tiene, usa tu cuenta, y puede gastar a tu nombre.</p>
+                <p>La documentación de Lovable recomienda no pegar credenciales en el chat, sino describir lo que quieres para que la herramienta las pida por un campo seguro; también avisa que detecta llaves pegadas en el chat (<a href="https://docs.lovable.dev/features/security" rel="noopener">Lovable, seguridad</a>). En esta etapa no lo necesitas: no hay integraciones en V1.</p>
+              </div>
+              <div class="vs">
+                <div class="vs__item vs__item--bad"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-x" /></svg>Así no</p><p class="vs__msg"><q>Conéctala a mi correo, la contraseña es…</q></p></div>
+                <div class="vs__item vs__item--good"><p class="vs__label"><svg class="ico" aria-hidden="true"><use href="#i-ok" /></svg>Así sí</p><p class="vs__msg">Escribir en «qué NO hace»: <q>no envía correos</q>. Y dejar la integración para después, con ayuda.</p></div>
+              </div>
+            </li>
+            <li class="rule rule--stop" id="seguridad-4">
+              <div class="rule__head"><span class="rule__n" aria-hidden="true">4</span><h3 class="rule__title">No conectar la app a cuentas reales en esta etapa</h3></div>
+              <div class="rule__body">
+                <p>Ni correo, ni pagos, ni bases de datos de la empresa. Una V1 sirve para aprender y para que tres personas la prueben. Conectarla a cuentas reales convierte cualquier error de práctica en un problema real.</p>
+                <p>Lovable revisa la seguridad de la app de forma automática cada vez que publicas, pero su propia documentación advierte que esa revisión no garantiza seguridad completa (<a href="https://docs.lovable.dev/features/security" rel="noopener">Lovable, seguridad</a>). La revisión ayuda; no reemplaza estas cuatro reglas.</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="checklist" data-checklist="seguridad">
+            <div class="checklist__bar">
+              <p class="checklist__title" id="cl-seguridad">Antes de publicar o compartir tu app</p>
+              <div class="checklist__meta">
+                <span class="checklist__count" data-check-count aria-live="polite">0/5</span>
+                <span class="meter" aria-hidden="true"><span class="meter__fill" data-check-fill></span></span>
+                <button class="reset" type="button" data-check-reset><svg class="ico" aria-hidden="true"><use href="#i-reset" /></svg><span data-reset-label>Reiniciar</span></button>
+              </div>
+            </div>
+            <ul class="checklist__items" aria-labelledby="cl-seguridad">
+              <li><label class="check"><input type="checkbox" data-check="seg-1" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Todos los datos de prueba son inventados.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="seg-2" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">La app no pide ni muestra información sensible.</span><span class="check__how">Sin documentos de identidad, datos de salud, de dinero o contraseñas.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="seg-3" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">No pegué contraseñas ni llaves en ningún mensaje.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="seg-4" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">La app no está conectada a correo, pagos ni sistemas de la empresa.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="seg-5" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Sé que cualquiera con la dirección puede abrirla.</span><span class="check__how">Y estoy de acuerdo con lo que va a ver.</span></span></label></li>
+            </ul>
+            <p class="checklist__done" data-check-done hidden>Lista. Tu V1 se puede compartir con tus tres usuarios de prueba.</p>
+            <p class="checklist__note">Se guarda solo en este navegador.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 12 -->
+        <section class="chapter" id="ruta-a" aria-labelledby="t-ruta-a" data-title="Ruta A · caja cerrada">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">12</span><span>Seguir solo</span></p>
+            <h2 class="chapter__title" id="t-ruta-a">Ruta A · caja cerrada (Lovable)</h2>
+            <p class="chapter__lede">De la spec a una app publicada y conectada a GitHub, sin instalar nada. Es el camino del taller, con más detalle y con qué hacer cuando algo no sale.</p>
+          </header>
+
+          <div class="prose">
+            <h3 id="ruta-a-para-quien">Para quién es esta ruta</h3>
+            <ul>
+              <li>Para quien no alcanzó los cinco puntos de control en clase.</li>
+              <li>Para quien se quedó sin créditos o llegó sin cuenta y trabajó en pareja.</li>
+              <li>Para quien ya publicó y quiere seguir mejorando su app.</li>
+            </ul>
+
+            <h3 id="ruta-a-necesitas">Lo que necesitas</h3>
+            <ul>
+              <li>Una cuenta en <a href="https://lovable.dev" rel="noopener">Lovable</a>, con el correo que usas para el curso. Se crea gratis.</li>
+              <li>Una cuenta en <a href="https://github.com" rel="noopener">GitHub</a>, con un nombre de usuario sencillo: lo vas a usar.</li>
+              <li>Un portátil con Chrome actualizado. Tablet o celular no sirven para construir; el celular sí sirve para probar la app publicada.</li>
+              <li>Tu spec, ya con la prueba del adivino, debajo de la <a href="#cabecera">cabecera</a>. Lovable acepta la descripción en cualquier idioma, así que va en español (<a href="https://docs.lovable.dev/introduction/getting-started" rel="noopener">Lovable, inicio rápido</a>).</li>
+            </ul>
+          </div>
+          <div class="callout callout--verify">
+            <p class="callout__title">Créditos: verifícalos antes de empezar</p>
+            <p>Cada mensaje que construye gasta créditos. El plan gratuito trae créditos de construcción diarios con un tope mensual: <span class="verify">{{VERIFICAR_CREDITOS_LOVABLE}}</span>. Los planes y lo que incluye cada uno: <span class="verify">{{VERIFICAR_PLANES_LOVABLE}}</span>. Lovable anuncia un descuento para estudiantes y docentes: <span class="verify">{{VERIFICAR_DESCUENTO_ESTUDIANTES_LOVABLE}}</span>.</p>
+            <p class="src">Fuentes: <a href="https://docs.lovable.dev/introduction/subscription-plans" rel="noopener">planes</a> y <a href="https://docs.lovable.dev/introduction/credits-and-usage" rel="noopener">créditos y uso</a> en la documentación de Lovable. Por eso la V1 es pequeña y cada mensaje pide un solo cambio: rinden los créditos.</p>
+          </div>
+
+          <div class="prose">
+            <h3 id="primer-mensaje-lovable">Paso 0: enviar el primer mensaje</h3>
+            <ol>
+              <li>Entra a Lovable. En la página principal está la caja para describir tu app; el modo debe estar en construir (<em>Build</em>) <span class="verify">{{VERIFICAR_BOTONES_LOVABLE}}</span>.</li>
+              <li>Pega tu mensaje completo: la cabecera y debajo la spec. Envíalo una sola vez.</li>
+              <li>Espera. La primera versión toma unos minutos. Cuando termina, ves el editor: el chat a la izquierda y la vista previa de tu app a la derecha (<a href="https://docs.lovable.dev/introduction/getting-started" rel="noopener">Lovable, inicio rápido</a>).</li>
+              <li>Si te responde con preguntas, escribe primero la respuesta en tu spec y después contéstale.</li>
+            </ol>
+            <p>Mientras genera, ubícalo en el mapa: primero aparece el front (lo que se ve). Cuando la app necesite guardar, se crea la base de datos.</p>
+
+            <h3 id="puntos-de-control">Los cinco puntos de control</h3>
+            <p>Cada punto es una prueba que haces como usuario, no como programador. La app avanza solo cuando pasa la prueba. Marca cada uno al pasarlo: se guarda en este navegador.</p>
+          </div>
+
+          <div class="checklist" data-checklist="puntos-de-control">
+            <div class="checklist__bar">
+              <p class="checklist__title" id="cl-puntos">Puntos de control · ruta A</p>
+              <div class="checklist__meta">
+                <span class="checklist__count" data-check-count aria-live="polite">0/5</span>
+                <span class="meter" aria-hidden="true"><span class="meter__fill" data-check-fill></span></span>
+                <button class="reset" type="button" data-check-reset><svg class="ico" aria-hidden="true"><use href="#i-reset" /></svg><span data-reset-label>Reiniciar</span></button>
+              </div>
+            </div>
+            <ul class="checklist__items" aria-labelledby="cl-puntos">
+              <li><label class="check"><input type="checkbox" data-check="pc-1" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">1. Carga la primera versión</span><span class="check__how"><b>Cómo se prueba:</b> la vista previa abre y se ve algo parecido a la spec.</span><span class="check__how"><b>Si falla:</b> copia el mensaje de error tal cual y pide que lo arregle. Dos intentos máximo; luego, versión anterior.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="pc-2" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">2. La acción principal funciona</span><span class="check__how"><b>Cómo se prueba:</b> ejecuta el escenario 1 de tu spec, paso a paso, con datos inventados.</span><span class="check__how"><b>Si falla:</b> describe lo que ves, no lo que crees que falla: «al presionar Enviar no pasa nada», no «el botón está mal programado».</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="pc-3" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">3. Guarda datos</span><span class="check__how"><b>Cómo se prueba:</b> la prueba de la pestaña. Registra algo, cierra la pestaña, vuelve a abrir. ¿Sigue ahí lo que registraste?</span><span class="check__how"><b>Si falla:</b> envía el mensaje exacto «Los datos deben guardarse en la base de datos, no en la memoria del navegador».</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="pc-4" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">4. Publicada</span><span class="check__how"><b>Cómo se prueba:</b> publica, copia la dirección y ábrela desde tu celular.</span><span class="check__how"><b>Si falla o tarda:</b> sigue al punto 5 y vuelve después.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="pc-5" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">5. Conectada a GitHub</span><span class="check__how"><b>Cómo se prueba:</b> en la configuración del proyecto conectas GitHub y ves el repositorio creado, con archivos adentro.</span><span class="check__how"><b>Si falla:</b> los pasos detallados están abajo, en <a href="#github-dos-direcciones">conectar GitHub</a>.</span></span></label></li>
+            </ul>
+            <p class="checklist__done" data-check-done hidden>Cinco de cinco: tienes spec, app publicada y repositorio. Llena el <a href="/vibecoding/#salida">formulario de salida</a> si no lo hiciste.</p>
+            <p class="checklist__note">Se guarda solo en este navegador.</p>
+          </div>
+
+          <div class="prose">
+            <h3 id="prueba-de-la-pestana">La prueba de la pestaña, en detalle</h3>
+            <p>Una app puede «recordar» de dos maneras. En la <strong>memoria del navegador</strong>, lo que registras vive solo en esa pestaña, en ese computador: cierras y desaparece, y nadie más lo ve. En una <strong>base de datos</strong>, lo que registras queda guardado afuera y lo ve cualquiera que abra la app, desde cualquier lugar.</p>
+            <ol>
+              <li>Registra algo con datos inventados (por ejemplo, una solicitud «Prueba de pestaña»).</li>
+              <li>Cierra la pestaña de la vista previa o de la app publicada.</li>
+              <li>Vuelve a abrirla. Si puedes, ábrela también desde tu celular.</li>
+              <li>Si lo que registraste sigue ahí en los dos, pasó. Si no, usa el mensaje del punto 3.</li>
+            </ol>
+
+            <h3 id="publicar-lovable">Publicar y volver a publicar</h3>
+            <p>Esto dice hoy la documentación de Lovable (<a href="https://docs.lovable.dev/features/publish" rel="noopener">Lovable, publicar</a>); los nombres exactos de los botones pueden cambiar: <span class="verify">{{VERIFICAR_BOTONES_LOVABLE}}</span>.</p>
+            <ul>
+              <li><strong>Primera vez:</strong> el botón <em>Publish</em> está arriba a la derecha. El cuadro que se abre sugiere una dirección que termina en <code>lovable.app</code>, te deja elegir quién puede ver la app y hace una revisión de seguridad.</li>
+              <li><strong>Los cambios no se publican solos.</strong> Después de mejorar la app, vuelves a <em>Publish</em> y eliges <em>Publish changes</em>. Un punto sobre el botón indica que hay cambios sin publicar.</li>
+              <li><strong>Publicar desde ese cuadro no gasta créditos</strong> y funciona aunque tengas cero. Pedirle a Lovable en el chat que publique sí gasta.</li>
+              <li><strong>Dominio propio</strong> (como <code>tu-app.com</code>): Lovable lo ofrece en planes pagos (<a href="https://docs.lovable.dev/features/custom-domain" rel="noopener">Lovable, dominio propio</a>; <span class="verify">{{VERIFICAR_PLANES_LOVABLE}}</span>). Para una V1, la dirección <code>lovable.app</code> basta.</li>
+            </ul>
+
+            <h3 id="iterar">Cómo iterar después de la V1</h3>
+            <p>Cada mejora sigue el mismo ciclo de cuatro pasos:</p>
+            <ol>
+              <li><strong>Primero, la spec.</strong> Si es una acción nueva, escríbela en el bloque 2 y su escenario en el bloque 6. Si no cabe en tu V1, va a «después».</li>
+              <li><strong>Un mensaje,</strong> con un solo cambio (<a href="#regla-1">regla 1</a>).</li>
+              <li><strong>Prueba</strong> el escenario nuevo y repasa los tres de siempre (<a href="#regla-3">regla 3</a>).</li>
+              <li><strong>Si se rompió,</strong> vuelve a la versión anterior (<a href="#regla-4">regla 4</a>).</li>
+            </ol>
+            <p>Si vas adelante, estas mejoras van en este orden: <strong>filtro por estado</strong>; <strong>vista separada por rol</strong>; <strong>exportar la lista a CSV</strong> (un archivo que abre Excel); <strong>ajustar textos y nombres</strong>. Quedan por fuera de esta etapa: envío de correos, inicio de sesión con Google y pagos. Son integraciones que consumen mucho tiempo y fallan por razones ajenas a tu spec.</p>
+            <p><strong>Para preguntar sin cambiar nada,</strong> usa el modo chat (<em>Chat mode</em>): conversa sobre tu proyecto sin tocar el código (<a href="https://docs.lovable.dev/features/chat-mode" rel="noopener">Lovable, modo chat</a>; costo: <span class="verify">{{VERIFICAR_COSTO_CHAT_LOVABLE}}</span>). Sirve para preguntas como «¿dónde se guardan las solicitudes?» o «¿qué tendría que cambiar para agregar un filtro?».</p>
+
+            <h3 id="historial-de-versiones">El historial de versiones</h3>
+            <p>Cada cambio que hace Lovable queda guardado como una versión que puedes restaurar. Así funciona hoy, según su documentación (<a href="https://docs.lovable.dev/features/projects/history" rel="noopener">Lovable, historial</a>; nombres de botones: <span class="verify">{{VERIFICAR_BOTONES_LOVABLE}}</span>):</p>
+            <ul>
+              <li><strong>Para abrirlo:</strong> el interruptor <em>History</em> en la barra superior del editor.</li>
+              <li><strong>Para volver a una versión:</strong> en esa versión, <em>Revert</em>. La versión publicada aparece marcada como <em>Published</em>.</li>
+              <li><strong>Para marcar versiones buenas:</strong> <em>Bookmark</em>. La guía de Lovable recomienda marcar los hitos para tener siempre un punto seguro al cual volver (<a href="https://docs.lovable.dev/prompting/prompting-one" rel="noopener">Lovable, prompting</a>). Marca una versión cada vez que pase un punto de control.</li>
+              <li><strong>Lo que no hace:</strong> volver atrás restaura el código, <strong>no los datos</strong> de la base de datos. Y no devuelve los créditos que gastaste.</li>
+            </ul>
+
+            <h3 id="github-dos-direcciones">Conectar GitHub en dos direcciones</h3>
+            <p><strong>Qué significa «dos direcciones»:</strong> lo que cambias en Lovable se copia a GitHub, y lo que se cambia en GitHub (por ejemplo, con un agente de código en la ruta B) vuelve a Lovable. Tu código queda en un repositorio a tu nombre: es el plano y el historial del mapa, y es la caja que abrimos en la Clase 2. GitHub lo define como un lugar para guardar tu código, tus archivos y el historial de cambios de cada archivo (<a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories" rel="noopener">GitHub, repositorios</a>).</p>
+            <p>Los pasos, según la documentación de Lovable (<a href="https://docs.lovable.dev/integrations/github" rel="noopener">Lovable, GitHub</a>; nombres de botones: <span class="verify">{{VERIFICAR_BOTONES_LOVABLE}}</span>):</p>
+            <ol>
+              <li>Abre la configuración del proyecto: <em>More</em> en la barra del proyecto, luego <em>Settings</em>, pestaña <em>Git</em>.</li>
+              <li>En <em>GitHub</em>, si es tu primera vez, agrega tu cuenta (<em>Add account</em>). Se abre una ventana de GitHub: autoriza a Lovable (<em>Install &amp; Authorize</em>).</li>
+              <li>Elige <em>Connect</em> junto a tu cuenta. Lovable crea un repositorio nuevo y empieza la sincronización en dos direcciones.</li>
+              <li>Ábrelo desde la misma pestaña <em>Git</em> y comprueba que tenga archivos. Ese es tu punto de control 5.</li>
+            </ol>
+          </div>
+          <div class="callout">
+            <p class="callout__title">Lo que conviene saber de tu repositorio</p>
+            <ul>
+              <li>La sincronización con GitHub está disponible en todos los planes, incluido el gratuito.</li>
+              <li>El repositorio que crea Lovable es <strong>privado</strong> por defecto: nadie ve tu código si no lo compartes.</li>
+              <li>Se sincroniza una rama a la vez: la principal del repositorio, normalmente <code>main</code>.</li>
+              <li><strong>No borres el repositorio:</strong> borrarlo detiene la sincronización. Cambiarle el nombre no la daña.</li>
+              <li>Si desconectas y vuelves a conectar, Lovable crea un repositorio nuevo. Y no puedes traer a Lovable un repositorio que ya existía usando esta conexión.</li>
+              <li>El repositorio guarda el <strong>código</strong>, no los datos: la base de datos de tu app es aparte.</li>
+            </ul>
+            <p class="src">Fuentes: <a href="https://docs.lovable.dev/integrations/github" rel="noopener">Lovable, GitHub</a>; <a href="https://docs.lovable.dev/introduction/subscription-plans" rel="noopener">Lovable, planes</a>; <a href="https://docs.lovable.dev/introduction/faq" rel="noopener">Lovable, preguntas frecuentes</a> (la dirección que cita el plan de clase, <a href="https://lovable.dev/faq/code-export/export-download-code" rel="noopener">lovable.dev/faq/code-export</a>, hoy lleva a esa página).</p>
+          </div>
+
+          <div class="prose">
+            <h3 id="sin-creditos">Cuando se acaban los créditos</h3>
+            <p><strong>En clase:</strong> te sientas con tu vecino, haces los puntos de control que falten en su proyecto y terminas el tuyo en casa con esta ruta. No se pierde la clase; se pierde la publicación de ese día.</p>
+            <p><strong>En casa,</strong> esto es lo que pasa según la documentación de Lovable (<a href="https://docs.lovable.dev/introduction/credits-and-usage" rel="noopener">Lovable, créditos y uso</a>):</p>
+            <ul>
+              <li>La construcción se detiene hasta que haya créditos de nuevo.</li>
+              <li>El modo chat sigue funcionando mientras dure la cuota diaria de chat.</li>
+              <li>Tu app publicada sigue en línea, pero si guarda datos en la nube de Lovable, esa parte puede pausarse. Los datos no se pierden; si al volver a tener créditos la app sigue pausada, la documentación indica reactivarla desde <em>More → Cloud → Overview</em> (<span class="verify">{{VERIFICAR_BOTONES_LOVABLE}}</span>).</li>
+            </ul>
+            <p><strong>Lo que puedes hacer sin créditos,</strong> mientras se renuevan (<span class="verify">{{VERIFICAR_CREDITOS_LOVABLE}}</span>):</p>
+            <ul>
+              <li>Pulir tu spec y tu lista de «después».</li>
+              <li>Probar tus tres escenarios en la app publicada y anotar los fallos en la <a href="#protocolo-de-error">bitácora</a>.</li>
+              <li>Hacer la <a href="#clase-2">prueba con tres usuarios</a>: no necesita créditos.</li>
+              <li>Leer la <a href="#ruta-b">ruta B</a>: tu código está en GitHub y es tuyo, también cuando la caja cerrada se detiene.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ===================================================== 13 -->
+        <section class="chapter" id="ruta-b" aria-labelledby="t-ruta-b" data-title="Ruta B · caja abierta">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">13</span><span>Seguir solo</span></p>
+            <h2 class="chapter__title" id="t-ruta-b">Ruta B · caja abierta (Claude Code o Codex)</h2>
+            <p class="chapter__lede">Un agente de código en tu computador, la misma spec y todas las piezas a la vista. En clase se demostró; aquí está la instalación completa y una primera sesión guiada.</p>
+          </header>
+
+          <div class="prose">
+            <h3 id="que-es-un-agente">Qué es un agente de código</h3>
+            <p>Un agente de código <strong>no es un chat</strong>. Un chat te responde con texto y tú copias. Un agente lee tus archivos, escribe código, lo ejecuta, prueba el resultado y vuelve a intentar si algo falla.</p>
+          </div>
+          <div class="pull">
+            <p class="pull__label">La fórmula</p>
+            <p class="pull__text">Agente = modelo + herramientas.</p>
+            <p class="pull__sub">El <strong>modelo</strong> es la IA que entiende tu pedido y escribe el código. Las <strong>herramientas</strong> son lo que le das permiso de hacer en tu computador: leer y crear archivos dentro de una carpeta, ejecutar comandos, abrir la app para probarla.</p>
+          </div>
+          <div class="prose">
+            <p>Claude Code (de Anthropic) y Codex (de OpenAI) son dos agentes de este tipo. Necesitas uno; los pasos de esta ruta sirven para los dos.</p>
+
+            <h3 id="lo-que-controlas">Lo que controlas: las cinco piezas</h3>
+            <p>En la caja abierta las cinco piezas están a la vista: tú eliges la base de datos, dónde se publica y el dominio. Más control, más decisiones, más responsabilidad.</p>
+          </div>
+          <div class="table-wrap">
+            <table class="rtable rtable--stack">
+              <caption>Quién decide cada pieza</caption>
+              <thead>
+                <tr><th scope="col">Pieza</th><th scope="col">Caja cerrada (Lovable)</th><th scope="col">Caja abierta (agente)</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Front</th><td>Lo genera la herramienta</td><td>Lo genera el agente, y ves cada archivo que crea</td></tr>
+                <tr><th scope="row">Lógica</th><td>La genera la herramienta</td><td>La genera el agente; puedes pedirle que te la explique</td></tr>
+                <tr><th scope="row">Base de datos</th><td>La nube de la herramienta</td><td>Tú eliges cuál y dónde vive</td></tr>
+                <tr><th scope="row">Dominio</th><td>Una dirección de la herramienta, o propia en planes pagos</td><td>Donde publiques, con tu dominio si quieres</td></tr>
+                <tr><th scope="row">Repositorio</th><td>GitHub, sincronizado</td><td>Tu carpeta con su historial desde el primer archivo, y GitHub si la subes</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="prose">
+            <h3 id="ruta-b-necesitas">Lo que necesitas</h3>
+            <ul>
+              <li><strong>Un computador</strong> con macOS 13 o posterior, o Windows 10 (versión 1809) o posterior, según los requisitos de Claude Code (<a href="https://code.claude.com/docs/en/setup" rel="noopener">Claude Code, instalación</a>).</li>
+              <li><strong>Una cuenta con acceso al agente.</strong> Claude Code requiere una cuenta Pro, Max, Team, Enterprise o Console; el plan gratuito de claude.ai no lo incluye (<a href="https://code.claude.com/docs/en/setup" rel="noopener">fuente</a>; <span class="verify">{{VERIFICAR_PLANES_CLAUDE}}</span>). Codex se usa iniciando sesión con una cuenta de ChatGPT con plan que lo incluya, o con una llave de la API (<a href="https://learn.chatgpt.com/docs/auth" rel="noopener">fuente</a>; <span class="verify">{{VERIFICAR_PLANES_CODEX}}</span>). Los precios cambian: revísalos en la página oficial de cada uno antes de pagar.</li>
+              <li><strong>Tu spec</strong>, la misma de la ruta A.</li>
+            </ul>
+
+            <h3 id="dos-formas">Dos formas de usar el agente</h3>
+          </div>
+          <div class="cards cards--2">
+            <div class="card">
+              <p class="card__k">Sin terminal</p>
+              <h4 class="card__title">La app de escritorio</h4>
+              <p><strong>Claude:</strong> instala la app de escritorio de Claude, inicia sesión y abre la pestaña <em>Code</em>. Debajo de la caja de texto eliges el entorno <em>Local</em> y, con <em>Open folder…</em>, la carpeta de tu proyecto. No necesitas instalar nada más (<a href="https://code.claude.com/docs/en/desktop-quickstart" rel="noopener">Claude Code, app de escritorio</a>).</p>
+              <p><strong>Codex:</strong> la app de escritorio de ChatGPT tiene un modo Codex que se elige en el menú de ChatGPT (<a href="https://learn.chatgpt.com/docs/app" rel="noopener">Codex, app</a>; <span class="verify">{{VERIFICAR_UI_CODEX}}</span>).</p>
+            </div>
+            <div class="card">
+              <p class="card__k">Con terminal</p>
+              <h4 class="card__title">La línea de comandos</h4>
+              <p>La <strong>terminal</strong> es una ventana donde escribes órdenes en vez de hacer clic. Asusta la primera vez, pero en esta ruta solo usas tres: entrar a una carpeta, abrir el agente y salir.</p>
+              <p>Es la forma de la demo de clase y la que más se documenta. Abajo están los pasos.</p>
+            </div>
+          </div>
+
+          <div class="prose">
+            <h3 id="abrir-terminal">Abrir la terminal</h3>
+            <ul>
+              <li><strong>macOS:</strong> presiona <kbd>Cmd</kbd> + <kbd>Espacio</kbd>, escribe <code>Terminal</code> y presiona <kbd>Enter</kbd>.</li>
+              <li><strong>Windows:</strong> presiona <kbd>Win</kbd> + <kbd>X</kbd> y elige <em>Windows PowerShell</em> (o <em>Terminal</em>). Fíjate que cada línea empiece con <code>PS</code>: eso indica que estás en PowerShell.</li>
+            </ul>
+            <p class="src">Fuente: <a href="https://code.claude.com/docs/en/terminal-guide" rel="noopener">Claude Code, guía de terminal para personas nuevas</a>.</p>
+
+            <h3 id="instalar-claude-code">Instalar Claude Code</h3>
+            <p>Copia la línea de tu sistema, pégala en la terminal y presiona <kbd>Enter</kbd>. La instalación no muestra avance mientras descarga: deja la ventana abierta y espera el mensaje de que terminó. Este instalador no necesita Node.js. Comandos verificados el 19 de octubre de 2026 en la <a href="https://code.claude.com/docs/en/setup" rel="noopener">documentación de instalación</a>.</p>
+          </div>
+          <div class="os">
+            <p class="os__label">macOS o Linux</p>
+            <div class="code code--cmd" data-copy-scope>
+              <div class="code__head"><p class="code__title" id="cmd-cc-mac">Instalar Claude Code · macOS / Linux</p><div class="code__actions"><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div></div>
+<pre data-copy-src>curl -fsSL https://claude.ai/install.sh | bash</pre>
+            </div>
+            <p class="os__label">Windows · PowerShell</p>
+            <div class="code code--cmd" data-copy-scope>
+              <div class="code__head"><p class="code__title" id="cmd-cc-win">Instalar Claude Code · Windows PowerShell</p><div class="code__actions"><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div></div>
+<pre data-copy-src>irm https://claude.ai/install.ps1 | iex</pre>
+            </div>
+            <p class="os__label">Windows · CMD (si no estás en PowerShell)</p>
+            <div class="code code--cmd" data-copy-scope>
+              <div class="code__head"><p class="code__title" id="cmd-cc-cmd">Instalar Claude Code · Windows CMD</p><div class="code__actions"><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div></div>
+<pre data-copy-src>curl -fsSL https://claude.ai/install.cmd -o install.cmd &amp;&amp; install.cmd &amp;&amp; del install.cmd</pre>
+            </div>
+          </div>
+          <div class="prose">
+            <p>Para comprobar la instalación escribe <code>claude --version</code>. En Windows, instalar Git para Windows es opcional (<a href="https://code.claude.com/docs/en/setup" rel="noopener">fuente</a>). La documentación también ofrece Homebrew (<code>brew install --cask claude-code</code>), WinGet (<code>winget install Anthropic.ClaudeCode</code>) y npm; si no sabes qué son, usa las líneas de arriba.</p>
+            <p><strong>La primera vez</strong> que escribes <code>claude</code>, se abre el navegador para que inicies sesión. Si no se abre, presiona <kbd>c</kbd> para copiar el enlace de inicio de sesión (<a href="https://code.claude.com/docs/en/authentication" rel="noopener">Claude Code, autenticación</a>). Para salir, escribe <code>exit</code>; para interrumpir al agente mientras trabaja, <kbd>Esc</kbd>.</p>
+
+            <h3 id="instalar-codex">Instalar Codex</h3>
+            <p>Mismo procedimiento. Comandos verificados el 19 de octubre de 2026 en la <a href="https://learn.chatgpt.com/docs/codex/cli" rel="noopener">documentación de Codex CLI</a>.</p>
+          </div>
+          <div class="os">
+            <p class="os__label">macOS o Linux</p>
+            <div class="code code--cmd" data-copy-scope>
+              <div class="code__head"><p class="code__title" id="cmd-cx-mac">Instalar Codex · macOS / Linux</p><div class="code__actions"><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div></div>
+<pre data-copy-src>curl -fsSL https://chatgpt.com/codex/install.sh | sh</pre>
+            </div>
+            <p class="os__label">Windows · PowerShell nueva</p>
+            <div class="code code--cmd" data-copy-scope>
+              <div class="code__head"><p class="code__title" id="cmd-cx-win">Instalar Codex · Windows PowerShell</p><div class="code__actions"><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div></div>
+<pre data-copy-src>powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"</pre>
+            </div>
+          </div>
+          <div class="prose">
+            <p>En Windows, la documentación de Codex y la de su repositorio en GitHub no coinciden sobre si funciona directo en Windows o requiere WSL2: <span class="verify">{{VERIFICAR_INSTALACION_CODEX_WINDOWS}}</span>. También se instala con npm (<code>npm install -g @openai/codex</code>) o Homebrew (<code>brew install --cask codex</code>). La primera vez que escribes <code>codex</code> en la carpeta de tu proyecto, eliges <em>Sign in with ChatGPT</em> u otro método de inicio de sesión.</p>
+          </div>
+
+          <div class="callout callout--warn">
+            <p class="callout__title">Quién aprueba los cambios: elígelo tú</p>
+            <p><strong>Claude Code</strong>, desde la versión 2.1.283, arranca en modo automático: un segundo modelo revisa las acciones en lugar de preguntarte (<a href="https://code.claude.com/docs/en/permission-modes" rel="noopener">Claude Code, modos de permiso</a>; <span class="verify">{{VERIFICAR_MODO_PERMISOS_CLAUDE}}</span>). Mientras aprendes, es mejor ver y aprobar cada cambio. Arráncalo así:</p>
+            <div class="code code--cmd" data-copy-scope>
+              <div class="code__head"><p class="code__title" id="cmd-cc-manual">Claude Code en modo manual</p><div class="code__actions"><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div></div>
+<pre data-copy-src>claude --permission-mode default</pre>
+            </div>
+            <p>Para que proponga un plan sin tocar archivos: modo plan, con <kbd>Shift</kbd> + <kbd>Tab</kbd> o empezando el mensaje con <code>/plan</code>. En la app de escritorio, el modo se elige debajo de la caja de texto (<em>Manual</em>, <em>Plan</em>…).</p>
+            <p><strong>Codex</strong>, en su modo <em>Auto</em>, lee, edita y ejecuta comandos dentro de la carpeta del proyecto sin preguntar, y pide permiso para salir de ella o usar internet. Con <code>/permissions</code> cambias de modo y con <code>/plan</code> pasas a modo plan (<a href="https://learn.chatgpt.com/docs/agent-approvals-security" rel="noopener">Codex, aprobaciones y seguridad</a>).</p>
+          </div>
+
+          <div class="prose">
+            <h3 id="claude-md">La spec se convierte en CLAUDE.md o AGENTS.md</h3>
+            <p>En la caja cerrada, la spec es un documento aparte que pegas en el chat. En la caja abierta, <strong>la spec vive con el código</strong>, en un archivo de instrucciones dentro de la carpeta del proyecto:</p>
+            <ul>
+              <li><strong>CLAUDE.md</strong> para Claude Code: un archivo de instrucciones que Claude lee al empezar cada sesión. El comando <code>/init</code> genera uno a partir del código que ya existe (<a href="https://code.claude.com/docs/en/memory" rel="noopener">Claude Code, memoria</a>).</li>
+              <li><strong>AGENTS.md</strong> para Codex: Codex lo lee antes de hacer cualquier trabajo, y <code>/init</code> crea uno de base (<a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" rel="noopener">Codex, AGENTS.md</a>). Es un formato abierto que usan varios agentes (<a href="https://agents.md" rel="noopener">agents.md</a>). Claude Code también puede leer un AGENTS.md como instrucciones del proyecto (<a href="https://code.claude.com/docs/en/memory" rel="noopener">Claude Code, memoria</a>).</li>
+            </ul>
+            <p>En una carpeta vacía, <code>/init</code> no tiene código que analizar: es mejor escribirlo tú, con tu spec y las reglas de mesa. Esta es la plantilla. El nombre del archivo es <code>CLAUDE.md</code> o <code>AGENTS.md</code>; el contenido es el mismo.</p>
+          </div>
+          <div class="code code--tall" data-copy-scope>
+            <div class="code__head">
+              <p class="code__title" id="code-claude-md">CLAUDE.md / AGENTS.md · plantilla</p>
+              <div class="code__actions">
+                <button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
+                <button class="copy copy--ghost" type="button" data-download="CLAUDE.md"><svg class="ico" aria-hidden="true"><use href="#i-file" /></svg><span>Descargar</span></button>
+              </div>
+            </div>
+<pre data-copy-src><span class="h"># [Nombre de la app]</span>
+
+Este archivo es la spec del proyecto. Léela completa antes de cada tarea.
+Quien dirige este proyecto no sabe programar: explica lo que haces en palabras simples.
+
+<span class="h">## Spec V1</span>
+[pega aquí tu spec completa: los siete bloques]
+
+<span class="h">## Cómo trabajamos</span>
+- Construye solo lo que está en la spec. Si algo no está claro, pregúntame antes de escribir código.
+- Un cambio a la vez. Cuando termines un cambio, dime cómo lo pruebo.
+- Los datos se guardan en una base de datos, nunca en la memoria del navegador.
+- Antes de agregar una función nueva, primero la escribimos en la spec de este archivo.
+- Si algo se rompe, primero volvemos a la última versión que funcionaba; después lo intentamos de otra forma, más pequeña.
+- Usa solo datos inventados. Nunca datos reales de personas.
+- Nunca escribas contraseñas ni llaves en el código ni en este archivo.
+- Guarda una versión (commit) cada vez que un escenario de la sección 6 pase.</pre>
+          </div>
+
+          <div class="prose">
+            <h3 id="primera-sesion">Primera sesión guiada: el tablero desde la misma spec</h3>
+            <p>Vas a reconstruir el tablero de solicitudes en caja abierta, como en el video de clase: el agente <strong>lee</strong> la spec, <strong>pregunta</strong> lo que no está claro, <strong>crea</strong> los archivos, <strong>ejecuta</strong> la app, <strong>prueba</strong> un escenario y <strong>corrige</strong> un error. Usa la <a href="#spec-tablero">spec del tablero</a> o la tuya. Los mensajes funcionan igual en Claude Code y en Codex (si usas Codex, cambia CLAUDE.md por AGENTS.md).</p>
+          </div>
+          <ol class="flow">
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">0</span>
+              <div class="flow__content">
+                <h4 class="flow__title">Prepara la carpeta</h4>
+                <p>Crea una carpeta vacía llamada <code>tablero-solicitudes</code> dentro de Documentos. Ábrela en el agente: en la app de escritorio, con <em>Open folder…</em>; en la terminal, entrando a ella y abriendo el agente:</p>
+                <div class="code code--cmd" data-copy-scope>
+                  <div class="code__head"><p class="code__title" id="cmd-cd">Entrar a la carpeta y abrir el agente</p><div class="code__actions"><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div></div>
+<pre data-copy-src>cd Documents/tablero-solicitudes
+claude --permission-mode default</pre>
+                </div>
+                <p class="small muted">En Windows la carpeta se escribe <code>cd Documents\tablero-solicitudes</code>. Si tu sistema está en español y la carpeta se llama «Documentos», usa ese nombre. Con Codex, la segunda línea es <code>codex</code>.</p>
+                <p>Luego pídele que cree el archivo de instrucciones con tu spec:</p>
+                <div class="msg" data-copy-scope>
+                  <div class="msg__head"><p class="msg__title" id="msg-b0">Mensaje 0 · crear CLAUDE.md</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                  <p class="msg__body" data-copy-src>Crea en esta carpeta un archivo llamado CLAUDE.md con exactamente este contenido, sin cambiar nada. No crees ningún otro archivo todavía.
+
+[pega aquí la plantilla de CLAUDE.md ya llena con tu spec]</p>
+                </div>
+              </div>
+            </li>
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">1</span>
+              <div class="flow__content">
+                <h4 class="flow__title">Lee</h4>
+                <div class="msg" data-copy-scope>
+                  <div class="msg__head"><p class="msg__title" id="msg-b1">Mensaje 1 · leer la spec</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                  <p class="msg__body" data-copy-src>Lee CLAUDE.md completo. Todavía no escribas código.
+Resúmeme en cinco líneas qué vas a construir y hazme las preguntas que necesites para no tener que adivinar nada.</p>
+                </div>
+                <p>Lo que esperas ver: un resumen que se parece a tu spec y una lista de preguntas. Si el resumen trae algo que no está en la spec, díselo.</p>
+              </div>
+            </li>
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">2</span>
+              <div class="flow__content">
+                <h4 class="flow__title">Pregunta (y tú respondes en la spec)</h4>
+                <div class="msg" data-copy-scope>
+                  <div class="msg__head"><p class="msg__title" id="msg-b2">Mensaje 2 · respuestas a la spec</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                  <p class="msg__body" data-copy-src>Estas son mis respuestas:
+[tus respuestas, una por pregunta]
+
+Agrégalas a la spec en CLAUDE.md, en el bloque que corresponda, y muéstrame qué cambiaste.</p>
+                </div>
+                <p>Es la prueba del adivino hecha por el agente. Cada respuesta queda escrita en la spec, no perdida en el chat.</p>
+              </div>
+            </li>
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">3</span>
+              <div class="flow__content">
+                <h4 class="flow__title">Planea y crea</h4>
+                <p>Activa el modo plan (<kbd>Shift</kbd> + <kbd>Tab</kbd> o <code>/plan</code>) y envía:</p>
+                <div class="msg" data-copy-scope>
+                  <div class="msg__head"><p class="msg__title" id="msg-b3">Mensaje 3 · el plan</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                  <p class="msg__body" data-copy-src>Propón un plan antes de construir. Usa el mapa de 5 piezas: qué vas a crear para el front, para la lógica y para la base de datos.
+Para esta primera versión quiero una base de datos que funcione en mi computador sin crear cuentas en ningún servicio. Dime cuál vas a usar y por qué, en palabras simples.
+Dime también qué necesito instalar, si algo, y cómo voy a abrir la app en el navegador.</p>
+                </div>
+                <p>Si el plan te parece bien, apruébalo y pídele que construya. En modo manual verás cada archivo antes de que lo cree: no tienes que entender el código, pero sí fijarte en que lo que hace corresponda a lo que dijo el plan. Si te pide instalar algo (por ejemplo, <a href="https://nodejs.org/en/download" rel="noopener">Node.js</a> o <a href="https://git-scm.com/install/" rel="noopener">Git</a>), pídele que te explique para qué sirve antes de aceptar.</p>
+              </div>
+            </li>
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">4</span>
+              <div class="flow__content">
+                <h4 class="flow__title">Ejecuta</h4>
+                <div class="msg" data-copy-scope>
+                  <div class="msg__head"><p class="msg__title" id="msg-b4">Mensaje 4 · ejecutar</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                  <p class="msg__body" data-copy-src>Ejecuta la app en mi computador y dime qué dirección abro en el navegador.</p>
+                </div>
+                <p>Te dará una dirección que empieza por <code>http://localhost</code>: es una dirección que solo existe en tu computador. Nadie más la puede abrir; para eso está <a href="#publicar-caja-abierta">publicar</a>.</p>
+              </div>
+            </li>
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">5</span>
+              <div class="flow__content">
+                <h4 class="flow__title">Prueba un escenario</h4>
+                <p>Haz tú el escenario 1, como en el punto de control 2. Después pídele al agente que lo convierta en una prueba que se repite sola:</p>
+                <div class="msg" data-copy-scope>
+                  <div class="msg__head"><p class="msg__title" id="msg-b5">Mensaje 5 · prueba automática</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                  <p class="msg__body" data-copy-src>Escribe una prueba automática para el escenario 1 de la sección 6 de la spec, ejecútala y dime si pasa. Explícame en una frase qué comprueba.</p>
+                </div>
+                <p>Esta es una ventaja de la caja abierta: los escenarios dejan de ser una lista que revisas a mano y se vuelven pruebas que el agente corre después de cada cambio.</p>
+              </div>
+            </li>
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">6</span>
+              <div class="flow__content">
+                <h4 class="flow__title">Corrige</h4>
+                <p>Cuando algo falle, el <a href="#protocolo-de-error">protocolo de error</a> es el mismo. La diferencia es que aquí el error se ve completo:</p>
+                <div class="msg" data-copy-scope>
+                  <div class="msg__head"><p class="msg__title" id="msg-b6">Mensaje 6 · corregir</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                  <p class="msg__body" data-copy-src>Hice: [los pasos]
+Esperaba: [el resultado del escenario]
+Pasó: [lo que veo]
+Este es el error tal cual: [pega el error]
+Arréglalo sin cambiar nada más y vuelve a correr la prueba del escenario.</p>
+                </div>
+              </div>
+            </li>
+            <li class="flow__step">
+              <span class="flow__n" aria-hidden="true">7</span>
+              <div class="flow__content">
+                <h4 class="flow__title">Guarda la versión</h4>
+                <div class="msg" data-copy-scope>
+                  <div class="msg__head"><p class="msg__title" id="msg-b7">Mensaje 7 · guardar una versión</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                  <p class="msg__body" data-copy-src>Guarda esta versión con un commit que explique qué funciona ahora.</p>
+                </div>
+                <p>Un <strong>commit</strong> es una versión guardada del código, con fecha, autor y una descripción: el «historial» del mapa. Claude Code puede preparar y describir los commits por ti (<a href="https://code.claude.com/docs/en/overview" rel="noopener">Claude Code, visión general</a>). Así, la regla 4 funciona igual que en Lovable: siempre hay una versión anterior a la cual volver.</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="checklist" data-checklist="primera-sesion">
+            <div class="checklist__bar">
+              <p class="checklist__title" id="cl-sesion">Mi primera sesión en caja abierta</p>
+              <div class="checklist__meta">
+                <span class="checklist__count" data-check-count aria-live="polite">0/7</span>
+                <span class="meter" aria-hidden="true"><span class="meter__fill" data-check-fill></span></span>
+                <button class="reset" type="button" data-check-reset><svg class="ico" aria-hidden="true"><use href="#i-reset" /></svg><span data-reset-label>Reiniciar</span></button>
+              </div>
+            </div>
+            <ul class="checklist__items" aria-labelledby="cl-sesion">
+              <li><label class="check"><input type="checkbox" data-check="rb-0" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">La carpeta tiene su CLAUDE.md o AGENTS.md con mi spec.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="rb-1" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Lee: el resumen del agente coincide con mi spec.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="rb-2" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Pregunta: respondí sus preguntas y quedaron escritas en la spec.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="rb-3" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Crea: aprobé un plan con las piezas del mapa y lo construyó.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="rb-4" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Ejecuta: abrí la app en el navegador de mi computador.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="rb-5" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Prueba: el escenario 1 pasa, a mano y con prueba automática.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="rb-6" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Corrige y guarda: arreglé un error con el protocolo y guardé la versión.</span></span></label></li>
+            </ul>
+            <p class="checklist__done" data-check-done hidden>Abriste la caja. Misma spec, segunda caja: eso es lo que hacemos en vivo en la Clase 2.</p>
+            <p class="checklist__note">Se guarda solo en este navegador.</p>
+          </div>
+
+          <div class="prose">
+            <h3 id="abrir-repo-lovable">Abrir el repositorio de tu app de Lovable</h3>
+            <p>Si hiciste la ruta A, tu app ya tiene repositorio en GitHub. Abrirlo con un agente es lo que haremos en vivo en la Clase 2.</p>
+            <ol>
+              <li><strong>Trae una copia a tu computador</strong> («clonar»). Sin terminal, con GitHub Desktop, una aplicación gratuita de GitHub: en la página de tu repositorio, botón <em>Code</em> y luego <em>Open with GitHub Desktop</em> (<a href="https://docs.github.com/en/desktop/adding-and-cloning-repositories/cloning-a-repository-from-github-to-github-desktop" rel="noopener">GitHub, clonar con Desktop</a>; <a href="https://docs.github.com/en/desktop/overview/about-github-desktop" rel="noopener">qué es GitHub Desktop</a>).</li>
+              <li><strong>Abre esa carpeta en el agente</strong>, como en el paso 0.</li>
+              <li><strong>Pide que te lo explique antes de cambiar nada:</strong></li>
+            </ol>
+          </div>
+          <div class="msg" data-copy-scope>
+            <div class="msg__head"><p class="msg__title" id="msg-explorar">Mensaje · explicar un proyecto de Lovable</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+            <p class="msg__body" data-copy-src>Este proyecto lo construyó Lovable. No cambies nada.
+Explícame el proyecto con el mapa de 5 piezas: qué carpetas son el front, dónde está la lógica, qué base de datos usa y dónde vive, cómo se publica y qué hay en el repositorio.
+Después compáralo con mi spec (abajo) y dime qué partes ya están y cuáles no.
+
+[pega aquí tu spec]</p>
+          </div>
+          <div class="callout callout--warn">
+            <p class="callout__title">Cuidado con la sincronización en dos direcciones</p>
+            <p>Lo que subas a la rama principal del repositorio (normalmente <code>main</code>) vuelve a tu proyecto de Lovable (<a href="https://docs.lovable.dev/integrations/github" rel="noopener">Lovable, GitHub</a>). Para experimentar sin tocar la versión de Lovable, pídele al agente que trabaje en una rama aparte: <q>Crea una rama nueva llamada experimento y trabaja ahí</q>. Y recuerda: el repositorio trae el código, no los datos. La base de datos de tu app sigue en la nube de Lovable.</p>
+          </div>
+
+          <div class="prose">
+            <h3 id="publicar-caja-abierta">Publicar desde la caja abierta</h3>
+            <p>Publicar es poner las piezas en internet. En la caja abierta decides tres cosas:</p>
+            <ul>
+              <li><strong>Dónde vive el código:</strong> en un repositorio de GitHub. Si tu proyecto viene de Lovable, ya lo tienes. Si lo creaste con el agente, pídele ayuda para subirlo a un repositorio nuevo en tu cuenta personal.</li>
+              <li><strong>Dónde corre la app (hosting).</strong> Una opción es <a href="https://vercel.com/docs/git" rel="noopener">Vercel</a>: creas un proyecto nuevo, eliges tu repositorio de GitHub y presionas <em>Deploy</em>. Después, cada cambio que subes al repositorio se publica solo (<a href="https://vercel.com/docs/git/vercel-for-github" rel="noopener">Vercel para GitHub</a>). Ojo: el plan <em>Hobby</em> de Vercel no despliega repositorios privados de una organización de GitHub; mantén el repositorio en tu cuenta personal (<a href="https://vercel.com/docs/git" rel="noopener">fuente</a>; <span class="verify">{{VERIFICAR_PLANES_VERCEL}}</span>).</li>
+              <li><strong>El dominio.</strong> Lo compras en un registrador de dominios y lo conectas en el hosting; en Vercel, desde <em>Settings → Domains → Add Domain</em> (<a href="https://vercel.com/docs/domains/working-with-domains/add-a-domain" rel="noopener">Vercel, agregar dominio</a>; precio: <span class="verify">{{VERIFICAR_PRECIO_DOMINIO}}</span>).</li>
+            </ul>
+            <p><strong>Si tu app viene de Lovable,</strong> Lovable tiene una guía para publicarla fuera de su nube (<a href="https://docs.lovable.dev/tips-tricks/external-deployment-hosting" rel="noopener">Lovable, publicar afuera</a>). Lo esencial: Vercel reconoce el proyecto sin configuración extra, pero hay que darle unos datos de conexión («variables de entorno») que la guía explica, y la app sigue usando la base de datos y los créditos de Lovable. Mover también los datos es otro paso, más técnico. Haz esto con el agente y con esa guía abierta, paso a paso.</p>
+            <p><strong>Si tu app la creó el agente</strong> con una base de datos que vive en tu computador, al publicarla necesita una base de datos en internet. Pídele opciones y que te explique, en palabras simples, dónde quedan los datos y qué cuesta cada una. Decides tú.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 14 -->
+        <section class="chapter" id="caja-cerrada-o-abierta" aria-labelledby="t-caja-cerrada-o-abierta" data-title="¿Caja cerrada o abierta?">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">14</span><span>Seguir solo</span></p>
+            <h2 class="chapter__title" id="t-caja-cerrada-o-abierta">¿Caja cerrada o abierta?</h2>
+            <p class="chapter__lede">«Caja cerrada / caja abierta» reemplaza «no-code contra código». La cerrada entrega todo armado y esconde las piezas; la abierta muestra todo y te hace responsable.</p>
+          </header>
+
+          <div class="table-wrap">
+            <table class="rtable rtable--stack">
+              <caption>Misma spec, dos cajas</caption>
+              <thead>
+                <tr><th scope="col">Criterio</th><th scope="col">Caja cerrada (Lovable)</th><th scope="col">Caja abierta (Claude Code / Codex)</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Tiempo a primera versión</th><td>Minutos, sin instalar nada</td><td>Minutos de generación, más instalación y decisiones previas</td></tr>
+                <tr><th scope="row">Control sobre las piezas</th><td>Bajo: la herramienta decide base de datos, hosting y estructura</td><td>Total: tú decides cada pieza</td></tr>
+                <tr><th scope="row">Costo</th><td>Créditos por mensaje dentro de un plan mensual</td><td>Suscripción o consumo por uso, más hosting y base de datos aparte</td></tr>
+                <tr><th scope="row">Un cambio que la caja no previó (exportar a Excel, enviar correo)</th><td>Depende de las integraciones que ofrezca</td><td>Se construye; el límite es tu spec</td></tr>
+                <tr><th scope="row">Cuando se rompe</th><td>Volver a la versión anterior; poco diagnóstico</td><td>El error se ve y se corrige; exige leerlo</td></tr>
+                <tr><th scope="row">Salida del código</th><td>GitHub en dos direcciones</td><td>Es tuyo desde el primer archivo</td></tr>
+                <tr><th scope="row">Quién lo mantiene</th><td>Tú, dentro de la herramienta</td><td>Tú o un ingeniero, con el código en la mano</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="prose">
+            <h3 id="fila-por-fila">La tabla, fila por fila</h3>
+            <p>No hay ganador: cada fila gana una distinta. Lo que importa es cuál pesa más para tu proyecto.</p>
+            <ul>
+              <li><strong>Tiempo a primera versión.</strong> La caja cerrada gana cuando lo urgente es ver algo funcionando hoy. Por eso la Clase 1 se hizo ahí: el objetivo era tu primera versión publicada, sin instalar nada.</li>
+              <li><strong>Control sobre las piezas.</strong> En la cerrada no eliges la base de datos ni dónde se publica; casi nunca importa en una V1. Empieza a importar cuando alguien pregunta «¿dónde quedan los datos?» y necesitas una respuesta precisa.</li>
+              <li><strong>Costo.</strong> En la cerrada pagas con créditos: cada mensaje cuesta, también los que arreglan errores. En la abierta pagas el agente, y aparte el hosting y la base de datos. Ninguna es gratis cuando la app crece; cambia qué pagas.</li>
+              <li><strong>Un cambio que la caja no previó.</strong> Exportar a Excel o enviar un correo: en la cerrada depende de que la herramienta ofrezca esa integración. En la abierta se construye, y el límite es lo bien que lo describas en tu spec.</li>
+              <li><strong>Cuando se rompe.</strong> En la cerrada, la salida es volver a la versión anterior; ves poco de por qué falló. En la abierta el error se ve completo y se puede corregir de raíz, pero alguien tiene que leerlo (tú, con ayuda del agente).</li>
+              <li><strong>Salida del código.</strong> Es el criterio que más pesó para elegir la herramienta de clase: con la sincronización a GitHub, tu código no queda atrapado. En la abierta es tuyo desde el primer archivo.</li>
+              <li><strong>Quién lo mantiene.</strong> En la cerrada, tú, dentro de la herramienta: si la herramienta cambia o sube de precio, te toca adaptarte. En la abierta puedes entregarle el código a un ingeniero, y él puede trabajar sin la herramienta.</li>
+            </ul>
+
+            <h3 id="base44">Una nota sobre Base44</h3>
+            <p>Base44 es otra caja cerrada, igual de empaquetada que Lovable. La diferencia que importa para este curso está en la salida: su sincronización en dos direcciones con GitHub exige el plan <em>Builder</em> o superior (<a href="https://docs.base44.com/developers/app-code/local-development/github" rel="noopener">documentación de Base44</a>; el plan de clase citaba <a href="https://docs.base44.com/Integrations/Using-GitHub" rel="noopener">esta página</a>, que hoy redirige; <span class="verify">{{VERIFICAR_PLANES_BASE44}}</span>). Y la app exportada puede seguir dependiendo del backend alojado en Base44 (<a href="https://capgo.app/blog/transform-base44-app-to-mobile-with-capacitor/" rel="noopener">guía de exportación</a>).</p>
+            <p>El criterio que usamos para elegir es una pregunta: <strong>¿se puede abrir la caja después, y a qué precio?</strong> Por eso en clase se construyó en Lovable. No porque sea mejor en todo, sino porque su salida a GitHub está disponible en todos los planes y funciona en dos direcciones (<a href="https://docs.lovable.dev/introduction/subscription-plans" rel="noopener">Lovable, planes</a>; fuentes del plan de clase: <a href="https://lovable.dev/faq/code-export/export-download-code" rel="noopener">Lovable, exportar código</a> y <a href="https://axonbuild.com/blog/lovable-export-code/" rel="noopener">detalle de planes</a>).</p>
+
+            <h3 id="guia-de-decision">Guía de decisión</h3>
+            <p>La desarrollamos en la Clase 2 con tu proyecto en la mano. Estas son las señales para cada camino:</p>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <p class="card__k">Sigue en caja cerrada si…</p>
+              <ul>
+                <li>Tu app hace lo que dice la spec y los cambios que necesitas son del tipo que la herramienta ya resuelve.</li>
+                <li>Los errores que aparecen se arreglan volviendo a la versión anterior y pidiendo el cambio más pequeño.</li>
+                <li>Nadie depende de la app para algo crítico, y el costo en créditos te sirve.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <p class="card__k">Pasa a caja abierta si…</p>
+              <ul>
+                <li>Necesitas un cambio que la caja no previó y la herramienta no ofrece esa integración.</li>
+                <li>Un error vuelve una y otra vez, y volver atrás ya no alcanza: necesitas ver por qué falla.</li>
+                <li>Quieres decidir dónde viven los datos o dónde se publica, o dejar de depender de una sola herramienta.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <p class="card__k">Llama a un ingeniero si…</p>
+              <ul>
+                <li>La app va a manejar datos personales o sensibles, inicio de sesión, pagos o dinero.</li>
+                <li>Otras personas dependen de ella todos los días, o la vas a conectar a sistemas de una empresa.</li>
+                <li>Aplicaste el protocolo de error en las dos cajas y el problema sigue.</li>
+              </ul>
+              <p class="small muted">Llegar con spec, repositorio y bitácora de fallos hace que esa conversación sea corta y concreta.</p>
+            </div>
+          </div>
+
+          <div class="prose">
+            <h3 id="dominio-propio">Dominio propio</h3>
+            <p>Un dominio propio es una dirección como <code>tu-app.com</code> en vez de <code>tu-app.lovable.app</code>. Se paga por periodos a un registrador de dominios (<span class="verify">{{VERIFICAR_PRECIO_DOMINIO}}</span>) y se conecta a donde está publicada la app: en Lovable, desde la configuración del proyecto, en planes pagos (<a href="https://docs.lovable.dev/features/custom-domain" rel="noopener">Lovable, dominio propio</a>); en Vercel, desde la configuración del proyecto (<a href="https://vercel.com/docs/domains/working-with-domains/add-a-domain" rel="noopener">Vercel, dominios</a>). Para una V1 que prueban tres personas no hace falta.</p>
+
+            <h3 id="costos">Costos de mantener una app publicada</h3>
+            <p>Publicar no es el final. Una app publicada sigue costando, aunque sea poco. Aquí no hay cifras, a propósito: cambian seguido. Lo que sí puedes saber es <strong>qué cosas cuestan</strong>, para revisarlas en las páginas oficiales:</p>
+            <ul>
+              <li><strong>La herramienta.</strong> En Lovable, construir gasta créditos, y tener la app con base de datos funcionando también consume; el plan gratuito incluye una cuota mensual para eso. Si se agotan, esa parte de la app se pausa (<a href="https://docs.lovable.dev/introduction/credits-and-usage" rel="noopener">Lovable, créditos y uso</a>; <span class="verify">{{VERIFICAR_CREDITOS_LOVABLE}}</span>).</li>
+              <li><strong>El agente de código,</strong> si usas la caja abierta: suscripción o pago por uso (<span class="verify">{{VERIFICAR_PRECIOS_CLAUDE_CODEX}}</span>).</li>
+              <li><strong>El hosting</strong> y <strong>la base de datos</strong>, si publicas fuera de la caja cerrada (<span class="verify">{{VERIFICAR_PRECIOS_HOSTING}}</span>).</li>
+              <li><strong>El dominio,</strong> si quieres uno propio (<span class="verify">{{VERIFICAR_PRECIO_DOMINIO}}</span>).</li>
+              <li><strong>Tu tiempo.</strong> Alguien responde a los usuarios, arregla lo que falla y decide qué sigue. Es el costo que más se olvida.</li>
+              <li><strong>La responsabilidad.</strong> Si la app guarda datos de otras personas, cuidarlos es tu responsabilidad. Es una razón más para que la V1 no los tenga.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ===================================================== 15 -->
+        <section class="chapter" id="clase-2" aria-labelledby="t-clase-2" data-title="Tarea y clase 2">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">15</span><span>Lo que sigue</span></p>
+            <h2 class="chapter__title" id="t-clase-2">Tarea y Clase 2</h2>
+            <p class="chapter__lede">La Clase 2 no explica: acompaña. Su material es lo que falló en tu semana. Por eso la tarea importa más que cualquier lectura.</p>
+          </header>
+
+          <div class="checklist" data-checklist="tarea">
+            <div class="checklist__bar">
+              <p class="checklist__title" id="cl-tarea">Tarea para la Clase 2</p>
+              <div class="checklist__meta">
+                <span class="checklist__count" data-check-count aria-live="polite">0/4</span>
+                <span class="meter" aria-hidden="true"><span class="meter__fill" data-check-fill></span></span>
+                <button class="reset" type="button" data-check-reset><svg class="ico" aria-hidden="true"><use href="#i-reset" /></svg><span data-reset-label>Reiniciar</span></button>
+              </div>
+            </div>
+            <ul class="checklist__items" aria-labelledby="cl-tarea">
+              <li><label class="check"><input type="checkbox" data-check="tarea-1" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Que tres personas reales usen la app esta semana.</span><span class="check__how">No familiares que dicen que todo está bien: personas que la necesitarían.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="tarea-2" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Anotar qué falló, qué no entendieron y qué pidieron.</span><span class="check__how">Esa lista llega a la Clase 2.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="tarea-3" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Traer una lista de dudas, por tontas que parezcan.</span><span class="check__how">Las tontas son las que todos tienen.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="tarea-4" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Opcional: leer la ruta B y crear cuenta en claude.ai.</span><span class="check__how">En la Clase 2 abrimos la caja de un proyecto real. Para usar Claude Code se necesita un plan que lo incluya: ver <a href="#ruta-b-necesitas">lo que necesitas</a>.</span></span></label></li>
+            </ul>
+            <p class="checklist__done" data-check-done hidden>Tarea lista. Nos vemos en la Clase 2 con tu lista de fallos y dudas.</p>
+            <p class="checklist__note">Se guarda solo en este navegador.</p>
+          </div>
+
+          <div class="prose">
+            <h3 id="prueba-con-usuarios">Cómo hacer la prueba con tres usuarios</h3>
+            <ol>
+              <li><strong>Elige bien a quién.</strong> Personas que tendrían el problema que tu app resuelve. Un familiar que te quiere va a decir que todo está bien.</li>
+              <li><strong>Dales la dirección y una tarea,</strong> no una explicación: «registra una solicitud como si la luz de tu oficina no prendiera». La tarea sale de tus escenarios.</li>
+              <li><strong>Mira sin ayudar.</strong> Donde se detienen, dudan o preguntan, ahí hay algo que corregir. Si les explicas, pierdes el dato.</li>
+              <li><strong>Anota en el momento</strong> qué falló, qué no entendieron y qué pidieron. Lo que piden va a tu lista de «después»; no lo prometas.</li>
+              <li><strong>Sin datos reales.</strong> Pídeles que usen datos inventados, y no anotes sus datos personales: con su rol basta («persona 2, del equipo de mantenimiento»).</li>
+            </ol>
+          </div>
+          <div class="msg" data-copy-scope>
+            <div class="msg__head"><p class="msg__title" id="msg-usuarios">Plantilla · hoja de prueba con usuarios</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+            <p class="msg__body" data-copy-src>Persona [1, 2 o 3] · [su rol, sin nombre]
+Tarea que le di: [el escenario, en palabras de usuario]
+Qué falló: [lo que no funcionó]
+Qué no entendió: [dónde dudó o preguntó]
+Qué pidió: [lo que quisiera que la app hiciera]</p>
+          </div>
+
+          <div class="prose">
+            <h3 id="como-funciona-la-clase-2">Cómo funciona la Clase 2</h3>
+            <p>No es otra clase magistral. Los grupos se arman antes de llegar, con el <a href="/vibecoding/#salida">formulario de salida</a>, no en el salón. Esta es la propuesta de formato; la duración exacta se ajusta al tiempo de la sesión, pero el orden se mantiene.</p>
+          </div>
+          <div class="table-wrap table-wrap--2">
+            <table class="rtable rtable--stack">
+              <caption>Formato propuesto de la Clase 2</caption>
+              <thead>
+                <tr><th scope="col">Tramo</th><th scope="col">Qué pasa</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Retro de fallos comunes</th><td>Los tres o cuatro fallos que más se repitieron en los formularios, resueltos en vivo en el proyecto de un estudiante.</td></tr>
+                <tr><th scope="row">Grupos por tipo de problema</th><td>Tres mesas, con rotación: «no funciona» (el protocolo de error aplicado), «quiero agregar» (una acción nueva: se escribe primero en la spec, luego se pide) y «quiero abrir la caja» (el repositorio y la ruta B).</td></tr>
+                <tr><th scope="row">Abrir la caja en vivo</th><td>Se toma el repositorio de un estudiante, se abre con Claude Code, se ubican sus carpetas en el mapa de 5 piezas y se agrega una función pequeña que la caja cerrada no resolvió. Misma spec, segunda caja, sobre un proyecto real.</td></tr>
+                <tr><th scope="row">Qué sigue</th><td>La <a href="#guia-de-decision">guía de decisión</a>: cuándo seguir en caja cerrada, cuándo pasar a caja abierta y cuándo llamar a un ingeniero. Dominio propio y costos reales de mantener una app publicada.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="prose">
+            <h3 id="que-traer">Qué traer</h3>
+            <ul>
+              <li>Tu spec V1, actualizada con lo que cambiaste en la semana.</li>
+              <li>La dirección de tu app y el enlace de tu repositorio.</li>
+              <li>Tus tres hojas de prueba con usuarios y tu bitácora de fallos.</li>
+              <li>Tu lista de dudas.</li>
+              <li>El portátil con cargador. Si vas a la mesa «quiero abrir la caja», con la ruta B leída.</li>
+            </ul>
+          </div>
+          <div class="callout">
+            <p class="callout__title">¿No llenaste el formulario de salida?</p>
+            <p>Llénalo ahora en la <a href="/vibecoding/#salida">página del curso</a>: nombre, dirección de tu app, enlace del repositorio, tu duda principal y hasta qué punto de control llegaste. Con eso se arman los grupos antes de la clase. Si tienes una duda urgente, escribe al expositor: <a href="https://wa.me/573143666151" rel="noopener">WhatsApp 314 366 6151</a>.</p>
+          </div>
+        </section>
+
+        <!-- ===================================================== 16 -->
+        <section class="chapter" id="glosario" aria-labelledby="t-glosario" data-title="Glosario">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span class="chapter__n">16</span><span>Lo que sigue</span></p>
+            <h2 class="chapter__title" id="t-glosario">Glosario</h2>
+            <p class="chapter__lede">Las palabras del curso, en lenguaje simple. Si una palabra te frena en cualquier parte del playbook, búscala aquí.</p>
+          </header>
+
+          <div class="gfilter" role="search">
+            <svg class="ico" aria-hidden="true"><use href="#i-search" /></svg>
+            <label class="sr" for="gfilter-input">Buscar en el glosario</label>
+            <input id="gfilter-input" type="search" placeholder="Buscar un término…" autocomplete="off" data-gfilter />
+            <span class="gfilter__count" data-gcount aria-live="polite"></span>
+          </div>
+
+          <dl class="glossary" data-glossary>
+            <div class="term" id="g-agente"><dt>Agente de código</dt><dd>Una IA que trabaja dentro de una carpeta de tu computador: lee archivos, escribe código, lo ejecuta, prueba el resultado y vuelve a intentar. Agente = modelo + herramientas. Claude Code y Codex son agentes.</dd><dd>Ver <a href="#que-es-un-agente">ruta B</a>.</dd></div>
+            <div class="term" id="g-agents-md"><dt>AGENTS.md</dt><dd>Archivo de instrucciones que Codex lee antes de trabajar en un proyecto. En este curso, es tu spec más las reglas de mesa, guardadas junto al código.</dd><dd>Ver <a href="#claude-md">la spec se convierte en CLAUDE.md o AGENTS.md</a>.</dd></div>
+            <div class="term" id="g-base-de-datos"><dt>Base de datos</dt><dd>Lo que la app recuerda cuando cierras la pestaña. Una de las 5 piezas. Pregunta que responde: ¿qué guarda?</dd><dd>Ejemplo: las solicitudes del tablero, con su estado.</dd></div>
+            <div class="term" id="g-caja-abierta"><dt>Caja abierta</dt><dd>Herramientas que muestran todas las piezas y te hacen responsable de ellas: tú eliges base de datos, hosting y dominio. Ejemplos: Claude Code, Codex.</dd></div>
+            <div class="term" id="g-caja-cerrada"><dt>Caja cerrada</dt><dd>Herramientas que reciben tu descripción, construyen front, lógica y base de datos, y publican. Las cinco piezas están, pero adentro. Ejemplos: Lovable, Base44.</dd></div>
+            <div class="term" id="g-claude-md"><dt>CLAUDE.md</dt><dd>Archivo de instrucciones que Claude Code lee al empezar cada sesión en un proyecto. Igual que AGENTS.md: tu spec y tus reglas, viviendo con el código.</dd></div>
+            <div class="term" id="g-clonar"><dt>Clonar</dt><dd>Traer a tu computador una copia de un repositorio de GitHub, que se mantiene conectada con el original.</dd></div>
+            <div class="term" id="g-commit"><dt>Commit</dt><dd>Una versión guardada del código, con fecha, autor y una descripción de qué cambió. Una fila del historial del repositorio.</dd></div>
+            <div class="term" id="g-credito"><dt>Crédito</dt><dd>La unidad con que se paga el trabajo de una herramienta como Lovable. Cada mensaje que construye gasta créditos; por eso una V1 pequeña y un cambio por mensaje.</dd></div>
+            <div class="term" id="g-despues"><dt>«Después» (la lista)</dt><dd>Donde van las funciones que quieres pero no caben en la V1. Nace del bloque 5 de la spec, «qué NO hace».</dd></div>
+            <div class="term" id="g-dominio"><dt>Dominio</dt><dd>La dirección donde la gente encuentra tu app, como <code>la-app.com</code>. Una de las 5 piezas. Pregunta que responde: ¿dónde vive?</dd></div>
+            <div class="term" id="g-error"><dt>Error (mensaje de error)</dt><dd>El aviso que muestra una herramienta cuando algo falla. Se copia tal cual, sin interpretarlo, y se le pide a la herramienta que lo arregle.</dd><dd>Ver <a href="#protocolo-de-error">protocolo de error</a>.</dd></div>
+            <div class="term" id="g-escenario"><dt>Escenario</dt><dd>Una prueba escrita en la spec con la forma «cuando [rol] hace [acción], pasa [resultado]». Si no pasa el escenario, no está listo.</dd></div>
+            <div class="term" id="g-front"><dt>Front</dt><dd>Lo que la persona ve y toca: pantallas, botones, formularios. Una de las 5 piezas. Pregunta que responde: ¿qué ve el usuario?</dd></div>
+            <div class="term" id="g-github"><dt>GitHub</dt><dd>Un servicio en internet para guardar repositorios: el código de tu app y el historial de cada cambio. Es donde queda tu código cuando sale de la caja cerrada.</dd></div>
+            <div class="term" id="g-hosting"><dt>Hosting</dt><dd>El lugar en internet donde corre tu app para que otros la abran. En la caja cerrada lo pone la herramienta; en la abierta lo eliges tú (por ejemplo, Vercel).</dd></div>
+            <div class="term" id="g-integracion"><dt>Integración</dt><dd>Conectar tu app con otro servicio: correo, pagos, calendario, inicio de sesión con Google. En la V1 van a «después».</dd></div>
+            <div class="term" id="g-llave"><dt>Llave (API key)</dt><dd>Un código largo que deja a un programa usar tu cuenta en otro servicio. Quien la tiene usa tu cuenta. Nunca se pega en un mensaje.</dd></div>
+            <div class="term" id="g-localhost"><dt>Localhost</dt><dd>Una dirección que solo existe en tu computador (empieza por <code>http://localhost</code>). Ahí abres la app mientras la construyes con un agente; nadie más la ve.</dd></div>
+            <div class="term" id="g-logica"><dt>Lógica</dt><dd>Lo que pasa cuando la persona toca algo: calcular, decidir, cambiar un estado. Una de las 5 piezas. Pregunta que responde: ¿qué hace la app por dentro?</dd></div>
+            <div class="term" id="g-memoria-navegador"><dt>Memoria del navegador</dt><dd>Un espacio donde una página guarda cosas solo en esa pestaña y ese computador. Lo que vive ahí desaparece o no lo ve nadie más. Lo contrario de una base de datos.</dd><dd>Ver <a href="#prueba-de-la-pestana">la prueba de la pestaña</a>.</dd></div>
+            <div class="term" id="g-modelo"><dt>Modelo</dt><dd>La IA que entiende lo que pides y escribe el código. Es la mitad de un agente; la otra mitad son las herramientas.</dd></div>
+            <div class="term" id="g-modo-plan"><dt>Modo plan</dt><dd>Un modo de trabajo en el que la herramienta propone cómo va a hacer algo sin cambiar ningún archivo. Sirve para revisar antes de construir.</dd></div>
+            <div class="term" id="g-prompt"><dt>Prompt</dt><dd>Un mensaje que le escribes a la IA. No es lo mismo que una spec: el prompt es un mensaje; la spec es la descripción del producto a la que todos los mensajes se refieren.</dd></div>
+            <div class="term" id="g-adivino"><dt>Prueba del adivino</dt><dd>Antes de enviar, preguntarte qué tendría que adivinar la IA. La lista de lo que adivina es la lista de lo que falta en la spec.</dd></div>
+            <div class="term" id="g-publicar"><dt>Publicar</dt><dd>Poner tu app en una dirección de internet para que otras personas la abran. En Lovable, los cambios posteriores hay que volver a publicarlos.</dd></div>
+            <div class="term" id="g-puntos-de-control"><dt>Puntos de control</dt><dd>Las cinco pruebas del taller: carga, la acción principal funciona, guarda datos, publicada y conectada a GitHub. La app avanza solo cuando pasa la prueba.</dd></div>
+            <div class="term" id="g-rama"><dt>Rama</dt><dd>Una línea de trabajo paralela dentro de un repositorio. Sirve para experimentar sin tocar la versión principal (normalmente llamada <code>main</code>).</dd></div>
+            <div class="term" id="g-reglas-de-mesa"><dt>Reglas de mesa</dt><dd>Las cinco reglas para iterar: un cambio por mensaje; describe lo que ves; prueba antes de pedir lo siguiente; si se rompió, vuelve a la versión anterior; nunca pegues datos reales.</dd></div>
+            <div class="term" id="g-repositorio"><dt>Repositorio</dt><dd>El plano y el historial de tu app: todo su código, con cada versión, fecha y autor. Es lo que hace que la app sea tuya. Pregunta que responde: ¿de quién es y cómo se deshace un cambio?</dd></div>
+            <div class="term" id="g-rol"><dt>Rol</dt><dd>Un tipo de persona que usa la app, con lo que ve y puede hacer. En la V1, máximo dos: quien llena y quien decide.</dd></div>
+            <div class="term" id="g-sincronizacion"><dt>Sincronización en dos direcciones</dt><dd>Una conexión en la que los cambios hechos en la herramienta llegan a GitHub y los hechos en GitHub vuelven a la herramienta. Es lo que permite abrir la caja sin perder la caja cerrada.</dd></div>
+            <div class="term" id="g-spec"><dt>Spec</dt><dd>De «especificación». La descripción de una página de tu producto, en siete bloques: para quién, qué hace, qué guarda, quién puede hacer qué, qué NO hace, cómo sé que funciona y pantallas.</dd></div>
+            <div class="term" id="g-terminal"><dt>Terminal</dt><dd>Una ventana donde le das órdenes al computador escribiendo en vez de hacer clic. En macOS se llama Terminal; en Windows, PowerShell.</dd></div>
+            <div class="term" id="g-url"><dt>URL</dt><dd>Una dirección de internet completa, como la que copias para abrir tu app desde el celular.</dd></div>
+            <div class="term" id="g-v1"><dt>V1 (versión 1)</dt><dd>La primera versión de tu app: un tipo de usuario principal, tres acciones y una cosa que se guarda. Todo lo demás va a «después».</dd></div>
+            <div class="term" id="g-version"><dt>Versión</dt><dd>Una foto guardada de tu app en un momento. Si algo se rompe, vuelves a la última versión que funcionaba. En Lovable están en el historial; en la caja abierta, en los commits.</dd></div>
+            <div class="term" id="g-vista-previa"><dt>Vista previa</dt><dd>La app funcionando dentro de la herramienta mientras la construyes, antes de publicarla. Ahí haces las pruebas de los puntos de control.</dd></div>
+          </dl>
+          <p class="glossary__empty" data-gempty hidden>No hay términos con esa palabra. Prueba con otra, o búscala en el índice.</p>
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <p class="footer__brand"><span class="t-accent" aria-hidden="true">›</span> vibe coding · Playbook de la Clase 1</p>
+      <p>Expositor: Fabian Zapata · Contacto: <a href="https://wa.me/573143666151" rel="noopener">WhatsApp 314 366 6151</a></p>
+      <p><a href="/vibecoding/">Página del curso</a> · <a href="/vibecoding/presentacion/">Presentación</a> · <a href="/vibecoding/#salida">Formulario de salida</a></p>
+      <p class="small">La herramienta va a cambiar de nombre el año entrante. La spec, el mapa y las reglas de mesa, no.</p>
+    </footer>
+
+    <button class="pill" type="button" data-toc-open aria-controls="indice" aria-expanded="false">
+      <svg class="ico" aria-hidden="true"><use href="#i-list" /></svg><span data-current>Inicio</span>
+    </button>
+    <div class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

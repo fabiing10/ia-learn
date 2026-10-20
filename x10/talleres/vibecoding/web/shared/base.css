@@ -1,0 +1,518 @@
+/* Components shared by the Vibe Coding landing and panel. Each page stylesheet
+   imports ../shared/theme.css first (tokens, themes, accent, fonts), then this.
+   The tokens call the accent "gold"; in this workshop it is cyan. */
+
+:root {
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+  --wrap: 1200px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --bar-h: 60px;
+  --tap: 44px;
+  --r-s: 10px;
+  --r-m: 14px;
+  --r-l: 20px;
+  --ink: var(--c-ink-dark);
+  --accent: var(--gold);
+  --accent-text: var(--gold-text);
+  --accent-soft: var(--gold-soft);
+  --accent-hover: #6fd8f0;
+  --field-bg: rgba(255, 255, 255, 0.04);
+  --field-bg-focus: rgba(255, 255, 255, 0.07);
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 20px 44px -28px rgba(0, 0, 0, 0.7);
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  --mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+}
+
+:root[data-theme='light'] {
+  --accent-hover: #24b2d6;
+  --field-bg: #ffffff;
+  --field-bg-focus: #ffffff;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 18px 40px -28px rgba(20, 23, 31, 0.35);
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px #0b6a80;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Only while the theme toggle runs, so page load never animates colours. */
+.theme-anim,
+.theme-anim * {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--accent-text);
+  text-underline-offset: 3px;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -80px;
+  z-index: 100;
+  padding: 12px 16px;
+  border-radius: var(--r-s);
+  background: var(--accent);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip:focus {
+  top: 12px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ── Brand mark: "›" in the accent + "vibe coding" ── */
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mark__chev {
+  color: var(--accent-text);
+  font-size: 1.35em;
+  line-height: 0.7;
+  transform: translateY(-0.04em);
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+/* {{PLACEHOLDERS}} stay visible on purpose: the presenter fills them in. */
+.ph {
+  display: inline-block;
+  padding: 0 6px;
+  border: 1px dashed currentColor;
+  border-radius: 6px;
+  color: var(--placeholder);
+  font-family: var(--mono);
+  font-size: 0.85em;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--tap);
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.975rem;
+  line-height: 1.1;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease,
+    color var(--dur-fast) ease, transform var(--dur-fast) var(--ease-out);
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+.btn--primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+
+.btn--ghost:hover {
+  background: var(--surface-2);
+}
+
+.btn--quiet {
+  background: transparent;
+  color: var(--text-2);
+  padding: 0 12px;
+}
+
+.btn--quiet:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.btn--danger {
+  background: var(--stop);
+  color: #fff;
+}
+
+.btn--sm {
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: var(--fs-sm);
+}
+
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn.is-done {
+  background: var(--go);
+  color: #06140c;
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: var(--tap);
+  height: var(--tap);
+  flex: none;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text-2);
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+.icon-btn:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Form fields ── */
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field__label {
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+
+.field__hint {
+  font-size: var(--fs-xs);
+  color: var(--text-2);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 10px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-s);
+  background: var(--field-bg);
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.4;
+  transition: border-color var(--dur-fast) ease, background-color var(--dur-fast) ease;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--text-3);
+  opacity: 1;
+}
+
+:root[data-theme='light'] .input::placeholder,
+:root[data-theme='light'] .textarea::placeholder {
+  color: #737987;
+}
+
+.input:hover,
+.textarea:hover {
+  border-color: var(--text-3);
+}
+
+.input:focus-visible,
+.textarea:focus-visible {
+  border-color: var(--accent);
+  background: var(--field-bg-focus);
+}
+
+.input[aria-invalid='true'],
+.textarea[aria-invalid='true'] {
+  border-color: var(--stop);
+}
+
+.field__error {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--stop);
+}
+
+:root[data-theme='dark'] .field__error {
+  color: #ff8a8d;
+}
+
+.field__warn {
+  font-size: var(--fs-sm);
+  color: var(--cyan-text);
+}
+
+/* Native checkbox, themed. */
+.check {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  flex: none;
+  border: 2px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--field-bg);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+
+.check::after {
+  content: '';
+  width: 6px;
+  height: 11px;
+  border: solid var(--ink);
+  border-width: 0 2.5px 2.5px 0;
+  transform: translateY(-1px) rotate(45deg) scale(0);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.check:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.check:checked::after {
+  transform: translateY(-1px) rotate(45deg) scale(1);
+}
+
+.check[aria-invalid='true'] {
+  border-color: var(--stop);
+}
+
+/* ── Badges and chips ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  color: var(--text-2);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.badge--demo {
+  border-style: dashed;
+  border-color: var(--cyan);
+  color: var(--cyan-text);
+}
+
+.badge--demo::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.badge--ok {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--go) 18%, transparent);
+  color: var(--text);
+}
+
+.badge--accent {
+  border-color: transparent;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+
+/* ── Surfaces ── */
+.surface {
+  background: var(--bg-raise);
+  border: 1px solid var(--line);
+  border-radius: var(--r-l);
+  box-shadow: var(--shadow);
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  z-index: 60;
+  max-width: min(520px, calc(100vw - 32px));
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 16px);
+  transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+}
+
+.toast.is-on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -14,6 +14,7 @@ import {
   NormalBlending,
 } from 'three';
 import { gsap } from '../core/motion.js';
+import { createNeural, brainPoint, neuronPoint } from './neural.js';
 
 const COUNT = 4096; // 2^12: the multiply loop doubles up to exactly this
 const FIELD_W = 26;
@@ -100,6 +101,7 @@ const vertex = /* glsl */ `
 const fragment = /* glsl */ `
   uniform vec3 uGold;
   uniform vec3 uCyan;
+  uniform float uGlyph;
   varying float vAlpha;
   varying float vType;
   varying float vTint;
@@ -107,7 +109,10 @@ const fragment = /* glsl */ `
   void main() {
     vec2 uv = gl_PointCoord - 0.5;
     float a;
-    if (vType > 0.93) {
+    if (vType > 0.93 && uGlyph > 0.5) {
+      // tiny ring (brain decks): a soma seen from afar
+      a = smoothstep(0.07, 0.02, abs(length(uv) - 0.3));
+    } else if (vType > 0.93) {
       // tiny ×: distance to both diagonals
       float d = min(abs(uv.x - uv.y), abs(uv.x + uv.y)) * 0.7071;
       a = smoothstep(0.075, 0.025, d) * smoothstep(0.5, 0.36, length(uv));
@@ -142,7 +147,23 @@ function crossPoint(r, size, thick) {
   return [x, y, (r() * 2 - 1) * 0.25];
 }
 
-function buildGeometry() {
+// The "›" of other workshops: two arms meeting at a tip on the right.
+function chevronPoint(r, size, thick) {
+  const arm = r() < 0.5 ? 1 : -1;
+  const t = r();
+  const n = (r() * 2 - 1) * thick;
+  const dx = 1.1 * size;
+  const dy = -arm * size;
+  const len = Math.hypot(dx, dy);
+  const x = -0.55 * size + dx * t - (dy / len) * n;
+  const y = arm * size + dy * t + (dx / len) * n;
+  return [x, y, (r() * 2 - 1) * 0.25];
+}
+
+// mark = 'cross'   (x10: one big ×, ten small ×)
+//        'chevron' (one big ›, five small ›)
+//        'brain'   (a brain seen from the side, five neurons in a chain)
+function buildGeometry(mark = 'cross') {
   const r = rand(1010);
   const field = new Float32Array(COUNT * 3);
   const parent = new Float32Array(COUNT * 3);
@@ -162,15 +183,24 @@ function buildGeometry() {
     const p = i === 0 ? 0 : i - 2 ** (g - 1);
     // parent position is filled in a second pass
 
-    const [cx, cy, cz] = crossPoint(r, 3.2, 0.36);
+    const [cx, cy, cz] =
+      mark === 'chevron' ? chevronPoint(r, 2.4, 0.34) : mark === 'brain' ? brainPoint(r) : crossPoint(r, 3.2, 0.36);
     cross.set([cx, cy, cz], i * 3);
 
-    // ten small × in two rows of five
-    const k = i % 10;
-    const col = k % 5;
-    const row = Math.floor(k / 5);
-    const [tx, ty, tz] = crossPoint(r, 0.56, 0.085);
-    ten.set([tx + (col - 2) * 1.5, ty + (row === 0 ? 0.95 : -0.95), tz], i * 3);
+    if (mark === 'brain') {
+      ten.set(neuronPoint(r, i % 5), i * 3);
+    } else if (mark === 'chevron') {
+      // five small › in a row
+      const [tx, ty, tz] = chevronPoint(r, 0.5, 0.08);
+      ten.set([tx + ((i % 5) - 2) * 1.5, ty, tz], i * 3);
+    } else {
+      // ten small × in two rows of five
+      const k = i % 10;
+      const col = k % 5;
+      const row = Math.floor(k / 5);
+      const [tx, ty, tz] = crossPoint(r, 0.56, 0.085);
+      ten.set([tx + (col - 2) * 1.5, ty + (row === 0 ? 0.95 : -0.95), tz], i * 3);
+    }
 
     seed.set([r(), r(), r(), r()], i * 4);
     parent[i * 3] = p; // temp: parent index
@@ -202,7 +232,10 @@ const PALETTE = {
   light: { gold: '#A8720A', cyan: '#1597B5', alpha: 0.6, form: 0.7, blending: NormalBlending },
 };
 
-export function createBackground(canvas) {
+export function createBackground(canvas, palette = {}, mark = 'cross') {
+  // config.tema.particulas = { dark: { gold, cyan }, light: { gold, cyan } }
+  // config.tema.forma = 'cross' | 'chevron' (shape of the big and small formations)
+  for (const k of ['dark', 'light']) PALETTE[k] = { ...PALETTE[k], ...(palette[k] || {}) };
   let renderer;
   try {
     renderer = new WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'high-performance' });
@@ -231,6 +264,7 @@ export function createBackground(canvas) {
     uFormAlpha: { value: 0.26 },
     uSize: { value: 60 },
     uCenter: { value: [4.2, 0.2] },
+    uGlyph: { value: mark === 'brain' ? 1 : 0 },
     uGold: { value: new Color(PALETTE.dark.gold) },
     uCyan: { value: new Color(PALETTE.dark.cyan) },
   };
@@ -245,9 +279,13 @@ export function createBackground(canvas) {
     blending: AdditiveBlending,
   });
 
-  const points = new Points(buildGeometry(), material);
+  const points = new Points(buildGeometry(mark), material);
   points.frustumCulled = false;
   scene.add(points);
+
+  // Decks with the brain mark also get synapses and travelling impulses.
+  const neural = mark === 'brain' ? createNeural(uniforms, rand) : null;
+  neural?.objects.forEach((o) => scene.add(o));
 
   let running = false;
   let raf = 0;
@@ -306,6 +344,7 @@ export function createBackground(canvas) {
     material.needsUpdate = true;
     baseAlpha = p.alpha;
     uniforms.uAlpha.value = baseAlpha * alphaScale;
+    neural?.setTheme(p);
   }
 
   function stopMultiply() {
@@ -332,6 +371,9 @@ export function createBackground(canvas) {
     ten: { uField: 0, uCross: 0, uTen: 1 },
     multiply: { uField: 1, uCross: 0, uTen: 0 },
   };
+  // shape-neutral names for workshops whose mark is not ×
+  FORMS.mark = FORMS.brain = FORMS.cross;
+  FORMS.marks = FORMS.neurons = FORMS.ten;
 
   let current = 'field';
 
@@ -360,6 +402,9 @@ export function createBackground(canvas) {
     gsap.fromTo(uniforms.uPulse, { value: 1 }, { value: 0, duration: 1.5, ease: 'power2.out' });
     gsap.fromTo(uniforms.uPulseR, { value: 0 }, { value: 14, duration: 1.5, ease: 'power1.out' });
     if (target === 'multiply' && current !== 'multiply') multiply();
+    neural?.setForm(target);
+    neural?.setAlpha(alpha);
+    neural?.fire(0.5);
     current = target;
   }
 
@@ -369,6 +414,7 @@ export function createBackground(canvas) {
     gsap.to(uniforms.uField, { value: f.uField, duration, ease: 'expo.inOut' });
     gsap.to(uniforms.uCross, { value: f.uCross, duration, ease: 'expo.inOut' });
     gsap.to(uniforms.uTen, { value: f.uTen, duration, ease: 'expo.inOut' });
+    neural?.setForm(form, duration);
     current = form;
   }
 
@@ -382,5 +428,8 @@ export function createBackground(canvas) {
     }
   });
 
-  return { start, stop, setTheme, onSlide, morph, get running() { return running; } };
+  /** A burst of impulses through the synapses (decks with the brain mark). */
+  const fire = (strength = 1) => neural?.fire(strength);
+
+  return { start, stop, setTheme, onSlide, morph, fire, get running() { return running; } };
 }

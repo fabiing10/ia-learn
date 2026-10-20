@@ -1,0 +1,185 @@
+<!-- BLOQUE 2 · Paso 1: construyan su cerebro (3–10 min) -->
+
+<section id="c07" data-block="2" data-hud="off" data-bg="field" data-bg-alpha="0.45" data-ctrl="exercise" class="cj-go">
+  <figure class="cj-go__qr" data-in="scale">
+    <div class="qrbox qrbox--cj-xl" data-qr="construir"></div>
+  </figure>
+  <div class="cj-go__text">
+    <p class="cj-kicker" data-in>Paso 1 · Construyan su cerebro</p>
+    <p class="cj-go__url" data-in><span data-config="urlCorta" data-ph="URL_CORTA"></span></p>
+    <p class="t-lead" data-split="lines">Funciona en celular y en computador.</p>
+    <p class="t-lead t-gold" data-split="lines">Nada se envía a ningún servidor.</p>
+    <div class="cj-go__timer fragment">
+      <div class="timer" data-timer="240" aria-label="Temporizador de 4 minutos">
+        <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="timer__bg" cx="60" cy="60" r="54" /><circle class="timer__ring" cx="60" cy="60" r="54" /></svg>
+        <span class="timer__time">4:00</span>
+      </div>
+      <p><b>Su perfil</b><span>rol, áreas, tres tareas, IA, sensibilidad, tono</span></p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><strong>C07 · QR</strong> · 3:00 · se queda hasta el minuto 6 · clic: arranca el temporizador de 4 minutos</p>
+    <p>"Escaneen. Van a ver un formulario corto: su rol, sus áreas, las tres tareas que más tiempo les quitan, qué IA usan, qué tan sensible es lo que manejan y cómo quieren que les responda. Tienen cuatro minutos. Mientras responden, a la derecha se van escribiendo sus cinco archivos. Esto no es un prompt: es su manual de vinculación para cualquier IA."</p>
+    <p>"Levanten el celular cuando lo tengan abierto." Luego proyecta la landing con el perfil de Laura y, en el minuto 5, cambia su rol a "sector público": que vean cómo se reescriben los archivos.</p>
+  </aside>
+</section>
+
+<section id="c08" data-block="2" data-bg-alpha="0.2" data-ctrl="cj-predict" class="cj-predict s-tight">
+  <p class="cj-kicker" data-in>Cómo piensa la máquina <span class="cj-tag">ilustración</span></p>
+  <h2 class="t-h2" data-split="words">No consulta. Estima.</h2>
+  <div class="cj-predict__stage">
+    <p class="cj-predict__sentence" data-in>
+      <span class="tk">El</span> <span class="tk">término</span> <span class="tk">para</span> <span class="tk">responder</span>
+      <span class="tk">una</span> <span class="tk">petición</span> <span class="tk">de</span> <span class="tk">documentos</span>
+      <span class="tk">es</span> <span class="tk">de</span> <span class="tk tk--blank" data-blank>____</span> <span class="tk">días</span>
+    </p>
+    <svg class="cj-predict__net" viewBox="0 0 440 460" aria-hidden="true" data-in="fade"></svg>
+    <ol class="cj-predict__bars" data-in="stagger">
+      <li data-p="75" data-word="diez" class="is-ok"><b>diez</b><i><s></s></i><small>Ley 1755, art. 14 · vigente</small></li>
+      <li data-p="44" data-word="veinte" class="is-old"><b>veinte</b><i><s></s></i><small>Decreto 491, art. 5 · derogado</small></li>
+      <li data-p="25" data-word="quince"><b>quince</b><i><s></s></i><small>término general, no el de documentos</small></li>
+      <li data-p="19" data-word="treinta" class="is-old"><b>treinta</b><i><s></s></i><small>consultas, o el general ampliado</small></li>
+    </ol>
+  </div>
+  <p class="cj-predict__foot fragment">Elige una, con algo de azar, y sigue escribiendo como si fuera cierta. Si la fuente vigente está en la mesa, la estimación se alinea con ella.</p>
+  <aside class="notes">
+    <p><strong>C08 · Cómo piensa la máquina</strong> · 4:00 · 40 s, mientras llenan el perfil · el hueco se llena distinto en cada vuelta</p>
+    <p>"El modelo no busca la respuesta: calcula cuál es la palabra más probable. Es el pasante más leído del mundo, que estudió toda la biblioteca hasta cierta fecha, pero no tiene el expediente en la mano." Las barras son una ilustración, no una medición.</p>
+  </aside>
+</section>
+
+<section id="c09" data-block="2" data-bg-alpha="0.2" data-ctrl="cj-table" class="cj-table s-tight">
+  <p class="cj-kicker" data-in>La mesa de trabajo · ventana de contexto</p>
+  <h2 class="t-h2" data-split="words">Lo que no está en la mesa, no existe.</h2>
+  <div class="cj-table__desk" data-in="fade">
+    <p class="cj-table__label">Ventana de contexto <span>la mesa</span></p>
+    <ul class="cj-table__cards">
+      <li class="is-sys">Instrucciones de sistema</li>
+      <li class="is-file">00_ADN</li>
+      <li class="is-file">01_LINEAS_ROJAS</li>
+      <li class="is-file">02_PLAYBOOK</li>
+      <li class="is-file">03_FUENTES</li>
+      <li class="is-file">04_VERIFICACION</li>
+      <li class="is-doc">El expediente que subiste</li>
+      <li class="is-q">Tu pregunta</li>
+      <li class="is-a">La respuesta se escribe aquí</li>
+    </ul>
+  </div>
+  <p class="cj-table__out" data-in>
+    <span>Fuera de la mesa</span><s>otros chats</s><s>archivos no cargados</s><s>lo que dijiste ayer</s>
+  </p>
+  <div class="cj-table__meter fragment">
+    <p class="cj-table__tokens">El modelo lee <b>tokens</b>, fragmentos de palabra: <span class="cj-tokens"><i>in</i><i>con</i><i>stitu</i><i>cional</i><i>idad</i></span> <span class="cj-tag">ilustrativo</span></p>
+    <div class="cj-meter">
+      <div class="cj-meter__bar"><s></s></div>
+      <p><b>Los cinco archivos: 6.000–9.000 tokens.</b> <span>La mesa de un modelo actual: de ~128.000 a más de 1.000.000. Caben con espacio de sobra.</span></p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><strong>C09 · La mesa de trabajo</strong> · 5:00 · clic: tokens y tamaño</p>
+    <p>"Lo que está sobre la mesa, el modelo lo lee. Lo que quedó en el archivador, otra conversación o un documento no cargado, no existe para él. Cada chat nuevo arranca con la mesa vacía."</p>
+  </aside>
+</section>
+
+<section id="c10" data-block="2" data-bg-alpha="0.2" data-ctrl="cj-library" class="cj-library s-tight">
+  <p class="cj-kicker" data-in>Corte de conocimiento</p>
+  <h2 class="t-h2" data-split="words">La biblioteca cerró.</h2>
+  <ol class="cj-library__line" data-in="fade">
+    <li data-pages="4"><b>2011</b><span>CPACA · Ley 1437</span></li>
+    <li data-pages="7"><b>2015</b><span>Ley 1755 · términos del derecho de petición</span></li>
+    <li data-pages="28" class="is-loud"><b>2020</b><span>Decreto 491 · amplía: 30, 20 y 35 días</span><em>miles de textos en pandemia</em></li>
+    <li data-pages="3" class="is-quiet"><b>2022</b><span>Ley 2207 · deroga el art. 5: vuelven los de la Ley 1755</span><em>una ley corta, poco comentada</em></li>
+    <li class="is-cut"><b>Corte</b><span>la biblioteca cierra</span></li>
+    <li class="is-now"><b>Hoy</b><span>preguntas por el término vigente</span><em class="cj-library__guess">patrón más probable: <s>30 días</s></em></li>
+  </ol>
+  <p class="cj-library__end fragment">Tu <code>03_FUENTES.md</code> es la actualización que el modelo no tiene: una línea corrige el patrón en todos los modelos a la vez.</p>
+  <aside class="notes">
+    <p><strong>C10 · La biblioteca cerró</strong> · 5:30 · explica la trampa que van a ver</p>
+    <p>"El modelo se entrenó una vez, con textos hasta una fecha. Si leyó mucho sobre el Decreto 491, pandemia, miles de textos, y poco sobre la Ley 2207, una ley corta, su patrón más probable puede ser el término ampliado." La altura de las pilas es ilustrativa.</p>
+  </aside>
+</section>
+
+<section id="c11" data-block="2" data-bg-alpha="0.2" data-ctrl="cj-halluc" class="cj-halluc s-tight">
+  <p class="cj-kicker" data-in>Alucinación</p>
+  <h2 class="t-h2" data-split="words">Completar el patrón sin el dato.</h2>
+  <div class="cj-halluc__pair">
+    <figure class="cj-cite" data-in="mask">
+      <p class="cj-cite__label">La forma que aprendió</p>
+      <p class="cj-cite__text">Corte Constitucional, Sentencia <span class="cj-slot" data-reel="T-">T-###</span> de <span class="cj-slot" data-reel="20">20##</span>, M.P. <span class="cj-slot cj-slot--name">Nombre Apellido</span></p>
+      <p class="cj-cite__stamp">Forma perfecta. Fondo inexistente.</p>
+    </figure>
+    <svg class="cj-flow" viewBox="0 0 780 520" role="img" aria-label="Si tiene el dato en la mesa, lo cita. Si no, a veces reconoce que no sabe; casi siempre completa el patrón.">
+      <path class="cj-flow__edge" d="M218 104 L218 196" />
+      <path class="cj-flow__edge" d="M218 286 L218 378" />
+      <path class="cj-flow__edge cj-flow__edge--soft" d="M418 59 L500 59" />
+      <path class="cj-flow__edge cj-flow__edge--soft" d="M418 241 L500 241" />
+      <path class="cj-syn cj-syn--bad" pathLength="100" d="M218 104 L218 196" style="--d: 0s" />
+      <path class="cj-syn cj-syn--bad" pathLength="100" d="M218 286 L218 378" style="--d: 0.9s" />
+      <rect class="cj-flow__q" x="18" y="14" width="400" height="90" rx="20" />
+      <text class="cj-flow__t" x="218" y="59">¿Tiene el dato en la mesa?</text>
+      <rect class="cj-flow__q" x="18" y="196" width="400" height="90" rx="20" />
+      <text class="cj-flow__t" x="218" y="241">¿Reconoce que no sabe?</text>
+      <rect class="cj-flow__bad" x="18" y="378" width="400" height="120" rx="20" />
+      <text class="cj-flow__t cj-flow__t--bad" x="218" y="424">Completa el patrón</text>
+      <text class="cj-flow__s" x="218" y="466">«Sentencia T-### de 20##…»</text>
+      <rect class="cj-flow__ok" x="500" y="14" width="270" height="90" rx="20" />
+      <text class="cj-flow__t cj-flow__t--ok" x="635" y="44">Lo cita</text>
+      <text class="cj-flow__s" x="635" y="78">y aun así, verifica</text>
+      <rect class="cj-flow__ok" x="500" y="196" width="270" height="90" rx="20" />
+      <text class="cj-flow__t cj-flow__t--ok" x="635" y="226">«No tengo la</text>
+      <text class="cj-flow__t cj-flow__t--ok" x="635" y="260">fuente exacta»</text>
+      <text class="cj-flow__lbl" x="459" y="46">sí</text>
+      <text class="cj-flow__lbl" x="459" y="228">a veces</text>
+      <text class="cj-flow__lbl cj-flow__lbl--side" x="236" y="158">no</text>
+      <text class="cj-flow__lbl cj-flow__lbl--bad" x="236" y="340">casi siempre</text>
+    </svg>
+  </div>
+  <p class="cj-halluc__def fragment">Tres defensas, en orden: la regla en <code>00_ADN</code>, la fuente en <code>03_FUENTES</code>, el protocolo en <code>04_VERIFICACION</code>. Ninguna sola basta.</p>
+  <aside class="notes">
+    <p><strong>C11 · Alucinación</strong> · 6:00 · 30 s · clic: las tres defensas</p>
+    <p>"Una cita de sentencia tiene una forma muy estable. El modelo aprendió la forma perfectamente. Cuando le piden una sentencia de nicho, produce la forma y rellena los huecos con lo probable. Parece verdadero y no existe."</p>
+    <p data-config="fuentes.casos"></p>
+    <p>Caso colombiano, si lo confirmas en la relatoría de la Corte Suprema antes de citarlo: auto AC739-2026 (13 feb. 2026), multa de 15 SMLMV y compulsa de copias a la comisión disciplinaria por citar diez providencias que la Relatoría no encontró; el abogado admitió haber usado IA. "La herramienta asiste; el abogado decide, estructura y responde." No nombres al abogado.</p>
+  </aside>
+</section>
+
+<section id="c12" data-block="2" data-bg-alpha="0.2" data-ctrl="cj-load" class="cj-load s-tight">
+  <p class="cj-kicker" data-in>Minuto 7 · ahora, cárguenlo</p>
+  <div class="cj-load__pair">
+    <div class="cj-load__left">
+      <h2 class="t-h2" data-split="words">Copien todo. Chat nuevo. Peguen.</h2>
+      <p class="cj-load__btn" data-in><span>Copiar todo para pegar en un chat</span><i class="cj-load__cursor" aria-hidden="true"></i></p>
+      <p class="cj-load__hands" data-in>Levanten la mano cuando vean las tres líneas.</p>
+    </div>
+    <figure class="cj-chat" data-in="mask">
+      <p class="cj-chat__me">Este es mi cerebro jurídico. Léelo completo. Antes de responder cualquier cosa, confírmame en tres líneas: quién soy, cuáles son mis líneas rojas y cómo vas a verificar tus respuestas.<span class="cj-chat__files">===== 00_ADN.md ===== · ===== 01_LINEAS_ROJAS.md ===== · …</span></p>
+      <ol class="cj-chat__ai">
+        <li><b>1</b><span>Eres Laura, litigante con práctica propia en civil y comercial, y constitucional.</span></li>
+        <li><b>2</b><span>Líneas rojas: solo datos anonimizados; tú decides si presentas el recurso o concilias.</span></li>
+        <li><b>3</b><span>Verifico así: reviso 03_FUENTES, marco [NO VERIFICADO] lo que no esté y cierro con «Verificación pendiente».</span></li>
+      </ol>
+      <figcaption>Ejemplo con el perfil de Laura</figcaption>
+    </figure>
+  </div>
+  <aside class="notes">
+    <p><strong>C12 · Cárguenlo</strong> · 7:00 · las tres líneas se escriben solas</p>
+    <p>"Botón 'Copiar todo para pegar en un chat'. Abran un chat nuevo en la IA que usan, peguen y envíen. Lo primero que les va a decir, si funcionó, son tres líneas: quién es usted, sus líneas rojas y cómo va a verificar. Levanten la mano cuando las vean."</p>
+    <p>Minuto 9: un voluntario lee en voz alta la primera línea de "Lo que nunca delego" de su archivo.</p>
+  </aside>
+</section>
+
+<section id="c13" data-block="2" data-bg-alpha="0.2" data-ctrl="cj-copy" class="cj-question s-tight">
+  <p class="cj-kicker" data-in>Minuto 9 · la pregunta de prueba</p>
+  <blockquote class="cj-question__q" data-split="lines" data-copy-src="pregunta">Un ciudadano radicó ante una entidad pública un derecho de petición pidiendo copia de un contrato. ¿Cuál es el término para responder, qué ocurre si la entidad no responde dentro de ese término y cuál es la fuente normativa exacta (ley, año y artículo)?</blockquote>
+  <div class="cj-question__row" data-in>
+    <button class="cj-copybtn" type="button" data-copy="pregunta"><span class="cj-copybtn__label">Copiar pregunta</span></button>
+    <p class="cj-lane cj-lane--on"><b>Con cerebro</b><span>en el chat donde pegaron sus archivos</span></p>
+    <p class="cj-lane"><b>Sin cerebro</b><span>en un chat limpio, si les da tiempo</span></p>
+  </div>
+  <p class="cj-question__back fragment">Volvemos sobre esto en diez minutos.</p>
+  <aside class="notes">
+    <p><strong>C13 · Pregunta de prueba</strong> · 9:00 · está también en la landing (#prueba)</p>
+    <p>"Copien la pregunta de prueba y háganla en ese chat con cerebro. Y, si les da tiempo, háganla también en un chat limpio, sin cerebro. Vamos a volver sobre eso en diez minutos."</p>
+    <p>Pregunta de reserva, si la semana anterior los cuatro modelos respondieron bien en frío: "Dame la sentencia de la Corte Constitucional que fijó el alcance del derecho de petición frente a entidades privadas, con número, año, magistrado ponente y la cita textual de la regla".</p>
+  </aside>
+</section>
