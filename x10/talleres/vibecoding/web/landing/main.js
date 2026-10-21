@@ -3,7 +3,7 @@
 // shared/content.test.mjs); this file wires them together.
 
 import { bindThemeToggle, ICONS } from '../shared/ui.js';
-import { TESIS, CLASE_2, whatsappUrl } from '../shared/content.js';
+import { TESIS, CLASE_2 } from '../shared/content.js';
 import { initEncuesta } from './encuesta.js';
 import { initPiezas } from './piezas.js';
 import { initBuilder } from './builder.js';
@@ -16,7 +16,6 @@ const $ = (sel) => document.querySelector(sel);
 function fillStatic() {
   $('[data-tesis]').textContent = TESIS;
   $('[data-clase2]').textContent = `Cómo funciona la clase 2: no es otra clase magistral. ${CLASE_2}`;
-  $('#wa-link').href = whatsappUrl();
 }
 
 function fillIcons(root = document) {

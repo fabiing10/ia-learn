@@ -99,7 +99,9 @@ Never collect more personal data than the plan's exit form asks for.
   marked to verify, e.g. `{{VERIFICAR_CREDITOS_LOVABLE}}`, never stated as fact.
 - Keep `{{PLACEHOLDERS}}` for things only the presenter knows (`{{FECHA_CLASE_1}}`,
   `{{URL_TABLERO_LOVABLE}}`, `{{URL_PROYECTO_CLAUDE_CODE}}`, `{{LUGAR}}`).
-- Expositor: Fabian Zapata. Contact: WhatsApp 314 366 6151.
+- Expositor: Fabian Zapata. Name only: no phone, email, WhatsApp or social profile anywhere
+  in Vibe Coding (landing, playbook, survey, deck). The deck is for the presenter: no public
+  page links to `/vibecoding/presentacion/`.
 - Safety section of the plan ("Qué no hacer") is mandatory wherever students build.
 
 ## Process rules

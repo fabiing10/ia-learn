@@ -3,10 +3,10 @@
 // plan-clase-1.md and assert the page data says exactly what the plan says.
 
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import {
   PIECES, MENU, REGLAS, PROTOCOLO, SEGURIDAD, CHECKPOINTS, MESAS, PLAYBOOK_ANCHORS,
-  LANDING_ANCHORS, CONTACT, whatsappUrl, TAREA, FRASE_DATOS, TESIS, CLASE_2,
+  LANDING_ANCHORS, CONTACT, TAREA, FRASE_DATOS, TESIS, CLASE_2,
 } from './content.js';
 
 let failures = 0;
@@ -109,12 +109,42 @@ test('landing anchors = exactly the list in CONTRACT.md', () => {
   assert.deepEqual(LANDING_ANCHORS, listed);
 });
 
-test('WhatsApp link goes to 573143666151 with a message that names Vibe Coding', () => {
-  const url = new URL(whatsappUrl());
-  assert.equal(url.origin + url.pathname, 'https://wa.me/573143666151');
-  assert.match(url.searchParams.get('text'), /Vibe Coding/);
-  assert.equal(CONTACT.whatsappLabel, '314 366 6151');
-  assert.equal(CONTACT.expositor, 'Fabian Zapata');
+// The presenter shows only his name: no phone, email or social profile anywhere in
+// Vibe Coding, and the deck is internal (no public page links to it).
+const read = (rel) => readFileSync(new URL(rel, import.meta.url), 'utf8');
+const slides = readdirSync(new URL('../../presentacion/slides/', import.meta.url))
+  .filter((f) => f.endsWith('.html'))
+  .map((f) => [`slides/${f}`, read(`../../presentacion/slides/${f}`)]);
+const publicPages = [
+  ['web/index.html', read('../index.html')],
+  ['web/playbook/index.html', read('../playbook/index.html')],
+  ['web/encuesta/index.html', read('../encuesta/index.html')],
+];
+const everything = [
+  ...publicPages,
+  ...slides,
+  ['presentacion/config.json', read('../../presentacion/config.json')],
+  ['web/shared/content.js', read('./content.js')],
+  ['web/landing/main.js', read('../landing/main.js')],
+  ['web/landing/salida.js', read('../landing/salida.js')],
+];
+
+test('the presenter is named, with no contact data', () => {
+  assert.deepEqual(CONTACT, { expositor: 'Fabian Zapata' });
+  const config = JSON.parse(read('../../presentacion/config.json'));
+  assert.equal(config.expositor, 'Fabian Zapata');
+  assert.ok(!('contacto' in config) && !('whatsapp' in config), 'config.json has contact keys');
+});
+
+test('no phone, email, WhatsApp or social profile in pages, deck or scripts', () => {
+  const personal = /wa\.me|whatsapp\s*\d|3143666151|314 366|mailto:|fabiing10|instagram\.com|linkedin\.com|data-qr="whatsapp"|data-config="contacto"|escr[ií]bele a fabian/i;
+  const hits = everything.filter(([, text]) => personal.test(text)).map(([name]) => name);
+  assert.deepEqual(hits, []);
+});
+
+test('no public page links to the deck (it is for the presenter)', () => {
+  const hits = publicPages.filter(([, text]) => /href="\/vibecoding\/presentacion/.test(text)).map(([name]) => name);
+  assert.deepEqual(hits, []);
 });
 
 console.log(failures ? `\n${failures} failing\n` : '\nall passing\n');

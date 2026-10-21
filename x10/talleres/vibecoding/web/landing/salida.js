@@ -124,7 +124,7 @@ export function initSalida() {
     sendBtn.querySelector('[data-label]').textContent = 'Enviar';
 
     if (res.status === 'error') {
-      statusEl.textContent = 'No pudimos enviarla. Inténtalo otra vez en un momento; si sigue fallando, escríbele a Fabian por WhatsApp.';
+      statusEl.textContent = 'No pudimos enviarla. Inténtalo otra vez en un momento; si sigue fallando, avísale a Fabian en la clase.';
       statusEl.classList.add('is-error');
       return;
     }

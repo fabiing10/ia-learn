@@ -132,3 +132,103 @@ Cuando termines, dime cómo pruebo cada uno de los tres escenarios de la secció
     <p>Señal de que funcionó: cada spec tiene al menos tres cosas en "qué NO hace" y tres escenarios con rol, acción y resultado. Mano alzada antes de pasar al bloque 5.</p>
   </aside>
 </section>
+
+<section id="modelos" data-block="4" data-bg-alpha="0.3" class="vc-roles-slide s-tight">
+  <p class="vc-kicker" data-in>Antes de construir · qué hay dentro de la herramienta</p>
+  <h2 class="t-h2" data-split="chars">Tres trabajos, tres tipos de modelo</h2>
+  <div class="vc-roles" data-in="stagger">
+    <article class="vc-role">
+      <span class="vc-role__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5l-2 5-5 2 2-5 5-2Z" /></svg></span>
+      <h3 class="vc-role__name">Planear</h3>
+      <p class="vc-role__line">Piensa despacio antes de escribir código.</p>
+      <ul>
+        <li>Convierte la idea en un plan.</li>
+        <li>Encuentra lo que falta en la spec.</li>
+        <li>Decide cómo se arman las piezas.</li>
+      </ul>
+      <p class="vc-role__as">Como <span>el arquitecto</span></p>
+    </article>
+    <article class="vc-role">
+      <span class="vc-role__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" /></svg></span>
+      <h3 class="vc-role__name">Ejecutar</h3>
+      <p class="vc-role__line">Escribe y corrige código rápido, muchas veces.</p>
+      <ul>
+        <li>Construye pantallas y funciones.</li>
+        <li>Aplica un cambio por mensaje.</li>
+        <li>Arregla el error que le pegas.</li>
+      </ul>
+      <p class="vc-role__as">Como <span>el maestro de obra</span></p>
+    </article>
+    <article class="vc-role">
+      <span class="vc-role__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5" /><circle cx="5" cy="18" r="2.5" /><circle cx="19" cy="18" r="2.5" /><path d="M12 7.5v4M12 11.5 6.5 16M12 11.5l5.5 4.5" /></svg></span>
+      <h3 class="vc-role__name">Orquestar</h3>
+      <p class="vc-role__line">Reparte el trabajo y revisa que encaje.</p>
+      <ul>
+        <li>Divide la tarea entre varios agentes.</li>
+        <li>Usa herramientas: terminal, navegador, pruebas.</li>
+        <li>Junta los resultados y los verifica.</li>
+      </ul>
+      <p class="vc-role__as">Como <span>el director de obra</span></p>
+    </article>
+  </div>
+  <p class="vc-roles__foot fragment">Más grande no siempre es mejor: el que <b>planea</b> tarda y cuesta más por mensaje; el que <b>ejecuta</b> es el rápido para iterar.</p>
+  <aside class="notes">
+    <p><strong>Modelos 1 · Planear, ejecutar, orquestar</strong> · 1:34 · 1 min</p>
+    <ul>
+      <li>"La spec ya está. Antes de enviarla: ¿quién la va a leer?" Dentro de cada herramienta hay modelos con trabajos distintos.</li>
+      <li>Planear: razona más antes de responder. Ejecutar: rápido y barato, para muchas vueltas. Orquestar: no es un modelo solo, es un modelo potente dentro de un programa (agente) que reparte tareas y usa herramientas.</li>
+      <li>Clic: la frase de cierre. La analogía de la obra es la que se quedan.</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="modelos-casas" data-block="4" data-bg-alpha="0.25" class="vc-models-slide s-tight">
+  <h2 class="t-h2" data-split="chars">Los modelos, por casa</h2>
+  <div class="vc-models" role="table" aria-label="Modelos para planear, ejecutar y orquestar, por casa">
+    <div class="vc-models__h" role="columnheader">Casa</div>
+    <div class="vc-models__h" role="columnheader">Planear<small>el modelo grande</small></div>
+    <div class="vc-models__h" role="columnheader">Ejecutar<small>los rápidos</small></div>
+    <div class="vc-models__h" role="columnheader">Orquestar<small>el agente</small></div>
+    <div class="vc-models__house fragment" data-fragment-index="0" role="rowheader">Claude<small>Anthropic</small></div>
+    <div class="vc-models__cell fragment" data-fragment-index="0" role="cell"><b>Fable 5.1 · Opus 5.5</b><span>Razonamiento exigente y trabajo largo</span></div><div class="vc-models__cell fragment" data-fragment-index="0" role="cell"><b>Sonnet 5.5 · Haiku 5.5</b><span>Velocidad e inteligencia; Haiku para alto volumen</span></div><div class="vc-models__cell fragment" data-fragment-index="0" role="cell"><b>Claude Code</b><span>Subagentes, cada uno con su propio contexto</span></div>
+    <div class="vc-models__house fragment" data-fragment-index="1" role="rowheader">GPT<small>OpenAI</small></div>
+    <div class="vc-models__cell fragment" data-fragment-index="1" role="cell"><b>GPT-6 Astra</b><span>Su modelo más capaz, para el trabajo más exigente</span></div><div class="vc-models__cell fragment" data-fragment-index="1" role="cell"><b>GPT-6.1 Sol · GPT-6 Luna</b><span>Casi Astra a menor costo; Luna, el más eficiente</span></div><div class="vc-models__cell fragment" data-fragment-index="1" role="cell"><b>Codex</b><span>Agentes especializados en paralelo</span></div>
+    <div class="vc-models__house fragment" data-fragment-index="2" role="rowheader">Gemini<small>Google</small></div>
+    <div class="vc-models__cell fragment" data-fragment-index="2" role="cell"><b>Gemini 4 Argon</b><span>Su modelo insignia de razonamiento</span></div><div class="vc-models__cell fragment" data-fragment-index="2" role="cell"><b>3.8 Flash · 3.5 Flash-Lite</b><span>Flash para software; Flash-Lite, el más rápido y barato</span></div><div class="vc-models__cell fragment" data-fragment-index="2" role="cell"><b>Antigravity</b><span>Su entorno de agentes: editor y terminal</span></div>
+    <div class="vc-models__house fragment" data-fragment-index="3" role="rowheader">Lovable<small>caja cerrada · hoy</small></div>
+    <div class="vc-models__cell vc-models__cell--box fragment" data-fragment-index="3" role="cell"><b>Modo Plan</b><span>Arma un plan que tú apruebas; no toca el código</span></div><div class="vc-models__cell vc-models__cell--box fragment" data-fragment-index="3" role="cell"><b>Modo Build</b><span>Implementa el cambio y verifica el resultado</span></div><div class="vc-models__cell vc-models__cell--box fragment" data-fragment-index="3" role="cell"><b>La herramienta</b><span>Elige y actualiza el modelo por ti</span></div>
+  </div>
+  <p class="vc-src">Documentación oficial de Anthropic, OpenAI, Google y Lovable, consultada el 20 de octubre de 2026. Los nombres cambian cada pocos meses; los tres papeles, no.</p>
+  <aside class="notes">
+    <p><strong>Modelos 2 · Los modelos, por casa</strong> · 1 min · un clic por casa</p>
+    <ul>
+      <li>Se lee por columnas: cada casa tiene un modelo grande para planear, uno o dos rápidos para ejecutar y un programa (agente) que orquesta.</li>
+      <li>La "Astra" de la que se habla es <b>GPT-6 Astra</b> (OpenAI, septiembre de 2026): es para planear. No confundir con Project Astra de Google, un asistente experimental de voz y video que no es un modelo de código.</li>
+      <li>Anthropic lo dice así en su guía para elegir modelo: un ejecutor que escala las decisiones difíciles a un asesor, y un orquestador que delega el trabajo pesado a trabajadores de menor costo.</li>
+      <li>Fable 5.1 está por encima de Opus: más lento y más caro. Anthropic recomienda empezar con Opus 5.5 para la mayoría de los casos.</li>
+      <li>Google: Gemini CLI dejó de atender a usuarios individuales el 18 de junio de 2026; lo reemplazó Antigravity CLI.</li>
+      <li>Lovable no deja escoger modelo para construir ("usa los modelos líderes y los actualiza para todos"). Base44 sí tiene selector, desde el plan Builder.</li>
+      <li>Fuentes: platform.claude.com/docs/en/models/overview y /about-claude/models/choosing-a-model · developers.openai.com/api/docs/models · ai.google.dev/gemini-api/docs/models · antigravity.google · docs.lovable.dev/features/plan-mode y /introduction/faq · docs.base44.com/Building-your-app/AI-chat-modes.</li>
+    </ul>
+  </aside>
+</section>
+
+<section id="modelos-uso" data-block="4" data-bg-alpha="0.3" class="vc-uses-slide s-tight">
+  <h2 class="t-h2" data-split="chars">¿Cuál uso en vibe coding?</h2>
+  <ol class="vc-uses focus-list">
+    <li class="fragment"><span class="vc-uses__when">Escribir y revisar la spec</span><span class="vc-uses__role">Planear</span><span class="vc-uses__how">Pégala en Claude, ChatGPT o Gemini y pregunta: <b>¿qué tendrías que adivinar?</b></span></li>
+    <li class="fragment"><span class="vc-uses__when">Construir la V1 y cada punto de control</span><span class="vc-uses__role vc-uses__role--run">Ejecutar</span><span class="vc-uses__how"><b>Modo Build</b> de Lovable, un cambio por mensaje. El modelo lo pone Lovable.</span></li>
+    <li class="fragment"><span class="vc-uses__when">Se rompió y no sale en dos intentos</span><span class="vc-uses__role">Planear</span><span class="vc-uses__how"><b>Modo Plan</b>: pide diagnóstico y plan antes de otro arreglo. No toca el código.</span></li>
+    <li class="fragment"><span class="vc-uses__when">Un proyecto grande, con varias piezas a la vez</span><span class="vc-uses__role vc-uses__role--orq">Orquestar</span><span class="vc-uses__how">Caja abierta: <b>Claude Code, Codex o Antigravity</b> reparten el trabajo entre agentes. Es la clase 2.</span></li>
+  </ol>
+  <p class="vc-uses__punch fragment" data-split="words">Piensa con el grande. Construye con el rápido. <em>Coordina con el agente.</em></p>
+  <aside class="notes">
+    <p><strong>Modelos 3 · ¿Cuál uso en vibe coding?</strong> · 1 min · un clic por fila, luego la frase</p>
+    <ul>
+      <li>Hoy casi todo es ejecutar: Lovable elige el modelo. Lo que sí deciden ustedes es el modo: Build para construir, Plan para pensar antes de tocar el código, Chat para preguntar.</li>
+      <li>Modo Plan en Lovable: cada mensaje cuesta 1 crédito, más la investigación de sus subagentes. Aprobar el plan pasa a Build.</li>
+      <li>La fila 3 conecta con el protocolo de error: si en dos intentos no sale, primero diagnóstico, después arreglo.</li>
+      <li>Fuentes: docs.lovable.dev/features/plan-mode y docs.lovable.dev/introduction/faq (consultadas el 20 de octubre de 2026).</li>
+    </ul>
+  </aside>
+</section>

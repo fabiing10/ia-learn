@@ -2359,3 +2359,255 @@ html.is-print .vc-cp__list > .fragment {
   font: 500 24px/1.2 var(--font-body);
   color: var(--placeholder);
 }
+
+/* =========================================================
+   Modelos · planear, ejecutar, orquestar (end of block 4)
+   ========================================================= */
+
+.vc-roles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 36px;
+}
+
+.vc-role {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 30px 32px 28px;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--line);
+  background: var(--surface);
+}
+
+.vc-role__icon {
+  width: 64px;
+  height: 64px;
+  padding: 13px;
+  border-radius: 18px;
+  background: var(--gold-soft);
+  color: var(--gold-text);
+}
+
+.vc-role__icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vc-role__name {
+  font: 700 48px/1 var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+.vc-role__line {
+  font: 600 29px/1.2 var(--font-display);
+  color: var(--gold-text);
+}
+
+.vc-role ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 500 25px/1.3 var(--font-body);
+  color: var(--text-2);
+}
+
+.vc-role ul li::before {
+  content: '·';
+  margin-right: 10px;
+  color: var(--gold-text);
+  font-weight: 700;
+}
+
+.vc-role__as {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 2px solid var(--line);
+  font: 600 28px/1.2 var(--font-display);
+  color: var(--text);
+}
+
+.vc-role__as span {
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+/* The arrows between the three roles */
+.vc-role + .vc-role::before {
+  content: '→';
+  position: absolute;
+  left: -30px;
+  top: 56px;
+  transform: translateX(-50%);
+  font: 700 40px/1 var(--font-display);
+  color: var(--gold-text);
+}
+
+.vc-roles__foot {
+  margin-top: 26px;
+  font: 600 30px/1.25 var(--font-display);
+  color: var(--text-2);
+}
+
+.vc-roles__foot b {
+  color: var(--gold-text);
+}
+
+/* Models by vendor */
+.vc-models {
+  display: grid;
+  grid-template-columns: 250px repeat(3, 1fr);
+  margin-top: 30px;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+}
+
+.vc-models > * {
+  padding: 15px 26px;
+  border-top: 2px solid var(--line);
+}
+
+.vc-models__h {
+  border-top: 0;
+  background: var(--surface-2);
+  font: 700 30px/1.1 var(--font-display);
+  color: var(--gold-text);
+}
+
+.vc-models__h:first-child {
+  color: var(--text-3);
+}
+
+.vc-models__h small {
+  display: block;
+  margin-top: 4px;
+  font: 500 22px/1.2 var(--font-body);
+  color: var(--text-3);
+}
+
+.vc-models__house {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--surface);
+  font: 700 32px/1.1 var(--font-display);
+}
+
+.vc-models__house small {
+  margin-top: 6px;
+  font: 500 22px/1.2 var(--font-body);
+  color: var(--text-3);
+}
+
+.vc-models__cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.vc-models__cell b {
+  font: 700 30px/1.1 var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.vc-models__cell span {
+  font: 500 21px/1.25 var(--font-body);
+  color: var(--text-2);
+}
+
+.vc-models__cell--box {
+  background: var(--gold-soft);
+}
+
+.vc-models__note {
+  margin-top: 22px;
+  font: 600 30px/1.25 var(--font-display);
+  color: var(--text-2);
+}
+
+.vc-models__note b {
+  color: var(--gold-text);
+}
+
+/* Which one, when */
+.vc-uses {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 44px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vc-uses li {
+  display: grid;
+  grid-template-columns: 560px 220px 1fr;
+  align-items: center;
+  gap: 32px;
+  padding: 22px 30px;
+  border-radius: var(--radius-m);
+  border: 2px solid var(--line);
+  background: var(--surface);
+}
+
+.vc-uses__when {
+  font: 600 32px/1.2 var(--font-display);
+}
+
+.vc-uses__role {
+  justify-self: start;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--gold-soft);
+  color: var(--gold-text);
+  font: 700 26px/1 var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.vc-uses__role--run {
+  background: color-mix(in srgb, var(--cyan) 18%, transparent);
+  color: var(--cyan-text);
+}
+
+.vc-uses__role--orq {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.vc-uses__how {
+  font: 500 27px/1.3 var(--font-body);
+  color: var(--text-2);
+}
+
+.vc-uses__how b {
+  color: var(--text);
+}
+
+.vc-uses__punch {
+  margin-top: 30px;
+  font: 700 44px/1.15 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.vc-uses__punch em {
+  font-style: normal;
+  color: var(--gold-text);
+}
+
+.vc-models-slide .vc-src {
+  margin-top: 18px;
+  font-size: 22px;
+}

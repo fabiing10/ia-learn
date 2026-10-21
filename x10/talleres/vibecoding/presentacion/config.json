@@ -65,17 +65,12 @@
     "sesion": "clase-1"
   },
   "expositor": "Fabian Zapata",
-  "contacto": "WhatsApp 314 366 6151",
   "media": {
     "tableroLovable": "media/tablero-lovable.png",
     "proyectoClaudeCode": "media/proyecto-claude-code.png",
     "resultadoPerezoso": "media/resultado-perezoso.png",
     "tableroDesdeSpec": "media/tablero-desde-spec.png",
     "videoCajaAbierta": "media/caja-abierta-4-min.mp4"
-  },
-  "whatsapp": {
-    "numero": "573143666151",
-    "mensaje": "Hola Fabian, soy estudiante de Vibe Coding (clase 1). Mi nombre es "
   },
   "fuentes": {
     "lovableGithub": "docs.lovable.dev/integrations/github · docs.lovable.dev/features/publish (consultadas el 19 de octubre de 2026)"

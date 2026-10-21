@@ -157,15 +157,10 @@ export const playbookUrl = (anchor) => {
   return `${PLAYBOOK}#${anchor}`;
 };
 
+/** Only the presenter's name: Vibe Coding publishes no contact data. */
 export const CONTACT = {
   expositor: 'Fabian Zapata',
-  whatsapp: '573143666151',
-  whatsappLabel: '314 366 6151',
 };
-
-export const whatsappUrl = (
-  text = 'Hola Fabian, soy estudiante de Vibe Coding (Clase 1). Mi nombre es ',
-) => `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(text)}`;
 
 /** Tesis of the class (bloque 1, minute 0:09). */
 export const TESIS = 'Vibe coding no es pedir una app. Es describirla tan bien que la IA no tenga que adivinar.';

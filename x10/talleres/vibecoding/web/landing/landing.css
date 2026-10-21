@@ -1692,6 +1692,7 @@ body {
 
 .foot__brand {
   display: grid;
+  align-content: start;
   gap: 12px;
   justify-items: start;
 }
@@ -1706,44 +1707,6 @@ body {
 
 .foot__line b {
   color: var(--text);
-}
-
-.foot__contact {
-  display: grid;
-  gap: 2px;
-  margin: 4px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.foot__contact a {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 40px;
-  color: var(--text);
-  font-size: var(--fs-sm);
-  text-decoration: none;
-}
-
-.foot__contact a:hover {
-  color: var(--accent-text);
-  text-decoration: underline;
-}
-
-.foot__contact [data-icon] {
-  display: grid;
-  width: 32px;
-  height: 32px;
-  place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  color: var(--accent-text);
-}
-
-.foot__contact [data-icon] svg {
-  width: 16px;
-  height: 16px;
 }
 
 .foot__privacy {
