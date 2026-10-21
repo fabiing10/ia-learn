@@ -46,6 +46,27 @@ export function noteFailure(id, now = Date.now()) {
 
 export const clearFailures = (id) => (id == null ? fails.clear() : fails.delete(id));
 
+/**
+ * Every wrong guess waits before answering, longer the more a client (and the
+ * instance as a whole) has failed, locked or not. Guessing is never free.
+ */
+export function wrongDelayMs(clientCount, globalCount) {
+  const perClient = Math.min(6000, 800 * clientCount);
+  const perInstance = globalCount > 50 ? 4000 : 0;
+  return Math.max(perClient, perInstance);
+}
+
+let globalFails = 0;
+let globalSince = 0;
+function noteGlobalFailure(now = Date.now()) {
+  if (now - globalSince > LOCK_MS) {
+    globalFails = 0;
+    globalSince = now;
+  }
+  globalFails += 1;
+  return globalFails;
+}
+
 const normalize = (s) => String(s ?? '').replace(/[\s.\-]/g, '');
 
 /** Hex HMAC-SHA256 of the key under the cookie secret; the cookie value. */
@@ -117,7 +138,9 @@ export function page({ error = '', action = '' } = {}) {
  * Decides what to do with a request to a protected path. Returns null when the
  * request may continue to the page, or the Response to send instead.
  */
-export async function gateResponse(request, secret, cookieSecret) {
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+export async function gateResponse(request, secret, cookieSecret, { sleep = wait } = {}) {
   const url = new URL(request.url);
   const action = url.pathname + url.search;
   // No key configured: the deck is open. Decided by the presenter on 21 Oct 2026
@@ -148,7 +171,8 @@ export async function gateResponse(request, secret, cookieSecret) {
         },
       });
     }
-    noteFailure(id);
+    const f = noteFailure(id);
+    await sleep(wrongDelayMs(f.count, noteGlobalFailure())); // guessing is never free
     const lock = lockState(id);
     if (lock.blocked) {
       return new Response(page({ error: `Demasiados intentos. Vuelve a intentarlo en ${Math.ceil(lock.retryAfterS / 60)} minutos.`, action }), {
@@ -156,7 +180,6 @@ export async function gateResponse(request, secret, cookieSecret) {
         headers: { ...HTML, 'Retry-After': String(lock.retryAfterS) },
       });
     }
-    await new Promise((r) => setTimeout(r, 800)); // slow every wrong guess down
     return new Response(page({ error: 'Clave incorrecta.', action }), { status: 401, headers: HTML });
   }
   if (readCookie(request.headers.get('cookie'), COOKIE) === expected) return null;

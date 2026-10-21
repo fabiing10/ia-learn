@@ -1,12 +1,13 @@
 // node --test src/gate/gate.test.mjs
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { COOKIE, MAX_FAILS, token, readCookie, gateResponse, page, lockState, noteFailure, clearFailures } from './gate.js';
+import { COOKIE, MAX_FAILS, token, readCookie, gateResponse, page, lockState, noteFailure, clearFailures, wrongDelayMs } from './gate.js';
 
 const URL_ = 'https://www.x10.expert/cerebro/presentacion/';
 const SECRET = '1.234.567.890';
 const PEPPER = 'b7d2c0e9f4a1c3e5d8f6a2b4c6e8d0f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3';
-const gate = (req, secret = SECRET, pepper = PEPPER) => gateResponse(req, secret, pepper);
+const slept = [];
+const gate = (req, secret = SECRET, pepper = PEPPER) => gateResponse(req, secret, pepper, { sleep: async (ms) => { slept.push(ms); } });
 const get = (cookie = '') => new Request(URL_, { headers: cookie ? { cookie } : {} });
 const post = (clave, ip = '203.0.113.9') => new Request(URL_, { method: 'POST', body: new URLSearchParams({ clave }), headers: { 'x-forwarded-for': ip } });
 
@@ -96,5 +97,21 @@ test('a right key clears the failure count', async () => {
   assert.equal(lockState(ip).blocked, false);
   for (let i = 0; i < MAX_FAILS - 1; i++) noteFailure(ip);
   assert.equal(lockState(ip).blocked, false, 'count restarted after success');
+  clearFailures();
+});
+
+test('every wrong guess waits, longer with each failure, locked or not; the right key does not wait', async () => {
+  clearFailures();
+  slept.length = 0;
+  const ip = '198.51.100.11';
+  for (let i = 0; i < MAX_FAILS + 2; i++) await gate(post('0000000000', ip));
+  assert.equal(slept.length, MAX_FAILS + 2, 'one wait per wrong guess, including the 429s');
+  assert.ok(slept[0] >= 800 && slept[slept.length - 1] > slept[0], `delays grow: ${slept.join(',')}`);
+  assert.equal(wrongDelayMs(1, 0), 800);
+  assert.equal(wrongDelayMs(100, 0), 6000);
+  assert.equal(wrongDelayMs(1, 51), 4000);
+  slept.length = 0;
+  assert.equal((await gate(post('1234567890', ip))).status, 303);
+  assert.equal(slept.length, 0, 'the right key answers at once');
   clearFailures();
 });
