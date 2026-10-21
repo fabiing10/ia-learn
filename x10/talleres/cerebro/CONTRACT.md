@@ -44,7 +44,10 @@ Build and dev:
 The plan's promise is "Nada se envía a ningún servidor" (§6.1, §6.15). So:
 - No Supabase, no fetch to any API, no analytics, no CDNs, no external fonts or images.
 - The profile may be kept in `localStorage` key `cj-perfil` (it stays on the device; say so).
-  Theme choice in `localStorage` key `cj-theme`.
+  Theme choice in `localStorage` key `cj-theme`. The intro survey (`/cerebro/encuesta/`) keeps its
+  draft in `cj-encuesta` and, without Supabase env vars, its demo rows in `cj-demo-submissions`
+  and an offline queue in `cj-queue`. Its rows carry name and email; the deck reads only the
+  counts returned by the SQL function `cj_intro_summary`.
 - No runtime `fetch()` of local JSON and no dynamic `import()`: everything is a static ES
   import, so the coordinator can also build the landing as one offline HTML file (plan B
   without network, §6.15).

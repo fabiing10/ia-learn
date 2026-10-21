@@ -62,7 +62,6 @@ export const TALLERES = [
     marca: { acento: '§', color: '#9D86FF' },
     enlaces: {
       landing: '/cerebro/',
-      presentacion: '/cerebro/presentacion/',
       playbook: '/cerebro/playbook/',
     },
     deck: {

@@ -51,7 +51,8 @@
     "landing": "https://x10.expert/cerebro/",
     "construir": "https://x10.expert/cerebro/#construir",
     "prueba": "https://x10.expert/cerebro/#prueba",
-    "playbook": "https://x10.expert/cerebro/playbook/"
+    "playbook": "https://x10.expert/cerebro/playbook/",
+    "encuesta": "https://x10.expert/cerebro/encuesta/"
   },
   "urlCorta": "x10.expert/cerebro",
   "evento": "Clase abierta · Innovación y tecnología para los servicios jurídicos · Pontificia Universidad Javeriana",
@@ -72,5 +73,8 @@
     "modelo": "21 de octubre de 2026, perfil de Laura, el mismo contrato",
     "sin": "10ª · Arbitraje en Medellín · Implica costos de desplazamiento, pero es tolerable. Baja (ceder). … Cede de entrada en el arbitraje en Medellín, en la confidencialidad y en dejar la indemnidad con tope. … Una precisión: no soy abogado.",
     "con": "4 rojas, 3 amarillas, 1 verde. Según tus posiciones son [ROJO] la Tercera, la Quinta, la Séptima y la Novena; [AMARILLO] la Cuarta, la Octava y la Décima; [VERDE] la Sexta. … Décima · Ley y controversias [AMARILLO] Ley colombiana, pero el arbitraje es en Medellín y no en Bogotá. … Me detengo en YO DECIDO: tú defines qué es innegociable para firmar este mes."
+  },
+  "encuesta": {
+    "sesion": "javeriana-2026-10-21"
   }
 }

@@ -32,6 +32,7 @@ const CHECKS = [
   // Cerebro Jurídico
   { path: '/cerebro/', expect: { selector: '#construir' } },
   { path: '/cerebro/offline/', expect: { selector: '#construir' } },
+  { path: '/cerebro/encuesta/', expect: { selector: '#start', text: '¿Cómo usas la IA hoy?' } },
   { path: '/cerebro/presentacion/', expect: { min: ['.reveal .slides section[id]', 24], text: '§cerebro jurídico', count: ['.hud__bar .segbar__seg', 6] } },
   { path: '/cerebro/playbook/', expect: { selector: '#verificar' } },
 ];

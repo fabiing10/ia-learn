@@ -4,7 +4,13 @@
 
 import { normalizeProfile } from './generator.js';
 
-export const KEYS = { perfil: 'cj-perfil', theme: 'cj-theme' };
+export const KEYS = {
+  perfil: 'cj-perfil',
+  theme: 'cj-theme',
+  encuesta: 'cj-encuesta',
+  demo: 'cj-demo-submissions',
+  queue: 'cj-queue',
+};
 
 /** window.localStorage, or null where reading the property itself throws. */
 export function localStore() {
@@ -48,3 +54,24 @@ export function clearData(storage = localStore()) {
 }
 
 export const sameProfile = (a, b) => JSON.stringify(normalizeProfile(a)) === JSON.stringify(normalizeProfile(b));
+
+// ── Generic JSON helpers for the survey page (never throw) ──
+
+export function readJSON(key, fallback) {
+  try {
+    const raw = localStore()?.getItem(key);
+    if (raw == null) return fallback;
+    return JSON.parse(raw) ?? fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+export function writeJSON(key, value) {
+  try {
+    localStore()?.setItem(key, JSON.stringify(value));
+    return true;
+  } catch {
+    return false;
+  }
+}

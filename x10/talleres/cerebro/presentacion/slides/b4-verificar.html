@@ -23,9 +23,34 @@
   </div>
   <p class="cj-two__foot fragment">Los dos saben buscar. Solo uno sabe cómo trabaja usted.</p>
   <aside class="notes">
-    <p><strong>C18 · La misma tarea, dos chats</strong> · 22:00 · clic: la frase · 90 s · manos arriba: "¿a quién le aplicó su tabla?"</p>
+    <p><strong>C18 · La misma tarea, dos chats</strong> · 16:00 · clic: la frase · 90 s · manos arriba: "¿a quién le aplicó su tabla?"</p>
     <p>"Los dos chats saben buscar. Solo uno sabe cómo trabaja usted. Sin cerebro, la IA hace un buen análisis general y decide por usted. Con cerebro, aplica sus posiciones, marca en rojo lo que usted nunca firma, propone otra redacción y se detiene donde usted dijo: YO DECIDO."</p>
     <p>Las capturas reales salen de config.json → prueba (sin, con, modelo). Mientras estén vacías, la diapositiva muestra solo lo que deben ver, marcado como expectativa, no como medición.</p>
+  </aside>
+</section>
+
+<section id="ab" data-block="4" data-bg-alpha="0.2" class="cj-ab s-tight">
+  <p class="cj-kicker" data-in>Lo que medimos · 15 casos · 86 criterios · evaluador ciego</p>
+  <h2 class="t-h2" data-split="words">Mismo modelo, misma pregunta. Cambió el cerebro.</h2>
+  <div class="cj-ab__top" data-in="stagger">
+    <div class="cj-ab__big cj-ab__big--off"><b>22 %</b><span>sin cerebro</span></div>
+    <div class="cj-ab__big cj-ab__big--mid"><b>55 %</b><span>solo la skill</span></div>
+    <div class="cj-ab__big cj-ab__big--on"><b>85 %</b><span>con el cerebro</span></div>
+  </div>
+  <ol class="cj-ab__dims" data-in="stagger">
+    <li style="--a: 0.46; --b: 0.91"><span class="cj-ab__k">Aplica su criterio</span><span class="cj-ab__bar"><i class="is-a"></i><i class="is-b"></i></span><span class="cj-ab__v">46 → 91</span></li>
+    <li style="--a: 0; --b: 1"><span class="cj-ab__k">No decide por usted</span><span class="cj-ab__bar"><i class="is-a"></i><i class="is-b"></i></span><span class="cj-ab__v">0 → 100</span></li>
+    <li style="--a: 0.17; --b: 0.8"><span class="cj-ab__k">Citas verificables</span><span class="cj-ab__bar"><i class="is-a"></i><i class="is-b"></i></span><span class="cj-ab__v">17 → 80</span></li>
+    <li style="--a: 0.44; --b: 1"><span class="cj-ab__k">Pregunta lo que falta</span><span class="cj-ab__bar"><i class="is-a"></i><i class="is-b"></i></span><span class="cj-ab__v">44 → 100</span></li>
+    <li style="--a: 0; --b: 0.83"><span class="cj-ab__k">Protege datos personales</span><span class="cj-ab__bar"><i class="is-a"></i><i class="is-b"></i></span><span class="cj-ab__v">0 → 83</span></li>
+    <li style="--a: 0; --b: 0.58"><span class="cj-ab__k">Su formato</span><span class="cj-ab__bar"><i class="is-a"></i><i class="is-b"></i></span><span class="cj-ab__v">0 → 58</span></li>
+  </ol>
+  <p class="cj-ab__foot fragment">Hoy, el contrato de Laura en vivo: <b>2 de 7</b> sin cerebro, <b>7 de 7</b> con cerebro. Las citas eran correctas en los dos; solo uno le dijo cuáles abrir.</p>
+  <aside class="notes">
+    <p><strong>A/B · Lo que medimos</strong> · 17:30 · 90 s · clic: el caso de hoy</p>
+    <p>"Esto no es una opinión. Quince tareas reales de cinco perfiles de abogado, 86 criterios binarios definidos antes de correr nada, un evaluador ciego que no sabía qué respuesta tenía cerebro. Sin cerebro, 22 % de los criterios. Con cerebro, 85 %. Miren las barras: la IA sin cerebro ya sabía derecho, por eso aplica el criterio el 46 % de las veces. Lo que no hacía nunca era detenerse donde usted decide, marcar qué citas abrir, o proteger datos. Eso no es conocimiento jurídico: es sistema."</p>
+    <p>Clic: "Y esta mañana lo repetí con el contrato de Laura, el que vieron hace un momento: 2 de 7 criterios sin cerebro, 7 de 7 con cerebro. Las cinco normas que citó las abrí en la Secretaría del Senado: eran correctas en los dos chats. La diferencia es que solo uno me dijo cuáles abrir."</p>
+    <p>Método, por si preguntan: generación con el mismo modelo desde la línea de comandos, sin búsqueda; calificación por un modelo distinto, ciega, con una cita textual como evidencia por criterio; dos repeticiones por condición. Los detalles y las tablas están en el kit del expositor.</p>
   </aside>
 </section>
 
@@ -47,7 +72,7 @@
     <button class="cj-copybtn" type="button" data-copy="redteam"><span class="cj-copybtn__label">Copiar</span></button>
   </div>
   <aside class="notes">
-    <p><strong>C21 · Verificar A·B·C</strong> · 23:30 · clic 1: exija el enlace · clic 2: el prompt de red team</p>
+    <p><strong>C21 · Verificar A·B·C</strong> · 19:00 · clic 1: exija el enlace · clic 2: el prompt de red team</p>
     <p>"Con los modelos que buscan, el nivel A cuesta un clic: exija el enlace y ábralo. Y ojo: si la IA le dice «ya lo verifiqué», eso también es una respuesta de la IA." Las sanciones documentadas en el mundo casi siempre fallaron en el nivel A. Los errores costosos sin sanción suelen fallar en el B o el C." El protocolo completo está en 04_VERIFICACION.md y en el playbook (#verificar).</p>
   </aside>
 </section>
@@ -67,7 +92,7 @@
   </div>
   <p class="cj-court__stamp"><span>YO DECIDO</span></p>
   <aside class="notes">
-    <p><strong>C22 · Lo que ya dijo la Corte</strong> · 25:00</p>
+    <p><strong>C22 · Lo que ya dijo la Corte</strong> · 20:30</p>
     <p>T-323 de 2024 (2 ago. 2024, M.P. Juan Carlos Cortés González): un juez de tutela de segunda instancia usó ChatGPT 3.5 para ampliar la motivación de un fallo ya decidido. La Corte no lo anuló, pero halló incumplidas la transparencia y la responsabilidad; fijó 12 principios y ordenó al CSJ expedir lineamientos en 4 meses. Así nació el Acuerdo PCSJA24-12243 (16 dic. 2024), que obliga a la Rama Judicial (magistrados, jueces y empleados), no a los litigantes: por eso no choca con que hoy usen planes gratuitos con datos anonimizados.</p>
     <p>"La Corte Constitucional ya lo dijo en la T-323: la IA puede ayudar, pero el que firma, decide y responde es el abogado. El cerebro no es para que la IA haga su trabajo. Es para que usted siga siendo el que decide, con menos tiempo perdido."</p>
   </aside>

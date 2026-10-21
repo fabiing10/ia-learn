@@ -16,7 +16,7 @@ const broken = {
 };
 
 test('keys are the contract ones', () => {
-  assert.deepEqual(KEYS, { perfil: 'cj-perfil', theme: 'cj-theme' });
+  assert.deepEqual(KEYS, { perfil: 'cj-perfil', theme: 'cj-theme', encuesta: 'cj-encuesta', demo: 'cj-demo-submissions', queue: 'cj-queue' });
 });
 
 test('save then load returns the normalized profile', () => {
