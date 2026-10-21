@@ -69,8 +69,8 @@
     "pcsja": "Lineamientos para magistrados, jueces y empleados: verificación humana de todo resultado, informar el uso de IA y no ingresar datos confidenciales en herramientas que los retengan o reentrenen con ellos."
   },
   "prueba": {
-    "modelo": "",
-    "sin": "",
-    "con": ""
+    "modelo": "Claude, 20 de octubre de 2026, perfil de Laura con su criterio",
+    "sin": "SEXTA · Confidencialidad 🟢 Recíproca, con excepciones estándar y plazo razonable. OCTAVA · Datos personales 🟠 Es demasiado escueta y no cumple con lo que la Ley 1581 de 2012 exige.",
+    "con": "SEXTA · Confidencialidad [AMARILLO] Recíproca y con excepciones estándar, pero a 3 años (tu VERDE es hasta 2). OCTAVA · Datos personales [ROJO] Accederá a bases de datos de clientes sin que el contrato defina quién es responsable. Me detengo en YO DECIDO: qué cedes, qué negocias y qué es innegociable lo decides tú."
   }
 }

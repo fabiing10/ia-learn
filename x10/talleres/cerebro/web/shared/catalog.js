@@ -15,11 +15,13 @@
 //   ESPERADO         { con: [..], sin: [..] } what to look for in the test
 //   PRIVACIDAD       [{ id, herramienta, label, entrena, apagar, sinRastro?, ojo, fuente }]
 //   INSTALAR_SKILL   { pasos: [..], nota }
+//   POSICIONES       [{ id, label, fila, opciones: [{ id, label, verde, amarillo, rojo }] }]
 //   PERFIL_LAURA     the preloaded example profile
 //
 // Profile shape (what the landing stores in localStorage `cj-perfil`):
-//   { nombre: string, rol: id|null, areas: [id], tareas: [id] (max 3),
-//     herramientas: [id], confidencialidad: id|null, tono: id|null, nuncaDelego: string }
+//   { nombre: string, ciudad: string, rol: id|null, areas: [id], tareas: [id] (max 3),
+//     herramientas: [id], confidencialidad: id|null, tono: id|null, nuncaDelego: string,
+//     posiciones: { [POSICIONES id]: option id } (only the ones set) }
 
 // §6.5 — `sistema` is the role description inside the system block,
 // `nuncaDelego` the default decision the role never delegates (no final period).
@@ -238,7 +240,8 @@ export const TAREAS = [
 4. VERIFICO: leí completas las cláusulas [VERDE] (la IA no las lee por mí) y comprobé
    las normas imperativas que no admiten pacto en contrario (consumidor, laboral, datos).
 
-Mis posiciones (edita esta tabla; es el corazón de la skill):
+Mis posiciones (edita esta tabla; es el corazón de la skill). Si una cláusula encaja en
+dos filas, usa la más específica y di cuál aplicaste:
 
 | Cláusula | VERDE | AMARILLO | ROJO |
 |---|---|---|---|
@@ -404,8 +407,8 @@ está desactualizada.`,
       texto: `1. YO entrego: la decisión o el documento técnico y quién es el cliente (empresario,
    persona natural, área interna).
 2. IA hace: dos versiones: un correo de seis líneas y una explicación extendida en
-   lenguaje claro, sin prometer resultados, con los próximos pasos y lo que necesito del
-   cliente.
+   lenguaje claro, sin prometer resultados, plazos ni la reacción de terceros, con los
+   próximos pasos y lo que necesito del cliente.
 3. YO DECIDO: qué nivel de riesgo comunico y en qué términos.
 4. VERIFICO: que ninguna frase prometa un resultado ni revele información de otro cliente.`,
     },
@@ -431,6 +434,53 @@ está desactualizada.`,
 ];
 
 export const MAX_TAREAS = 3;
+
+// The lawyer's own thresholds for the contracts skill. Each option rewrites one row
+// of the positions table (VERDE | AMARILLO | ROJO); the first option of each is the
+// row the plan ships. The dry runs of 20 Oct 2026 showed the brain only changes the
+// AI's verdict when a row differs from general practice, so this is where the
+// lawyer's criterion gets written in thirty seconds.
+export const POSICIONES = [
+  {
+    id: 'responsabilidad',
+    label: 'Tope de responsabilidad que acepto para mi cliente',
+    fila: 'Limitación de responsabilidad',
+    opciones: [
+      { id: 'contrato', label: 'Igual al valor del contrato', verde: 'Tope igual al valor del contrato, recíproco', amarillo: 'Tope inferior o no recíproco', rojo: 'Sin tope para mi cliente o exclusión total para la contraparte' },
+      { id: 'doble', label: 'Hasta el doble del contrato', verde: 'Tope hasta el doble del valor del contrato, recíproco', amarillo: 'Tope superior al doble, o no recíproco', rojo: 'Sin tope para mi cliente o exclusión total para la contraparte' },
+      { id: 'directo', label: 'Igual al contrato y solo daño directo', verde: 'Tope igual al valor del contrato, recíproco, limitado al daño directo y previsible', amarillo: 'Tope igual al contrato que incluye lucro cesante o daño indirecto', rojo: 'Sin tope, o tope superior al contrato con daños indirectos' },
+    ],
+  },
+  {
+    id: 'confidencialidad',
+    label: 'Plazo de confidencialidad que acepto',
+    fila: 'Confidencialidad',
+    opciones: [
+      { id: 'cinco', label: 'Hasta 5 años', verde: 'Recíproca, 2 a 5 años, excepciones estándar', amarillo: 'Plazo indefinido', rojo: 'Unilateral' },
+      { id: 'dos', label: 'Hasta 2 años', verde: 'Recíproca, hasta 2 años, excepciones estándar', amarillo: 'Recíproca, de 3 a 5 años', rojo: 'Unilateral o indefinida' },
+      { id: 'indefinido', label: 'Indefinido si es recíproca', verde: 'Recíproca, cualquier plazo, con excepciones estándar', amarillo: 'Recíproca sin excepciones estándar', rojo: 'Unilateral' },
+    ],
+  },
+  {
+    id: 'datos',
+    label: 'Datos personales de terceros',
+    fila: 'Datos personales',
+    opciones: [
+      { id: 'roles', label: 'Basta con roles definidos', verde: 'Roles definidos (responsable / encargado) conforme a la Ley 1581 de 2012', amarillo: 'Sin rol definido', rojo: 'Transferencia sin autorización ni contrato de transmisión' },
+      { id: 'transmision', label: 'Exijo contrato de transmisión firmado', verde: 'Roles definidos (responsable / encargado) y contrato de transmisión firmado', amarillo: 'Roles definidos, sin contrato de transmisión', rojo: 'Acceso a datos personales de terceros sin roles definidos ni contrato de transmisión' },
+    ],
+  },
+  {
+    id: 'penal',
+    label: 'Cláusula penal que acepto',
+    fila: 'Cláusula penal',
+    opciones: [
+      { id: 'proporcional', label: 'Proporcional y reducible', verde: 'Proporcional y reducible', amarillo: 'Alta pero acotada', rojo: 'Acumulable con perjuicios sin límite' },
+      { id: 'diez', label: 'Hasta 10 %, no acumulable', verde: 'Hasta el 10 % del valor del contrato, no acumulable con perjuicios', amarillo: 'Entre el 10 % y el 20 %, o acumulable con tope', rojo: 'Más del 20 %, o acumulable con perjuicios sin límite' },
+      { id: 'veinte', label: 'Hasta 20 %, no acumulable', verde: 'Hasta el 20 % del valor del contrato, no acumulable con perjuicios', amarillo: 'Más del 20 % pero acotada', rojo: 'Acumulable con perjuicios sin límite' },
+    ],
+  },
+];
 
 // §6.8 (reglas, sistema) and §3.11 (que, modelo). `sistema` is rule 4 of the system block.
 export const CONFIDENCIALIDAD = [
@@ -458,7 +508,7 @@ export const CONFIDENCIALIDAD = [
       'Los expedientes con reserva legal (penal en investigación, familia, menores) no entran a ninguna IA en la nube',
     ],
     sistema:
-      'Asume que todo lo que te paso viene anonimizado con códigos (CLIENTE-01, CONTRAPARTE-01). Si ves nombres, cédulas o NIT reales, detente y pídeme que los reemplace antes de continuar.',
+      'Asume que todo lo que te paso viene anonimizado con códigos (CLIENTE-01, CONTRAPARTE-01). Si ves nombres, cédulas o NIT reales, detente y pídeme que los reemplace antes de continuar, y no repitas esos datos en tu respuesta.',
   },
   {
     id: 'sensible',
@@ -472,7 +522,7 @@ export const CONFIDENCIALIDAD = [
       'El cerebro se usa igual: cambia el modelo, no el método',
     ],
     sistema:
-      'Trabajas en un entorno restringido. Nunca me pidas datos de identificación de personas; si los necesitas para razonar, usa marcadores genéricos. Si una tarea exige datos que no puedo darte, dime cómo haría el análisis yo mismo.',
+      'Trabajas en un entorno restringido. Nunca me pidas datos de identificación de personas; si los necesitas para razonar, usa marcadores genéricos. Si una tarea exige datos que no puedo darte, dime cómo haría el análisis yo mismo. Si ves datos personales o sensibles reales, detente, no los repitas y pídeme marcadores.',
   },
 ];
 
@@ -482,19 +532,19 @@ export const TONOS = [
     id: 'formal',
     label: 'Formal y técnico',
     instruccion: 'Formal y técnico, con terminología jurídica precisa, sin adornos',
-    formato: 'Párrafos numerados y citas completas al final',
+    formato: 'Párrafos numerados; referencias cortas en el texto y las citas completas en un bloque propio al final del desarrollo, justo antes de la sección «Verificación pendiente»',
   },
   {
     id: 'didactico',
     label: 'Claro y didáctico',
     instruccion: 'Claro y didáctico; explica cada término técnico la primera vez que aparece',
-    formato: 'Resumen en tres líneas al inicio y luego el desarrollo con subtítulos',
+    formato: 'Resumen en exactamente tres líneas numeradas (1, 2, 3) al inicio y luego el desarrollo con subtítulos',
   },
   {
     id: 'ejecutivo',
     label: 'Directo y ejecutivo',
     instruccion: 'Directo y ejecutivo: conclusión primero, sustento después',
-    formato: 'Conclusión en una línea, máximo cinco viñetas de sustento, riesgos al final',
+    formato: 'Primero la conclusión en una sola línea; inmediatamente después, máximo cinco viñetas de sustento; solo después tablas, borradores y detalles; riesgos al final',
   },
 ];
 

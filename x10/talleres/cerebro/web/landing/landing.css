@@ -2151,3 +2151,22 @@ fieldset.field > legend + * {
 .load__side .dl {
   height: auto;
 }
+
+
+/* ── Tu criterio en contratos: one radio row per position ── */
+
+.field--criterio {
+  display: grid;
+  gap: 14px;
+}
+
+.subfield {
+  display: grid;
+  gap: 6px;
+}
+
+.subfield__label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-2);
+}

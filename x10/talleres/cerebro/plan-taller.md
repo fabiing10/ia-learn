@@ -533,14 +533,17 @@ REGLAS
    internet, búscala en la fuente oficial (relatorías de las altas cortes,
    SUIN-Juriscol, Secretaría del Senado). Si no la abriste en una fuente oficial,
    márcala [NO VERIFICADO].
-3. Citas: cada sentencia, norma o artículo que cites lleva su enlace oficial. Nunca
-   inventes sentencias, radicados, magistrados ponentes, fechas ni artículos; si no
-   encuentras el dato exacto, dilo en lugar de completarlo.
+3. Citas: cada sentencia, norma o artículo que cites lleva, en la misma línea, su
+   enlace oficial o la marca [NO VERIFICADO]; también las que vienen de 03_FUENTES.md
+   mientras su enlace oficial esté vacío. Nunca inventes sentencias, radicados,
+   magistrados ponentes, fechas ni artículos; si no encuentras el dato exacto, dilo en
+   lugar de completarlo.
 4. Confidencialidad: asume que todo lo que te paso viene anonimizado con códigos
    (CLIENTE-01, CONTRAPARTE-01). Si ves nombres, cédulas o NIT reales, detente y pídeme
-   que los reemplace antes de continuar.
+   que los reemplace antes de continuar, y no repitas esos datos en tu respuesta.
 5. Tono: claro y didáctico; explica cada término técnico la primera vez que aparece.
-   Formato: resumen en tres líneas al inicio y luego el desarrollo con subtítulos.
+   Formato: resumen en exactamente tres líneas numeradas (1, 2, 3) al inicio y luego el
+   desarrollo con subtítulos.
 6. Procedimientos y criterio: para las tareas de 02_PLAYBOOK.md sigue sus pasos, aplica
    mis posiciones antes que la práctica general y detente en cada punto marcado YO DECIDO.
 7. Cierre obligatorio: termina toda respuesta jurídica con una sección "Verificación
@@ -739,7 +742,7 @@ sequenceDiagram
     participant IA as Su IA (Claude / ChatGPT / Gemini / local)
     A->>L: Escanea QR, abre la página
     L-->>A: Perfil de ejemplo precargado (Laura)
-    A->>L: Responde 6–8 campos (rol, áreas, 3 tareas, IA, confidencialidad, tono, "nunca delego")
+    A->>L: Responde 8–10 campos (nombre, ciudad, rol, áreas, 3 tareas, IA, confidencialidad, tono, "nunca delego", su criterio en contratos)
     L-->>A: Reescribe los 5 archivos + README en tiempo real
     A->>L: "Copiar todo para pegar en un chat"
     A->>IA: Pega en un chat nuevo
@@ -755,6 +758,7 @@ sequenceDiagram
 | Campo | Tipo | Opciones | Qué decide |
 |---|---|---|---|
 | Nombre (cómo quiere que la IA le llame) | texto, opcional | libre | Saludo en el bloque de sistema; portada del README |
+| Ciudad donde ejerce | texto, opcional | libre | Frase «Ejerzo en …» en el bloque de sistema y línea en `00_ADN.md`; evita que la IA pregunte la ciudad cuando un foro o juzgado dependa de ella (agregado el 20 de octubre de 2026 tras las pruebas) |
 | Rol principal | una opción | litigante · firma · in-house · público · docente/estudiante · emprendedor legaltech | Descripción en el sistema; "qué es un buen trabajo"; la decisión por defecto que nunca delega |
 | Áreas de práctica | varias | civil y comercial · laboral · penal · administrativo y contratación · constitucional y tutelas · tributario · societario y M&A · PI y tecnología · familia · financiero · datos y cumplimiento | Semilla de normas en `03_FUENTES.md` |
 | Tareas que más tiempo quitan | hasta 3 | contratos · jurisprudencia · demandas y contestaciones · peticiones y PQRS · expedientes · términos · due diligence · conceptos · comunicación con clientes · contenido jurídico | Una skill por tarea en `02_PLAYBOOK.md` |
@@ -762,6 +766,7 @@ sequenceDiagram
 | Sensibilidad de lo que maneja | una opción | pública o propia · reservada · altamente sensible | Reglas de `01_LINEAS_ROJAS.md` y la regla 4 del sistema |
 | Cómo quiere que le responda | una opción | formal y técnico · claro y didáctico · directo y ejecutivo | Regla 5 del sistema (tono y formato) |
 | Una decisión que nunca delegaría | texto, opcional | libre | Primera línea de "Lo que nunca delego" |
+| Su criterio en contratos (solo si eligió la tarea Contratos) | cuatro elecciones, opcionales | tope de responsabilidad (igual al contrato · hasta el doble · igual y solo daño directo) · plazo de confidencialidad (hasta 5 años · hasta 2 años · indefinido si es recíproca) · datos personales (basta con roles · exijo contrato de transmisión) · cláusula penal (proporcional · hasta 10 % · hasta 20 %) | Reescribe la fila correspondiente de la tabla de posiciones de la skill de contratos en `02_PLAYBOOK.md` y en la skill instalable. La primera opción de cada una es la fila original. Agregado el 20 de octubre de 2026: las pruebas mostraron que la tabla original coincide con la práctica común, y el cerebro solo cambia el veredicto de la IA cuando una fila es distinta |
 
 ### 6.4 Lógica de generación (campo → archivo)
 
@@ -831,7 +836,8 @@ Cuándo: cualquier contrato que deba revisar o negociar.
 4. VERIFICO: leí completas las cláusulas [VERDE] (la IA no las lee por mí) y comprobé
    las normas imperativas que no admiten pacto en contrario (consumidor, laboral, datos).
 
-Mis posiciones (edita esta tabla; es el corazón de la skill):
+Mis posiciones (edita esta tabla; es el corazón de la skill). Si una cláusula encaja en
+dos filas, usa la más específica y di cuál aplicaste:
 
 | Cláusula | VERDE | AMARILLO | ROJO |
 |---|---|---|---|
@@ -955,8 +961,8 @@ desactualizada.
 1. YO entrego: la decisión o el documento técnico y quién es el cliente (empresario,
    persona natural, área interna).
 2. IA hace: dos versiones: un correo de seis líneas y una explicación extendida en
-   lenguaje claro, sin prometer resultados, con los próximos pasos y lo que necesito del
-   cliente.
+   lenguaje claro, sin prometer resultados, plazos ni la reacción de terceros, con los
+   próximos pasos y lo que necesito del cliente.
 3. YO DECIDO: qué nivel de riesgo comunico y en qué términos.
 4. VERIFICO: que ninguna frase prometa un resultado ni revele información de otro cliente.
 ```
@@ -979,16 +985,16 @@ desactualizada.
 | Nivel | Reglas en `01_LINEAS_ROJAS.md` | Regla 4 del sistema |
 |---|---|---|
 | Pública o propia | Lo que proceso es público o de mi autoría. Aun así, no subo datos personales que no sean necesarios | "Puedes trabajar con los documentos que te comparto. Si detectas datos personales innecesarios, avísame antes de usarlos." |
-| Reservada (datos de terceros) | Anonimizo antes de subir (nombres, cédulas, NIT, direcciones, correos, radicados con nombres); uso códigos (CLIENTE-01, CONTRAPARTE-01, TESTIGO-A) · No subo documentos completos a cuentas gratuitas; reviso que la cuenta no entrene con mis datos · Los expedientes con reserva legal (penal en investigación, familia, menores) no entran a ninguna IA en la nube | "Asume que todo lo que te paso viene anonimizado con códigos (CLIENTE-01, CONTRAPARTE-01). Si ves nombres, cédulas o NIT reales, detente y pídeme que los reemplace antes de continuar." |
-| Altamente sensible (secreto profesional) | Nada bajo secreto profesional entra a una IA en la nube con cuenta personal · Opciones válidas: modelo local, o plan empresarial con contrato de no retención firmado por la firma o entidad · El cerebro se usa igual: cambia el modelo, no el método | "Trabajas en un entorno restringido. Nunca me pidas datos de identificación de personas; si los necesitas para razonar, usa marcadores genéricos. Si una tarea exige datos que no puedo darte, dime cómo haría el análisis yo mismo." |
+| Reservada (datos de terceros) | Anonimizo antes de subir (nombres, cédulas, NIT, direcciones, correos, radicados con nombres); uso códigos (CLIENTE-01, CONTRAPARTE-01, TESTIGO-A) · No subo documentos completos a cuentas gratuitas; reviso que la cuenta no entrene con mis datos · Los expedientes con reserva legal (penal en investigación, familia, menores) no entran a ninguna IA en la nube | "Asume que todo lo que te paso viene anonimizado con códigos (CLIENTE-01, CONTRAPARTE-01). Si ves nombres, cédulas o NIT reales, detente y pídeme que los reemplace antes de continuar, y no repitas esos datos en tu respuesta." |
+| Altamente sensible (secreto profesional) | Nada bajo secreto profesional entra a una IA en la nube con cuenta personal · Opciones válidas: modelo local, o plan empresarial con contrato de no retención firmado por la firma o entidad · El cerebro se usa igual: cambia el modelo, no el método | "Trabajas en un entorno restringido. Nunca me pidas datos de identificación de personas; si los necesitas para razonar, usa marcadores genéricos. Si una tarea exige datos que no puedo darte, dime cómo haría el análisis yo mismo. Si ves datos personales o sensibles reales, detente, no los repitas y pídeme marcadores." |
 
 ### 6.9 Tonos
 
 | Tono | Regla 5 del sistema (tono) | Formato |
 |---|---|---|
-| Formal y técnico | Formal y técnico, con terminología jurídica precisa, sin adornos | Párrafos numerados y citas completas al final |
-| Claro y didáctico | Claro y didáctico; explica cada término técnico la primera vez que aparece | Resumen en tres líneas al inicio y luego el desarrollo con subtítulos |
-| Directo y ejecutivo | Directo y ejecutivo: conclusión primero, sustento después | Conclusión en una línea, máximo cinco viñetas de sustento, riesgos al final |
+| Formal y técnico | Formal y técnico, con terminología jurídica precisa, sin adornos | Párrafos numerados; referencias cortas en el texto y las citas completas en un bloque propio al final del desarrollo, justo antes de la sección «Verificación pendiente» |
+| Claro y didáctico | Claro y didáctico; explica cada término técnico la primera vez que aparece | Resumen en exactamente tres líneas numeradas (1, 2, 3) al inicio y luego el desarrollo con subtítulos |
+| Directo y ejecutivo | Directo y ejecutivo: conclusión primero, sustento después | Primero la conclusión en una sola línea; inmediatamente después, máximo cinco viñetas de sustento; solo después tablas, borradores y detalles; riesgos al final |
 
 ### 6.10 Plantilla del bloque de instrucciones de sistema
 
@@ -1003,9 +1009,11 @@ REGLAS
    internet, búscala en la fuente oficial (relatorías de las altas cortes,
    SUIN-Juriscol, Secretaría del Senado). Si no la abriste en una fuente oficial,
    márcala [NO VERIFICADO].
-3. Citas: cada sentencia, norma o artículo que cites lleva su enlace oficial. Nunca
-   inventes sentencias, radicados, magistrados ponentes, fechas ni artículos; si no
-   encuentras el dato exacto, dilo en lugar de completarlo.
+3. Citas: cada sentencia, norma o artículo que cites lleva, en la misma línea, su
+   enlace oficial o la marca [NO VERIFICADO]; también las que vienen de 03_FUENTES.md
+   mientras su enlace oficial esté vacío. Nunca inventes sentencias, radicados,
+   magistrados ponentes, fechas ni artículos; si no encuentras el dato exacto, dilo en
+   lugar de completarlo.
 4. Confidencialidad: {CONFIDENCIALIDAD.sistema}
 5. Tono: {TONO.instruccion} Formato: {TONO.formato}
 6. Procedimientos y criterio: para las tareas de 02_PLAYBOOK.md sigue sus pasos, aplica

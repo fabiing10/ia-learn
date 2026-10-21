@@ -4,8 +4,8 @@
 
 import {
   AREAS, CONFIDENCIALIDAD, DISCLAIMER, FUENTES_OFICIALES, HERRAMIENTAS, INSTALAR_SKILL,
-  INTRO_CARGA, MARCO_COLOMBIANO, MAX_TAREAS, PRIVACIDAD, PRIVACIDAD_VERIFICADA, ROLES,
-  RUTAS_CARGA, RUTAS_VERIFICADAS, TAREAS, TONOS,
+  INTRO_CARGA, MARCO_COLOMBIANO, MAX_TAREAS, POSICIONES, PRIVACIDAD, PRIVACIDAD_VERIFICADA,
+  ROLES, RUTAS_CARGA, RUTAS_VERIFICADAS, TAREAS, TONOS,
 } from './catalog.js';
 
 export const ARCHIVOS = [
@@ -24,6 +24,7 @@ export const ARCHIVOS_CEREBRO = ARCHIVOS.slice(1);
 // entry in 03_FUENTES. A test checks this map against the generator.
 export const CAMPOS = [
   { id: 'nombre', label: 'Nombre', archivos: ['00_ADN.md', 'README.md', '03_FUENTES.md'] },
+  { id: 'ciudad', label: 'Ciudad', archivos: ['00_ADN.md'] },
   { id: 'rol', label: 'Rol', archivos: ['00_ADN.md', '01_LINEAS_ROJAS.md'] },
   { id: 'areas', label: 'Áreas', archivos: ['00_ADN.md', '03_FUENTES.md'] },
   { id: 'tareas', label: 'Tareas', archivos: ['00_ADN.md', '02_PLAYBOOK.md', 'README.md'] },
@@ -31,6 +32,7 @@ export const CAMPOS = [
   { id: 'confidencialidad', label: 'Confidencialidad', archivos: ['00_ADN.md', '01_LINEAS_ROJAS.md'] },
   { id: 'tono', label: 'Tono', archivos: ['00_ADN.md'] },
   { id: 'nuncaDelego', label: 'Nunca delego', archivos: ['01_LINEAS_ROJAS.md'] },
+  { id: 'posiciones', label: 'Mi criterio', archivos: ['02_PLAYBOOK.md'] },
 ];
 
 export const FIJOS = {
@@ -63,6 +65,16 @@ function pick(list, values, max = Infinity) {
 
 const one = (list, value) => (typeof value === 'string' && byId(list, value) ? value : null);
 
+/** Only the positions that are set to a known option, in catalog order. */
+function pickPosiciones(raw) {
+  const out = {};
+  const p = raw && typeof raw === 'object' ? raw : {};
+  for (const pos of POSICIONES) {
+    if (typeof p[pos.id] === 'string' && byId(pos.opciones, p[pos.id])) out[pos.id] = p[pos.id];
+  }
+  return out;
+}
+
 /** Any input (stored JSON, form state, partial object) → a clean profile. */
 export function normalizeProfile(raw) {
   const p = raw && typeof raw === 'object' ? raw : {};
@@ -70,6 +82,7 @@ export function normalizeProfile(raw) {
   if (herramientas.length > 1) herramientas = herramientas.filter((h) => h !== 'ninguna');
   return {
     nombre: oneLine(p.nombre, 60).replace(/[.\s]+$/, ''),
+    ciudad: oneLine(p.ciudad, 40).replace(/[.\s]+$/, ''),
     rol: one(ROLES, p.rol),
     areas: pick(AREAS, p.areas),
     tareas: pick(TAREAS, p.tareas, MAX_TAREAS),
@@ -77,6 +90,7 @@ export function normalizeProfile(raw) {
     confidencialidad: one(CONFIDENCIALIDAD, p.confidencialidad),
     tono: one(TONOS, p.tono),
     nuncaDelego: oneLine(p.nuncaDelego, 280),
+    posiciones: pickPosiciones(p.posiciones),
   };
 }
 
@@ -105,15 +119,16 @@ const fence = (text) => '```text\n' + text + '\n```';
 export const REGLA_FUENTES =
   '2. Fuentes: primero revisa 03_FUENTES.md. Si la regla no está allí y puedes buscar en internet, búscala en la fuente oficial (relatorías de las altas cortes, SUIN-Juriscol, Secretaría del Senado). Si no la abriste en una fuente oficial, márcala [NO VERIFICADO].';
 export const REGLA_CITAS =
-  '3. Citas: cada sentencia, norma o artículo que cites lleva su enlace oficial. Nunca inventes sentencias, radicados, magistrados ponentes, fechas ni artículos; si no encuentras el dato exacto, dilo en lugar de completarlo.';
+  '3. Citas: cada sentencia, norma o artículo que cites lleva, en la misma línea, su enlace oficial o la marca [NO VERIFICADO]; también las que vienen de 03_FUENTES.md mientras su enlace oficial esté vacío. Nunca inventes sentencias, radicados, magistrados ponentes, fechas ni artículos; si no encuentras el dato exacto, dilo en lugar de completarlo.';
 
 export function sistemaBlock(raw) {
   const { p, rol, areas, conf, tono } = resolve(raw);
   const como = rol ? rol.sistema : 'abogado/a';
   const practica = areas.length ? `, con práctica en ${areas.map((a) => a.sistema).join(', ')}` : '';
   const nombre = p.nombre ? ` Llámame ${p.nombre}.` : '';
+  const ciudad = p.ciudad ? ` Ejerzo en ${p.ciudad}: cuando algo dependa de mi ciudad (foro, juzgados, cámara de comercio), usa esa.` : '';
   return [
-    `Eres mi asistente jurídico. Trabajo en Colombia como ${como}${practica}.${nombre}`,
+    `Eres mi asistente jurídico. Trabajo en Colombia como ${como}${practica}.${nombre}${ciudad}`,
     '',
     'REGLAS',
     '1. Jurisdicción por defecto: Colombia. Si usas derecho comparado o doctrina extranjera, márcalo como tal.',
@@ -131,6 +146,7 @@ function adn(r) {
   const { p, rol, areas, tareas, herramientas, conf, tono } = r;
   const quien = [
     p.nombre ? `Cómo me llamas: ${p.nombre}` : null,
+    p.ciudad ? `Ciudad: ${p.ciudad}` : null,
     `Rol: ${rol ? `${rol.label} (${rol.sistema})` : 'sin definir'}`,
     `Áreas de práctica: ${areas.length ? areas.map((a) => a.label).join(' · ') : 'sin definir'}`,
     tareas.length
@@ -230,19 +246,34 @@ const COMO_AGREGAR = [
   'Cuando la IA se equivoque en un paso, agrega el paso o una advertencia a la skill, como la "Trampa conocida" de la skill de peticiones. Así crece el cerebro.',
 ];
 
-function skill(t) {
-  const { titulo, cuando, texto } = t.skill;
-  return `## Skill: ${titulo}\n\n${cuando ? `Cuándo: ${cuando}\n` : ''}${texto}`;
+/** The skill body with the lawyer's positions written into the contracts table. */
+export function skillTexto(t, raw) {
+  let { texto } = t.skill;
+  if (t.id !== 'contratos') return texto;
+  const { posiciones } = normalizeProfile(raw);
+  for (const pos of POSICIONES) {
+    const o = byId(pos.opciones, posiciones[pos.id]);
+    if (!o) continue;
+    const re = new RegExp(`^\\| ${pos.fila} \\|.*$`, 'm');
+    if (!re.test(texto)) throw new Error(`row not found in contracts table: ${pos.fila}`);
+    texto = texto.replace(re, `| ${pos.fila} | ${o.verde} | ${o.amarillo} | ${o.rojo} |`);
+  }
+  return texto;
 }
 
-function playbook({ tareas }) {
+function skill(t, p) {
+  const { titulo, cuando } = t.skill;
+  return `## Skill: ${titulo}\n\n${cuando ? `Cuándo: ${cuando}\n` : ''}${skillTexto(t, p)}`;
+}
+
+function playbook({ p, tareas }) {
   return md([
     '# 02_PLAYBOOK · Cómo hago cada tarea',
     '> Mis skills: procedimientos para las tareas que más tiempo me quitan. Cada una dice qué entrego, qué hace la IA, dónde se detiene (YO DECIDO) y qué verifico. Las fuentes no van aquí: van en 03_FUENTES.md.',
     '## La estructura de toda skill',
     fence(ESTRUCTURA_SKILL),
     ...(tareas.length
-      ? tareas.map(skill)
+      ? tareas.map((t) => skill(t, p))
       : ['Todavía no hay skills. Elige hasta tres tareas en tu perfil, o escribe tu primera skill con la estructura de arriba.']),
     '## Cómo agregar una skill',
     COMO_AGREGAR.map((l, i) => `${i + 1}. ${l}`).join('\n'),

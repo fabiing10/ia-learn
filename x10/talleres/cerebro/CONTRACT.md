@@ -99,6 +99,8 @@ export const PREGUNTA_PRUEBA   // §6.13 the contracts test (a task, not a trap 
 export const ESPERADO          // §6.13 { con: [..], sin: [..] } procedural expectations
 export const PRIVACIDAD        // §6.13 bis [{ id, herramienta, label, entrena, apagar, sinRastro?, ojo, fuente }]
 export const INSTALAR_SKILL    // §6.13 ter { pasos: [..], nota }
+export const POSICIONES        // §6.3 [{ id, label, fila, opciones: [{ id, label, verde, amarillo, rojo }] }]: the lawyer's
+                               //      own thresholds; each rewrites one row of the contracts table (profile.posiciones)
 export const PERFIL_LAURA     // §4.3 / §6.11 the preloaded example profile
 ```
 

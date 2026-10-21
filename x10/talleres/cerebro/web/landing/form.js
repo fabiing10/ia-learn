@@ -2,7 +2,7 @@
 // native radios and checkboxes (keyboard and screen readers for free). Each
 // field shows which files it feeds, from the same map the generator is tested on.
 
-import { AREAS, CONFIDENCIALIDAD, HERRAMIENTAS, MAX_TAREAS, ROLES, TAREAS, TONOS } from '../shared/catalog.js';
+import { AREAS, CONFIDENCIALIDAD, HERRAMIENTAS, MAX_TAREAS, POSICIONES, ROLES, TAREAS, TONOS } from '../shared/catalog.js';
 import { CAMPOS, normalizeProfile } from '../shared/generator.js';
 import { esc, reducedMotion } from '../shared/ui.js';
 
@@ -15,7 +15,7 @@ function feeds(campo) {
     .join('')}</p>`;
 }
 
-const legend = (n, text) => `<legend class="field__label"><span class="field__n" aria-hidden="true">0${n}</span>${text}</legend>`;
+const legend = (n, text) => `<legend class="field__label"><span class="field__n" aria-hidden="true">${String(n).padStart(2, '0')}</span>${text}</legend>`;
 
 const chips = (name, type, list) =>
   `<div class="chips">${list
@@ -44,22 +44,29 @@ function template() {
     <p class="field__hint" id="f-nombre-h">Opcional. Va en el saludo del bloque de sistema y en la portada del README.</p>
   </div>
 
+  <div class="field" data-campo="ciudad">
+    <label class="field__label" for="f-ciudad"><span class="field__n" aria-hidden="true">02</span>¿En qué ciudad ejerces?</label>
+    ${feeds('ciudad')}
+    <input class="input" id="f-ciudad" name="ciudad" type="text" maxlength="40" autocomplete="address-level2" autocapitalize="words" spellcheck="false" placeholder="Ej.: Medellín" aria-describedby="f-ciudad-feeds f-ciudad-h" />
+    <p class="field__hint" id="f-ciudad-h">Opcional. Sin ella, la IA te pregunta la ciudad cada vez que un foro o un juzgado dependa de eso.</p>
+  </div>
+
   <fieldset class="field" data-campo="rol" aria-describedby="f-rol-feeds f-rol-h">
-    ${legend(2, 'Tu rol principal')}
+    ${legend(3, 'Tu rol principal')}
     ${feeds('rol')}
     ${chips('rol', 'radio', ROLES)}
     <p class="field__hint" id="f-rol-h" aria-live="polite"></p>
   </fieldset>
 
   <fieldset class="field" data-campo="areas" aria-describedby="f-areas-feeds f-areas-h">
-    ${legend(3, 'Tus áreas de práctica')}
+    ${legend(4, 'Tus áreas de práctica')}
     ${feeds('areas')}
     ${chips('areas', 'checkbox', AREAS)}
     <p class="field__hint" id="f-areas-h">Todas las que apliquen. Cada área trae su semilla de normas a <code>03_FUENTES</code>.</p>
   </fieldset>
 
   <fieldset class="field" data-campo="tareas" aria-describedby="f-tareas-feeds f-tareas-h">
-    ${legend(4, 'Las tareas que más tiempo te quitan')}
+    ${legend(5, 'Las tareas que más tiempo te quitan')}
     ${feeds('tareas')}
     ${chips('tareas', 'checkbox', TAREAS)}
     <p class="field__hint" id="f-tareas-h">Hasta tres. Cada una se vuelve una skill en <code>02_PLAYBOOK</code>. <b class="count" id="f-tareas-count"></b></p>
@@ -67,30 +74,42 @@ function template() {
   </fieldset>
 
   <fieldset class="field" data-campo="herramientas" aria-describedby="f-herramientas-feeds f-herramientas-h">
-    ${legend(5, 'La IA que usas hoy')}
+    ${legend(6, 'La IA que usas hoy')}
     ${feeds('herramientas')}
     ${chips('herramientas', 'checkbox', HERRAMIENTAS)}
     <p class="field__hint" id="f-herramientas-h">Sus rutas de carga salen primero en el README.</p>
   </fieldset>
 
   <fieldset class="field" data-campo="confidencialidad" aria-describedby="f-confidencialidad-feeds">
-    ${legend(6, 'Qué tan sensible es lo que manejas')}
+    ${legend(7, 'Qué tan sensible es lo que manejas')}
     ${feeds('confidencialidad')}
     ${cards('confidencialidad', CONFIDENCIALIDAD, (o) => o.que)}
   </fieldset>
 
   <fieldset class="field" data-campo="tono" aria-describedby="f-tono-feeds">
-    ${legend(7, 'Cómo quieres que te responda')}
+    ${legend(8, 'Cómo quieres que te responda')}
     ${feeds('tono')}
     ${cards('tono', TONOS, (o) => o.formato)}
   </fieldset>
 
   <div class="field" data-campo="nuncaDelego">
-    <label class="field__label" for="f-nunca"><span class="field__n" aria-hidden="true">08</span>Una decisión que nunca delegarías</label>
+    <label class="field__label" for="f-nunca"><span class="field__n" aria-hidden="true">09</span>Una decisión que nunca delegarías</label>
     ${feeds('nuncaDelego')}
     <textarea class="textarea" id="f-nunca" name="nuncaDelego" rows="2" maxlength="280" aria-describedby="f-nuncaDelego-feeds f-nunca-h"></textarea>
     <p class="field__hint" id="f-nunca-h">Opcional. Va de primera en «Lo que nunca delego»; debajo, la de tu rol.</p>
-  </div>`;
+  </div>
+
+  <fieldset class="field field--criterio" data-campo="posiciones" aria-describedby="f-posiciones-feeds f-posiciones-h" hidden>
+    ${legend(10, 'Tu criterio en contratos')}
+    ${feeds('posiciones')}
+    <p class="field__hint" id="f-posiciones-h">Lo que ningún buscador sabe de ti. Cada respuesta reescribe una fila de tu tabla de posiciones; la primera opción es la práctica común.</p>
+    ${POSICIONES.map(
+      (pos) => `<div class="subfield" role="group" aria-labelledby="f-pos-${pos.id}-l">
+      <p class="subfield__label" id="f-pos-${pos.id}-l">${esc(pos.label)}</p>
+      ${chips(`pos-${pos.id}`, 'radio', pos.opciones)}
+    </div>`,
+    ).join('')}
+  </fieldset>`;
 }
 
 /**
@@ -107,6 +126,7 @@ export function mountForm(form, { onChange, onFocusField }) {
   const read = () =>
     normalizeProfile({
       nombre: $('#f-nombre').value,
+      ciudad: $('#f-ciudad').value,
       rol: value('rol'),
       areas: checked('areas'),
       tareas: checked('tareas'),
@@ -114,6 +134,7 @@ export function mountForm(form, { onChange, onFocusField }) {
       confidencialidad: value('confidencialidad'),
       tono: value('tono'),
       nuncaDelego: $('#f-nunca').value,
+      posiciones: Object.fromEntries(POSICIONES.map((pos) => [pos.id, value(`pos-${pos.id}`)])),
     });
 
   // Live hints that depend on the current values.
@@ -131,12 +152,14 @@ export function mountForm(form, { onChange, onFocusField }) {
       i.closest('.chip').classList.toggle('is-blocked', blocked);
     }
     if (n < MAX_TAREAS) $('#f-tareas-warn').textContent = '';
+    // The positions only exist for the contracts skill.
+    $('[data-campo="posiciones"]').hidden = !checked('tareas').includes('contratos');
   }
 
   form.addEventListener('change', (e) => {
     const input = e.target;
     const campo = input.closest('[data-campo]')?.dataset.campo;
-    if (!campo || campo === 'nombre' || campo === 'nuncaDelego') return;
+    if (!campo || campo === 'nombre' || campo === 'ciudad' || campo === 'nuncaDelego') return;
 
     if (campo === 'tareas' && input.checked && checked('tareas').length > MAX_TAREAS) {
       input.checked = false;
@@ -159,7 +182,7 @@ export function mountForm(form, { onChange, onFocusField }) {
 
   form.addEventListener('input', (e) => {
     const campo = e.target.closest('[data-campo]')?.dataset.campo;
-    if (campo === 'nombre' || campo === 'nuncaDelego') onChange(campo, read(), { typing: true });
+    if (campo === 'nombre' || campo === 'ciudad' || campo === 'nuncaDelego') onChange(campo, read(), { typing: true });
   });
 
   form.addEventListener('submit', (e) => e.preventDefault());
@@ -176,7 +199,12 @@ export function mountForm(form, { onChange, onFocusField }) {
   function set(profile) {
     const p = normalizeProfile(profile);
     $('#f-nombre').value = p.nombre;
+    $('#f-ciudad').value = p.ciudad;
     $('#f-nunca').value = p.nuncaDelego;
+    for (const pos of POSICIONES) {
+      const chosen = p.posiciones[pos.id] ?? pos.opciones[0].id;
+      for (const i of inputs(`pos-${pos.id}`)) i.checked = i.value === chosen;
+    }
     for (const name of ['rol', 'confidencialidad', 'tono']) for (const i of inputs(name)) i.checked = i.value === p[name];
     for (const name of ['areas', 'tareas', 'herramientas']) for (const i of inputs(name)) i.checked = p[name].includes(i.value);
     $('#f-tareas-warn').textContent = '';

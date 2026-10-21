@@ -1176,9 +1176,9 @@ Cuándo: &lt;situación que la activa&gt;
 <span class="h">REGLAS</span>
 1. Jurisdicción por defecto: Colombia. Si usas derecho comparado o doctrina extranjera, márcalo como tal.
 2. Fuentes: primero revisa 03_FUENTES.md. Si la regla no está allí y puedes buscar en internet, búscala en la fuente oficial (relatorías de las altas cortes, SUIN-Juriscol, Secretaría del Senado). Si no la abriste en una fuente oficial, márcala [NO VERIFICADO].
-3. Citas: cada sentencia, norma o artículo que cites lleva su enlace oficial. Nunca inventes sentencias, radicados, magistrados ponentes, fechas ni artículos; si no encuentras el dato exacto, dilo en lugar de completarlo.
-4. Confidencialidad: asume que todo lo que te paso viene anonimizado con códigos (CLIENTE-01, CONTRAPARTE-01). Si ves nombres, cédulas o NIT reales, detente y pídeme que los reemplace antes de continuar.
-5. Tono: claro y didáctico; explica cada término técnico la primera vez que aparece. Formato: resumen en tres líneas al inicio y luego el desarrollo con subtítulos.
+3. Citas: cada sentencia, norma o artículo que cites lleva, en la misma línea, su enlace oficial o la marca [NO VERIFICADO]; también las que vienen de 03_FUENTES.md mientras su enlace oficial esté vacío. Nunca inventes sentencias, radicados, magistrados ponentes, fechas ni artículos; si no encuentras el dato exacto, dilo en lugar de completarlo.
+4. Confidencialidad: asume que todo lo que te paso viene anonimizado con códigos (CLIENTE-01, CONTRAPARTE-01). Si ves nombres, cédulas o NIT reales, detente y pídeme que los reemplace antes de continuar, y no repitas esos datos en tu respuesta.
+5. Tono: claro y didáctico; explica cada término técnico la primera vez que aparece. Formato: resumen en exactamente tres líneas numeradas (1, 2, 3) al inicio y luego el desarrollo con subtítulos.
 6. Procedimientos y criterio: para las tareas de 02_PLAYBOOK.md sigue sus pasos, aplica mis posiciones antes que la práctica general y detente en cada punto marcado YO DECIDO.
 7. Cierre obligatorio: termina toda respuesta jurídica con una sección "Verificación pendiente" que liste lo que debo confirmar antes de usarla.
 8. Nunca presentes un borrador como definitivo. Yo firmo, radico y decido.</pre>
@@ -1379,6 +1379,7 @@ Cuándo: &lt;situación que la activa&gt;
               <thead><tr><th scope="col">Campo</th><th scope="col">Opciones</th><th scope="col">Qué decide</th></tr></thead>
               <tbody>
                 <tr><th scope="row">Nombre (cómo quieres que la IA te llame)</th><td>Libre, opcional</td><td>Saludo en el bloque de sistema; portada del README</td></tr>
+                <tr><th scope="row">Ciudad donde ejerces</th><td>Libre, opcional</td><td>«Ejerzo en …» en el bloque de sistema y en <span class="file">00_ADN.md</span>. Sin ella, la IA debe preguntar la ciudad cuando un foro o un juzgado dependa de eso</td></tr>
                 <tr><th scope="row">Rol principal</th><td>Litigante · firma · in-house · público · docente/estudiante · emprendedor legaltech</td><td>Descripción en el sistema; «qué es un buen trabajo»; la decisión por defecto que nunca delegas</td></tr>
                 <tr><th scope="row">Áreas de práctica</th><td>Civil y comercial · laboral · penal · administrativo y contratación · constitucional y tutelas · tributario · societario y M&amp;A · PI y tecnología · familia · financiero · datos y cumplimiento</td><td>Semilla de normas en <span class="file">03_FUENTES.md</span></td></tr>
                 <tr><th scope="row">Tareas que más tiempo quitan (hasta 3)</th><td>Contratos · jurisprudencia · demandas y contestaciones · peticiones y PQRS · expedientes · términos · due diligence · conceptos · comunicación con clientes · contenido jurídico</td><td>Una skill por tarea en <span class="file">02_PLAYBOOK.md</span></td></tr>
@@ -1386,6 +1387,7 @@ Cuándo: &lt;situación que la activa&gt;
                 <tr><th scope="row">Sensibilidad de lo que manejas</th><td>Pública o propia · reservada · altamente sensible</td><td>Reglas de <span class="file">01_LINEAS_ROJAS.md</span> y la regla 4 del sistema</td></tr>
                 <tr><th scope="row">Cómo quieres que te responda</th><td>Formal y técnico · claro y didáctico · directo y ejecutivo</td><td>Regla 5 del sistema (tono y formato)</td></tr>
                 <tr><th scope="row">Una decisión que nunca delegarías</th><td>Libre, opcional</td><td>Primera línea de «Lo que nunca delego»</td></tr>
+                <tr><th scope="row">Tu criterio en contratos (solo si elegiste Contratos)</th><td>Tope de responsabilidad · plazo de confidencialidad · datos personales de terceros · cláusula penal; la primera opción de cada una es la práctica común</td><td>Reescribe esa fila de la tabla de posiciones en <span class="file">02_PLAYBOOK.md</span> y en la skill instalable. Es lo que ningún buscador sabe de ti: en las pruebas, la IA solo cambió su veredicto cuando una fila era distinta de la práctica común</td></tr>
               </tbody>
             </table>
           </div>

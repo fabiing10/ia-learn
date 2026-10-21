@@ -64,6 +64,13 @@ test('the contracts skill carries the positions table: the criterion search cann
   assert.ok(contratos.contenido.includes('Mis posiciones'));
 });
 
+test('the contracts skill carries the lawyer positions and the city', () => {
+  const [s] = buildSkills({ ...laura(), ciudad: 'Cali', posiciones: { datos: 'transmision' } });
+  assert.ok(s.contenido.includes('| Datos personales | Roles definidos (responsable / encargado) y contrato de transmisión firmado |'));
+  assert.ok(!s.contenido.includes('| Datos personales | Roles definidos (responsable / encargado) conforme a la Ley 1581 de 2012 |'));
+  assert.ok(s.contenido.includes('Ejerzo en Cali'));
+});
+
 test('the skill speaks for the profile: name, role, confidentiality rule and tone', () => {
   for (const conf of CONFIDENCIALIDAD) {
     for (const tono of TONOS) {

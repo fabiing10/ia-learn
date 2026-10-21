@@ -8,7 +8,7 @@ import {
 } from './generator.js';
 import {
   AREAS, CONFIDENCIALIDAD, HERRAMIENTAS, INTRO_CARGA, PERFIL_LAURA, PERFIL_VACIO, ROLES,
-  RUTAS_CARGA, TAREAS, TONOS, PREGUNTA_PRUEBA, PRIVACIDAD,
+  RUTAS_CARGA, TAREAS, TONOS, PREGUNTA_PRUEBA, PRIVACIDAD, POSICIONES,
 } from './catalog.js';
 import { PLAN, blockAfter, squash } from './plan.fixture.mjs';
 
@@ -96,9 +96,42 @@ test('system block: official links instead of silence, and my positions before g
   const s = sistemaBlock(laura());
   assert.ok(s.includes('2. Fuentes: primero revisa 03_FUENTES.md. Si la regla no está allí y puedes buscar en internet, búscala en la fuente oficial'));
   assert.ok(s.includes('Si no la abriste en una fuente oficial, márcala [NO VERIFICADO].'));
-  assert.ok(s.includes('3. Citas: cada sentencia, norma o artículo que cites lleva su enlace oficial.'));
+  assert.ok(s.includes('3. Citas: cada sentencia, norma o artículo que cites lleva, en la misma línea, su enlace oficial o la marca [NO VERIFICADO]; también las que vienen de 03_FUENTES.md mientras su enlace oficial esté vacío.'));
   assert.ok(s.includes('6. Procedimientos y criterio: para las tareas de 02_PLAYBOOK.md sigue sus pasos, aplica mis posiciones antes que la práctica general y detente en cada punto marcado YO DECIDO.'));
   assert.ok(!s.includes('no tengo la fuente exacta'), 'the old rule told a searching model to stop');
+});
+
+test('ciudad: in the system block and 00_ADN only; absent when empty', () => {
+  const con = buildFiles({ ...laura(), ciudad: 'Medellín' });
+  assert.ok(sistemaBlock({ ...laura(), ciudad: 'Medellín' }).includes('Ejerzo en Medellín: cuando algo dependa de mi ciudad (foro, juzgados, cámara de comercio), usa esa.'));
+  assert.ok(con['00_ADN.md'].includes('- Ciudad: Medellín'));
+  assert.ok(!sistemaBlock(laura()).includes('Ejerzo en'));
+  assert.ok(!buildFiles(laura())['00_ADN.md'].includes('- Ciudad:'));
+  assert.equal(normalizeProfile({ ciudad: '  Cali.  ' }).ciudad, 'Cali');
+});
+
+test('posiciones: each option rewrites one row of the contracts table; defaults keep the plan table', () => {
+  assert.deepEqual(POSICIONES.map((x) => x.id), ['responsabilidad', 'confidencialidad', 'datos', 'penal']);
+  const plan = squash(blockAfter('#### Skill: Revisión de contratos con semáforo'));
+  for (const pos of POSICIONES) {
+    const ids = pos.opciones.map((o) => o.id);
+    assert.equal(new Set(ids).size, ids.length, pos.id);
+    for (const o of pos.opciones) {
+      for (const k of ['label', 'verde', 'amarillo', 'rojo']) assert.ok(o[k], `${pos.id}.${o.id}.${k}`);
+      const row = `| ${pos.fila} | ${o.verde} | ${o.amarillo} | ${o.rojo} |`;
+      const pb = buildFiles({ ...laura(), posiciones: { [pos.id]: o.id } })['02_PLAYBOOK.md'];
+      assert.ok(pb.includes(row), `${pos.id}.${o.id} row in playbook`);
+      assert.equal(pb.split(`| ${pos.fila} |`).length - 1, 1, 'one row per clause');
+    }
+    // the first option is the plan's own row
+    const first = pos.opciones[0];
+    assert.ok(plan.includes(squash(`| ${pos.fila} | ${first.verde} | ${first.amarillo} | ${first.rojo} |`)), `${pos.id} default = plan`);
+  }
+  assert.equal(buildFiles({ ...laura(), posiciones: {} })['02_PLAYBOOK.md'], buildFiles(laura())['02_PLAYBOOK.md']);
+  assert.deepEqual(normalizeProfile({ posiciones: { datos: 'transmision', penal: 'nope', x: 'y' } }).posiciones, { datos: 'transmision' });
+  // without the contracts task the positions change nothing
+  const sin = { ...laura(), tareas: ['peticiones'] };
+  assert.deepEqual(buildFiles({ ...sin, posiciones: { datos: 'transmision' } }), buildFiles(sin));
 });
 
 test('system block without name, role or areas drops those clauses cleanly', () => {
@@ -362,6 +395,8 @@ test('field → file map is truthful: each field rewrites exactly the files it p
     confidencialidad: { confidencialidad: 'sensible' },
     tono: { tono: 'formal' },
     nuncaDelego: { nuncaDelego: 'Firmar la demanda' },
+    ciudad: { ciudad: 'Medellín' },
+    posiciones: { posiciones: { confidencialidad: 'dos' } },
   };
   assert.deepEqual(CAMPOS.map((c) => c.id).sort(), Object.keys(changes).sort());
   const base = buildFiles(laura());

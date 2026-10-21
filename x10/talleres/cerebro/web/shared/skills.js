@@ -5,7 +5,7 @@
 // Pure ES module, like generator.js.
 
 import { zip } from './zip.js';
-import { REGLA_CITAS, REGLA_FUENTES, resolve } from './generator.js';
+import { REGLA_CITAS, REGLA_FUENTES, resolve, skillTexto } from './generator.js';
 
 const ucFirst = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 /** "2. Fuentes: texto" → "Texto" (the rule without its number and label). */
@@ -14,8 +14,9 @@ const list = (items) => items.map((i) => `- ${i}`).join('\n');
 
 function skillMd(t, r) {
   const { p, rol, conf, tono } = r;
-  const { titulo, slug, descripcion, cuando, texto } = t.skill;
-  const quien = `Soy ${rol ? rol.sistema : 'abogado/a'} y trabajo en Colombia.${p.nombre ? ` Llámame ${p.nombre}.` : ''}`;
+  const { titulo, slug, descripcion, cuando } = t.skill;
+  const texto = skillTexto(t, p);
+  const quien = `Soy ${rol ? rol.sistema : 'abogado/a'} y trabajo en Colombia.${p.ciudad ? ` Ejerzo en ${p.ciudad}.` : ''}${p.nombre ? ` Llámame ${p.nombre}.` : ''}`;
   return [
     '---',
     `name: ${slug}`,
