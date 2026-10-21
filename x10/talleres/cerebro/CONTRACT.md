@@ -71,7 +71,8 @@ Same family as x10 and Vibe Coding, its own accent:
 ## Landing anchors (worker A must create these ids; the deck's QR codes point to them)
 
 `#inicio` · `#construir` (profile + live files) · `#cargar` (copy all + how to load it per
-tool) · `#prueba` (test question, with/without brain) · `#boveda` (Obsidian vault ZIP)
+tool, account privacy check, skill ZIPs) · `#prueba` (one test per chosen task,
+with/without brain) · `#boveda` (Obsidian vault ZIP)
 
 ## Playbook anchors (worker B must create exactly these ids; landing and deck link to them)
 
@@ -89,14 +90,25 @@ tool) · `#prueba` (test question, with/without brain) · `#boveda` (Obsidian va
 ```js
 export const ROLES            // §6.5  [{ id, label, sistema, buenTrabajo: [..], nuncaDelego }]
 export const AREAS            // §6.6  [{ id, label, fuentes: [..] }]
-export const TAREAS           // §6.7  [{ id, label, skill: { titulo, cuando?, texto } }]
+export const TAREAS           // §6.7  [{ id, label, prueba, skill: { titulo, slug, descripcion, cuando?, texto } }]
 export const CONFIDENCIALIDAD // §6.8  [{ id, label, reglas: [..], sistema }]
 export const TONOS            // §6.9  [{ id, label, instruccion, formato }]
 export const HERRAMIENTAS     // §6.3  [{ id, label }]
 export const RUTAS_CARGA      // §6.12 [{ id, label, pasos: [..] }]
-export const PREGUNTA_PRUEBA, PREGUNTA_RESERVA   // §6.13 strings
+export const PREGUNTA_PRUEBA   // §6.13 the contracts test (a task, not a trap question)
+export const ESPERADO          // §6.13 { con: [..], sin: [..] } procedural expectations
+export const PRIVACIDAD        // §6.13 bis [{ id, herramienta, label, entrena, apagar, sinRastro?, ojo, fuente }]
+export const INSTALAR_SKILL    // §6.13 ter { pasos: [..], nota }
 export const PERFIL_LAURA     // §4.3 / §6.11 the preloaded example profile
 ```
+
+`shared/skills.js` turns the chosen tasks into installable skills: `buildSkills(profile)`
+→ `[{ tarea, carpeta, titulo, contenido }]` and `skillZip(skill)` → a ZIP whose root is
+`<slug>/SKILL.md` (name = slug, lowercase-hyphen; description ≤ 200 characters).
+
+Message (since 20 Oct 2026): «La IA ya sabe buscar. Su criterio no está en internet.»
+Never claim that models do not search or almost always invent citations: Claude and
+ChatGPT search with citations on every plan.
 
 ## Content rules (non-negotiable)
 

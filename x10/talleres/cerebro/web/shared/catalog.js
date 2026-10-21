@@ -6,12 +6,15 @@
 // Shape (see CONTRACT.md):
 //   ROLES            [{ id, label, sistema, buenTrabajo: [..], nuncaDelego }]
 //   AREAS            [{ id, label, sistema, fuentes: [..] }]
-//   TAREAS           [{ id, label, skill: { titulo, cuando?, texto } }]
+//   TAREAS           [{ id, label, prueba, skill: { titulo, slug, descripcion, cuando?, texto } }]
 //   CONFIDENCIALIDAD [{ id, label, corto, que, modelo, reglas: [..], sistema }]
 //   TONOS            [{ id, label, instruccion, formato }]
 //   HERRAMIENTAS     [{ id, label }]
 //   RUTAS_CARGA      [{ id, herramienta, label, pasos: [..], nota? }]
-//   PREGUNTA_PRUEBA, PREGUNTA_RESERVA  strings
+//   PREGUNTA_PRUEBA  string (the contracts test, projected in the workshop)
+//   ESPERADO         { con: [..], sin: [..] } what to look for in the test
+//   PRIVACIDAD       [{ id, herramienta, label, entrena, apagar, sinRastro?, ojo, fuente }]
+//   INSTALAR_SKILL   { pasos: [..], nota }
 //   PERFIL_LAURA     the preloaded example profile
 //
 // Profile shape (what the landing stores in localStorage `cj-perfil`):
@@ -206,16 +209,25 @@ export const AREAS = [
   },
 ];
 
+// §6.13 — the workshop test: a task, not a trivia question. The answer depends on
+// the lawyer's own positions (02_PLAYBOOK), which no search engine can find.
+export const PREGUNTA_PRUEBA =
+  'Represento a EL CONTRATISTA. Revisa esta cláusula del contrato que nos enviaron para firmar: "EL CONTRATISTA responderá de manera ilimitada por todos los daños, directos o indirectos, que se deriven de la ejecución del contrato, y mantendrá indemne a LA CONTRATANTE frente a cualquier reclamación, sin límite de cuantía." ¿La acepto?';
+
 // §6.3 tasks mapped one-to-one to the §6.7 skills. `skill.texto` is the skill body
 // verbatim (hard line wraps kept) after its optional "Cuándo:" line, which lives
-// in `skill.cuando`. The peticiones skill carries the coordinator's fact-check of
+// in `skill.cuando`. `slug` and `descripcion` make it an installable skill
+// (skills.js); `prueba` is the test prompt the landing offers for that task. The peticiones skill carries the coordinator's fact-check of
 // 20 Oct 2026 (art. 14 and 21 CPACA, art. 5 Decreto 491), which supersedes the plan.
 export const TAREAS = [
   {
     id: 'contratos',
     label: 'Contratos',
+    prueba: PREGUNTA_PRUEBA,
     skill: {
       titulo: 'Revisión de contratos con semáforo',
+      slug: 'revision-de-contratos',
+      descripcion: 'Revisa contratos o cláusulas con mi semáforo de posiciones (verde, amarillo, rojo), propone redacción para lo rojo y se detiene en YO DECIDO. Úsala al revisar o negociar.',
       cuando: 'cualquier contrato que deba revisar o negociar.',
       texto: `1. YO entrego: el contrato anonimizado (CLIENTE-01 / CONTRAPARTE-01, sin NIT ni cédulas),
    a quién represento y el objetivo de la negociación en una línea.
@@ -243,29 +255,37 @@ Mis posiciones (edita esta tabla; es el corazón de la skill):
   {
     id: 'jurisprudencia',
     label: 'Jurisprudencia',
+    prueba: 'Aplica mi skill de jurisprudencia: ¿qué ha dicho la Corte Constitucional sobre el derecho de petición ante particulares desde 2015? Quiero la tabla.',
     skill: {
       titulo: 'Investigación de jurisprudencia',
-      texto: `Regla de oro: la IA orienta la búsqueda; la fuente oficial confirma. Nunca al revés.
+      slug: 'investigacion-de-jurisprudencia',
+      descripcion: 'Busca jurisprudencia colombiana en las relatorías oficiales y la entrega en una tabla con enlace por fila; distingue ratio de obiter. Úsala al investigar una línea.',
+      texto: `Regla de oro: la IA busca y enlaza; la fuente oficial confirma. Una fila sin enlace oficial no existe.
 1. YO entrego: el problema jurídico en una frase, la jurisdicción (Corte Constitucional,
    Corte Suprema y su sala, Consejo de Estado y su sección, tribunales) y el periodo.
-2. IA hace: propone (a) las líneas jurisprudenciales probables, (b) descriptores y
-   palabras clave para buscar en la relatoría oficial, (c) una tabla vacía de resultados:
-   corporación, sentencia, radicado, fecha, M.P., tesis, enlace.
-3. YO: busco en la relatoría oficial y pego los apartes reales.
-4. IA hace: resume solo lo que pegué, distingue ratio decidendi de obiter dicta y marca
+2. IA hace: si puede buscar en internet, busca en las relatorías oficiales y entrega una
+   tabla: corporación, sentencia, radicado, fecha, M.P., tesis en una línea y enlace
+   oficial. Si no puede buscar, no llena filas de memoria: entrega las líneas
+   jurisprudenciales probables, los descriptores de búsqueda y la tabla vacía.
+3. YO: abro cada enlace y confirmo que la sentencia existe y dice lo que la tabla dice.
+4. IA hace: con lo que confirmé, distingue ratio decidendi de obiter dicta y marca
    contradicciones entre sentencias.
 5. VERIFICO: cada fila de la tabla tiene un enlace oficial que yo abrí. Una fila sin
    enlace no existe.
 
-Prompt de arranque: "No cites sentencias todavía. Dame las líneas jurisprudenciales
-probables, los descriptores de búsqueda y la tabla vacía para este problema: ..."`,
+Prompt de arranque: "Busca en las relatorías oficiales la jurisprudencia sobre este
+problema y dame la tabla con un enlace oficial por fila. Si no puedes buscar, no cites:
+dame los descriptores y la tabla vacía. Problema: ..."`,
     },
   },
   {
     id: 'demandas',
     label: 'Demandas y contestaciones',
+    prueba: 'CLIENTE-01 vendió mercancía a CONTRAPARTE-01 y tiene tres facturas vencidas sin pagar por $40 millones. Tengo las facturas y los correos de cobro. Prepárame el borrador de la demanda.',
     skill: {
       titulo: 'Borrador de demanda o contestación',
+      slug: 'borrador-de-demanda',
+      descripcion: 'Arma el esqueleto de una demanda o contestación según la norma procesal, con [PENDIENTE] donde falten datos, y se detiene antes de la estrategia. Úsala al preparar un escrito.',
       texto: `1. YO entrego: hechos en viñetas (anonimizados), pretensión principal, jurisdicción y
    tipo de proceso, pruebas con las que cuento.
 2. IA hace: arma el esqueleto según la norma procesal aplicable (art. 82 del CGP para
@@ -280,8 +300,11 @@ probables, los descriptores de búsqueda y la tabla vacía para este problema: .
   {
     id: 'peticiones',
     label: 'Peticiones y PQRS',
+    prueba: 'Recibí esta petición el 1 de octubre de 2026: "Solicito copia del contrato de prestación de servicios que la entidad firmó con CONTRATISTA-01." Prepárame la respuesta.',
     skill: {
       titulo: 'Derechos de petición y PQRS',
+      slug: 'derechos-de-peticion',
+      descripcion: 'Clasifica un derecho de petición o PQRS, identifica el término aplicable, revisa la competencia y propone una respuesta de fondo; se detiene en YO DECIDO.',
       texto: `1. YO entrego: el texto de la petición (anonimizado) y la fecha de radicación.
 2. IA hace: clasifica el tipo (información, documentos, consulta, queja, reclamo,
    sugerencia); identifica el término aplicable según 03_FUENTES.md (art. 14 del CPACA,
@@ -301,8 +324,11 @@ está desactualizada.`,
   {
     id: 'expedientes',
     label: 'Expedientes',
+    prueba: 'Arma la ficha del expediente con estas actuaciones: [pega aquí dos o tres actuaciones de un caso tuyo, con fechas y con códigos en lugar de nombres].',
     skill: {
       titulo: 'Ficha de expediente',
+      slug: 'ficha-de-expediente',
+      descripcion: 'Arma la ficha de un expediente anonimizado: partes por códigos, actuaciones, términos que corren, pruebas y riesgos, cada dato con su folio. Úsala al revisar un expediente.',
       texto: `1. YO entrego: las piezas del expediente (PDF o texto), anonimizadas y en orden
    cronológico.
 2. IA hace: una ficha con partes (por códigos), radicado, despacho, etapa procesal,
@@ -316,8 +342,11 @@ está desactualizada.`,
   {
     id: 'terminos',
     label: 'Términos',
+    prueba: 'En un proceso verbal (CGP) me notificaron por estado el lunes 19 de octubre de 2026 un auto que corre traslado por 10 días. ¿Cuándo vence?',
     skill: {
       titulo: 'Cálculo y vigilancia de términos',
+      slug: 'calculo-de-terminos',
+      descripcion: 'Calcula un término procesal explicando el conteo día por día y deja una fila para el calendario; pide confirmar festivos y vacancia judicial. Úsala al contar un término.',
       texto: `1. YO entrego: la actuación, la fecha de notificación o del estado, el tipo de proceso y
    la norma que fija el término (desde 03_FUENTES.md).
 2. IA hace: calcula el vencimiento explicando el conteo día por día, indica desde cuándo
@@ -331,8 +360,11 @@ está desactualizada.`,
   {
     id: 'duediligence',
     label: 'Due diligence',
+    prueba: 'Vamos a revisar una SAS para una compra de acciones. Dame el checklist por bloques y la matriz de hallazgos vacía.',
     skill: {
       titulo: 'Due diligence por bloques',
+      slug: 'due-diligence',
+      descripcion: 'Organiza una due diligence por bloques y produce la matriz de hallazgos con documento, página y severidad. Úsala al revisar un data room.',
       texto: `1. YO entrego: el tipo de operación, la lista de documentos del data room (anonimizada)
    y el nivel de materialidad.
 2. IA hace: checklist por bloque (societario, contratos relevantes, laboral, tributario,
@@ -347,8 +379,11 @@ está desactualizada.`,
   {
     id: 'conceptos',
     label: 'Conceptos',
+    prueba: 'Un cliente pregunta si puede terminar antes de tiempo un contrato de arrendamiento de local comercial. Hazme el concepto.',
     skill: {
       titulo: 'Concepto jurídico',
+      slug: 'concepto-juridico',
+      descripcion: 'Redacta un concepto jurídico con estructura fija: problema, marco, análisis, conclusión, riesgos y lo que falta confirmar. Úsala cuando un cliente pide un concepto.',
       texto: `1. YO entrego: la pregunta del cliente, los hechos relevantes y las normas que ya
    identifiqué.
 2. IA hace: estructura fija: (1) problema jurídico, (2) marco normativo solo con
@@ -361,8 +396,11 @@ está desactualizada.`,
   {
     id: 'clientes',
     label: 'Comunicación con clientes',
+    prueba: 'Explícale a CLIENTE-01, gerente de una pyme, que el juzgado negó la medida cautelar que pedimos y qué sigue.',
     skill: {
       titulo: 'Explicarle al cliente',
+      slug: 'explicar-al-cliente',
+      descripcion: 'Traduce una decisión o un documento técnico para el cliente: correo de seis líneas y explicación en lenguaje claro, sin prometer resultados. Úsala al comunicar algo.',
       texto: `1. YO entrego: la decisión o el documento técnico y quién es el cliente (empresario,
    persona natural, área interna).
 2. IA hace: dos versiones: un correo de seis líneas y una explicación extendida en
@@ -375,8 +413,11 @@ está desactualizada.`,
   {
     id: 'contenido',
     label: 'Contenido jurídico',
+    prueba: 'Convierte esta providencia en un hilo para LinkedIn: [pega aquí el texto completo de una providencia].',
     skill: {
       titulo: 'De la providencia al contenido',
+      slug: 'providencia-a-contenido',
+      descripcion: 'Convierte una providencia o norma completa en una ficha y tres formatos de contenido, con la cita completa y el aviso de que no es asesoría. Úsala al publicar.',
       texto: `1. YO entrego: la providencia o norma completa (nunca el resumen de otra persona) y el
    formato de salida (hilo, guion de video, artículo).
 2. IA hace: ficha de la providencia (corporación, número, fecha, M.P., radicado, tesis en
@@ -490,7 +531,7 @@ export const RUTAS_CARGA = [
       'Instrucciones: menú ••• del proyecto → «Project settings»; pegar el bloque de sistema.',
       'Archivos: subir los cinco `.md`. El plan gratuito admite hasta 5 archivos por proyecto: caben.',
     ],
-    nota: 'Las cuentas personales ya no pueden crear GPT personalizados (los que ya existen se siguen usando); el proyecto es la ruta.',
+    nota: 'Las cuentas personales ya no pueden crear GPT personalizados, y todos los GPT personalizados se retiran el 11 de diciembre de 2026 (pasan a plugins); el proyecto es la ruta.',
   },
   {
     id: 'gemini',
@@ -501,7 +542,7 @@ export const RUTAS_CARGA = [
       'Instrucciones: pegar el bloque de sistema.',
       'Conocimiento → Agregar archivos: subir los cinco `.md`.',
     ],
-    nota: 'Desde noviembre de 2026 Google retira las Gems de las cuentas personales y las convierte en skills (Configuración → Skills, para mayores de 18 años). {{VERIFICAR_GEMS_2026}}',
+    nota: 'Desde noviembre de 2026 Google retira las Gems de las cuentas personales y las convierte automáticamente en skills (para mayores de 18 años). Tu Gem pasa sola; el bloque de sistema y los archivos siguen sirviendo.',
   },
   {
     id: 'copilot',
@@ -531,31 +572,81 @@ export const RUTAS_VERIFICADAS = 'Rutas de Claude, ChatGPT y Gemini verificadas 
 export const INTRO_CARGA =
   'Este es mi cerebro jurídico. Léelo completo. Antes de responder cualquier cosa, confírmame en tres líneas: quién soy, cuáles son mis líneas rojas y cómo vas a verificar tus respuestas. Luego espera mi primera pregunta.';
 
-// §6.13
-export const PREGUNTA_PRUEBA =
-  'Un ciudadano radicó ante una entidad pública un derecho de petición pidiendo copia de un contrato. ¿Cuál es el término para responder, qué ocurre si la entidad no responde dentro de ese término y cuál es la fuente normativa exacta (ley, año y artículo)?';
+// §6.13 — what to look for when the test runs with and without the brain. The
+// difference is procedural (criterion, stop points, links), so it does not depend
+// on the model getting the law wrong.
+export const ESPERADO = {
+  con: [
+    'Sigue los pasos de tu skill, en orden.',
+    'Aplica tus posiciones y tu formato, no la práctica general.',
+    'Pide lo que falta en vez de inventarlo ([PENDIENTE]).',
+    'Se detiene en YO DECIDO y te devuelve la decisión.',
+    'Cada cita lleva su enlace oficial y cierra con «Verificación pendiente».',
+  ],
+  sin: [
+    'Responde con la práctica promedio, no con la tuya.',
+    'Decide por ti o se queda en «depende».',
+    'Cita sin enlace o no dice qué verificar.',
+  ],
+};
 
-export const PREGUNTA_RESERVA =
-  'Dame la sentencia de la Corte Constitucional que fijó el alcance del derecho de petición frente a entidades privadas, con número, año, magistrado ponente y la cita textual de la regla';
-
-export const COMPARACION_PRUEBA = [
+// What each account does with what you upload. Official privacy pages, checked on
+// 20 Oct 2026 (labels are the English UI ones; the Spanish UI translates them).
+export const PRIVACIDAD = [
   {
-    sin: 'Responde 30 o 20 días (art. 5 del Decreto 491 de 2020, derogado por la Ley 2207 de 2022)',
-    con: '10 días para documentos e información (art. 14, num. 1, del CPACA, sustituido por el art. 1 de la Ley 1755 de 2015)',
+    id: 'claude',
+    herramienta: 'claude',
+    label: 'Claude · Free, Pro y Max',
+    entrena: 'Sí, salvo que lo apagues.',
+    apagar: 'Configuración → Privacidad → «Help improve our AI models»: desactívalo.',
+    sinRastro: 'Chat incógnito (ícono de fantasma al abrir un chat nuevo fuera de un proyecto): nunca se usa para entrenar.',
+    ojo: 'El pulgar arriba o abajo envía la conversación completa y Anthropic la guarda hasta 5 años, aunque hayas apagado el entrenamiento.',
+    fuente: 'https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training',
   },
   {
-    sin: 'Cita el art. 14 de la Ley 1437 de 2011 sin mencionar que la Ley 1755 lo sustituyó',
-    con: 'Si no responde, la petición se entiende aceptada y las copias se entregan en los 3 días siguientes',
+    id: 'chatgpt',
+    herramienta: 'chatgpt',
+    label: 'ChatGPT · Free, Go, Plus y Pro',
+    entrena: 'Sí, por defecto.',
+    apagar: 'Configuración → Controles de datos → «Improve the model for everyone»: desactívalo.',
+    sinRastro: 'Chat temporal (Nuevo chat → Temporal): no se usa para entrenar y se borra en 30 días.',
+    ojo: 'El pulgar arriba o abajo permite que OpenAI entrene con esa conversación, aunque hayas apagado la opción.',
+    fuente: 'https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance',
   },
   {
-    sin: 'No distingue petición general, de documentos o de consulta',
-    con: 'Advierte que los términos ampliados de 2020 ya no aplican',
+    id: 'gemini',
+    herramienta: 'gemini',
+    label: 'Gemini · cuenta personal',
+    entrena: 'Sí, mientras «Keep Activity» esté activado; viene activado para mayores de 18 años.',
+    apagar: 'myactivity.google.com/product/gemini → «Keep Activity»: desactívalo.',
+    sinRastro: 'Chat temporal: se guarda hasta 72 horas y no se usa para entrenar.',
+    ojo: 'Revisores humanos leen algunas conversaciones y las guardan hasta 3 años, aunque borres tu actividad. Google pide no escribir nada confidencial.',
+    fuente: 'https://support.google.com/gemini/answer/13594961',
   },
   {
-    sin: 'No dice qué verificar',
-    con: 'Cierra con "Verificación pendiente": conteo en días hábiles y festivos del año',
+    id: 'empresa',
+    herramienta: null,
+    label: 'Claude Team o Enterprise · ChatGPT Business o Enterprise',
+    entrena: 'No.',
+    apagar: 'Nada que apagar. El administrador puede desactivar los pulgares de calificación.',
+    ojo: 'Es la opción para trabajar con documentos de clientes, siempre anonimizados y con el contrato de la firma.',
+    fuente: 'https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training',
   },
 ];
+
+export const PRIVACIDAD_VERIFICADA =
+  'Verificado el 20 de octubre de 2026 en las páginas oficiales de Anthropic, OpenAI y Google. Los nombres de los menús están en inglés; en la interfaz en español aparecen traducidos.';
+
+// How to install a skill ZIP in Claude (support.claude.com 12512180, 20 Oct 2026).
+export const INSTALAR_SKILL = {
+  pasos: [
+    'En Claude, Configuración → Capacidades: activa «Code execution and file creation». Las skills lo necesitan.',
+    'Customize → Skills → botón «+» → «Create skill» → «Upload a skill».',
+    'Sube el ZIP de la skill tal como lo descargaste, sin descomprimirlo.',
+    'Actívala en la lista. Claude la usa sola cuando aparece la tarea, en cualquier chat.',
+  ],
+  nota: 'Disponible en todos los planes de Claude, también el gratuito. En Team y Enterprise puedes compartirla con tu equipo o publicarla para toda la organización. Verificado el 20 de octubre de 2026.',
+};
 
 // §3.13, with the coordinator's fact-check of 20 Oct 2026 (T-323 principles,
 // PCSJA24-12243 scope). ABA 512 is comparative and stays in the playbook.

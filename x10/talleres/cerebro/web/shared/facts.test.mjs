@@ -7,7 +7,7 @@ import * as catalog from './catalog.js';
 import { buildFiles } from './generator.js';
 import { buildVault } from './vault.js';
 
-const { PERFIL_LAURA, PERFIL_VACIO, RUTAS_CARGA, MARCO_COLOMBIANO, COMPARACION_PRUEBA } = catalog;
+const { PERFIL_LAURA, PERFIL_VACIO, RUTAS_CARGA, MARCO_COLOMBIANO, PRIVACIDAD, INSTALAR_SKILL } = catalog;
 
 const PROFILES = [
   PERFIL_LAURA,
@@ -37,7 +37,6 @@ test('never "sin vigencia" for the Decreto 491; the repeal is art. 5 (and 6) by 
   const fuentes = buildFiles(PERFIL_LAURA)['03_FUENTES.md'];
   assert.ok(fuentes.includes('La Ley 2207 de 2022 derogó los arts. 5 y 6 del Decreto 491 y restableció los términos de la Ley 1755'));
   assert.ok(fuentes.includes('art. 5 del Decreto 491 de 2020 derogado por la Ley 2207 de 2022'));
-  assert.ok(COMPARACION_PRUEBA[0].sin.includes('art. 5 del Decreto 491 de 2020, derogado por la Ley 2207 de 2022'));
 });
 
 test('art. 14 CPACA as substituted by the Ley 1755, with the extension rule and días hábiles', () => {
@@ -87,10 +86,48 @@ test('tools: no new Custom GPTs on personal accounts, Gems retire in November, G
   assert.ok(ruta('chatgpt').nota.includes('ya no pueden crear GPT personalizados'));
   assert.ok(ruta('chatgpt').pasos.join(' ').includes('hasta 5 archivos'));
   assert.ok(ruta('gemini').pasos.join(' ').includes('Conocimiento → Agregar archivos'));
-  assert.ok(ruta('gemini').nota.includes('noviembre de 2026') && ruta('gemini').nota.includes('{{VERIFICAR_GEMS_2026}}'));
+  assert.ok(ruta('gemini').nota.includes('noviembre de 2026') && ruta('gemini').nota.includes('automáticamente'));
+  assert.ok(ruta('chatgpt').nota.includes('11 de diciembre de 2026'));
   const readme = buildFiles(PERFIL_LAURA)['README.md'];
   assert.ok(readme.includes('Gemini Notebook (antes NotebookLM)'));
-  assert.ok(readme.includes('{{VERIFICAR_GEMS_2026}}'));
+  for (const [where, text] of allTexts()) assert.doesNotMatch(text, /\{\{VERIFICAR_GEMS_2026\}\}/, where);
+});
+
+// Frontier models search the web with citations on every Claude and ChatGPT plan
+// (support.claude.com 10684626, help.openai.com 9237897, checked 20 Oct 2026), and
+// GPT-6 Astra answered the old reserve question right (verified in the relatoría).
+test('no claim that models never search or almost always invent a citation', () => {
+  for (const [where, text] of allTexts()) {
+    assert.doesNotMatch(text, /no busca nada|biblioteca cerró|casi siempre producen al menos un dato inventado|no tengo la fuente exacta/i, where);
+  }
+  assert.ok(!('PREGUNTA_RESERVA' in catalog) && !('COMPARACION_PRUEBA' in catalog), 'the trap questions are gone');
+});
+
+// Data use per plan, from the official privacy pages (checked 20 Oct 2026).
+test('privacy: what each account does with your data and the exact switch', () => {
+  const by = (id) => PRIVACIDAD.find((x) => x.id === id);
+  assert.deepEqual(PRIVACIDAD.map((x) => x.id), ['claude', 'chatgpt', 'gemini', 'empresa']);
+  assert.ok(by('claude').apagar.includes('Configuración → Privacidad → «Help improve our AI models»'));
+  assert.ok(by('claude').ojo.includes('5 años'));
+  assert.ok(by('claude').sinRastro.includes('incógnito'));
+  assert.ok(by('chatgpt').apagar.includes('Configuración → Controles de datos → «Improve the model for everyone»'));
+  assert.ok(by('chatgpt').sinRastro.includes('temporal'));
+  assert.ok(by('gemini').apagar.includes('myactivity.google.com/product/gemini') && by('gemini').apagar.includes('«Keep Activity»'));
+  assert.ok(by('gemini').ojo.includes('3 años'));
+  assert.ok(by('empresa').entrena.startsWith('No'));
+  for (const x of PRIVACIDAD) {
+    assert.match(x.fuente, /^https:\/\/(privacy\.claude\.com|help\.openai\.com|support\.google\.com)\//, x.id);
+    assert.ok(x.label && x.entrena && x.apagar && x.ojo, x.id);
+  }
+  assert.ok(catalog.PRIVACIDAD_VERIFICADA.includes('20 de octubre de 2026'));
+});
+
+test('skills install path is the one on support.claude.com (12512180)', () => {
+  const pasos = INSTALAR_SKILL.pasos.join(' ');
+  for (const s of ['Configuración → Capacidades', '«Code execution and file creation»', 'Skills', '«+»', '«Upload a skill»', 'sin descomprimirlo']) {
+    assert.ok(pasos.includes(s), s);
+  }
+  assert.ok(INSTALAR_SKILL.nota.includes('también el gratuito'));
 });
 
 test('vault README: Obsidian free for commercial use, Templater warning, Filesystem extension first', () => {

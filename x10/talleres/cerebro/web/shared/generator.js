@@ -3,8 +3,9 @@
 // byte-identical files. Pure ES module, shared by the landing, the vault and tests.
 
 import {
-  AREAS, CONFIDENCIALIDAD, DISCLAIMER, FUENTES_OFICIALES, HERRAMIENTAS, INTRO_CARGA,
-  MARCO_COLOMBIANO, MAX_TAREAS, ROLES, RUTAS_CARGA, RUTAS_VERIFICADAS, TAREAS, TONOS,
+  AREAS, CONFIDENCIALIDAD, DISCLAIMER, FUENTES_OFICIALES, HERRAMIENTAS, INSTALAR_SKILL,
+  INTRO_CARGA, MARCO_COLOMBIANO, MAX_TAREAS, PRIVACIDAD, PRIVACIDAD_VERIFICADA, ROLES,
+  RUTAS_CARGA, RUTAS_VERIFICADAS, TAREAS, TONOS,
 } from './catalog.js';
 
 export const ARCHIVOS = [
@@ -25,7 +26,7 @@ export const CAMPOS = [
   { id: 'nombre', label: 'Nombre', archivos: ['00_ADN.md', 'README.md', '03_FUENTES.md'] },
   { id: 'rol', label: 'Rol', archivos: ['00_ADN.md', '01_LINEAS_ROJAS.md'] },
   { id: 'areas', label: 'Áreas', archivos: ['00_ADN.md', '03_FUENTES.md'] },
-  { id: 'tareas', label: 'Tareas', archivos: ['00_ADN.md', '02_PLAYBOOK.md'] },
+  { id: 'tareas', label: 'Tareas', archivos: ['00_ADN.md', '02_PLAYBOOK.md', 'README.md'] },
   { id: 'herramientas', label: 'IA que usas', archivos: ['00_ADN.md', 'README.md'] },
   { id: 'confidencialidad', label: 'Confidencialidad', archivos: ['00_ADN.md', '01_LINEAS_ROJAS.md'] },
   { id: 'tono', label: 'Tono', archivos: ['00_ADN.md'] },
@@ -79,7 +80,7 @@ export function normalizeProfile(raw) {
   };
 }
 
-function resolve(raw) {
+export function resolve(raw) {
   const p = normalizeProfile(raw);
   return {
     p,
@@ -98,6 +99,14 @@ const fence = (text) => '```text\n' + text + '\n```';
 
 // ── 00_ADN: system block (§6.10) ──
 
+// Rules 2 and 3 ask a model that can search for the official link, instead of
+// asking it to stop: Claude and ChatGPT search with citations on every plan
+// (checked 20 Oct 2026). skills.js repeats them inside every skill.
+export const REGLA_FUENTES =
+  '2. Fuentes: primero revisa 03_FUENTES.md. Si la regla no está allí y puedes buscar en internet, búscala en la fuente oficial (relatorías de las altas cortes, SUIN-Juriscol, Secretaría del Senado). Si no la abriste en una fuente oficial, márcala [NO VERIFICADO].';
+export const REGLA_CITAS =
+  '3. Citas: cada sentencia, norma o artículo que cites lleva su enlace oficial. Nunca inventes sentencias, radicados, magistrados ponentes, fechas ni artículos; si no encuentras el dato exacto, dilo en lugar de completarlo.';
+
 export function sistemaBlock(raw) {
   const { p, rol, areas, conf, tono } = resolve(raw);
   const como = rol ? rol.sistema : 'abogado/a';
@@ -108,11 +117,11 @@ export function sistemaBlock(raw) {
     '',
     'REGLAS',
     '1. Jurisdicción por defecto: Colombia. Si usas derecho comparado o doctrina extranjera, márcalo como tal.',
-    '2. Fuente de verdad: antes de afirmar una regla jurídica, revisa 03_FUENTES.md. Si la fuente no está allí, responde igual pero marca la afirmación con [NO VERIFICADO].',
-    '3. Citas: nunca inventes sentencias, radicados, magistrados ponentes, fechas ni artículos. Si no tienes el dato exacto, di "no tengo la fuente exacta" en lugar de completarlo.',
+    REGLA_FUENTES,
+    REGLA_CITAS,
     `4. Confidencialidad: ${lcFirst(conf.sistema)}`,
     `5. Tono: ${lcFirst(tono.instruccion)}. Formato: ${lcFirst(tono.formato)}.`,
-    '6. Procedimientos: para las tareas descritas en 02_PLAYBOOK.md sigue sus pasos y detente en cada punto marcado YO DECIDO.',
+    '6. Procedimientos y criterio: para las tareas de 02_PLAYBOOK.md sigue sus pasos, aplica mis posiciones antes que la práctica general y detente en cada punto marcado YO DECIDO.',
     '7. Cierre obligatorio: termina toda respuesta jurídica con una sección "Verificación pendiente" que liste lo que debo confirmar antes de usarla.',
     '8. Nunca presentes un borrador como definitivo. Yo firmo, radico y decido.',
   ].join('\n');
@@ -158,8 +167,9 @@ const NUNCA_DELEGO_FIJO = [
 ];
 
 const IA_NUNCA = [
-  'Inventa sentencias, radicados, magistrados ponentes, fechas ni artículos. Sin el dato exacto, dice "no tengo la fuente exacta".',
-  'Afirma una regla jurídica que no está en 03_FUENTES.md sin marcarla [NO VERIFICADO].',
+  'Cita una sentencia, norma o artículo sin su enlace oficial, o completa un dato que no encontró (radicado, ponente, fecha, artículo).',
+  'Afirma una regla jurídica que no abrió en una fuente oficial ni está en 03_FUENTES.md sin marcarla [NO VERIFICADO].',
+  'Usa la práctica general cuando 02_PLAYBOOK.md tiene mi posición.',
   'Usa derecho comparado o doctrina extranjera sin marcarlo como tal.',
   'Se salta un punto YO DECIDO de 02_PLAYBOOK.md.',
   'Cierra una respuesta jurídica sin la sección "Verificación pendiente".',
@@ -269,7 +279,7 @@ function fuentes({ p, areas }) {
   return md([
     '# 03_FUENTES · Mi fuente de verdad',
     '> Regla: 03_FUENTES.md solo crece con lo que abriste y verificaste. Nunca con lo que la IA dijo.',
-    'Es la actualización que el modelo no tiene: la biblioteca cerró en una fecha, y lo que se publicó después solo existe para la IA si lo pones sobre la mesa.',
+    'La IA puede buscar en internet; aquí va lo que tú ya abriste y verificaste, y las alertas que aprendiste. La IA lo consulta primero, antes de buscar.',
     '## Dónde verifico',
     list(FUENTES_OFICIALES.map((f) => `${f.label}: ${f.url}`)),
     '## Semilla por área',
@@ -324,6 +334,7 @@ function verificacion() {
     '## Los tres niveles',
     fence(' ' + NIVELES),
     'Las sanciones documentadas en el mundo casi siempre fallaron en el nivel A. Los errores costosos sin sanción suelen fallar en el B o el C.',
+    'Con una IA que busca en internet, el nivel A es rápido: exige el enlace oficial de cada cita y ábrelo. «Ya lo verifiqué» también es una respuesta de la IA: el enlace lo abres tú.',
     '## Red team con un segundo modelo',
     'Pega la respuesta del primer modelo en otro distinto con este mensaje:',
     fence(PROMPT_RED_TEAM),
@@ -348,7 +359,7 @@ const ARBOL_MANTENIMIENTO = `La IA se equivocó
 
 const NIVELES_MADUREZ = [
   'Nivel 0 · Chat en frío, sin contexto. Donde está la mayoría hoy.',
-  'Nivel 1 · Los cinco archivos cargados en un Proyecto, Gem o chat. Aquí llegas hoy.',
+  'Nivel 1 · Los cinco archivos cargados en un Proyecto, Gem o chat, y tus skills instaladas. Aquí llegas hoy.',
   'Nivel 2 · Bóveda: Obsidian con casos, fuentes, plantillas y consultas de términos.',
   'Nivel 3 · Lector que no inventa: Gemini Notebook (antes NotebookLM) con las fuentes oficiales, cita al párrafo.',
   'Nivel 4 · IA con manos: lee y escribe en la bóveda vía MCP; consulta fuentes oficiales en vivo.',
@@ -356,10 +367,51 @@ const NIVELES_MADUREZ = [
 ];
 
 const TRES_ACCIONES = [
-  'Carga tu cerebro en un Proyecto de Claude o ChatGPT, o en Gemini. Diez minutos; dejas de pegarlo cada vez.',
-  'La próxima vez que la IA se equivoque, escribe la corrección en `02_PLAYBOOK.md` o `03_FUENTES.md`. Así crece.',
-  'Antes de firmar, radicar o enviar, abre `04_VERIFICACION.md`. Cinco minutos.',
+  'Revisa tu cuenta: apaga el entrenamiento con tus datos (sección «Antes de pegar»). Dos minutos.',
+  'Carga tu cerebro en un Proyecto de Claude o ChatGPT, o en Gemini, e instala tus skills en Claude. Diez minutos; dejas de pegarlo cada vez.',
+  'Cuando la IA se equivoque, escribe la corrección en `02_PLAYBOOK.md` o `03_FUENTES.md`. Antes de firmar, radicar o enviar, abre `04_VERIFICACION.md`.',
 ];
+
+/** Privacy rows with the tools the user chose first (catalog order otherwise). */
+export function privacidadOrdenada(raw) {
+  const { herramientas } = normalizeProfile(raw);
+  const mine = PRIVACIDAD.filter((x) => x.herramienta && herramientas.includes(x.herramienta));
+  return [...mine, ...PRIVACIDAD.filter((x) => !mine.includes(x))].map((x) => ({ ...x, mia: mine.includes(x) }));
+}
+
+function cuentaSection(p) {
+  const rows = privacidadOrdenada(p).map((x) =>
+    [
+      `### ${x.label}${x.mia ? ' · la usas hoy' : ''}`,
+      '',
+      list([
+        `¿Entrena con lo que subes? ${x.entrena}`,
+        `Cómo apagarlo: ${x.apagar}`,
+        x.sinRastro ? `Sin rastro: ${x.sinRastro}` : null,
+        `Ojo: ${x.ojo}`,
+        `Fuente: ${x.fuente}`,
+      ].filter(Boolean)),
+    ].join('\n'),
+  );
+  return [
+    '## Antes de pegar: revisa tu cuenta',
+    `Dos minutos. En las cuentas personales, lo que subes puede usarse para entrenar modelos: apágalo antes de pegar tu cerebro o un documento. ${PRIVACIDAD_VERIFICADA}`,
+    rows.join('\n\n'),
+  ];
+}
+
+function skillsSection(tareas) {
+  if (!tareas.length) {
+    return ['## Instala tus skills en Claude', 'Elige tareas en tu perfil y aquí aparecen sus skills: cada tarea de tu playbook sale también como un ZIP que Claude instala.'];
+  }
+  return [
+    '## Instala tus skills en Claude',
+    'Cada tarea de tu playbook sale también como skill: un ZIP que Claude instala una vez y usa solo cuando aparece la tarea, en cualquier chat. Descárgalas en la página del taller (x10.expert/cerebro, paso «Carga»).',
+    list(tareas.map((t) => `\`${t.skill.slug}.zip\` · ${t.skill.titulo}`)),
+    INSTALAR_SKILL.pasos.map((l, i) => `${i + 1}. ${l}`).join('\n'),
+    INSTALAR_SKILL.nota,
+  ];
+}
 
 /** Load routes with the tools the user chose first (catalog order otherwise). */
 export function rutasOrdenadas(raw) {
@@ -396,6 +448,7 @@ export function buildReadme(raw, { extra = [] } = {}) {
       'Acumulativo. Cada error de la IA se convierte en una línea nueva del playbook o de las fuentes. El cerebro mejora con el uso; el chat no.',
     ]),
     '| Archivo | Responde a |\n|---|---|\n' + ARCHIVOS_CEREBRO.map((n) => `| ${n} | ${PREGUNTAS[n]} |`).join('\n'),
+    ...cuentaSection(p),
     '## Cómo cargarlo',
     '### Camino universal (cualquier IA, cualquier plan)',
     'Abre un chat nuevo y pega como primer mensaje este texto, seguido de los cinco archivos. El botón "Copiar todo para pegar en un chat" de la página del taller lo arma por ti.',
@@ -403,6 +456,7 @@ export function buildReadme(raw, { extra = [] } = {}) {
     'Si funcionó, la IA te confirma en tres líneas quién eres, cuáles son tus líneas rojas y cómo va a verificar sus respuestas. Esa confirmación es deliberada: obliga al modelo a procesar el paquete antes de la primera pregunta y te muestra en diez segundos si la carga funcionó.',
     `Para dejarlo fijo y no pegarlo cada vez, usa un Proyecto, Gemini o tu modelo local. El bloque de instrucciones de sistema está al final de 00_ADN.md. ${RUTAS_VERIFICADAS}`,
     rutas,
+    ...skillsSection(resolve(p).tareas),
     '## Cómo mantenerlo',
     fence(ARBOL_MANTENIMIENTO),
     'Regla: 03_FUENTES.md solo crece con lo que abriste y verificaste. Nunca con lo que la IA dijo.',

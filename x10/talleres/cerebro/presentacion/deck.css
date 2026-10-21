@@ -1141,163 +1141,91 @@
 }
 
 /* =========================================================
-   C10 · la biblioteca cerró
+   C10 · ¿su cuenta entrena con lo que sube?
    ========================================================= */
 
-.cj-library__line {
-  position: relative;
+.cj-priv .t-h2 {
+  font-size: 80px;
+}
+
+.cj-priv__table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.cj-priv__row {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 20px;
-  flex: 1;
-  margin-top: 26px;
-  padding-top: 20px;
-}
-
-/* the time axis */
-.cj-library__line::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 430px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--gold) 0 66%, var(--line-strong) 66% 100%);
-}
-
-.cj-library__line > li {
-  position: relative;
-  display: grid;
-  grid-template-rows: 400px auto auto auto;
-  row-gap: 8px;
-  align-content: start;
-}
-
-.cj-library__line > li::after {
-  content: '';
-  position: absolute;
-  top: 418px;
-  left: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 0 6px var(--bg);
-}
-
-.cj-library__line > li > b {
-  grid-row: 2;
-  margin-top: 46px;
-  font: 700 48px/1 var(--font-display);
-  letter-spacing: -0.02em;
-}
-
-.cj-library__line > li > span:not(.cj-stack) {
-  grid-row: 3;
-  font: 500 30px/1.2 var(--font-body);
+  grid-template-columns: 540px 360px 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 14px 28px 16px;
+  border-radius: 22px;
+  border: 2px solid var(--line);
+  background: color-mix(in srgb, var(--bg-raise) 88%, transparent);
+  font: 500 28px/1.25 var(--font-body);
   color: var(--text-2);
 }
 
-.cj-library__line > li > em {
-  grid-row: 4;
-  font: italic 500 26px/1.2 var(--font-body);
+.cj-priv__row--head {
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 0;
+  background: none;
+  font: 600 24px/1 var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--text-3);
 }
 
-/* pages piled on the year they were written */
-.cj-stack {
-  grid-row: 1;
-  align-self: end;
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 4px;
-  width: 170px;
-  margin-bottom: 4px;
-}
-
-.cj-stack i {
-  height: 10px;
-  border-radius: 3px;
-  background: color-mix(in srgb, var(--gold) 55%, transparent);
-}
-
-.cj-stack i:nth-child(3n) {
-  width: 92%;
-}
-
-.cj-stack i:nth-child(4n + 1) {
-  width: 86%;
-}
-
-.is-loud .cj-stack i {
-  background: color-mix(in srgb, #ff7a7a 70%, var(--gold));
-}
-
-.is-quiet .cj-stack i {
-  background: var(--cyan);
-}
-
-.cj-library__line > li.is-cut {
-  --shut: 1;
-}
-
-.cj-library__line > li.is-cut::after {
-  width: 10px;
-  height: 0;
-}
-
-.cj-library__line > li.is-cut::before {
-  content: '';
-  position: absolute;
-  left: 9px;
-  top: 30px;
-  width: 10px;
-  height: 420px;
-  border-radius: 5px;
-  background: var(--text);
-  transform: scaleY(var(--shut));
-  transform-origin: top center;
-}
-
-.cj-library__line > li.is-cut > b {
+.cj-priv__row b {
+  font: 700 31px/1.15 var(--font-display);
+  letter-spacing: -0.01em;
   color: var(--text);
 }
 
-.cj-library__line > li.is-now::after {
-  background: var(--cyan);
-  animation: cj-ping 1.6s ease-out infinite;
+.cj-priv__row q {
+  quotes: '«' '»';
+  font-weight: 600;
+  color: var(--text);
 }
 
-@keyframes cj-ping {
-  0% {
-    box-shadow: 0 0 0 6px var(--bg), 0 0 0 6px color-mix(in srgb, var(--cyan) 60%, transparent);
-  }
-  100% {
-    box-shadow: 0 0 0 6px var(--bg), 0 0 0 34px transparent;
-  }
+.cj-priv__yes,
+.cj-priv__no {
+  font: 700 30px/1.2 var(--font-display);
 }
 
-.cj-library__guess {
-  grid-row: 1 !important;
-  align-self: end;
-  margin-bottom: 40px;
-  padding: 18px 22px;
-  border-radius: 22px 22px 22px 4px;
-  border: 2px solid #ff7a7a;
-  background: rgba(255, 122, 122, 0.12);
-  font: 600 30px/1.2 var(--font-display) !important;
-  font-style: normal !important;
-  color: var(--text) !important;
-}
-
-.cj-library__guess s {
-  text-decoration: none;
+.cj-priv__yes {
   color: #ff9c9c;
 }
 
-.cj-library__end {
-  font: 500 36px/1.3 var(--font-body);
+.cj-priv__no {
+  color: var(--cyan-text);
+}
+
+.cj-priv__warn {
+  display: flex;
+  gap: 22px;
+  align-items: baseline;
+  margin-top: 22px;
+  padding: 16px 28px 18px;
+  border-radius: 22px;
+  border: 2px dashed #ff7a7a;
+  font: 500 28px/1.3 var(--font-body);
   color: var(--text-2);
+}
+
+.cj-priv__warn b {
+  flex: none;
+  font: 700 32px/1 var(--font-display);
+  color: #ff9c9c;
+}
+
+.cj-priv__safe {
+  margin-top: 14px;
+  font: 600 32px/1.2 var(--font-display);
+  color: var(--cyan-text);
 }
 
 /* =========================================================
@@ -2248,99 +2176,128 @@ html.is-print .cj-ask__cursor {
 }
 
 /* =========================================================
-   C18–C19 · grilla de modelos
+   C18 · la misma tarea, dos chats
    ========================================================= */
 
-.cj-grid__cols {
+.cj-two__cols {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
-  flex: 1;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
   margin-top: 36px;
   align-content: start;
 }
 
-.cj-col {
+.cj-two__col {
   display: flex;
   flex-direction: column;
-  gap: 22px;
-  padding: 30px 30px 34px;
-  border-radius: 28px;
+  gap: 24px;
+  padding: 36px 40px 40px;
+  border-radius: 32px;
   border: 2px solid var(--line-strong);
   background: color-mix(in srgb, var(--bg-raise) 88%, transparent);
 }
 
-.cj-col.is-ok {
-  border-color: var(--cyan);
+.cj-two__col--on {
+  border-color: var(--gold);
+  box-shadow: 0 0 60px color-mix(in srgb, var(--gold) 18%, transparent);
 }
 
-.cj-col.is-wrong {
-  border-color: #ff7a7a;
-}
-
-.cj-col__name {
-  font: 700 40px/1 var(--font-display);
+.cj-two__name {
+  font: 700 48px/1 var(--font-display);
   letter-spacing: -0.02em;
 }
 
-.cj-col__ans {
-  min-height: 110px;
-  font: 600 38px/1.2 var(--font-display);
+.cj-two__col--off .cj-two__name {
+  color: var(--text-2);
 }
 
-.cj-col__ans .ph {
-  font-size: 24px;
-  word-break: break-all;
+.cj-two__col--on .cj-two__name {
+  color: var(--gold-text);
 }
 
-.cj-col.is-wrong .cj-col__ans {
-  color: #ff9c9c;
+.cj-two__what {
+  font: 500 36px/1.35 var(--font-body);
+  color: var(--text-2);
 }
 
-.cj-col.is-ok .cj-col__ans {
-  color: var(--cyan-text);
-}
-
-.cj-col__checks {
+.cj-two__checks {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding-top: 18px;
-  border-top: 2px solid var(--line);
+  gap: 16px;
 }
 
-.cj-col__checks li {
+.cj-two__checks li {
   display: grid;
-  grid-template-columns: 32px 1fr;
-  gap: 12px;
+  grid-template-columns: 44px 1fr;
+  gap: 14px;
   align-items: baseline;
-  font: 500 26px/1.2 var(--font-body);
-  color: var(--text-2);
+  font: 600 36px/1.2 var(--font-display);
 }
 
-.cj-col__checks li::before {
-  content: '·';
-  font: 700 30px/1 var(--font-display);
-  color: var(--text-3);
-}
-
-.cj-col__checks li.is-yes::before {
+.cj-two__checks li::before {
   content: '✓';
+  font: 700 36px/1 var(--font-display);
   color: var(--cyan-text);
 }
 
-.cj-col__checks li.is-no::before {
-  content: '✕';
-  color: #ff9c9c;
+.cj-two__ex {
+  margin-top: auto;
+  padding: 20px 24px 22px;
+  border-left: 6px solid var(--line-strong);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
+  font: 500 24px/1.4 var(--font-body);
+  color: var(--text-2);
+  white-space: pre-line;
+  max-height: 300px;
+  overflow: hidden;
 }
 
-.cj-grid__why {
-  font: 500 36px/1.3 var(--font-body);
-  color: var(--text-2);
+.cj-two__col--on .cj-two__ex {
+  border-left-color: var(--gold);
+}
+
+.cj-two__foot {
+  margin-top: auto;
+  font: 600 44px/1.2 var(--font-display);
+  color: var(--cyan-text);
+}
+
+/* With real captures there is less room: smaller type, capped excerpts */
+.cj-two.has-excerpts .cj-two__cols {
+  margin-top: 26px;
+}
+
+.cj-two.has-excerpts .cj-two__col {
+  gap: 14px;
+  padding: 26px 32px 28px;
+}
+
+.cj-two.has-excerpts .cj-two__name {
+  font-size: 40px;
+}
+
+.cj-two.has-excerpts .cj-two__what,
+.cj-two.has-excerpts .cj-two__checks li {
+  font-size: 27px;
+}
+
+.cj-two.has-excerpts .cj-two__checks {
+  gap: 6px;
+}
+
+.cj-two.has-excerpts .cj-two__ex {
+  max-height: 250px;
+  padding: 14px 20px 16px;
+  font-size: 21px;
+}
+
+.cj-two.has-excerpts .cj-two__foot {
+  font-size: 36px;
 }
 
 /* =========================================================
-   C20 · por qué difieren
+   R3 · por qué difieren (reserva)
    ========================================================= */
 
 .cj-why__cards {
@@ -2708,12 +2665,155 @@ html.is-print .cj-ask__cursor {
 }
 
 /* =========================================================
+   Trampa · la trampa que preparé para hoy
+   ========================================================= */
+
+.cj-trap__q {
+  margin-top: 30px;
+  padding: 30px 40px 34px;
+  border-left: 8px solid var(--gold);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg-raise) 80%, transparent);
+  font: 600 50px/1.24 var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+.cj-trap__checks {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 18px 40px;
+  margin-top: 40px;
+}
+
+.cj-trap__checks li {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 20px;
+  align-items: center;
+  font: 600 42px/1.15 var(--font-display);
+}
+
+.cj-trap__checks i {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--cyan);
+  color: #0b0f1a;
+  font: 700 36px/1 var(--font-display);
+  font-style: normal;
+}
+
+.cj-trap__src {
+  margin-top: 26px;
+  font: 500 30px/1.3 var(--font-body);
+  color: var(--text-3);
+}
+
+.cj-trap__end {
+  margin-top: auto;
+  font: 600 52px/1.18 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--text-2);
+}
+
+.cj-trap__end b {
+  display: block;
+  color: var(--gold-text);
+}
+
+/* =========================================================
+   Criterio · lo que ningún buscador encuentra
+   ========================================================= */
+
+.cj-crit__title {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cj-crit__a {
+  color: var(--text-2);
+}
+
+.cj-crit__b {
+  color: var(--gold-text);
+}
+
+.cj-crit__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 28px;
+  margin-top: 48px;
+}
+
+.cj-crit__cards li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 24px;
+  row-gap: 10px;
+  align-items: baseline;
+  padding: 28px 34px 30px;
+  border-radius: 30px;
+  border: 2px solid var(--line-strong);
+  background: color-mix(in srgb, var(--bg-raise) 88%, transparent);
+}
+
+.cj-crit__cards b {
+  font: 700 44px/1.05 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.cj-crit__cards span {
+  grid-column: 1 / -1;
+  font: 500 32px/1.3 var(--font-body);
+  color: var(--text-2);
+}
+
+.cj-crit__cards code {
+  grid-row: 1;
+  grid-column: 2;
+  font-size: 24px;
+}
+
+.cj-crit__foot {
+  margin-top: auto;
+  font: 600 40px/1.2 var(--font-display);
+  color: var(--cyan-text);
+}
+
+/* C13 · the task prompt is longer than a question: smaller type */
+.cj-question__q--task {
+  margin-top: 28px;
+  font-size: 40px;
+  line-height: 1.3;
+}
+
+.cj-question .t-h2 + .cj-question__q--task {
+  margin-top: 24px;
+}
+
+/* C21 · exija el enlace */
+.cj-gates__link {
+  margin-top: 40px;
+  font: 500 36px/1.25 var(--font-body);
+  color: var(--text-2);
+}
+
+.cj-gates__link b {
+  font-family: var(--font-display);
+  color: var(--cyan-text);
+}
+
+/* =========================================================
    Light theme, lite mode and print
    ========================================================= */
 
 :root[data-theme='light'] .cj-syn--bad,
 :root[data-theme='light'] .cj-flow__bad,
-:root[data-theme='light'] .cj-col.is-wrong,
+:root[data-theme='light'] .cj-priv__warn,
 :root[data-theme='light'] .cj-redteam {
   stroke: #b33a3a;
   border-color: #b33a3a;
@@ -2722,16 +2822,14 @@ html.is-print .cj-ask__cursor {
 :root[data-theme='light'] .cj-flow__t--bad,
 :root[data-theme='light'] .cj-cite__stamp,
 :root[data-theme='light'] .cj-redteam__label,
-:root[data-theme='light'] .cj-col.is-wrong .cj-col__ans,
-:root[data-theme='light'] .cj-library__guess s,
-:root[data-theme='light'] .cj-conf__rows li:nth-child(3) b,
-:root[data-theme='light'] .cj-col__checks li.is-no::before {
+:root[data-theme='light'] .cj-priv__yes,
+:root[data-theme='light'] .cj-priv__warn b,
+:root[data-theme='light'] .cj-conf__rows li:nth-child(3) b {
   fill: #b33a3a;
   color: #b33a3a;
 }
 
-:root[data-theme='light'] .cj-cite__stamp,
-:root[data-theme='light'] .cj-library__guess {
+:root[data-theme='light'] .cj-cite__stamp {
   border-color: #b33a3a;
 }
 

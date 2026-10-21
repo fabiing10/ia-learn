@@ -77,7 +77,7 @@
               <span class="hero__line hero__line--accent">es tu sistema.</span>
               <span class="hero__line hero__line--soft">Y los sistemas se diseñan.</span>
             </h1>
-            <p class="hero__lead">Describe tu práctica en ocho campos y recibe tu <b>cerebro jurídico</b>: cinco archivos que le dicen a cualquier IA quién eres, cómo trabajas, qué nunca hace y cómo se verifica.</p>
+            <p class="hero__lead"><b>La IA ya sabe buscar; tu criterio no está en internet.</b> Describe tu práctica en ocho campos y recibe tu <b>cerebro jurídico</b>: cinco archivos que le dicen a cualquier IA quién eres, cómo trabajas, qué nunca hace y cómo se verifica, y tus tareas como skills para Claude.</p>
             <p class="hero__promise"><span data-icon="lock"></span>Funciona en celular y en computador. Nada se envía a ningún servidor.</p>
             <div class="hero__ctas">
               <a class="btn btn--primary btn--lg" href="#construir">Construir mi cerebro <span data-icon="down"></span></a>
@@ -94,7 +94,7 @@
               <li><code>03_FUENTES.md</code><span>Con qué razona la IA</span></li>
               <li><code>04_VERIFICACION.md</code><span>Cómo sé que puedo usarlo</span></li>
             </ol>
-            <p class="leave__foot">Más un <code>README.md</code> para cargarlo y mantenerlo. Sirven en Claude, ChatGPT, Gemini, Copilot o un modelo local.</p>
+            <p class="leave__foot">Más un <code>README.md</code> para cargarlo y mantenerlo, y una skill por tarea para instalar en Claude. Los archivos sirven en Claude, ChatGPT, Gemini, Copilot o un modelo local.</p>
           </aside>
         </div>
 
@@ -102,7 +102,7 @@
           <ol class="steps__list">
             <li><a href="#construir"><span class="steps__n">1</span><span class="steps__what">Construye</span><span class="steps__how">Tu perfil, 4 minutos</span></a></li>
             <li><a href="#cargar"><span class="steps__n">2</span><span class="steps__what">Carga</span><span class="steps__how">Copia y pega en tu IA</span></a></li>
-            <li><a href="#prueba"><span class="steps__n">3</span><span class="steps__what">Prueba</span><span class="steps__how">La pregunta del derecho de petición</span></a></li>
+            <li><a href="#prueba"><span class="steps__n">3</span><span class="steps__what">Prueba</span><span class="steps__how">Una tarea tuya, con y sin cerebro</span></a></li>
           </ol>
         </nav>
       </section>
@@ -164,6 +164,15 @@
             <p class="sec__lead">Un botón copia los cinco archivos con una instrucción al inicio. Abre un chat nuevo, pega y envía.</p>
           </header>
 
+          <div class="account surface" aria-labelledby="cuenta-t">
+            <div class="account__head">
+              <h3 class="h3" id="cuenta-t"><span data-icon="shield"></span>Antes de pegar: revisa tu cuenta</h3>
+              <p class="account__lead">Dos minutos, en el celular. En las cuentas personales, lo que subes puede usarse para entrenar modelos. Tus herramientas salen primero.</p>
+            </div>
+            <ul class="account__list" id="cuenta-lista"></ul>
+            <p class="account__note" id="cuenta-verificada"></p>
+          </div>
+
           <div class="load">
             <div class="load__main surface">
               <button class="btn btn--primary btn--xl" id="copiar-todo" type="button"><span data-icon="copy"></span><span data-label>Copiar todo para pegar en un chat</span></button>
@@ -175,7 +184,7 @@
               <ol class="confirm3" aria-label="La confirmación que esperas">
                 <li><span class="confirm3__n">1</span><span><b>Quién eres</b>: tu rol, tus áreas, cómo te llama.</span></li>
                 <li><span class="confirm3__n">2</span><span><b>Tus líneas rojas</b>: confidencialidad y lo que nunca delegas.</span></li>
-                <li><span class="confirm3__n">3</span><span><b>Cómo va a verificar</b>: fuentes, "no tengo la fuente exacta" y el cierre "Verificación pendiente".</span></li>
+                <li><span class="confirm3__n">3</span><span><b>Cómo va a verificar</b>: fuentes con enlace oficial, [NO VERIFICADO] y el cierre "Verificación pendiente".</span></li>
               </ol>
               <p class="load__why">La confirmación obliga al modelo a procesar el paquete antes de tu primera pregunta y te muestra en diez segundos si la carga funcionó. Si responde otra cosa, vuelve a pegar en un chat nuevo.</p>
             </div>
@@ -186,6 +195,16 @@
                 <p class="dl__lead">Para subirlo a un Proyecto o una Gem, o guardarlo en tu equipo.</p>
                 <button class="btn btn--ghost" id="bajar-zip" type="button"><span data-icon="zip"></span>Descargar todo (.zip)</button>
                 <ul class="dl__files" id="bajar-archivos" aria-label="Descargar un archivo"></ul>
+              </div>
+              <div class="dl surface" aria-labelledby="skills-t">
+                <h3 class="h3" id="skills-t">Tus skills para Claude</h3>
+                <p class="dl__lead">Cada tarea de tu playbook como skill: Claude la usa sola cuando aparece la tarea, en cualquier chat. Un ZIP por skill; súbelo sin descomprimir.</p>
+                <ul class="dl__files" id="bajar-skills" aria-label="Descargar una skill"></ul>
+                <details class="skills-how">
+                  <summary>Cómo instalarla en Claude</summary>
+                  <ol class="route-steps" id="skills-pasos"></ol>
+                  <p class="route-note" id="skills-nota"></p>
+                </details>
               </div>
             </div>
           </div>
@@ -207,29 +226,29 @@
         <div class="wrap">
           <header class="sec__head">
             <p class="eyebrow">Paso 3 · Prueba</p>
-            <h2 class="sec__title" id="prueba-t">La pregunta de prueba</h2>
-            <p class="sec__lead">Hazla con tu cerebro y, si te da tiempo, en un chat limpio. Luego compara el fondo, la fuente citada y el cierre.</p>
+            <h2 class="sec__title" id="prueba-t">La prueba: una tarea tuya</h2>
+            <p class="sec__lead">Copia la prueba de una de tus tareas. Hazla en el chat donde pegaste tu cerebro y, si te da tiempo, en un chat temporal o incógnito, sin cerebro. Compara el proceso, no solo la respuesta.</p>
           </header>
 
-          <figure class="question surface">
+          <div class="routes__tabs pruebas__tabs" role="tablist" aria-label="Pruebas por tarea" id="pruebas-tabs"></div>
+          <figure class="question surface" role="tabpanel" id="pruebas-panel">
             <blockquote class="question__text" id="pregunta"></blockquote>
-            <button class="btn btn--primary" id="copiar-pregunta" type="button"><span data-icon="copy"></span><span data-label>Copiar pregunta</span></button>
+            <button class="btn btn--primary" id="copiar-pregunta" type="button"><span data-icon="copy"></span><span data-label>Copiar prueba</span></button>
+            <p class="question__note" id="pregunta-nota" hidden></p>
           </figure>
 
           <div class="compare" role="table" aria-label="Sin cerebro y con cerebro">
             <div class="compare__head" role="row">
               <span role="columnheader" class="compare__h compare__h--sin">Sin cerebro: lo que suele pasar</span>
-              <span role="columnheader" class="compare__h compare__h--con">Con cerebro: lo que debe pasar</span>
+              <span role="columnheader" class="compare__h compare__h--con">Con cerebro: lo que debes ver</span>
             </div>
             <div id="comparacion" role="rowgroup"></div>
           </div>
 
           <details class="reserve surface">
-            <summary><span>¿Respondió bien incluso sin cerebro? Usa la pregunta de reserva</span><span class="reserve__chev" aria-hidden="true"></span></summary>
+            <summary><span>¿Por qué no una pregunta de “cuántos días”?</span><span class="reserve__chev" aria-hidden="true"></span></summary>
             <div class="reserve__body">
-              <blockquote class="question__text question__text--sm" id="pregunta-reserva"></blockquote>
-              <button class="btn btn--ghost btn--sm" id="copiar-reserva" type="button"><span data-icon="copy"></span><span data-label>Copiar pregunta de reserva</span></button>
-              <p class="reserve__why">Las preguntas que piden una sentencia específica con cita textual casi siempre producen al menos un dato inventado en frío. Con el cerebro, la regla 3 obliga a decir "no tengo la fuente exacta".</p>
+              <p class="reserve__why">Porque los modelos que buscan en internet ya responden bien ese tipo de preguntas. El 20 de octubre de 2026 le pedimos a un modelo con búsqueda una sentencia con número, ponente y cita textual, y la comprobamos en la relatoría oficial de la Corte Constitucional: todo correcto. Lo que ningún buscador encuentra es tu criterio: qué aceptas, dónde se detiene la IA y qué nunca subes. Eso es lo que muestra esta prueba.</p>
             </div>
           </details>
         </div>

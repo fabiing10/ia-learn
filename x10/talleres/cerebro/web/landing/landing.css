@@ -2002,3 +2002,152 @@ fieldset.field > legend + * {
 .dock:not([hidden]) ~ .toast {
   bottom: calc(72px + env(safe-area-inset-bottom));
 }
+
+/* ── Antes de pegar: what each account does with the data ── */
+
+.account {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 16px;
+  padding: clamp(18px, 3vw, 28px);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+}
+
+.account__head .h3 {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.account__head [data-icon] svg {
+  width: 20px;
+  height: 20px;
+}
+
+.account__lead,
+.account__note {
+  color: var(--text-2);
+  font-size: var(--fs-sm);
+}
+
+.account__note {
+  font-size: var(--fs-xs);
+}
+
+.account__list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 900px) {
+  .account__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.account__item {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
+  background: var(--surface);
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+}
+
+.account__item.is-mine {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+}
+
+.account__item b {
+  color: var(--text);
+}
+
+.account__name {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.account__train {
+  color: var(--text);
+}
+
+.account__ojo {
+  padding-left: 10px;
+  border-left: 2px solid var(--stop);
+}
+
+.account__src a {
+  color: var(--accent-text, var(--accent));
+  font-size: var(--fs-xs);
+}
+
+/* ── Skills: two-line download buttons ── */
+
+.file-dl__two {
+  display: grid;
+  min-width: 0;
+  padding: 6px 0;
+  line-height: 1.25;
+}
+
+.file-dl__two small {
+  overflow: hidden;
+  color: var(--text-2);
+  font-size: var(--fs-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dl__empty {
+  color: var(--text-3);
+  font-size: var(--fs-sm);
+}
+
+.skills-how summary {
+  min-height: 40px;
+  padding: 8px 0;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.skills-how .route-steps {
+  font-size: var(--fs-sm);
+}
+
+/* ── Prueba: one tab per chosen task ── */
+
+.pruebas__tabs {
+  margin-bottom: 14px;
+}
+
+.question__note {
+  color: var(--text-2);
+  font-size: var(--fs-sm);
+}
+
+.compare__cell.is-empty::before {
+  content: none;
+}
+
+/* Two download cards in the side column: stack them; `.dl` alone fills the row. */
+.load__side {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.load__side .dl {
+  height: auto;
+}

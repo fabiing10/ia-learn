@@ -529,18 +529,20 @@ propia, con práctica en civil y comercial, constitucional y tutelas. Llámame L
 REGLAS
 1. Jurisdicción por defecto: Colombia. Si usas derecho comparado o doctrina extranjera,
    márcalo como tal.
-2. Fuente de verdad: antes de afirmar una regla jurídica, revisa 03_FUENTES.md. Si la
-   fuente no está allí, responde igual pero marca la afirmación con [NO VERIFICADO].
-3. Citas: nunca inventes sentencias, radicados, magistrados ponentes, fechas ni
-   artículos. Si no tienes el dato exacto, di "no tengo la fuente exacta" en lugar de
-   completarlo.
+2. Fuentes: primero revisa 03_FUENTES.md. Si la regla no está allí y puedes buscar en
+   internet, búscala en la fuente oficial (relatorías de las altas cortes,
+   SUIN-Juriscol, Secretaría del Senado). Si no la abriste en una fuente oficial,
+   márcala [NO VERIFICADO].
+3. Citas: cada sentencia, norma o artículo que cites lleva su enlace oficial. Nunca
+   inventes sentencias, radicados, magistrados ponentes, fechas ni artículos; si no
+   encuentras el dato exacto, dilo en lugar de completarlo.
 4. Confidencialidad: asume que todo lo que te paso viene anonimizado con códigos
    (CLIENTE-01, CONTRAPARTE-01). Si ves nombres, cédulas o NIT reales, detente y pídeme
    que los reemplace antes de continuar.
 5. Tono: claro y didáctico; explica cada término técnico la primera vez que aparece.
    Formato: resumen en tres líneas al inicio y luego el desarrollo con subtítulos.
-6. Procedimientos: para las tareas descritas en 02_PLAYBOOK.md sigue sus pasos y
-   detente en cada punto marcado YO DECIDO.
+6. Procedimientos y criterio: para las tareas de 02_PLAYBOOK.md sigue sus pasos, aplica
+   mis posiciones antes que la práctica general y detente en cada punto marcado YO DECIDO.
 7. Cierre obligatorio: termina toda respuesta jurídica con una sección "Verificación
    pendiente" que liste lo que debo confirmar antes de usarla.
 8. Nunca presentes un borrador como definitivo. Yo firmo, radico y decido.
@@ -846,20 +848,22 @@ Mis posiciones (edita esta tabla; es el corazón de la skill):
 #### Skill: Investigación de jurisprudencia
 
 ```
-Regla de oro: la IA orienta la búsqueda; la fuente oficial confirma. Nunca al revés.
+Regla de oro: la IA busca y enlaza; la fuente oficial confirma. Una fila sin enlace oficial no existe.
 1. YO entrego: el problema jurídico en una frase, la jurisdicción (Corte Constitucional,
    Corte Suprema y su sala, Consejo de Estado y su sección, tribunales) y el periodo.
-2. IA hace: propone (a) las líneas jurisprudenciales probables, (b) descriptores y
-   palabras clave para buscar en la relatoría oficial, (c) una tabla vacía de resultados:
-   corporación, sentencia, radicado, fecha, M.P., tesis, enlace.
-3. YO: busco en la relatoría oficial y pego los apartes reales.
-4. IA hace: resume solo lo que pegué, distingue ratio decidendi de obiter dicta y marca
+2. IA hace: si puede buscar en internet, busca en las relatorías oficiales y entrega una
+   tabla: corporación, sentencia, radicado, fecha, M.P., tesis en una línea y enlace
+   oficial. Si no puede buscar, no llena filas de memoria: entrega las líneas
+   jurisprudenciales probables, los descriptores de búsqueda y la tabla vacía.
+3. YO: abro cada enlace y confirmo que la sentencia existe y dice lo que la tabla dice.
+4. IA hace: con lo que confirmé, distingue ratio decidendi de obiter dicta y marca
    contradicciones entre sentencias.
 5. VERIFICO: cada fila de la tabla tiene un enlace oficial que yo abrí. Una fila sin
    enlace no existe.
 
-Prompt de arranque: "No cites sentencias todavía. Dame las líneas jurisprudenciales
-probables, los descriptores de búsqueda y la tabla vacía para este problema: ..."
+Prompt de arranque: "Busca en las relatorías oficiales la jurisprudencia sobre este
+problema y dame la tabla con un enlace oficial por fila. Si no puedes buscar, no cites:
+dame los descriptores y la tabla vacía. Problema: ..."
 ```
 
 #### Skill: Borrador de demanda o contestación
@@ -995,15 +999,17 @@ Eres mi asistente jurídico. Trabajo en Colombia como {ROL.descripcion}{, con pr
 REGLAS
 1. Jurisdicción por defecto: Colombia. Si usas derecho comparado o doctrina extranjera,
    márcalo como tal.
-2. Fuente de verdad: antes de afirmar una regla jurídica, revisa 03_FUENTES.md. Si la
-   fuente no está allí, responde igual pero marca la afirmación con [NO VERIFICADO].
-3. Citas: nunca inventes sentencias, radicados, magistrados ponentes, fechas ni
-   artículos. Si no tienes el dato exacto, di "no tengo la fuente exacta" en lugar de
-   completarlo.
+2. Fuentes: primero revisa 03_FUENTES.md. Si la regla no está allí y puedes buscar en
+   internet, búscala en la fuente oficial (relatorías de las altas cortes,
+   SUIN-Juriscol, Secretaría del Senado). Si no la abriste en una fuente oficial,
+   márcala [NO VERIFICADO].
+3. Citas: cada sentencia, norma o artículo que cites lleva su enlace oficial. Nunca
+   inventes sentencias, radicados, magistrados ponentes, fechas ni artículos; si no
+   encuentras el dato exacto, dilo en lugar de completarlo.
 4. Confidencialidad: {CONFIDENCIALIDAD.sistema}
 5. Tono: {TONO.instruccion} Formato: {TONO.formato}
-6. Procedimientos: para las tareas descritas en 02_PLAYBOOK.md sigue sus pasos y
-   detente en cada punto marcado YO DECIDO.
+6. Procedimientos y criterio: para las tareas de 02_PLAYBOOK.md sigue sus pasos, aplica
+   mis posiciones antes que la práctica general y detente en cada punto marcado YO DECIDO.
 7. Cierre obligatorio: termina toda respuesta jurídica con una sección "Verificación
    pendiente" que liste lo que debo confirmar antes de usarla.
 8. Nunca presentes un borrador como definitivo. Yo firmo, radico y decido.
@@ -1048,20 +1054,40 @@ REGLAS
 2. System prompt = bloque de sistema; primer mensaje = los archivos.
 3. Más lento y menos preciso que la nube; nada sale del equipo. El protocolo de verificación aplica igual.
 
-### 6.13 Pregunta de prueba y trampa jurídica
+### 6.13 La prueba: una tarea, no una pregunta trampa
 
-**Pregunta (se copia desde la landing):**
+> **Cambio del 20 de octubre de 2026.** La versión anterior usaba una pregunta de "cuántos días" y una pregunta de reserva que pedía una sentencia con cita textual, esperando que la IA fallara en frío. Ese día, GPT-6 Astra con búsqueda respondió la de reserva sin un error: T-377 de 2000 con los literales e) y f) del fundamento 4 textuales, la SU-166 de 1999 como fuente y la C-951 de 2014 con el condicionamiento del art. 32, todo verificado en la relatoría oficial. Claude y ChatGPT buscan en internet con citas en todos los planes. La prueba ya no depende de que el modelo se equivoque en derecho: muestra lo que ningún buscador encuentra, el criterio del abogado.
 
-> Un ciudadano radicó ante una entidad pública un derecho de petición pidiendo copia de un contrato. ¿Cuál es el término para responder, qué ocurre si la entidad no responde dentro de ese término y cuál es la fuente normativa exacta (ley, año y artículo)?
+**Mensaje central:** "La IA ya sabe buscar. Su criterio no está en internet."
+
+**Prueba del taller (se copia desde la landing y desde la diapositiva):**
+
+> Represento a EL CONTRATISTA. Revisa esta cláusula del contrato que nos enviaron para firmar: "EL CONTRATISTA responderá de manera ilimitada por todos los daños, directos o indirectos, que se deriven de la ejecución del contrato, y mantendrá indemne a LA CONTRATANTE frente a cualquier reclamación, sin límite de cuantía." ¿La acepto?
 
 | Sin cerebro: lo que suele pasar | Con cerebro: lo que debe pasar |
 |---|---|
-| Responde 30 o 20 días (Decreto 491 de 2020, sin vigencia desde la Ley 2207 de 2022) | 10 días para documentos e información (Ley 1755 de 2015, art. 14, num. 1) |
-| Cita el art. 14 de la Ley 1437 de 2011 sin mencionar que la Ley 1755 lo sustituyó | Si no responde, la petición se entiende aceptada y los documentos se entregan en los 3 días siguientes |
-| No distingue petición general, de documentos o de consulta | Advierte que los términos ampliados de 2020 ya no aplican |
-| No dice qué verificar | Cierra con "Verificación pendiente": conteo en días hábiles y festivos del año |
+| Responde con la práctica promedio, no con la del abogado | Aplica la tabla de posiciones de su skill de contratos: limitación de responsabilidad e indemnidad en [ROJO] |
+| Decide por el abogado o se queda en "depende" | Propone redacción alternativa y se detiene en YO DECIDO |
+| Cita sin enlace o no dice qué verificar | Cada cita con enlace oficial y cierre "Verificación pendiente" |
 
-`[VALIDAR]` Probar la pregunta en frío en Claude, ChatGPT, Gemini y un modelo local la semana anterior. Si los cuatro responden bien en frío, la demostración pierde fuerza: tener lista la **pregunta de reserva**: "Dame la sentencia de la Corte Constitucional que fijó el alcance del derecho de petición frente a entidades privadas, con número, año, magistrado ponente y la cita textual de la regla". Las preguntas que piden una sentencia específica con cita textual casi siempre producen al menos un dato inventado en frío; con el cerebro, la regla 3 obliga a decir "no tengo la fuente exacta".
+Cada tarea del catálogo trae su propia prueba (`TAREAS[].prueba`), así que quien no eligió contratos prueba con su primera tarea.
+
+### 6.13 bis Antes de pegar: revisa tu cuenta
+
+Verificado el 20 de octubre de 2026 en las páginas oficiales:
+
+| Cuenta | ¿Entrena con lo que subes? | Cómo apagarlo |
+|---|---|---|
+| Claude Free, Pro y Max | Sí, salvo que lo apagues | Configuración → Privacidad → «Help improve our AI models» |
+| ChatGPT Free, Go, Plus y Pro | Sí, por defecto | Configuración → Controles de datos → «Improve the model for everyone» |
+| Gemini personal | Sí, con «Keep Activity» activado (por defecto) | myactivity.google.com/product/gemini → «Keep Activity» |
+| Claude Team/Enterprise · ChatGPT Business/Enterprise | No | Nada que apagar |
+
+El pulgar arriba o abajo envía la conversación completa: Anthropic la guarda hasta 5 años y OpenAI puede entrenar con ella, aunque el entrenamiento esté apagado. Incógnito (Claude) y temporal (ChatGPT, Gemini) no entrenan.
+
+### 6.13 ter Skills instalables
+
+Cada tarea elegida sale también como skill: un ZIP cuya raíz es la carpeta de la skill con `SKILL.md` (frontmatter `name` en minúsculas con guiones, igual a la carpeta; `description` de máximo 200 caracteres). Se instala en Claude en Customize → Skills → «+» → «Create skill» → «Upload a skill», con «Code execution and file creation» activado; disponible en todos los planes, también el gratuito.
 
 ### 6.14 Micro-interacciones durante el Paso 1
 

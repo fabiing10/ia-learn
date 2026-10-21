@@ -8,7 +8,7 @@ import {
 } from './generator.js';
 import {
   AREAS, CONFIDENCIALIDAD, HERRAMIENTAS, INTRO_CARGA, PERFIL_LAURA, PERFIL_VACIO, ROLES,
-  RUTAS_CARGA, TAREAS, TONOS, PREGUNTA_PRUEBA,
+  RUTAS_CARGA, TAREAS, TONOS, PREGUNTA_PRUEBA, PRIVACIDAD,
 } from './catalog.js';
 import { PLAN, blockAfter, squash } from './plan.fixture.mjs';
 
@@ -90,6 +90,15 @@ test('system block rules 1–3 and 6–8 are the §6.10 template, verbatim', () 
     const rule = tpl.match(new RegExp(`${n}\\. .*?(?= ${n + 1}\\. |$)`))[0];
     assert.ok(s.includes(rule), `rule ${n}`);
   }
+});
+
+test('system block: official links instead of silence, and my positions before general practice', () => {
+  const s = sistemaBlock(laura());
+  assert.ok(s.includes('2. Fuentes: primero revisa 03_FUENTES.md. Si la regla no está allí y puedes buscar en internet, búscala en la fuente oficial'));
+  assert.ok(s.includes('Si no la abriste en una fuente oficial, márcala [NO VERIFICADO].'));
+  assert.ok(s.includes('3. Citas: cada sentencia, norma o artículo que cites lleva su enlace oficial.'));
+  assert.ok(s.includes('6. Procedimientos y criterio: para las tareas de 02_PLAYBOOK.md sigue sus pasos, aplica mis posiciones antes que la práctica general y detente en cada punto marcado YO DECIDO.'));
+  assert.ok(!s.includes('no tengo la fuente exacta'), 'the old rule told a searching model to stop');
 });
 
 test('system block without name, role or areas drops those clauses cleanly', () => {
@@ -192,7 +201,9 @@ test('01_LINEAS_ROJAS: confidentiality rules of the chosen level, AI limits and 
     }
   }
   const rojas = buildFiles(laura())['01_LINEAS_ROJAS.md'];
-  assert.ok(section(rojas, 'Lo que la IA nunca hace').includes('no tengo la fuente exacta'));
+  const nunca = section(rojas, 'Lo que la IA nunca hace');
+  assert.ok(nunca.includes('Cita una sentencia, norma o artículo sin su enlace oficial'));
+  assert.ok(nunca.includes('Usa la práctica general cuando 02_PLAYBOOK.md tiene mi posición.'));
   const marco = section(rojas, 'Marco colombiano');
   for (const s of ['T-323 de 2024', 'PCSJA24-12243', 'Ley 1581 de 2012', 'Decreto 1377 de 2013', 'Art. 74 C.P.', 'Ley 1123 de 2007']) {
     assert.ok(marco.includes(s), s);
@@ -262,6 +273,8 @@ test('03_FUENTES: official sources, seed per chosen area behind the warning, ent
   assert.ok(section(fu, 'Alertas de vigencia').includes('Ley 2207 de 2022'));
   assert.ok(section(fu, 'Alertas de vigencia').includes('art. 5 del Decreto 491 de 2020 derogado por la Ley 2207 de 2022'));
   assert.ok(fu.includes('- Tipo: norma | sentencia'), 'template');
+  assert.ok(!fu.includes('biblioteca cerró'), 'models search now: 03 is what you verified, read first');
+  assert.ok(fu.includes('La IA lo consulta primero, antes de buscar.'));
 });
 
 test('03_FUENTES: the verified entry carries the user name, or blanks when there is none', () => {
@@ -280,6 +293,8 @@ test('04_VERIFICACION: protocol §8.1, levels §8.2, red team §8.3 and the log'
   assert.ok(ve.includes(blockAfter('### 8.2 Los tres niveles').trim()));
   assert.ok(ve.includes(blockAfter('### 8.3 Red team con un segundo modelo')));
   assert.ok(ve.trimEnd().endsWith('| Fecha | Tarea | IA usada | Qué verifiqué | Resultado |\n|---|---|---|---|---|'));
+  assert.ok(ve.includes('exige el enlace oficial de cada cita y ábrelo'));
+  assert.ok(ve.includes('«Ya lo verifiqué» también es una respuesta de la IA'));
   assert.equal(ve, buildFiles(PERFIL_VACIO)['04_VERIFICACION.md'], '04 is fixed');
 });
 
@@ -301,9 +316,27 @@ test('README: name, how to load (chosen tools first), maintain, levels, three ac
   assert.ok(rm.includes('03_FUENTES.md solo crece con lo que abriste y verificaste'));
   for (let n = 0; n <= 5; n++) assert.ok(section(rm, 'Niveles de madurez').includes(`Nivel ${n}`));
   const acciones = section(rm, 'Tres acciones para mañana');
-  for (const s of ['Carga tu cerebro en un Proyecto de Claude o ChatGPT, o en Gemini.', 'escribe la corrección en `02_PLAYBOOK.md` o `03_FUENTES.md`', 'abre `04_VERIFICACION.md`. Cinco minutos.']) {
+  for (const s of ['Revisa tu cuenta: apaga el entrenamiento con tus datos', 'e instala tus skills en Claude', 'escribe la corrección en `02_PLAYBOOK.md` o `03_FUENTES.md`', 'abre `04_VERIFICACION.md`']) {
     assert.ok(acciones.includes(s), s);
   }
+  // Before pasting: what each account does with your data, your tools first.
+  const cuenta = section(rm, 'Antes de pegar: revisa tu cuenta');
+  for (const x of PRIVACIDAD) {
+    assert.ok(cuenta.includes(`### ${x.label}`), x.id);
+    for (const k of ['entrena', 'apagar', 'ojo', 'fuente']) assert.ok(cuenta.includes(x[k]), `${x.id}.${k}`);
+  }
+  assert.ok(cuenta.indexOf('### Claude') < cuenta.indexOf('### Gemini'));
+  const gemFirst = section(buildFiles({ ...laura(), herramientas: ['gemini'] })['README.md'], 'Antes de pegar: revisa tu cuenta');
+  assert.ok(gemFirst.indexOf('### Gemini') < gemFirst.indexOf('### Claude'), 'chosen tools first');
+  assert.ok(rm.indexOf('## Antes de pegar') < rm.indexOf('## Cómo cargarlo'));
+  // Skills: one ZIP per chosen task, with the install steps.
+  const sk = section(rm, 'Instala tus skills en Claude');
+  for (const id of PERFIL_LAURA.tareas) {
+    const t = TAREAS.find((x) => x.id === id);
+    assert.ok(sk.includes(`\`${t.skill.slug}.zip\``), id);
+  }
+  assert.ok(sk.includes('«Upload a skill»'));
+  assert.ok(section(buildFiles({ ...laura(), tareas: [] })['README.md'], 'Instala tus skills en Claude').includes('Elige tareas en tu perfil'));
   assert.ok(rm.includes('no constituyen asesoría jurídica'));
   assert.ok(buildFiles(PERFIL_VACIO)['README.md'].startsWith('# Mi cerebro jurídico\n'));
 });
@@ -348,4 +381,13 @@ test('the catalog covers every option of §6.3', () => {
   assert.equal(CONFIDENCIALIDAD.length, 3);
   assert.equal(TONOS.length, 3);
   assert.ok(PLAN.includes(PREGUNTA_PRUEBA));
+});
+
+test('every task has its own test prompt; the contracts one is the workshop test', () => {
+  for (const t of TAREAS) {
+    assert.ok(typeof t.prueba === 'string' && t.prueba.length > 40, t.id);
+    assert.doesNotMatch(t.prueba, /\{\{|undefined/, t.id);
+  }
+  assert.equal(TAREAS.find((t) => t.id === 'contratos').prueba, PREGUNTA_PRUEBA);
+  assert.ok(PREGUNTA_PRUEBA.includes('Represento a EL CONTRATISTA'));
 });

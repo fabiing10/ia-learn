@@ -124,7 +124,7 @@
             <ol class="toc__sub">
               <li><a href="#modelo-de-lenguaje">Qué es un modelo de lenguaje</a></li>
               <li><a href="#mesa-de-trabajo">La mesa de trabajo</a></li>
-              <li><a href="#biblioteca">La biblioteca cerró</a></li>
+              <li><a href="#biblioteca">Corte y búsqueda</a></li>
               <li><a href="#alucinacion">Alucinación</a></li>
               <li><a href="#capas">Sistema, contexto y mensaje</a></li>
               <li><a href="#memoria">Proyectos, Gems y skills</a></li>
@@ -149,8 +149,10 @@
           <li>
             <a href="#construir-y-cargar"><span class="toc__n">3</span><span>Construirlo y cargarlo</span></a>
             <ol class="toc__sub">
+              <li><a href="#antes-de-pegar">Antes de pegar: revisa tu cuenta</a></li>
               <li><a href="#rutas-de-carga">Rutas de carga por herramienta</a></li>
-              <li><a href="#pregunta-de-prueba">Pregunta de prueba</a></li>
+              <li><a href="#instalar-skills">Instala tus skills en Claude</a></li>
+              <li><a href="#pregunta-de-prueba">La prueba: una tarea tuya</a></li>
             </ol>
           </li>
           <li>
@@ -159,7 +161,7 @@
               <li><a href="#obsidian">Obsidian · la bóveda</a></li>
               <li><a href="#notebooklm">Gemini Notebook · el lector</a></li>
               <li><a href="#nivel-3">Nivel 3 · la IA con manos</a></li>
-              <li><a href="#grilla">Grilla de modelos</a></li>
+              <li><a href="#grilla">La misma tarea, dos chats</a></li>
             </ol>
           </li>
           <li>
@@ -383,8 +385,8 @@
           <nav class="inside" aria-label="Capítulos del playbook">
             <a href="#fundamentos"><span class="inside__n">1</span><span class="inside__t">Los fundamentos en 10 minutos</span><span class="inside__d">Doce conceptos de IA, cada uno con una analogía jurídica y un diagrama.</span></a>
             <a href="#tu-cerebro"><span class="inside__n">2</span><span class="inside__t">Tu cerebro jurídico</span><span class="inside__d">Los cinco archivos, el cerebro de Laura, cómo se mantiene y los niveles 0 a 5.</span></a>
-            <a href="#construir-y-cargar"><span class="inside__n">3</span><span class="inside__t">Construirlo y cargarlo</span><span class="inside__d">La landing paso a paso, rutas de carga por herramienta y la pregunta de prueba.</span></a>
-            <a href="#escalar"><span class="inside__n">4</span><span class="inside__t">Escalarlo</span><span class="inside__d">Bóveda de Obsidian, Gemini Notebook (antes NotebookLM), la IA con manos (MCP) y la grilla de modelos.</span></a>
+            <a href="#construir-y-cargar"><span class="inside__n">3</span><span class="inside__t">Construirlo y cargarlo</span><span class="inside__d">La landing paso a paso, revisa tu cuenta, rutas de carga, tus skills instaladas y la prueba con una tarea tuya.</span></a>
+            <a href="#escalar"><span class="inside__n">4</span><span class="inside__t">Escalarlo</span><span class="inside__d">Bóveda de Obsidian, Gemini Notebook (antes NotebookLM), la IA con manos (MCP) y la misma tarea en dos chats.</span></a>
             <a href="#verificar"><span class="inside__n">5</span><span class="inside__t">Verificar siempre</span><span class="inside__d">El protocolo A · B · C como lista de chequeo, el red team y el registro.</span></a>
             <a href="#marco-colombiano"><span class="inside__n">6</span><span class="inside__t">Marco colombiano</span><span class="inside__d">T-323 de 2024, PCSJA24-12243, Ley 1581, art. 74 C.P., Ley 1123 y ABA 512.</span></a>
             <a href="#recursos"><span class="inside__n">7</span><span class="inside__t">Recursos</span><span class="inside__d">Fuentes oficiales para verificar, referencias y el ecosistema.</span></a>
@@ -395,7 +397,7 @@
             <h3 id="como-usarlo">Cómo usar este playbook</h3>
             <ul>
               <li><strong>Copia y adapta.</strong> Cada prompt, configuración y plantilla tiene un botón <em>Copiar</em>. Lo que aparece resaltado, como <span class="fill">&lt;usuario&gt;</span>, lo cambias por lo tuyo.</li>
-              <li><strong>Marca tu avance.</strong> El protocolo de verificación y la grilla de modelos guardan lo que marques o escribas en este navegador. Nadie más lo ve y nada se envía a ningún servidor.</li>
+              <li><strong>Marca tu avance.</strong> El protocolo de verificación y la comparación de dos chats guardan lo que marques en este navegador. Nadie más lo ve y nada se envía a ningún servidor.</li>
               <li><strong>Guárdalo.</strong> El botón <em>Descargar PDF</em> de arriba genera una versión para imprimir o tener sin internet.</li>
               <li><strong>Comparte una sección.</strong> Cada título tiene un ícono de enlace: tócalo y se copia la dirección directa a esa parte.</li>
               <li><strong>Empieza por el final si tienes prisa.</strong> Las <a href="#manana">tres acciones para mañana</a> caben en diez minutos.</li>
@@ -427,10 +429,11 @@
               <dt>Definición</dt>
               <dd>Un modelo de lenguaje (LLM) es un sistema que, dado un texto, calcula cuál es la continuación más probable, palabra por palabra (en realidad, <em>token</em> por <em>token</em>).</dd>
               <dd>No consulta una base de datos; completa patrones aprendidos de una cantidad enorme de texto.</dd>
+              <dd>Las herramientas de chat le agregan búsqueda: Claude y ChatGPT buscan en internet en todos sus planes cuando hace falta y citan con enlaces (verificado el 20 de octubre de 2026). Sin búsqueda, estima; con búsqueda, consulta.</dd>
             </dl>
             <div class="analogy">
               <p class="analogy__k">Analogía jurídica</p>
-              <p>Es el pasante más leído del mundo, que estudió toda la biblioteca hasta cierta fecha, pero <strong>no tiene el expediente en la mano</strong>. Si le preguntas «¿cuál es el término para responder un derecho de petición?», responde con lo que más veces leyó, no con lo que hoy rige.</p>
+              <p>Es el pasante más leído del mundo, que estudió toda la biblioteca hasta cierta fecha, pero <strong>no tiene el expediente en la mano</strong>. Si le preguntas «¿cuál es el término para responder un derecho de petición?» y no busca, responde con lo que más veces leyó, no con lo que hoy rige. Si busca, va a la fuente. Lo que no encuentra en ningún lado es tu criterio.</p>
             </div>
             <figure class="fig" data-fig="probs" aria-labelledby="cap-probs">
               <p class="fig__label">Entrada</p>
@@ -447,14 +450,14 @@
             </figure>
             <div class="implica">
               <p class="implica__k">Qué implica para tu cerebro</p>
-              <p>El modelo no «sabe»: estima. Si tu fuente de verdad está en la mesa (en el contexto), la estimación se alinea con ella. Si no está, completa con lo que leyó. Por eso existe <span class="file">03_FUENTES.md</span>.</p>
+              <p>Sin búsqueda, el modelo no «sabe»: estima. Con búsqueda, consulta la fuente y la cita. Pero tu criterio, tus procedimientos y tus documentos no están en ninguna fuente pública: ahí sigue estimando, y elige la respuesta promedio. Por eso existen <span class="file">02_PLAYBOOK.md</span> y <span class="file">03_FUENTES.md</span>.</p>
             </div>
             <div class="table-wrap">
               <table class="rtable rtable--stack myth">
                 <caption>Mito vs. realidad</caption>
                 <thead><tr><th scope="col">Mito</th><th scope="col">Realidad</th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">«La IA busca la respuesta en internet»</th><td>Por defecto no busca nada; genera texto. Algunas herramientas agregan búsqueda, pero el modelo base no la tiene.</td></tr>
+                  <tr><th scope="row">«La IA busca la respuesta en internet»</th><td>Claude y ChatGPT buscan en internet en todos sus planes y citan con enlaces (verificado el 20 oct. 2026); el modelo base, sin esa herramienta, no busca. Lo que ningún buscador encuentra es tu criterio, tus procedimientos y tus documentos.</td></tr>
                   <tr><th scope="row">«Si lo dice con seguridad, es cierto»</th><td>El tono seguro es un patrón aprendido, no una medida de certeza.</td></tr>
                   <tr><th scope="row">«Es como Google»</th><td>Google indexa documentos reales; un LLM produce texto nuevo que <em>parece</em> un documento real.</td></tr>
                 </tbody>
@@ -533,20 +536,20 @@
           </section>
 
           <!-- 1.3 -->
-          <section class="concept" id="biblioteca" aria-labelledby="t-c3" data-title="La biblioteca cerró">
+          <section class="concept" id="biblioteca" aria-labelledby="t-c3" data-title="Corte y búsqueda">
             <header class="concept__head">
               <p class="concept__n">1.3</p>
-              <h3 class="concept__title" id="t-c3">Entrenamiento, corte de conocimiento e inferencia</h3>
-              <p class="concept__alias">La biblioteca cerró</p>
+              <h3 class="concept__title" id="t-c3">Corte de conocimiento y búsqueda</h3>
+              <p class="concept__alias">La biblioteca cerró, pero ahora sale a buscar</p>
             </header>
             <dl class="kv kv--def">
               <dt>Definición</dt>
               <dd>El modelo se <em>entrena</em> una vez con textos hasta una fecha (el <em>corte de conocimiento</em>) y después solo <em>infiere</em>: responde con lo que aprendió.</dd>
-              <dd>No se actualiza solo.</dd>
+              <dd>No se actualiza solo. Lo que la herramienta le agrega es la búsqueda: con ella consulta la web y cita; sin ella (modo rápido, modelos locales, o cuando decide no buscar) responde con lo que aprendió.</dd>
             </dl>
             <div class="analogy">
               <p class="analogy__k">Analogía jurídica</p>
-              <p>La biblioteca cerró en una fecha. Todo lo que se publicó después (una ley que restableció términos, una sentencia de unificación) <strong>no está en los estantes</strong>, salvo que tú lo pongas sobre la mesa.</p>
+              <p>La biblioteca cerró en una fecha. Lo que se publicó después (una ley que restableció términos, una sentencia de unificación) <strong>no está en los estantes</strong>. Con búsqueda, el pasante sale a la relatoría y lo trae. Lo que no encuentra ni en los estantes ni en internet es lo tuyo: tu criterio, tus plantillas, tu expediente.</p>
             </div>
             <figure class="fig" data-fig="biblioteca" aria-labelledby="cap-biblioteca">
               <p class="fig__label">El derecho de petición, en la biblioteca del modelo</p>
@@ -565,16 +568,16 @@
                   <span class="tl__books" aria-hidden="true"><i style="height: 34%"></i></span>
                   <span class="tl__vol">una ley corta, poco comentada</span>
                 </li>
-                <li class="tl__ev tl__ev--cut" data-a="drop"><span class="tl__year">corte del modelo</span><span class="tl__name">La biblioteca cierra aquí</span><span class="tl__shutter">Cerrado</span></li>
-                <li class="tl__ev tl__ev--now" data-a="fade"><span class="tl__year">hoy</span><span class="tl__name">Tú preguntas por el término vigente</span><span class="tl__desc">Lo que salió después del corte no está en los estantes.</span></li>
+                <li class="tl__ev tl__ev--cut" data-a="drop"><span class="tl__year">corte del modelo</span><span class="tl__name">Sin búsqueda, la biblioteca cierra aquí</span><span class="tl__shutter">Cerrado</span></li>
+                <li class="tl__ev tl__ev--now" data-a="fade"><span class="tl__year">hoy</span><span class="tl__name">Tú preguntas por el término vigente</span><span class="tl__desc">Sin búsqueda, lo posterior al corte no está en los estantes. Con búsqueda, lo consulta y lo cita.</span></li>
               </ol>
               </div>
-              <p class="tl-note" data-a="fade">Si el modelo leyó mucho sobre el Decreto 491 (pandemia, miles de textos) y poco sobre la Ley 2207 (una ley corta, poco comentada), su «patrón más probable» puede ser el término ampliado.</p>
+              <p class="tl-note" data-a="fade">Sin búsqueda, si el modelo leyó mucho sobre el Decreto 491 (pandemia, miles de textos) y poco sobre la Ley 2207 (una ley corta, poco comentada), su «patrón más probable» puede ser el término ampliado. Con búsqueda, consulta la norma vigente y te da el enlace.</p>
               <figcaption class="fig__cap" id="cap-biblioteca">Ilustrativo: el alto de las pilas de libros representa cuánto se escribió sobre cada norma, no una cifra medida.</figcaption>
             </figure>
             <div class="implica">
               <p class="implica__k">Qué implica para tu cerebro</p>
-              <p>Tu <span class="file">03_FUENTES.md</span> es la actualización que el modelo no tiene. Una línea que diga «art. 5 del Decreto 491 de 2020 derogado por la Ley 2207 de 2022» corrige el patrón en todos los modelos a la vez.</p>
+              <p>Tu <span class="file">03_FUENTES.md</span> es lo que ya abriste y verificaste: la IA lo consulta primero, antes de buscar, y una línea como «art. 5 del Decreto 491 de 2020 derogado por la Ley 2207 de 2022» sirve en todos los modelos, también en los que no buscan. Lo que no está en ningún estante ni en internet, tus posiciones y tus pasos, va en <span class="file">02_PLAYBOOK.md</span>.</p>
             </div>
           </section>
 
@@ -592,7 +595,7 @@
             </dl>
             <div class="analogy">
               <p class="analogy__k">Analogía jurídica</p>
-              <p>Una cita de sentencia tiene una forma muy estable: <em>«Corte Constitucional, Sentencia T-### de 20##, M.P. Nombre Apellido»</em>. El modelo aprendió la <strong>forma</strong> perfectamente. Cuando le pides una sentencia sobre un tema de nicho, produce la forma y rellena los huecos con lo probable: un número plausible, un magistrado real, una fecha coherente. El resultado parece verdadero y no existe.</p>
+              <p>Una cita de sentencia tiene una forma muy estable: <em>«Corte Constitucional, Sentencia T-### de 20##, M.P. Nombre Apellido»</em>. El modelo aprendió la <strong>forma</strong> perfectamente. Cuando le pides una sentencia sobre un tema de nicho y no busca, produce la forma y rellena los huecos con lo probable: un número plausible, un magistrado real, una fecha coherente. El resultado parece verdadero y no existe.</p>
             </div>
             <figure class="fig" data-fig="cita" aria-labelledby="cap-cita">
               <div class="cite">
@@ -603,26 +606,27 @@
               </div>
               <ol class="hflow">
                 <li class="hq" data-a="rise">
-                  <span class="hq__q">¿Tiene el dato en el contexto?</span>
-                  <span class="hq__b hq__b--good"><b>Sí</b> lo cita (y aun así, verifica)</span>
+                  <span class="hq__q">¿Buscó en una fuente oficial?</span>
+                  <span class="hq__b hq__b--good"><b>Sí</b> cita con enlace <em>← ábrelo</em></span>
                   <span class="hq__b"><b>No</b> sigue abajo</span>
                 </li>
                 <li class="hq" data-a="rise">
-                  <span class="hq__q">¿Reconoce que no sabe?</span>
-                  <span class="hq__b hq__b--good"><b>A veces</b> «no tengo la fuente exacta» <em>← lo que queremos</em></span>
-                  <span class="hq__b"><b>Casi siempre</b> no lo reconoce y sigue abajo</span>
+                  <span class="hq__q">¿Le exigiste el enlace?</span>
+                  <span class="hq__b hq__b--good"><b>Sí</b> «No encontré la fuente» <em>← lo que queremos</em></span>
+                  <span class="hq__b"><b>No</b> sigue abajo</span>
                 </li>
                 <li class="hq hq--end" data-a="rise">
                   <span class="hq__q">Completa el patrón</span>
-                  <span class="hq__b hq__b--bad">«Sentencia T-### de 20##, M.P. …» <em>← existe la forma, no el fondo</em></span>
+                  <span class="hq__b hq__b--bad">«Sentencia T-### de 20##, M.P. …» <em>← en modo rápido o sin búsqueda</em></span>
                 </li>
               </ol>
-              <figcaption class="fig__cap" id="cap-cita">El modelo llena cada hueco con un valor plausible: la forma es perfecta y el fondo no existe. Aquí los números quedan enmascarados porque cualquier número verosímil puede coincidir con una sentencia real que no resuelve lo que pediste. Por eso la regla 3 del ADN obliga a decir «no tengo la fuente exacta».</figcaption>
+              <figcaption class="fig__cap" id="cap-cita">El modelo llena cada hueco con un valor plausible: la forma es perfecta y el fondo no existe. Aquí los números quedan enmascarados porque cualquier número verosímil puede coincidir con una sentencia real que no resuelve lo que pediste. Por eso la regla 3 del ADN exige el enlace oficial de cada cita y, si no encuentra el dato, que lo diga en lugar de completarlo.</figcaption>
             </figure>
             <div class="prose">
               <h4>Datos duros</h4>
               <ul>
                 <li>Más de 2.200 decisiones judiciales en el mundo, desde 2023, documentan contenido alucinado por IA; más de 1.200 son de 2026 (Damien Charlotin, <em>AI Hallucination Cases</em>, consultada el 19 oct. 2026).</li>
+                <li>Los modelos con búsqueda fallan mucho menos en esto. El 20 de octubre de 2026, GPT-6 Astra respondió bien una pregunta que pedía sentencia, ponente y cita textual, y lo comprobamos en la relatoría oficial. El riesgo no desapareció: se movió al modo rápido o sin búsqueda, a la cita que nadie abrió y a lo que no está en internet.</li>
                 <li><em>Mata v. Avianca</em> (S.D.N.Y., 22 jun. 2023): sanción de USD 5.000 a abogados que presentaron seis sentencias inexistentes generadas por ChatGPT. Es el caso fundacional.</li>
                 <li><em>Chakma v. Sushi Katsuei</em> (S.D.N.Y., 19 may. 2026): la abogada reconoció haber usado la IA de LexisNexis sin revisar. <strong>La herramienta no sustituye el protocolo.</strong></li>
                 <li>Colombia: en la Sentencia T-323 de 2024 (2 ago. 2024, M.P. Juan Carlos Cortés González), la Corte Constitucional revisó el caso de un juez de tutela de segunda instancia que usó ChatGPT 3.5 para ampliar la motivación de un fallo ya decidido. No prohibió la IA: fijó doce principios, entre ellos transparencia, responsabilidad, no sustitución de la racionalidad humana y seriedad y verificación (<a href="#marco-colombiano">capítulo 6</a>).</li>
@@ -633,8 +637,8 @@
               <p class="implica__k">Qué implica para tu cerebro</p>
               <p>Tres defensas, en orden. Ninguna sola basta:</p>
               <ol>
-                <li>Regla de sistema «nunca inventes citas; si no tienes el dato exacto, dilo» (en <span class="file">00_ADN.md</span>).</li>
-                <li>Fuente de verdad en la mesa (<span class="file">03_FUENTES.md</span>).</li>
+                <li>Regla de sistema «cada cita con su enlace oficial; si no encuentras el dato, dilo» (en <span class="file">00_ADN.md</span>).</li>
+                <li>Lo que ya verificaste, en la mesa (<span class="file">03_FUENTES.md</span>).</li>
                 <li>Protocolo de verificación antes de usar (<span class="file">04_VERIFICACION.md</span>, <a href="#verificar">capítulo 5</a>).</li>
               </ol>
             </div>
@@ -644,7 +648,7 @@
                 <thead><tr><th scope="col">Mito</th><th scope="col">Realidad</th></tr></thead>
                 <tbody>
                   <tr><th scope="row">«Las herramientas jurídicas no alucinan»</th><td>Reducen el riesgo, no lo eliminan: hay casos documentados de citas falsas con herramientas jurídicas especializadas.</td></tr>
-                  <tr><th scope="row">«Le pido que no invente y ya»</th><td>Ayuda, pero sin fuente en la mesa el modelo sigue completando patrones.</td></tr>
+                  <tr><th scope="row">«Le pido que no invente y ya»</th><td>Ayuda, pero sin búsqueda ni fuente en la mesa el modelo sigue completando patrones. Pídele el enlace oficial de cada cita: eso sí lo puedes comprobar.</td></tr>
                   <tr><th scope="row">«Si verifico una cita, verifiqué todo»</th><td>Verifica también que la sentencia diga lo que la IA dice (ratio vs. obiter) y que siga vigente.</td></tr>
                 </tbody>
               </table>
@@ -706,7 +710,7 @@
             <dl class="kv kv--def">
               <dt>Definición</dt>
               <dd>Un chat olvida al cerrarse, y las herramientas ofrecen tres formas de persistencia: espacios con instrucciones y archivos fijos, memoria y archivos tuyos que vuelves a cargar.</dd>
-              <dd>Los espacios son los Proyectos de Claude y de ChatGPT, las Gems de Gemini (que en cuentas personales pasan a ser skills en noviembre de 2026) y los GPT personalizados que ya existan; la memoria son notas que la herramienta guarda de lo que le dijiste.</dd>
+              <dd>Los espacios son los Proyectos de Claude y de ChatGPT, las Gems de Gemini (que en cuentas personales pasan solas a ser skills en noviembre de 2026) y los GPT personalizados que ya existan (se retiran el 11 de diciembre de 2026); la memoria son notas que la herramienta guarda de lo que le dijiste.</dd>
             </dl>
             <div class="analogy">
               <p class="analogy__k">Analogía jurídica</p>
@@ -738,8 +742,8 @@
                 <thead><tr><th scope="col">Herramienta</th><th scope="col">Dónde van las instrucciones</th><th scope="col">Dónde van los archivos</th><th scope="col">Disponibilidad</th></tr></thead>
                 <tbody>
                   <tr><th scope="row">Claude · Proyectos</th><td>«Establecer instrucciones del proyecto»</td><td>Base de conocimiento, botón «+»</td><td>Proyectos en el plan gratuito, hasta 5. En Pro y Max se está desplegando una beta de Proyectos: las pantallas pueden variar.</td></tr>
-                  <tr><th scope="row">ChatGPT · Proyectos</th><td>Menú ••• del proyecto → «Project settings»</td><td>Archivos del proyecto (hasta 5 en el plan gratuito: los cinco .md caben)</td><td>Proyectos en el plan gratuito. Las cuentas personales ya no pueden crear GPT personalizados nuevos; OpenAI los está retirando.</td></tr>
-                  <tr><th scope="row">Gemini · Gems</th><td>Instrucciones de la Gem</td><td>Conocimiento → Agregar archivos</td><td>Gems en cuentas personales hasta noviembre de 2026; después Google las convierte en skills. <span class="verify" title="Dato que cambia con frecuencia: confírmalo en la herramienta.">verificar<span class="verify__id"> {{VERIFICAR_GEMS_2026}}</span></span></td></tr>
+                  <tr><th scope="row">ChatGPT · Proyectos</th><td>Menú ••• del proyecto → «Project settings»</td><td>Archivos del proyecto (hasta 5 en el plan gratuito: los cinco .md caben)</td><td>Proyectos en el plan gratuito. Las cuentas personales ya no pueden crear GPT personalizados nuevos, y todos se retiran el 11 de diciembre de 2026 (pasan a plugins).</td></tr>
+                  <tr><th scope="row">Gemini · Gems</th><td>Instrucciones de la Gem</td><td>Conocimiento → Agregar archivos</td><td>Gems en cuentas personales hasta noviembre de 2026; después Google las convierte automáticamente en skills.</td></tr>
                   <tr><th scope="row">Copilot (M365)</th><td>Primer mensaje / instrucciones</td><td>SharePoint / OneDrive</td><td>Según licencia de la organización <span class="verify" title="Dato que cambia con frecuencia: confírmalo en la herramienta.">verificar<span class="verify__id"> {{VERIFICAR_LICENCIA_COPILOT}}</span></span></td></tr>
                   <tr><th scope="row">Modelo local (Ollama, LM Studio)</th><td>«System prompt»</td><td>Primer mensaje o carpeta local</td><td>Gratuito; depende del equipo</td></tr>
                 </tbody>
@@ -981,6 +985,7 @@ Cuándo: &lt;situación que la activa&gt;
             <div class="implica">
               <p class="implica__k">Qué implica para tu cerebro</p>
               <p>Cada tarea que más tiempo te quita se vuelve una skill de tu <span class="file">02_PLAYBOOK.md</span>: la landing genera una por cada tarea que elijas, hasta tres. Las diez del catálogo están en <a href="#catalogo-de-skills">el capítulo 2</a>.</p>
+              <p>Y además las puedes instalar: Claude acepta skills como archivos (una carpeta con un <code>SKILL.md</code>, en un ZIP) y las usa solo cuando aparece la tarea, en cualquier chat. La landing te da un ZIP por cada una de tus tareas: <a href="#instalar-skills">instala tus skills</a>.</p>
             </div>
           </section>
 
@@ -1055,8 +1060,8 @@ Cuándo: &lt;situación que la activa&gt;
               </ol>
             </div>
             <div class="prose">
-              <h4>Qué se ve en la grilla de modelos</h4>
-              <p>Con el cerebro cargado, las cuatro respuestas convergen en el fondo (10 días, art. 14 del CPACA, sustituido por la Ley 1755 de 2015) y difieren en forma: extensión, orden, si abren con la conclusión, cuánto explican la vigencia. Sin el cerebro, pueden divergir en el fondo. Haz tu propia comparación con la <a href="#grilla">grilla</a>.</p>
+              <h4>Qué se ve con la misma tarea en dos chats</h4>
+              <p>Con el cerebro cargado, la IA sigue tus pasos, aplica tus posiciones, se detiene donde tú decides y cierra con lo que debes verificar, sea cual sea el modelo. Sin el cerebro, responde con la práctica promedio. Haz tu propia comparación: <a href="#grilla">la misma tarea, dos chats</a>.</p>
             </div>
           </section>
 
@@ -1071,7 +1076,7 @@ Cuándo: &lt;situación que la activa&gt;
                 <thead><tr><th scope="col">Concepto</th><th scope="col">Lo que produce en tu cerebro</th></tr></thead>
                 <tbody>
                   <tr><th scope="row"><a href="#modelo-de-lenguaje">1.1</a> Modelo de lenguaje: predice el patrón más probable</th><td>Lleva a la alucinación (1.4), al corte de conocimiento (1.3) y a la mesa de trabajo (1.2).</td></tr>
-                  <tr><th scope="row"><a href="#biblioteca">1.3</a> Corte de conocimiento: la biblioteca cerró</th><td><span class="file">03_FUENTES.md</span>, la actualización que el modelo no tiene.</td></tr>
+                  <tr><th scope="row"><a href="#biblioteca">1.3</a> Corte de conocimiento y búsqueda</th><td><span class="file">03_FUENTES.md</span>, lo que ya verificaste y la IA consulta antes de buscar; tu criterio va en <span class="file">02_PLAYBOOK.md</span>.</td></tr>
                   <tr><th scope="row"><a href="#alucinacion">1.4</a> Alucinación: completa el patrón sin dato</th><td><span class="file">04_VERIFICACION.md</span> (protocolo antes de firmar) y la regla «nunca inventes citas» de <span class="file">00_ADN.md</span>.</td></tr>
                   <tr><th scope="row"><a href="#capas">1.5</a> Capas: sistema · contexto · mensaje</th><td>El bloque de instrucciones de <span class="file">00_ADN.md</span>.</td></tr>
                   <tr><th scope="row"><a href="#ingenieria-de-contexto">1.7</a> Ingeniería de contexto: escribir el manual una vez</th><td>Las skills de <span class="file">02_PLAYBOOK.md</span> (1.10), que con agentes y MCP (1.9) llegan al nivel 3: Claude con la bóveda.</td></tr>
@@ -1170,11 +1175,11 @@ Cuándo: &lt;situación que la activa&gt;
 
 <span class="h">REGLAS</span>
 1. Jurisdicción por defecto: Colombia. Si usas derecho comparado o doctrina extranjera, márcalo como tal.
-2. Fuente de verdad: antes de afirmar una regla jurídica, revisa 03_FUENTES.md. Si la fuente no está allí, responde igual pero marca la afirmación con [NO VERIFICADO].
-3. Citas: nunca inventes sentencias, radicados, magistrados ponentes, fechas ni artículos. Si no tienes el dato exacto, di "no tengo la fuente exacta" en lugar de completarlo.
+2. Fuentes: primero revisa 03_FUENTES.md. Si la regla no está allí y puedes buscar en internet, búscala en la fuente oficial (relatorías de las altas cortes, SUIN-Juriscol, Secretaría del Senado). Si no la abriste en una fuente oficial, márcala [NO VERIFICADO].
+3. Citas: cada sentencia, norma o artículo que cites lleva su enlace oficial. Nunca inventes sentencias, radicados, magistrados ponentes, fechas ni artículos; si no encuentras el dato exacto, dilo en lugar de completarlo.
 4. Confidencialidad: asume que todo lo que te paso viene anonimizado con códigos (CLIENTE-01, CONTRAPARTE-01). Si ves nombres, cédulas o NIT reales, detente y pídeme que los reemplace antes de continuar.
 5. Tono: claro y didáctico; explica cada término técnico la primera vez que aparece. Formato: resumen en tres líneas al inicio y luego el desarrollo con subtítulos.
-6. Procedimientos: para las tareas descritas en 02_PLAYBOOK.md sigue sus pasos y detente en cada punto marcado YO DECIDO.
+6. Procedimientos y criterio: para las tareas de 02_PLAYBOOK.md sigue sus pasos, aplica mis posiciones antes que la práctica general y detente en cada punto marcado YO DECIDO.
 7. Cierre obligatorio: termina toda respuesta jurídica con una sección "Verificación pendiente" que liste lo que debo confirmar antes de usarla.
 8. Nunca presentes un borrador como definitivo. Yo firmo, radico y decido.</pre>
               <p class="code__note">Las ocho reglas son las mismas para todos; cambian la descripción del rol, las áreas, el nombre y las reglas 4 (confidencialidad) y 5 (tono), según tu perfil.</p>
@@ -1293,7 +1298,7 @@ Cuándo: &lt;situación que la activa&gt;
             <figure class="fig" data-fig="stair" aria-labelledby="cap-stair">
               <ol class="stair">
                 <li class="step step--0" style="--n: 0" data-a="rise"><span class="step__n">0</span><span class="step__t">Chat en frío, sin contexto</span><span class="step__tag">donde está la mayoría hoy</span></li>
-                <li class="step step--you" style="--n: 1" data-a="rise"><span class="you" data-a="pop">Tú, hoy</span><span class="step__n">1</span><span class="step__t">Los cinco archivos cargados en un Proyecto, Gem o chat</span><a class="step__tag" href="#construir-y-cargar">ejercicio</a></li>
+                <li class="step step--you" style="--n: 1" data-a="rise"><span class="you" data-a="pop">Tú, hoy</span><span class="step__n">1</span><span class="step__t">Tus archivos en un Proyecto y tus skills instaladas</span><a class="step__tag" href="#construir-y-cargar">ejercicio</a></li>
                 <li class="step step--demo" style="--n: 2" data-a="rise"><span class="step__n">2</span><span class="step__t">Bóveda: Obsidian con casos, fuentes, plantillas y consultas de términos</span><a class="step__tag" href="#obsidian">demo N1</a></li>
                 <li class="step step--demo" style="--n: 3" data-a="rise"><span class="step__n">3</span><span class="step__t">Lector que no inventa: Gemini Notebook (antes NotebookLM) con las fuentes oficiales, cita al pasaje</span><a class="step__tag" href="#notebooklm">demo N2</a></li>
                 <li class="step step--demo" style="--n: 4" data-a="rise"><span class="step__n">4</span><span class="step__t">IA con manos: lee y escribe en la bóveda vía MCP; consulta fuentes oficiales en vivo</span><a class="step__tag" href="#nivel-3">demo N3</a></li>
@@ -1350,15 +1355,15 @@ Cuándo: &lt;situación que la activa&gt;
             <li class="flow__step">
               <span class="flow__n">5</span>
               <div class="flow__content">
-                <h4 class="flow__title">Haz la pregunta de prueba</h4>
-                <p>Cópiala desde la landing (<a href="/cerebro/#prueba">prueba</a>) o desde <a href="#pregunta-de-prueba">este playbook</a> y hazla en ese chat con cerebro. Si alcanzas, hazla también en un chat limpio, sin cerebro, y compara: fondo, fuente citada y cierre «Verificación pendiente».</p>
+                <h4 class="flow__title">Haz la prueba con una tarea tuya</h4>
+                <p>Cópiala desde la landing (<a href="/cerebro/#prueba">prueba</a>) o desde <a href="#pregunta-de-prueba">este playbook</a> y hazla en ese chat con cerebro. Si alcanzas, hazla también en un chat temporal o incógnito, sin cerebro, y compara: ¿aplicó tus posiciones?, ¿se detuvo donde decides tú?, ¿te dijo qué verificar?</p>
               </div>
             </li>
             <li class="flow__step">
               <span class="flow__n">6</span>
               <div class="flow__content">
                 <h4 class="flow__title">Déjalo fijo</h4>
-                <p>Descarga el .zip o los .md y cárgalos en un Proyecto, una Gem o tu bóveda para no pegarlos cada vez. Las <a href="#rutas-de-carga">rutas de carga</a> están abajo.</p>
+                <p>Descarga el .zip o los .md y cárgalos en un Proyecto, una Gem o tu bóveda para no pegarlos cada vez, e instala tus skills en Claude. Las <a href="#rutas-de-carga">rutas de carga</a> y <a href="#instalar-skills">cómo instalar las skills</a> están abajo. Antes, <a href="#antes-de-pegar">revisa tu cuenta</a>.</p>
               </div>
             </li>
           </ol>
@@ -1404,9 +1409,31 @@ Cuándo: &lt;situación que la activa&gt;
             <p class="msg__note">La confirmación en tres líneas es deliberada: obliga al modelo a procesar el paquete antes de la primera pregunta y te muestra, en 10 segundos, si la carga funcionó. <b>Reemplaza los «...» por el contenido de cada archivo</b>, o usa el botón de la landing, que ya lo hace.</p>
           </div>
 
-          <section class="concept" id="rutas-de-carga" aria-labelledby="t-rutas" data-title="Rutas de carga">
+          <section class="concept" id="antes-de-pegar" aria-labelledby="t-cuenta" data-title="Antes de pegar">
             <header class="concept__head">
               <p class="concept__n">3.1</p>
+              <h3 class="concept__title" id="t-cuenta">Antes de pegar: revisa tu cuenta</h3>
+              <p class="concept__alias">Dos minutos, en el celular</p>
+            </header>
+            <p class="next">En las cuentas personales, lo que subes puede usarse para entrenar modelos. Revisa tu cuenta antes de pegar tu cerebro, y mucho antes de subir un documento de un cliente. Tus herramientas salen primero.</p>
+            <div class="table-wrap">
+              <table class="rtable rtable--stack privacy">
+                <caption>Qué hace cada cuenta con lo que subes</caption>
+                <thead><tr><th scope="col">Cuenta</th><th scope="col">¿Entrena con lo que subes?</th><th scope="col">Cómo evitarlo</th><th scope="col">Ojo</th></tr></thead>
+                <tbody data-privacidad>
+                  <tr><th scope="row">Claude · Free, Pro y Max</th><td>Sí, salvo que lo apagues.</td><td>Configuración → Privacidad → «Help improve our AI models»: desactívalo.<span class="cell-sub"><b>Sin rastro:</b> Chat incógnito (ícono de fantasma al abrir un chat nuevo fuera de un proyecto): nunca se usa para entrenar.</span></td><td>El pulgar arriba o abajo envía la conversación completa y Anthropic la guarda hasta 5 años, aunque hayas apagado el entrenamiento. <a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training" rel="noopener">Fuente oficial</a></td></tr>
+                  <tr><th scope="row">ChatGPT · Free, Go, Plus y Pro</th><td>Sí, por defecto.</td><td>Configuración → Controles de datos → «Improve the model for everyone»: desactívalo.<span class="cell-sub"><b>Sin rastro:</b> Chat temporal (Nuevo chat → Temporal): no se usa para entrenar y se borra en 30 días.</span></td><td>El pulgar arriba o abajo permite que OpenAI entrene con esa conversación, aunque hayas apagado la opción. <a href="https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance" rel="noopener">Fuente oficial</a></td></tr>
+                  <tr><th scope="row">Gemini · cuenta personal</th><td>Sí, mientras «Keep Activity» esté activado; viene activado para mayores de 18 años.</td><td>myactivity.google.com/product/gemini → «Keep Activity»: desactívalo.<span class="cell-sub"><b>Sin rastro:</b> Chat temporal: se guarda hasta 72 horas y no se usa para entrenar.</span></td><td>Revisores humanos leen algunas conversaciones y las guardan hasta 3 años, aunque borres tu actividad. Google pide no escribir nada confidencial. <a href="https://support.google.com/gemini/answer/13594961" rel="noopener">Fuente oficial</a></td></tr>
+                  <tr><th scope="row">Claude Team o Enterprise · ChatGPT Business o Enterprise</th><td>No.</td><td>Nada que apagar. El administrador puede desactivar los pulgares de calificación.</td><td>Es la opción para trabajar con documentos de clientes, siempre anonimizados y con el contrato de la firma. <a href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training" rel="noopener">Fuente oficial</a></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="next small" data-privacidad-verificada>Verificado el 20 de octubre de 2026 en las páginas oficiales de Anthropic, OpenAI y Google. Los nombres de los menús están en inglés; en la interfaz en español aparecen traducidos.</p>
+          </section>
+
+          <section class="concept" id="rutas-de-carga" aria-labelledby="t-rutas" data-title="Rutas de carga">
+            <header class="concept__head">
+              <p class="concept__n">3.2</p>
               <h3 class="concept__title" id="t-rutas">Rutas de carga por herramienta</h3>
               <p class="concept__alias">Para no pegarlo cada vez</p>
             </header>
@@ -1421,62 +1448,131 @@ Cuándo: &lt;situación que la activa&gt;
             </div>
           </section>
 
-          <section class="concept" id="pregunta-de-prueba" aria-labelledby="t-prueba" data-title="Pregunta de prueba">
+          <section class="concept" id="instalar-skills" aria-labelledby="t-instalar" data-title="Instala tus skills">
             <header class="concept__head">
-              <p class="concept__n">3.2</p>
-              <h3 class="concept__title" id="t-prueba">La pregunta de prueba y qué esperar</h3>
-              <p class="concept__alias">Con cerebro y sin cerebro</p>
+              <p class="concept__n">3.3</p>
+              <h3 class="concept__title" id="t-instalar">Instala tus skills en Claude</h3>
+              <p class="concept__alias">Del archivo a una habilidad que Claude usa sola</p>
             </header>
+            <dl class="kv kv--def">
+              <dt>Qué es</dt>
+              <dd>Una skill instalada es la misma skill de tu <span class="file">02_PLAYBOOK.md</span> empaquetada como archivo: una carpeta con un <code>SKILL.md</code> (nombre, descripción y pasos) dentro de un ZIP. Un ZIP por skill.</dd>
+              <dd>Claude la usa sola cuando aparece la tarea, en cualquier chat, sin que pegues nada. Cada skill lleva tus reglas: tu tono, tu confidencialidad, cada cita con su enlace oficial, el punto YO DECIDO y el cierre «Verificación pendiente».</dd>
+            </dl>
+            <div class="prose">
+              <p>Los ZIP salen de tu perfil: descárgalos en la página del curso, en <a href="/cerebro/#cargar">Cargar</a>. Luego:</p>
+            </div>
+            <ol class="flow" data-instalar>
+              <li class="flow__step"><span class="flow__n">1</span><div class="flow__content"><p>En Claude, Configuración → Capacidades: activa «Code execution and file creation». Las skills lo necesitan.</p></div></li>
+              <li class="flow__step"><span class="flow__n">2</span><div class="flow__content"><p>Customize → Skills → botón «+» → «Create skill» → «Upload a skill».</p></div></li>
+              <li class="flow__step"><span class="flow__n">3</span><div class="flow__content"><p>Sube el ZIP de la skill tal como lo descargaste, sin descomprimirlo.</p></div></li>
+              <li class="flow__step"><span class="flow__n">4</span><div class="flow__content"><p>Actívala en la lista. Claude la usa sola cuando aparece la tarea, en cualquier chat.</p></div></li>
+            </ol>
+            <p class="next small" data-instalar-nota>Disponible en todos los planes de Claude, también el gratuito. En Team y Enterprise puedes compartirla con tu equipo o publicarla para toda la organización. Verificado el 20 de octubre de 2026.</p>
+            <div class="table-wrap">
+              <table class="rtable rtable--stack">
+                <caption>Las diez skills instalables</caption>
+                <thead><tr><th scope="col">Skill y archivo</th><th scope="col">Cuándo la usa Claude</th></tr></thead>
+                <tbody data-skills-zip>
+                  <tr><th scope="row">Revisión de contratos con semáforo<code class="cell-file">revision-de-contratos.zip</code></th><td>Revisa contratos o cláusulas con mi semáforo de posiciones (verde, amarillo, rojo), propone redacción para lo rojo y se detiene en YO DECIDO. Úsala al revisar o negociar.</td></tr>
+                  <tr><th scope="row">Investigación de jurisprudencia<code class="cell-file">investigacion-de-jurisprudencia.zip</code></th><td>Busca jurisprudencia colombiana en las relatorías oficiales y la entrega en una tabla con enlace por fila; distingue ratio de obiter. Úsala al investigar una línea.</td></tr>
+                  <tr><th scope="row">Borrador de demanda o contestación<code class="cell-file">borrador-de-demanda.zip</code></th><td>Arma el esqueleto de una demanda o contestación según la norma procesal, con [PENDIENTE] donde falten datos, y se detiene antes de la estrategia. Úsala al preparar un escrito.</td></tr>
+                  <tr><th scope="row">Derechos de petición y PQRS<code class="cell-file">derechos-de-peticion.zip</code></th><td>Clasifica un derecho de petición o PQRS, identifica el término aplicable, revisa la competencia y propone una respuesta de fondo; se detiene en YO DECIDO.</td></tr>
+                  <tr><th scope="row">Ficha de expediente<code class="cell-file">ficha-de-expediente.zip</code></th><td>Arma la ficha de un expediente anonimizado: partes por códigos, actuaciones, términos que corren, pruebas y riesgos, cada dato con su folio. Úsala al revisar un expediente.</td></tr>
+                  <tr><th scope="row">Cálculo y vigilancia de términos<code class="cell-file">calculo-de-terminos.zip</code></th><td>Calcula un término procesal explicando el conteo día por día y deja una fila para el calendario; pide confirmar festivos y vacancia judicial. Úsala al contar un término.</td></tr>
+                  <tr><th scope="row">Due diligence por bloques<code class="cell-file">due-diligence.zip</code></th><td>Organiza una due diligence por bloques y produce la matriz de hallazgos con documento, página y severidad. Úsala al revisar un data room.</td></tr>
+                  <tr><th scope="row">Concepto jurídico<code class="cell-file">concepto-juridico.zip</code></th><td>Redacta un concepto jurídico con estructura fija: problema, marco, análisis, conclusión, riesgos y lo que falta confirmar. Úsala cuando un cliente pide un concepto.</td></tr>
+                  <tr><th scope="row">Explicarle al cliente<code class="cell-file">explicar-al-cliente.zip</code></th><td>Traduce una decisión o un documento técnico para el cliente: correo de seis líneas y explicación en lenguaje claro, sin prometer resultados. Úsala al comunicar algo.</td></tr>
+                  <tr><th scope="row">De la providencia al contenido<code class="cell-file">providencia-a-contenido.zip</code></th><td>Convierte una providencia o norma completa en una ficha y tres formatos de contenido, con la cita completa y el aviso de que no es asesoría. Úsala al publicar.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="concept" id="pregunta-de-prueba" aria-labelledby="t-prueba" data-title="La prueba">
+            <header class="concept__head">
+              <p class="concept__n">3.4</p>
+              <h3 class="concept__title" id="t-prueba">La prueba: una tarea tuya</h3>
+              <p class="concept__alias">La misma tarea, con cerebro y sin cerebro</p>
+            </header>
+            <p class="next">No le preguntes a la IA un dato que puede buscar. Dale una tarea donde la respuesta depende de ti: tus posiciones, tus pasos, dónde se detiene. Esta es la del taller, con el semáforo de contratos de Laura.</p>
             <div class="msg" data-copy-scope>
               <div class="msg__head">
-                <p class="msg__title">Pregunta de prueba</p>
+                <p class="msg__title">La prueba del taller · contratos</p>
                 <button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
               </div>
-              <p class="msg__body" data-copy-src data-catalog="PREGUNTA_PRUEBA">Un ciudadano radicó ante una entidad pública un derecho de petición pidiendo copia de un contrato. ¿Cuál es el término para responder, qué ocurre si la entidad no responde dentro de ese término y cuál es la fuente normativa exacta (ley, año y artículo)?</p>
-              <p class="msg__note">Hazla primero en el chat <b>con</b> cerebro. Si alcanzas, hazla también en un chat limpio, <b>sin</b> cerebro, y compara.</p>
+              <p class="msg__body" data-copy-src data-catalog="PREGUNTA_PRUEBA">Represento a EL CONTRATISTA. Revisa esta cláusula del contrato que nos enviaron para firmar: "EL CONTRATISTA responderá de manera ilimitada por todos los daños, directos o indirectos, que se deriven de la ejecución del contrato, y mantendrá indemne a LA CONTRATANTE frente a cualquier reclamación, sin límite de cuantía." ¿La acepto?</p>
+              <p class="msg__note">Hazla primero en el chat <b>con</b> cerebro. Luego en un chat temporal (ChatGPT, Gemini) o incógnito (Claude), <b>sin</b> cerebro, y compara.</p>
             </div>
             <div class="vs">
               <div class="vs__item vs__item--bad">
                 <p class="vs__label">Sin cerebro: lo que suele pasar</p>
-                <ul data-comparacion="sin">
-                  <li>Responde 30 o 20 días (art. 5 del Decreto 491 de 2020, derogado por la Ley 2207 de 2022).</li>
-                  <li>Cita el art. 14 de la Ley 1437 de 2011 sin mencionar que la Ley 1755 lo sustituyó.</li>
-                  <li>No distingue petición general, de documentos o de consulta.</li>
-                  <li>No dice qué verificar.</li>
+                <ul data-esperado="sin">
+                  <li>Responde con la práctica promedio, no con la tuya.</li>
+                  <li>Decide por ti o se queda en «depende».</li>
+                  <li>Cita sin enlace o no dice qué verificar.</li>
                 </ul>
               </div>
               <div class="vs__item vs__item--good">
                 <p class="vs__label">Con cerebro: lo que debe pasar</p>
-                <ul data-comparacion="con">
-                  <li>10 días para documentos e información (art. 14, num. 1, del CPACA, sustituido por el art. 1 de la Ley 1755 de 2015).</li>
-                  <li>Si no responde, la petición se entiende aceptada y las copias se entregan en los 3 días siguientes.</li>
-                  <li>Advierte que los términos ampliados de 2020 ya no aplican.</li>
-                  <li>Cierra con «Verificación pendiente»: conteo en días hábiles y festivos del año.</li>
+                <ul data-esperado="con">
+                  <li>Sigue los pasos de tu skill, en orden.</li>
+                  <li>Aplica tus posiciones y tu formato, no la práctica general.</li>
+                  <li>Pide lo que falta en vez de inventarlo ([PENDIENTE]).</li>
+                  <li>Se detiene en YO DECIDO y te devuelve la decisión.</li>
+                  <li>Cada cita lleva su enlace oficial y cierra con «Verificación pendiente».</li>
                 </ul>
               </div>
             </div>
-            <div class="table-wrap">
-              <table class="rtable rtable--stack">
-                <caption>La misma pregunta, con cerebro, según el perfil</caption>
-                <thead><tr><th scope="col">Perfil</th><th scope="col">Qué debe responder</th></tr></thead>
-                <tbody>
-                  <tr><th scope="row">Laura · litigante</th><td>10 días, art. 14 del CPACA (Ley 1755 de 2015); explica la trampa del art. 5 del Decreto 491; resumen en tres líneas.</td></tr>
-                  <tr><th scope="row">Andrés · in-house</th><td>10 días; una línea de conclusión; riesgo: tutela por violación del derecho de petición.</td></tr>
-                  <tr><th scope="row">Marcela · sector público</th><td>10 días; si la entidad no es competente, traslado (art. 21: remitir y avisar en 5 días si la petición fue escrita, de inmediato si fue verbal); párrafos numerados.</td></tr>
-                </tbody>
-              </table>
-            </div>
             <div class="prose">
-              <h4 id="pregunta-de-reserva">Si tu IA responde bien sin cerebro: la pregunta de reserva</h4>
-              <p>Puede pasar que un modelo ya responda bien la pregunta de prueba en frío. Entonces prueba con esta. Las preguntas que piden una sentencia específica con cita textual casi siempre producen al menos un dato inventado en frío; con el cerebro, la regla 3 obliga a decir «no tengo la fuente exacta».</p>
+              <h4 id="prueba-por-tarea">La prueba de cada tarea</h4>
+              <p>Si no elegiste contratos, usa la prueba de una de tus tareas. Cada una pone a trabajar su skill: lo que cambia con cerebro es el procedimiento, no el dato.</p>
             </div>
-            <div class="msg" data-copy-scope>
-              <div class="msg__head">
-                <p class="msg__title">Pregunta de reserva</p>
-                <button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button>
-              </div>
-              <p class="msg__body" data-copy-src data-catalog="PREGUNTA_RESERVA">Dame la sentencia de la Corte Constitucional que fijó el alcance del derecho de petición frente a entidades privadas, con número, año, magistrado ponente y la cita textual de la regla.</p>
-              <p class="msg__note">Lo que esperas <b>con</b> cerebro: que diga «no tengo la fuente exacta» en vez de completar un número, un año o un magistrado. Si te da una sentencia, pásala por el <a href="#verificar">protocolo</a> antes de creerle.</p>
+            <ol class="qlist" data-pruebas>
+              <li class="q" data-copy-scope data-prueba="contratos">
+                <div class="q__head"><p class="q__n">Contratos</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                <p class="q__text" data-copy-src>Represento a EL CONTRATISTA. Revisa esta cláusula del contrato que nos enviaron para firmar: "EL CONTRATISTA responderá de manera ilimitada por todos los daños, directos o indirectos, que se deriven de la ejecución del contrato, y mantendrá indemne a LA CONTRATANTE frente a cualquier reclamación, sin límite de cuantía." ¿La acepto?</p>
+              </li>
+              <li class="q" data-copy-scope data-prueba="jurisprudencia">
+                <div class="q__head"><p class="q__n">Jurisprudencia</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                <p class="q__text" data-copy-src>Aplica mi skill de jurisprudencia: ¿qué ha dicho la Corte Constitucional sobre el derecho de petición ante particulares desde 2015? Quiero la tabla.</p>
+              </li>
+              <li class="q" data-copy-scope data-prueba="demandas">
+                <div class="q__head"><p class="q__n">Demandas y contestaciones</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                <p class="q__text" data-copy-src>CLIENTE-01 vendió mercancía a CONTRAPARTE-01 y tiene tres facturas vencidas sin pagar por $40 millones. Tengo las facturas y los correos de cobro. Prepárame el borrador de la demanda.</p>
+              </li>
+              <li class="q" data-copy-scope data-prueba="peticiones">
+                <div class="q__head"><p class="q__n">Peticiones y PQRS</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                <p class="q__text" data-copy-src>Recibí esta petición el 1 de octubre de 2026: "Solicito copia del contrato de prestación de servicios que la entidad firmó con CONTRATISTA-01." Prepárame la respuesta.</p>
+              </li>
+              <li class="q" data-copy-scope data-prueba="expedientes">
+                <div class="q__head"><p class="q__n">Expedientes</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                <p class="q__text" data-copy-src>Arma la ficha del expediente con estas actuaciones: [pega aquí dos o tres actuaciones de un caso tuyo, con fechas y con códigos en lugar de nombres].</p>
+              </li>
+              <li class="q" data-copy-scope data-prueba="terminos">
+                <div class="q__head"><p class="q__n">Términos</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                <p class="q__text" data-copy-src>En un proceso verbal (CGP) me notificaron por estado el lunes 19 de octubre de 2026 un auto que corre traslado por 10 días. ¿Cuándo vence?</p>
+              </li>
+              <li class="q" data-copy-scope data-prueba="duediligence">
+                <div class="q__head"><p class="q__n">Due diligence</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                <p class="q__text" data-copy-src>Vamos a revisar una SAS para una compra de acciones. Dame el checklist por bloques y la matriz de hallazgos vacía.</p>
+              </li>
+              <li class="q" data-copy-scope data-prueba="conceptos">
+                <div class="q__head"><p class="q__n">Conceptos</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                <p class="q__text" data-copy-src>Un cliente pregunta si puede terminar antes de tiempo un contrato de arrendamiento de local comercial. Hazme el concepto.</p>
+              </li>
+              <li class="q" data-copy-scope data-prueba="clientes">
+                <div class="q__head"><p class="q__n">Comunicación con clientes</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                <p class="q__text" data-copy-src>Explícale a CLIENTE-01, gerente de una pyme, que el juzgado negó la medida cautelar que pedimos y qué sigue.</p>
+              </li>
+              <li class="q" data-copy-scope data-prueba="contenido">
+                <div class="q__head"><p class="q__n">Contenido jurídico</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                <p class="q__text" data-copy-src>Convierte esta providencia en un hilo para LinkedIn: [pega aquí el texto completo de una providencia].</p>
+              </li>
+            </ol>
+            <div class="callout callout--teal">
+              <p class="callout__title">Por qué no una pregunta de «cuántos días»</p>
+              <p>Los modelos con búsqueda ya responden bien ese tipo de preguntas. El 20 de octubre de 2026 le pedimos a GPT-6 Astra una sentencia con número, ponente y cita textual, y lo comprobamos en la relatoría oficial: todo era correcto. Lo que no encuentra en internet es tu criterio. Por eso la prueba es una tarea.</p>
             </div>
           </section>
         </section>
@@ -1486,7 +1582,7 @@ Cuándo: &lt;situación que la activa&gt;
           <header class="chapter__head">
             <p class="chapter__kicker"><span class="chapter__n">4</span><span>Escalar</span></p>
             <h2 class="chapter__title" id="t-escalar">Escalarlo: del archivo a la bóveda</h2>
-            <p class="chapter__lede">El mismo paquete, tres niveles más arriba: la bóveda donde vive (Obsidian), el lector que no inventa (Gemini Notebook, antes NotebookLM) y la IA que escribe dentro de tu sistema (MCP). Más la grilla para comparar modelos con tus propios ojos.</p>
+            <p class="chapter__lede">El mismo paquete, tres niveles más arriba: la bóveda donde vive (Obsidian), el lector que no inventa (Gemini Notebook, antes NotebookLM) y la IA que escribe dentro de tu sistema (MCP). Más la prueba de dos chats para comparar con tus propios ojos.</p>
           </header>
 
           <div class="callout">
@@ -1496,7 +1592,7 @@ Cuándo: &lt;situación que la activa&gt;
 
           <div class="prose">
             <h3 id="cliente-01">El caso hilo: CLIENTE-01</h3>
-            <p>Un caso anonimizado que recorre los tres niveles. Es el mismo problema de la pregunta de prueba, así que ya tienes el contexto.</p>
+            <p>Un caso anonimizado que recorre los tres niveles: una petición de documentos que una entidad no respondió a tiempo.</p>
           </div>
           <div class="table-wrap">
             <table class="rtable rtable--stack">
@@ -1794,8 +1890,8 @@ FROM "20_FUENTES/Sentencias"
             </div>
             <ol class="qlist">
               <li class="q" data-copy-scope>
-                <div class="q__head"><p class="q__n">Pregunta 1 · la de prueba</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
-                <p class="q__text" data-copy-src data-catalog="PREGUNTA_PRUEBA">Un ciudadano radicó ante una entidad pública un derecho de petición pidiendo copia de un contrato. ¿Cuál es el término para responder, qué ocurre si la entidad no responde dentro de ese término y cuál es la fuente normativa exacta (ley, año y artículo)?</p>
+                <div class="q__head"><p class="q__n">Pregunta 1 · el término</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                <p class="q__text" data-copy-src>Un ciudadano radicó ante una entidad pública un derecho de petición pidiendo copia de un contrato. ¿Cuál es el término para responder, qué ocurre si la entidad no responde dentro de ese término y cuál es la fuente normativa exacta (ley, año y artículo)?</p>
                 <p class="q__expect"><b>Qué debe mostrar:</b> diez días, y cada afirmación con un número que lleva al párrafo exacto de la ley. No es memoria del modelo: es tu documento.</p>
               </li>
               <li class="q" data-copy-scope>
@@ -1809,8 +1905,8 @@ FROM "20_FUENTES/Sentencias"
                 <p class="q__expect"><b>Qué debe mostrar:</b> que tus cinco fuentes no lo resuelven. La regla está en el art. 33 de la Ley 1755 y en el art. 158 de la Ley 142 de 1994 (15 días hábiles, silencio positivo), y la Ley 142 no está en el cuaderno. La frase «no está en tus fuentes» vale más que cualquier respuesta elegante.</p>
               </li>
               <li class="q" data-copy-scope>
-                <div class="q__head"><p class="q__n">Pregunta 4 · la de reserva</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
-                <p class="q__text" data-copy-src data-catalog="PREGUNTA_RESERVA">Dame la sentencia de la Corte Constitucional que fijó el alcance del derecho de petición frente a entidades privadas, con número, año, magistrado ponente y la cita textual de la regla</p>
+                <div class="q__head"><p class="q__n">Pregunta 4 · una sentencia fuera de tus fuentes</p><button class="copy" type="button" data-copy><svg class="ico copy__i1" aria-hidden="true"><use href="#i-copy" /></svg><svg class="ico copy__i2" aria-hidden="true"><use href="#i-check" /></svg><span class="copy__label">Copiar</span></button></div>
+                <p class="q__text" data-copy-src>Dame la sentencia de la Corte Constitucional que fijó el alcance del derecho de petición frente a entidades privadas, con número, año, magistrado ponente y la cita textual de la regla</p>
                 <p class="q__expect"><b>Qué debe mostrar:</b> una respuesta que salga solo de tus fuentes. Si esa sentencia no está entre ellas, debe decir que no la encuentra en lugar de completar número, año y magistrado.</p>
               </li>
               <li class="q" data-copy-scope>
@@ -1947,44 +2043,39 @@ FROM "20_FUENTES/Sentencias"
             </div>
           </section>
 
-          <!-- 4.4 Grilla -->
-          <section class="concept" id="grilla" aria-labelledby="t-grilla" data-title="Grilla de modelos">
+          <!-- 4.4 La misma tarea, dos chats -->
+          <section class="concept" id="grilla" aria-labelledby="t-grilla" data-title="La misma tarea, dos chats">
             <header class="concept__head">
               <p class="concept__n">4.4</p>
-              <h3 class="concept__title" id="t-grilla">La grilla de modelos</h3>
+              <h3 class="concept__title" id="t-grilla">La misma tarea, dos chats</h3>
               <p class="concept__alias">Cambia el modelo, no el método</p>
             </header>
-            <p class="next">Misma pregunta de prueba, mismo cerebro cargado (camino universal, pegado como primer mensaje), en cuatro modelos: Claude, ChatGPT, Gemini y un modelo abierto local (Ollama o LM Studio). Primero sin cerebro, luego con cerebro. Llena las dos grillas con lo que veas.</p>
+            <p class="next">Hazla en casa con la IA que uses, o con dos distintas. La diferencia que buscas no es si la IA sabe la norma, sino si trabaja como tú.</p>
             <ol class="flow">
-              <li class="flow__step"><span class="flow__n">1</span><div class="flow__content"><h4 class="flow__title">Antes: sin cerebro</h4><p>Chat nuevo en cada modelo, sin nada cargado. Pega la <a href="#pregunta-de-prueba">pregunta de prueba</a> y anota en la grilla «antes».</p></div></li>
-              <li class="flow__step"><span class="flow__n">2</span><div class="flow__content"><h4 class="flow__title">Después: con cerebro</h4><p>Chat nuevo en cada modelo con tu cerebro pegado como primer mensaje (<a href="#camino-universal">camino universal</a>). Espera la confirmación de tres líneas, haz la misma pregunta y anota en la grilla «después».</p></div></li>
-              <li class="flow__step"><span class="flow__n">3</span><div class="flow__content"><h4 class="flow__title">Guarda la evidencia</h4><p>Toma captura de cada respuesta con la fecha. Los modelos cambian de comportamiento: lo que viste hoy puede no repetirse mañana.</p></div></li>
+              <li class="flow__step"><span class="flow__n">1</span><div class="flow__content"><h4 class="flow__title">Sin cerebro</h4><p>Abre un chat temporal (ChatGPT, Gemini) o incógnito (Claude), sin nada cargado. Pega <a href="#pregunta-de-prueba">la prueba</a> y guarda la respuesta.</p></div></li>
+              <li class="flow__step"><span class="flow__n">2</span><div class="flow__content"><h4 class="flow__title">Con cerebro</h4><p>Abre un chat en tu Proyecto, o pega tu cerebro como primer mensaje (<a href="#camino-universal">camino universal</a>). Espera la confirmación de tres líneas y pega la misma prueba.</p></div></li>
+              <li class="flow__step"><span class="flow__n">3</span><div class="flow__content"><h4 class="flow__title">Compara y guarda la evidencia</h4><p>Marca abajo lo que viste con cerebro. Toma captura de cada respuesta con la fecha: los modelos cambian de comportamiento.</p></div></li>
             </ol>
-            <div class="grid-block" data-grid="antes">
-              <div class="table-wrap">
-                <table class="rtable rtable--stack grid-fill">
-                  <caption>Antes · sin cerebro</caption>
-                  <thead><tr><th scope="col">Criterio</th><th scope="col">Claude</th><th scope="col">ChatGPT</th><th scope="col">Gemini</th><th scope="col">Local</th></tr></thead>
-                  <tbody data-grid-body></tbody>
-                </table>
+            <div class="checklist" data-checklist="dos-chats" data-done-msg="Tu cerebro hizo su trabajo.">
+              <div class="checklist__bar">
+                <p class="checklist__title" id="cl-dos-chats">Con cerebro, ¿lo hizo?</p>
+                <div class="checklist__meta">
+                  <span class="checklist__count" data-check-count aria-live="polite">0/5</span>
+                  <span class="meter" aria-hidden="true"><span class="meter__fill" data-check-fill></span></span>
+                  <button class="reset" type="button" data-check-reset><svg class="ico" aria-hidden="true"><use href="#i-reset" /></svg><span data-reset-label>Reiniciar</span></button>
+                </div>
               </div>
-            </div>
-            <div class="grid-block" data-grid="despues">
-              <div class="table-wrap">
-                <table class="rtable rtable--stack grid-fill">
-                  <caption>Después · con cerebro</caption>
-                  <thead><tr><th scope="col">Criterio</th><th scope="col">Claude</th><th scope="col">ChatGPT</th><th scope="col">Gemini</th><th scope="col">Local</th></tr></thead>
-                  <tbody data-grid-body></tbody>
-                </table>
-              </div>
-            </div>
-            <div class="grid-tools">
-              <span>Se guarda solo en este navegador.</span>
-              <button class="reset" type="button" data-grid-reset><svg class="ico" aria-hidden="true"><use href="#i-reset" /></svg><span data-reset-label>Borrar las grillas</span></button>
+              <ul class="checklist__items" aria-labelledby="cl-dos-chats" data-esperado-check>
+              <li><label class="check"><input type="checkbox" data-check="con-1" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Sigue los pasos de tu skill, en orden.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="con-2" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Aplica tus posiciones y tu formato, no la práctica general.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="con-3" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Pide lo que falta en vez de inventarlo ([PENDIENTE]).</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="con-4" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Se detiene en YO DECIDO y te devuelve la decisión.</span></span></label></li>
+              <li><label class="check"><input type="checkbox" data-check="con-5" /><span class="check__box" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="check__text"><span class="check__main">Cada cita lleva su enlace oficial y cierra con «Verificación pendiente».</span></span></label></li>
+              </ul>
             </div>
             <div class="prose">
               <h4 id="lectura-esperada">Lectura esperada</h4>
-              <p>Con cerebro, convergen en el fondo y divergen en la forma; el modelo local suele ser más corto y a veces omite la trampa (porque la regla 2 lo obliga a marcar <code>[NO VERIFICADO]</code> si no encuentra la fuente). Esa diferencia es el argumento: el método, la verificación, es el mismo para los cuatro.</p>
+              <p>Sin cerebro, la respuesta puede ser correcta y aun así no ser tuya: aplica la práctica promedio, decide por ti o se queda en «depende». Con cerebro, sigue tus pasos y se detiene donde decides tú, en Claude, en ChatGPT, en Gemini o en un modelo local. Esa es la diferencia: el método es el mismo para todos.</p>
             </div>
           </section>
         </section>
@@ -2004,7 +2095,7 @@ FROM "20_FUENTES/Sentencias"
               <li class="gate" data-a="rise"><span class="gate__ok" data-a="pop" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="gate__l">B</span><span class="gate__q">¿Dice eso?</span><span class="gate__how">Leer el aparte; ratio vs. obiter; cita textual.</span></li>
               <li class="gate" data-a="rise"><span class="gate__ok" data-a="pop" aria-hidden="true"><svg class="ico"><use href="#i-check" /></svg></span><span class="gate__l">C</span><span class="gate__q">¿Sigue vigente?</span><span class="gate__how">Modificaciones, derogatorias, unificaciones, inexequibilidad.</span></li>
             </ol>
-            <p class="abc-note" data-a="fade">Las sanciones documentadas en el mundo casi siempre fallaron en el nivel A. Los errores costosos sin sanción suelen fallar en el B o el C.</p>
+            <p class="abc-note" data-a="fade">Las sanciones documentadas en el mundo casi siempre fallaron en el nivel A. Los errores costosos sin sanción suelen fallar en el B o el C. Con una IA que busca, el nivel A es rápido: exige el enlace oficial de cada cita y ábrelo. «Ya lo verifiqué» también es una respuesta de la IA.</p>
             <figcaption class="fig__cap" id="cap-abc">Toda cita y toda norma que la IA te entregue pasa por las tres puertas, en orden.</figcaption>
           </figure>
 
@@ -2299,7 +2390,7 @@ Funciona porque los modelos tienen datos y sesgos distintos: lo que uno completa
             <div class="term" id="g-cerebro"><dt>Cerebro jurídico</dt><dd>Paquete de archivos de texto (ADN, líneas rojas, playbook, fuentes, verificación) que da contexto a cualquier IA.</dd><dd>Ver <a href="#cinco-archivos">los cinco archivos</a>.</dd></div>
             <div class="term" id="g-contexto"><dt>Contexto / ventana de contexto</dt><dd>Todo lo que el modelo puede ver en un momento dado; «la mesa de trabajo».</dd><dd>Ver <a href="#mesa-de-trabajo">1.2</a>.</dd></div>
             <div class="term" id="g-context-engineering"><dt>Context engineering</dt><dd>Diseñar una vez qué información, reglas y procedimientos ve el modelo, en lugar de redactar cada vez el prompt perfecto.</dd><dd>Ver <a href="#ingenieria-de-contexto">1.7</a>.</dd></div>
-            <div class="term" id="g-corte"><dt>Corte de conocimiento</dt><dd>Fecha hasta la cual el modelo leyó textos en su entrenamiento.</dd><dd>Ver <a href="#biblioteca">la biblioteca cerró</a>.</dd></div>
+            <div class="term" id="g-corte"><dt>Corte de conocimiento</dt><dd>Fecha hasta la cual el modelo leyó textos en su entrenamiento.</dd><dd>Con búsqueda, la herramienta consulta lo posterior en la web; sin búsqueda, no lo conoce.</dd><dd>Ver <a href="#biblioteca">corte y búsqueda</a>.</dd></div>
             <div class="term" id="g-dataview"><dt>Dataview / Templater</dt><dd>Complementos de Obsidian: consultas sobre metadatos de notas / plantillas que se llenan solas.</dd><dd>Ver <a href="#obsidian">Obsidian</a>.</dd></div>
             <div class="term" id="g-dots"><dt>DOTS</dt><dd>Marco propuesto: Datos, Orquestación, Tools/Skills, Supervisión.</dd><dd>Ver <a href="#dots">DOTS en una página</a>.</dd></div>
             <div class="term" id="g-embedding"><dt>Embedding</dt><dd>Representación numérica del significado de un texto; permite encontrar fragmentos «cercanos».</dd><dd>Ver <a href="#libro-abierto">1.8</a>.</dd></div>
@@ -2312,7 +2403,7 @@ Funciona porque los modelos tienen datos y sesgos distintos: lo que uno completa
             <div class="term" id="g-obsidian"><dt>Obsidian</dt><dd>Aplicación de notas sobre archivos Markdown locales, enlazables entre sí.</dd><dd>Ver <a href="#obsidian">Obsidian</a>.</dd></div>
             <div class="term" id="g-rag"><dt>RAG</dt><dd>Generación aumentada por recuperación: buscar fragmentos relevantes en tus fuentes y pasárselos al modelo.</dd><dd>Ver <a href="#libro-abierto">libro abierto</a>.</dd></div>
             <div class="term" id="g-red-team"><dt>Red team</dt><dd>Pedirle a un segundo modelo (o persona) que ataque una respuesta para encontrar errores.</dd><dd>Ver <a href="#red-team">red team</a>.</dd></div>
-            <div class="term" id="g-skill"><dt>Skill</dt><dd>Procedimiento reutilizable escrito en lenguaje natural: cuándo, entradas, pasos, puntos de parada, verificación.</dd><dd>Ver <a href="#skills">1.10</a> y <a href="#catalogo-de-skills">el catálogo</a>.</dd></div>
+            <div class="term" id="g-skill"><dt>Skill</dt><dd>Procedimiento reutilizable escrito en lenguaje natural: cuándo, entradas, pasos, puntos de parada, verificación.</dd><dd>En Claude se instala como archivo: una carpeta con un <code>SKILL.md</code>, en un ZIP. Ver <a href="#instalar-skills">instala tus skills</a>.</dd><dd>Ver <a href="#skills">1.10</a> y <a href="#catalogo-de-skills">el catálogo</a>.</dd></div>
             <div class="term" id="g-token"><dt>Token</dt><dd>Unidad mínima de texto que procesa el modelo (fragmento de palabra).</dd><dd>Ver <a href="#mesa-de-trabajo">1.2</a>.</dd></div>
             <div class="term" id="g-yo-decido"><dt>YO DECIDO</dt><dd>Punto de parada obligatorio en una skill: la decisión es del abogado.</dd><dd>Ver <a href="#skills">skills</a>.</dd></div>
           </dl>
@@ -2329,20 +2420,20 @@ Funciona porque los modelos tienen datos y sesgos distintos: lo que uno completa
           <ol class="actions">
             <li class="action">
               <span class="action__n" aria-hidden="true">1</span>
-              <h3 class="action__title">Carga tu cerebro en un Proyecto de Claude o ChatGPT, o en Gemini</h3>
+              <h3 class="action__title">Revisa tu cuenta: apaga el entrenamiento con tus datos</h3>
+              <p>Dos minutos, en el celular.</p>
+              <a href="#antes-de-pegar">Antes de pegar <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+            </li>
+            <li class="action">
+              <span class="action__n" aria-hidden="true">2</span>
+              <h3 class="action__title">Carga tu cerebro en un Proyecto de Claude o ChatGPT, o en Gemini, e instala tus skills en Claude</h3>
               <p>Diez minutos; dejas de pegarlo cada vez.</p>
               <a href="#rutas-de-carga">Rutas de carga <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a>
             </li>
             <li class="action">
-              <span class="action__n" aria-hidden="true">2</span>
-              <h3 class="action__title">La próxima vez que la IA se equivoque, escribe la corrección</h3>
-              <p>En <span class="file">02_PLAYBOOK.md</span> o <span class="file">03_FUENTES.md</span>. Así crece.</p>
-              <a href="#mantenimiento">Cómo se mantiene <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a>
-            </li>
-            <li class="action">
               <span class="action__n" aria-hidden="true">3</span>
-              <h3 class="action__title">Antes de firmar, radicar o enviar, abre <span class="file">04_VERIFICACION.md</span></h3>
-              <p>Cinco minutos. Una cita inventada cuesta mucho más.</p>
+              <h3 class="action__title">Cuando la IA se equivoque, corrige <span class="file">02_PLAYBOOK.md</span> o <span class="file">03_FUENTES.md</span></h3>
+              <p>Antes de firmar, radicar o enviar, abre <span class="file">04_VERIFICACION.md</span>. Cinco minutos.</p>
               <a href="#verificar">El protocolo <svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></a>
             </li>
           </ol>

@@ -2,9 +2,12 @@
 // the browser: profile → six files → copy, ZIP, vault. Nothing is sent anywhere.
 
 import {
-  COMPARACION_PRUEBA, PERFIL_LAURA, PERFIL_VACIO, PREGUNTA_PRUEBA, PREGUNTA_RESERVA, RUTAS_VERIFICADAS,
+  ESPERADO, INSTALAR_SKILL, PERFIL_LAURA, PERFIL_VACIO, PREGUNTA_PRUEBA, PRIVACIDAD_VERIFICADA, RUTAS_VERIFICADAS, TAREAS,
 } from '../shared/catalog.js';
-import { ARCHIVOS, CAMPOS, buildFiles, buildPaste, rutasOrdenadas, sistemaBlock } from '../shared/generator.js';
+import {
+  ARCHIVOS, CAMPOS, buildFiles, buildPaste, privacidadOrdenada, rutasOrdenadas, sistemaBlock,
+} from '../shared/generator.js';
+import { buildSkills, skillZip } from '../shared/skills.js';
 import { clearData, loadProfile, sameProfile, saveProfile } from '../shared/store.js';
 import { ARBOL_BOVEDA, CARPETA_BOVEDA, buildVaultZip } from '../shared/vault.js';
 import { zip } from '../shared/zip.js';
@@ -56,6 +59,7 @@ function apply(next, campos, { save = true } = {}) {
   const nextFiles = buildFiles(next);
   const changed = ARCHIVOS.filter((n) => nextFiles[n] !== files[n]);
   const toolsChanged = JSON.stringify(next.herramientas) !== JSON.stringify(profile.herramientas);
+  const tasksChanged = JSON.stringify(next.tareas) !== JSON.stringify(profile.tareas);
   profile = next;
   files = nextFiles;
   archivos.update(files, changed);
@@ -66,7 +70,14 @@ function apply(next, campos, { save = true } = {}) {
     mapa.cascade(campos, changed);
   }
   dockPulse(changed);
-  if (toolsChanged) renderRutas();
+  if (toolsChanged) {
+    renderRutas();
+    renderCuenta();
+  }
+  if (tasksChanged) {
+    renderSkills();
+    renderPruebas();
+  }
   if (save) persist();
   else persist.cancel();
   state();
@@ -172,16 +183,106 @@ $('rutas-tabs').addEventListener('keydown', (e) => {
 renderRutas();
 $('rutas-verificadas').textContent = RUTAS_VERIFICADAS;
 
-// ── Prueba ──
+// What each account does with the data, the user's tools first.
+function renderCuenta() {
+  $('cuenta-lista').innerHTML = privacidadOrdenada(profile)
+    .map(
+      (x) => `<li class="account__item${x.mia ? ' is-mine' : ''}">
+  <p class="account__name">${esc(x.label)}${x.mia ? '<span class="pill__mine">la usas</span>' : ''}</p>
+  <p class="account__train"><b>¿Entrena con lo que subes?</b> ${esc(x.entrena)}</p>
+  <p><b>Cómo apagarlo:</b> ${esc(x.apagar)}</p>
+  ${x.sinRastro ? `<p><b>Sin rastro:</b> ${esc(x.sinRastro)}</p>` : ''}
+  <p class="account__ojo"><b>Ojo:</b> ${esc(x.ojo)}</p>
+  <p class="account__src"><a href="${esc(x.fuente)}" target="_blank" rel="noopener">Fuente oficial</a></p>
+</li>`,
+    )
+    .join('');
+}
+renderCuenta();
+$('cuenta-verificada').textContent = PRIVACIDAD_VERIFICADA;
 
-$('pregunta').textContent = PREGUNTA_PRUEBA;
-$('pregunta-reserva').textContent = PREGUNTA_RESERVA;
-bindCopy($('copiar-pregunta'), () => PREGUNTA_PRUEBA, { done: 'Pregunta copiada', message: 'Pregunta copiada. Hazla en el chat con tu cerebro.' });
-bindCopy($('copiar-reserva'), () => PREGUNTA_RESERVA, { done: 'Copiada', message: 'Pregunta de reserva copiada.' });
-$('comparacion').innerHTML = COMPARACION_PRUEBA.map(
-  (r) =>
-    `<div class="compare__row" role="row"><p role="cell" class="compare__cell compare__cell--sin">${esc(r.sin)}</p><p role="cell" class="compare__cell compare__cell--con">${esc(r.con)}</p></div>`,
-).join('');
+// One ZIP per chosen task; the content is built with the profile at click time.
+function renderSkills() {
+  const skills = buildSkills(profile);
+  $('bajar-skills').innerHTML = skills.length
+    ? skills
+        .map(
+          (k) =>
+            `<li><button class="file-dl" type="button" data-skill="${esc(k.tarea)}"><span data-icon="download"></span><span class="file-dl__two"><code>${esc(k.carpeta)}.zip</code><small>${esc(k.titulo)}</small></span></button></li>`,
+        )
+        .join('')
+    : '<li class="dl__empty">Elige hasta tres tareas en tu perfil y aquí aparecen tus skills.</li>';
+  paintIcons($('bajar-skills'));
+}
+$('bajar-skills').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-skill]');
+  if (!b) return;
+  const k = buildSkills(profile).find((x) => x.tarea === b.dataset.skill);
+  if (!k) return;
+  downloadZip(`${k.carpeta}.zip`, skillZip(k));
+  toast(`Descargando ${k.carpeta}.zip. Súbelo a Claude sin descomprimirlo.`);
+});
+$('skills-pasos').innerHTML = INSTALAR_SKILL.pasos.map((x) => `<li>${inline(x)}</li>`).join('');
+$('skills-nota').textContent = INSTALAR_SKILL.nota;
+renderSkills();
+
+// ── Prueba: one test per chosen task (contracts when none is chosen) ──
+
+let prueba = null;
+function pruebas() {
+  const mine = TAREAS.filter((t) => profile.tareas?.includes(t.id));
+  return mine.length ? mine : TAREAS.filter((t) => t.id === 'contratos');
+}
+
+function renderPruebas() {
+  const list = pruebas();
+  if (!list.some((t) => t.id === prueba)) prueba = list[0].id;
+  const tabs = $('pruebas-tabs');
+  const hadFocus = tabs.contains(document.activeElement);
+  tabs.innerHTML = list
+    .map(
+      (t) =>
+        `<button class="pill" type="button" role="tab" id="prueba-${t.id}" data-prueba="${t.id}" aria-controls="pruebas-panel" aria-selected="${t.id === prueba}" tabindex="${t.id === prueba ? 0 : -1}">${esc(t.label)}</button>`,
+    )
+    .join('');
+  const t = list.find((x) => x.id === prueba);
+  $('pruebas-panel').setAttribute('aria-labelledby', `prueba-${t.id}`);
+  $('pregunta').textContent = t.prueba;
+  const nota = $('pregunta-nota');
+  const sinTareas = !profile.tareas?.length;
+  nota.hidden = !sinTareas;
+  nota.textContent = sinTareas ? 'No elegiste tareas: esta es la prueba de contratos, la del taller. Elige tus tareas y aparece la prueba de cada una.' : '';
+  if (hadFocus) $(`prueba-${prueba}`).focus();
+}
+
+$('pruebas-tabs').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-prueba]');
+  if (!b) return;
+  prueba = b.dataset.prueba;
+  renderPruebas();
+});
+$('pruebas-tabs').addEventListener('keydown', (e) => {
+  const ids = pruebas().map((t) => t.id);
+  const i = ids.indexOf(prueba);
+  const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: ids.length - 1 }[e.key];
+  if (to === undefined) return;
+  e.preventDefault();
+  prueba = ids[(to + ids.length) % ids.length];
+  renderPruebas();
+  $(`prueba-${prueba}`).focus();
+});
+renderPruebas();
+bindCopy($('copiar-pregunta'), () => $('pregunta').textContent || PREGUNTA_PRUEBA, {
+  done: 'Prueba copiada',
+  message: 'Prueba copiada. Hazla en el chat con tu cerebro.',
+});
+
+const filas = Math.max(ESPERADO.sin.length, ESPERADO.con.length);
+$('comparacion').innerHTML = Array.from({ length: filas }, (_, i) => {
+  const cell = (side, text) =>
+    `<p role="cell" class="compare__cell compare__cell--${side}${text ? '' : ' is-empty'}">${text ? esc(text) : ''}</p>`;
+  return `<div class="compare__row" role="row">${cell('sin', ESPERADO.sin[i])}${cell('con', ESPERADO.con[i])}</div>`;
+}).join('');
 
 // ── Bóveda ──
 

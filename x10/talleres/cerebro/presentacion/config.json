@@ -68,85 +68,9 @@
     "t323": "Fija doce principios para usar IA en la justicia; entre ellos, transparencia, responsabilidad, privacidad, no sustitución de la racionalidad humana, seriedad y verificación.",
     "pcsja": "Lineamientos para magistrados, jueces y empleados: verificación humana de todo resultado, informar el uso de IA y no ingresar datos confidenciales en herramientas que los retengan o reentrenen con ellos."
   },
-  "grilla": {
-    "modelos": [
-      "Claude",
-      "ChatGPT",
-      "Gemini",
-      "Modelo local"
-    ],
-    "antes": [
-      {
-        "respuesta": "{{SIN_CEREBRO_CLAUDE}}",
-        "ok": null
-      },
-      {
-        "respuesta": "{{SIN_CEREBRO_CHATGPT}}",
-        "ok": null
-      },
-      {
-        "respuesta": "{{SIN_CEREBRO_GEMINI}}",
-        "ok": null
-      },
-      {
-        "respuesta": "{{SIN_CEREBRO_LOCAL}}",
-        "ok": null
-      }
-    ],
-    "despues": [
-      {
-        "respuesta": "{{CON_CEREBRO_CLAUDE}}",
-        "ok": null
-      },
-      {
-        "respuesta": "{{CON_CEREBRO_CHATGPT}}",
-        "ok": null
-      },
-      {
-        "respuesta": "{{CON_CEREBRO_GEMINI}}",
-        "ok": null
-      },
-      {
-        "respuesta": "{{CON_CEREBRO_LOCAL}}",
-        "ok": null
-      }
-    ],
-    "criterios": [
-      "10 días",
-      "Ley 1755 de 2015, art. 14, num. 1",
-      "Trampa: Decreto 491 → Ley 2207",
-      "Silencio: aceptada, entrega en 3 días",
-      "Cierra con «Verificación pendiente»"
-    ],
-    "marcas": [
-      [
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      [
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      [
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      [
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    ]
+  "prueba": {
+    "modelo": "",
+    "sin": "",
+    "con": ""
   }
 }

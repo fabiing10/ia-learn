@@ -1,62 +1,31 @@
 <!-- BLOQUE 4 · Grilla de modelos y verificación (22–27 min) -->
 
-<section id="c18" data-block="4" data-bg-alpha="0.2" data-ctrl="cj-grid" data-grid="antes" class="cj-grid s-tight">
-  <p class="cj-kicker" data-in>Antes · la misma pregunta, sin cerebro</p>
-  <h2 class="t-h2" data-split="words">¿A quién le dio 20 o 30 días?</h2>
-  <div class="cj-grid__cols" data-cols></div>
-  <p class="cj-grid__why fragment">Son los términos del art. 5 del Decreto 491 de 2020, de la pandemia. La Ley 2207 de 2022 lo derogó. El modelo completó el patrón.</p>
+<section id="c18" data-block="4" data-bg-alpha="0.2" data-ctrl="cj-two" class="cj-two s-tight">
+  <p class="cj-kicker" data-in>La prueba <span class="cj-tag" data-two-tag>Lo que deben ver</span></p>
+  <h2 class="t-h2" data-split="words">La misma tarea, dos chats.</h2>
+  <div class="cj-two__cols">
+    <article class="cj-two__col cj-two__col--off" data-in>
+      <p class="cj-two__name">Sin cerebro</p>
+      <p class="cj-two__what">Un análisis general, correcto y prudente. Pero no conoce sus posiciones: decide por usted, con el criterio promedio.</p>
+      <blockquote class="cj-two__ex" data-prueba="sin"></blockquote>
+    </article>
+    <article class="cj-two__col cj-two__col--on" data-in>
+      <p class="cj-two__name">Con cerebro</p>
+      <ul class="cj-two__checks">
+        <li>Aplica sus posiciones</li>
+        <li>Clasifica en verde, amarillo o rojo</li>
+        <li>Propone otra redacción</li>
+        <li>Se detiene en YO DECIDO</li>
+        <li>Cierra con «Verificación pendiente»</li>
+      </ul>
+      <blockquote class="cj-two__ex" data-prueba="con"></blockquote>
+    </article>
+  </div>
+  <p class="cj-two__foot fragment">Los dos saben buscar. Solo uno sabe cómo trabaja usted.</p>
   <aside class="notes">
-    <p><strong>C18 · Antes</strong> · 22:00 · manos arriba · clic: la explicación</p>
-    <p>"Levante la mano a quien el chat sin cerebro le haya dicho veinte o treinta días." Pausa. Las celdas salen de config.json → grilla.antes: llénalas con las capturas de la semana del evento, nunca en vivo.</p>
-  </aside>
-</section>
-
-<section id="c19" data-block="4" data-bg-alpha="0.2" data-ctrl="cj-grid" data-grid="despues" class="cj-grid s-tight">
-  <p class="cj-kicker" data-in>Después · la misma pregunta, con cerebro</p>
-  <h2 class="t-h2" data-split="words">Cambia el modelo, no el método.</h2>
-  <div class="cj-grid__cols" data-cols></div>
-  <aside class="notes">
-    <p><strong>C19 · Después</strong> · 23:00</p>
-    <p>"Con el cerebro cargado, miren: los cuatro dicen diez días y citan la Ley 1755. Difieren en la forma, no en el fondo. Y los cuatro cierran con 'Verificación pendiente', porque así lo dice su ADN. El protocolo es el mismo para Claude, para ChatGPT, para Gemini y para el modelo que corre en mi portátil sin internet."</p>
-    <p>Las marcas salen de config.json → grilla.marcas (true, false o null). El modelo local suele ser más corto y a veces omite la trampa: es el argumento a favor de verificar.</p>
-  </aside>
-</section>
-
-<section id="c20" data-block="4" data-bg-alpha="0.2" data-ctrl="cj-why" class="cj-why s-tight">
-  <p class="cj-kicker" data-in>Por qué difieren</p>
-  <h2 class="t-h2" data-split="words">Tres razones. Una consecuencia.</h2>
-  <ol class="cj-why__cards" data-in="stagger">
-    <li>
-      <svg class="cj-why__art" viewBox="0 0 300 150" aria-hidden="true">
-        <g class="cj-shelf cj-shelf--a"><rect x="20" y="40" width="16" height="90" /><rect x="40" y="58" width="16" height="72" /><rect x="60" y="30" width="16" height="100" /><rect x="80" y="70" width="16" height="60" /><rect x="100" y="48" width="16" height="82" /></g>
-        <g class="cj-shelf cj-shelf--b"><rect x="170" y="62" width="16" height="68" /><rect x="190" y="36" width="16" height="94" /><rect x="210" y="80" width="16" height="50" /><rect x="230" y="52" width="16" height="78" /><rect x="250" y="66" width="16" height="64" /></g>
-        <path class="cj-why__line" d="M10 132 H290" />
-      </svg>
-      <b>Datos</b>
-      <span>Cada modelo leyó una biblioteca distinta, con un corte distinto.</span>
-    </li>
-    <li>
-      <div class="cj-why__dice" aria-hidden="true"><i style="--p: 75"></i><i style="--p: 44"></i><i style="--p: 25"></i><i style="--p: 19"></i></div>
-      <b>Muestreo</b>
-      <span>Elige entre continuaciones probables con algo de azar: la misma pregunta da respuestas distintas.</span>
-    </li>
-    <li>
-      <svg class="cj-why__art" viewBox="0 0 300 150" aria-hidden="true">
-        <rect class="cj-layer cj-layer--p" x="40" y="18" width="220" height="30" rx="8" />
-        <rect class="cj-layer" x="40" y="58" width="220" height="30" rx="8" />
-        <rect class="cj-layer cj-layer--me" x="40" y="98" width="220" height="30" rx="8" />
-        <text x="150" y="33">reglas del proveedor</text>
-        <text x="150" y="73">tus instrucciones</text>
-        <text x="150" y="113">tu pregunta</text>
-      </svg>
-      <b>Instrucciones</b>
-      <span>Cada proveedor pone sus propias reglas antes que las tuyas.</span>
-    </li>
-  </ol>
-  <p class="cj-why__so fragment">Por eso: <b>verificar siempre</b>, con el mismo protocolo para todos, y <b>red team</b> con un segundo modelo.</p>
-  <aside class="notes">
-    <p><strong>C20 · Por qué difieren</strong> · 24:00 · clic: la consecuencia</p>
-    <p>Tres razones: datos de entrenamiento y cortes distintos; muestreo, la "temperatura"; instrucciones de cada proveedor. "La diferencia se puede usar a favor: pídale a un segundo modelo que ataque la respuesta del primero."</p>
+    <p><strong>C18 · La misma tarea, dos chats</strong> · 22:00 · clic: la frase · 90 s · manos arriba: "¿a quién le aplicó su tabla?"</p>
+    <p>"Los dos chats saben buscar. Solo uno sabe cómo trabaja usted. Sin cerebro, la IA hace un buen análisis general y decide por usted. Con cerebro, aplica sus posiciones, marca en rojo lo que usted nunca firma, propone otra redacción y se detiene donde usted dijo: YO DECIDO."</p>
+    <p>Las capturas reales salen de config.json → prueba (sin, con, modelo). Mientras estén vacías, la diapositiva muestra solo lo que deben ver, marcado como expectativa, no como medición.</p>
   </aside>
 </section>
 
@@ -71,14 +40,15 @@
       <li><b>C</b><strong>¿Sigue vigente?</strong><span>Sin modificación, derogatoria ni unificación.</span></li>
     </ol>
   </div>
+  <p class="cj-gates__link fragment">Exija el enlace. Ábralo. <b>«Ya lo verifiqué» también es una respuesta de la IA.</b></p>
   <div class="cj-redteam fragment">
     <p class="cj-redteam__label">Red team con un segundo modelo</p>
     <p class="cj-redteam__prompt" data-copy-src="redteam">Actúa como la contraparte. Encuentra errores, citas dudosas, normas posiblemente derogadas y argumentos débiles en este texto. No lo reescribas; solo ataca. Marca cada hallazgo como [CITA], [VIGENCIA], [LÓGICA] o [HECHOS].</p>
     <button class="cj-copybtn" type="button" data-copy="redteam"><span class="cj-copybtn__label">Copiar</span></button>
   </div>
   <aside class="notes">
-    <p><strong>C21 · Verificar A·B·C</strong> · 25:00 · clic: el prompt de red team</p>
-    <p>"Las sanciones documentadas en el mundo casi siempre fallaron en el nivel A. Los errores costosos sin sanción suelen fallar en el B o el C." El protocolo completo está en 04_VERIFICACION.md y en el playbook (#verificar).</p>
+    <p><strong>C21 · Verificar A·B·C</strong> · 23:30 · clic 1: exija el enlace · clic 2: el prompt de red team</p>
+    <p>"Con los modelos que buscan, el nivel A cuesta un clic: exija el enlace y ábralo. Y ojo: si la IA le dice «ya lo verifiqué», eso también es una respuesta de la IA." Las sanciones documentadas en el mundo casi siempre fallaron en el nivel A. Los errores costosos sin sanción suelen fallar en el B o el C." El protocolo completo está en 04_VERIFICACION.md y en el playbook (#verificar).</p>
   </aside>
 </section>
 
@@ -97,7 +67,7 @@
   </div>
   <p class="cj-court__stamp"><span>YO DECIDO</span></p>
   <aside class="notes">
-    <p><strong>C22 · Lo que ya dijo la Corte</strong> · 26:00</p>
+    <p><strong>C22 · Lo que ya dijo la Corte</strong> · 25:00</p>
     <p>T-323 de 2024 (2 ago. 2024, M.P. Juan Carlos Cortés González): un juez de tutela de segunda instancia usó ChatGPT 3.5 para ampliar la motivación de un fallo ya decidido. La Corte no lo anuló, pero halló incumplidas la transparencia y la responsabilidad; fijó 12 principios y ordenó al CSJ expedir lineamientos en 4 meses. Así nació el Acuerdo PCSJA24-12243 (16 dic. 2024), que obliga a la Rama Judicial (magistrados, jueces y empleados), no a los litigantes: por eso no choca con que hoy usen planes gratuitos con datos anonimizados.</p>
     <p>"La Corte Constitucional ya lo dijo en la T-323: la IA puede ayudar, pero el que firma, decide y responde es el abogado. El cerebro no es para que la IA haga su trabajo. Es para que usted siga siendo el que decide, con menos tiempo perdido."</p>
   </aside>

@@ -33,6 +33,18 @@ defineCtrl('cj-count', {
   },
 });
 
+/* Trampa · every check lands with a burst; the closing line, a bigger one */
+defineCtrl('cj-trap', {
+  fragment(slide, frags, shown) {
+    if (!shown || state.lite) return;
+    const end = frags.some((f) => f.classList.contains('cj-trap__end'));
+    fire(end ? 0.9 : 0.35);
+    frags
+      .filter((f) => f.tagName === 'LI')
+      .forEach((li) => gsap.fromTo(li.querySelector('i'), { scale: 2.2, rotate: -20 }, { scale: 1, rotate: 0, duration: 0.5, ease: 'back.out(2.4)' }));
+  },
+});
+
 /* C02 · the system lights up when it appears */
 defineCtrl('cj-vs', {
   fragment(slide, frags, shown) {
@@ -145,32 +157,10 @@ defineCtrl('cj-table', {
   },
 });
 
-/* C10 · the stacks pile up, the library closes, the guess appears */
-defineCtrl('cj-library', {
-  build(slide) {
-    slide.querySelectorAll('[data-pages]').forEach((li) => {
-      const stack = document.createElement('span');
-      stack.className = 'cj-stack';
-      stack.setAttribute('aria-hidden', 'true');
-      for (let i = 0; i < Number(li.dataset.pages); i++) stack.appendChild(document.createElement('i'));
-      li.prepend(stack);
-    });
-  },
-  enter(slide, { lite }) {
-    if (lite) return;
-    const items = $$(slide, '.cj-library__line > li');
-    const tl = gsap.timeline({ delay: 0.4 });
-    items.forEach((li, i) => {
-      tl.fromTo(li.querySelectorAll('b, span:not(.cj-stack), em:not(.cj-library__guess)'), { y: 24, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.4, ease: 'expo.out' }, i * 0.22);
-      const pages = li.querySelectorAll('.cj-stack i');
-      if (pages.length) {
-        tl.fromTo(pages, { y: -26, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.25, ease: 'power2.out', stagger: { amount: Math.min(0.9, pages.length * 0.035), from: 'start' } }, i * 0.22 + 0.1);
-      }
-    });
-    const cut = slide.querySelector('.is-cut');
-    tl.fromTo(cut, { '--shut': 0 }, { '--shut': 1, duration: 0.5, ease: 'bounce.out' }, '>-0.2')
-      .call(() => fire(0.5), null, '<')
-      .fromTo(slide.querySelector('.cj-library__guess'), { scale: 0.7, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.6, ease: 'back.out(2)' }, '>+0.2');
+/* C10 · each account row lands; the warnings fire the network */
+defineCtrl('cj-priv', {
+  fragment(slide, frags, shown) {
+    if (shown && !state.lite) fire(0.45);
   },
 });
 
@@ -288,68 +278,37 @@ defineCtrl('cj-ladder', {
   },
 });
 
-/* C18–C19 · the model grid, filled from config.grilla */
-defineCtrl('cj-grid', {
+/* C18 · the same task in two chats. Real excerpts come from config.prueba;
+   an empty one is removed, so the slide never shows a placeholder. */
+const isFilled = (v) => typeof v === 'string' && v.trim() !== '' && !/^\s*\{\{.*\}\}\s*$/.test(v);
+
+defineCtrl('cj-two', {
   build(slide) {
-    const g = config.grilla || {};
-    const mode = slide.dataset.grid;
-    const box = slide.querySelector('[data-cols]');
-    (g.modelos || []).forEach((name, i) => {
-      const col = document.createElement('article');
-      col.className = 'cj-col';
-      const cell = (g[mode] || [])[i] || {};
-      const head = document.createElement('p');
-      head.className = 'cj-col__name';
-      head.textContent = name;
-      const ans = document.createElement('p');
-      ans.className = 'cj-col__ans';
-      ans.setAttribute('data-config', `grilla.${mode}.${i}.respuesta`);
-      col.append(head, ans);
-      if (cell.ok === true) col.classList.add('is-ok');
-      if (cell.ok === false) col.classList.add('is-wrong');
-      if (mode === 'despues') {
-        const list = document.createElement('ul');
-        list.className = 'cj-col__checks';
-        (g.criterios || []).forEach((c, k) => {
-          const li = document.createElement('li');
-          const mark = g.marcas?.[i]?.[k];
-          li.className = mark === true ? 'is-yes' : mark === false ? 'is-no' : 'is-open';
-          li.textContent = c;
-          list.appendChild(li);
-        });
-        col.appendChild(list);
-      }
-      box.appendChild(col);
+    const p = config.prueba || {};
+    let real = false;
+    $$(slide, '[data-prueba]').forEach((el) => {
+      const v = p[el.dataset.prueba];
+      if (isFilled(v)) {
+        el.textContent = v.trim();
+        real = true;
+      } else el.remove();
     });
-    // build runs after config was poured in: fill the new [data-config] nodes ourselves
-    box.querySelectorAll('[data-config]').forEach((el) => {
-      const path = el.dataset.config.split('.');
-      const v = path.reduce((o, k) => (o == null ? o : o[k]), config);
-      if (typeof v === 'string' && !/^\s*\{\{.*\}\}\s*$/.test(v)) el.textContent = v;
-      else {
-        const ph = document.createElement('span');
-        ph.className = 'ph';
-        ph.textContent = typeof v === 'string' ? v : '{{CAPTURA_PENDIENTE}}';
-        el.appendChild(ph);
-      }
-    });
+    const tag = slide.querySelector('[data-two-tag]');
+    if (real) tag.textContent = isFilled(p.modelo) ? `Captura real · ${p.modelo.trim()}` : 'Captura real';
+    slide.classList.toggle('has-excerpts', real);
   },
   enter(slide, { lite }) {
     if (lite) return;
-    const cols = $$(slide, '.cj-col');
-    gsap.fromTo(cols, { y: 50, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, ease: 'expo.out', stagger: 0.12, delay: 0.3 });
     gsap.fromTo(
-      $$(slide, '.cj-col__checks li'),
-      { x: -16, autoAlpha: 0 },
-      { x: 0, autoAlpha: 1, duration: 0.35, ease: 'expo.out', stagger: 0.03, delay: 0.7 },
+      $$(slide, '.cj-two__checks li'),
+      { x: -18, autoAlpha: 0 },
+      { x: 0, autoAlpha: 1, duration: 0.4, ease: 'expo.out', stagger: 0.12, delay: 0.8 },
     );
-    const wrong = $$(slide, '.cj-col.is-wrong .cj-col__ans');
-    if (wrong.length) gsap.fromTo(wrong, { x: -8 }, { x: 0, duration: 0.5, ease: 'elastic.out(1.4, 0.2)', delay: 1.1 });
-    gsap.delayedCall(0.9, () => fire(0.4));
+    gsap.delayedCall(1.4, () => fire(0.5));
   },
 });
 
-/* C20 · the sampling dice keeps picking a different bar */
+/* R3 · the sampling dice keeps picking a different bar */
 defineCtrl('cj-why', {
   enter(slide, { lite }) {
     if (lite) return;

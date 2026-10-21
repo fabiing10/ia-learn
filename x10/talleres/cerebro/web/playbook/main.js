@@ -1,9 +1,10 @@
 // Cerebro Jurídico playbook: progressive enhancement over static HTML. Renders the
-// catalog-driven parts (skills, load routes, test questions, Colombian frame), then
-// wires the theme toggle (cj-theme), TOC drawer + scrollspy, reading progress, copy
-// and download buttons, heading deep links, the verification checklist and the
-// model grid (both saved in this browser only), stacked tables on phones, glossary
-// filter, print preparation and the figures. The page makes no network requests.
+// catalog-driven parts (skills, load routes, privacy per account, installable
+// skills, the task tests, Colombian frame), then wires the theme toggle (cj-theme),
+// TOC drawer + scrollspy, reading progress, copy and download buttons, heading deep
+// links, the checklists (saved in this browser only), stacked tables on phones,
+// glossary filter, print preparation and the figures. The page makes no network
+// requests.
 import './playbook.css';
 import './figures.css';
 import './print.css';
@@ -79,7 +80,10 @@ function inline(text) {
 }
 
 // Contract exports (CONTRACT.md) plus optional ones the coordinator may add or drop.
-const { TAREAS, RUTAS_CARGA, PREGUNTA_PRUEBA, PREGUNTA_RESERVA, COMPARACION_PRUEBA = [], MARCO_COLOMBIANO = [], FUENTES_OFICIALES = [] } = catalog;
+const {
+  TAREAS, RUTAS_CARGA, PREGUNTA_PRUEBA, ESPERADO = { con: [], sin: [] }, PRIVACIDAD = [], INSTALAR_SKILL,
+  MARCO_COLOMBIANO = [], FUENTES_OFICIALES = [],
+} = catalog;
 const guillemets = (s) => s.replace(/"([^"]+)"/g, '«$1»');
 const profile = loadProfile();
 
@@ -128,16 +132,15 @@ function renderRoutes() {
 }
 
 function renderCatalogText() {
-  const texts = { PREGUNTA_PRUEBA, PREGUNTA_RESERVA };
+  const texts = { PREGUNTA_PRUEBA };
   $$('[data-catalog]').forEach((node) => {
     const value = texts[node.dataset.catalog];
     if (value) node.textContent = value;
   });
 
-  $$('[data-comparacion]').forEach((list) => {
-    const side = list.dataset.comparacion;
-    const rows = COMPARACION_PRUEBA.map((row) => row[side]).filter(Boolean);
-    if (rows.length) list.replaceChildren(...rows.map((t) => el('li', { text: `${guillemets(t)}.` })));
+  $$('[data-esperado]').forEach((list) => {
+    const rows = ESPERADO[list.dataset.esperado] || [];
+    if (rows.length) list.replaceChildren(...rows.map((t) => el('li', { text: t })));
   });
 
   const verified = $('[data-rutas-verificadas]');
@@ -178,55 +181,101 @@ function renderCatalogText() {
   }
 }
 
-/* ---------- Model grid (fillable, saved locally) ---------- */
+/* ---------- Privacy, installable skills and the task tests ---------- */
 
-const GRID_KEY = 'cj-playbook-grilla-v1';
-const GRID_ROWS = [
-  ['termino', 'Término correcto (10 días)'],
-  ['fuente', 'Fuente exacta (art. 14, num. 1, del CPACA; Ley 1755 de 2015)'],
-  ['trampa', 'Menciona la trampa (art. 5 del Decreto 491 → Ley 2207)'],
-  ['silencio', 'Efecto del silencio (aceptación + 3 días)'],
-  ['cierre', 'Cierra con «Verificación pendiente»'],
-  ['tono', 'Respeta el tono/formato del ADN'],
-  ['longitud', 'Longitud y orden'],
-];
-const GRID_COLS = [
-  ['claude', 'Claude'],
-  ['chatgpt', 'ChatGPT'],
-  ['gemini', 'Gemini'],
-  ['local', 'Local'],
-];
+const mineFirst = (list, isMine) => [...list].sort((a, b) => Number(isMine(b)) - Number(isMine(a)));
 
-function readGrid() {
-  try {
-    const saved = JSON.parse(store.get(GRID_KEY) || '{}');
-    return saved && typeof saved === 'object' ? saved : {};
-  } catch {
-    return {};
-  }
-}
-
-function renderGrids() {
-  const saved = readGrid();
-  $$('[data-grid]').forEach((block) => {
-    const grid = block.dataset.grid;
-    const label = grid === 'antes' ? 'Antes' : 'Después';
-    $('[data-grid-body]', block).replaceChildren(
-      ...GRID_ROWS.map(([row, rowLabel]) =>
+// What each account does with what you upload; the reader's own tools come first.
+function renderPrivacy() {
+  const body = $('[data-privacidad]');
+  if (body && PRIVACIDAD.length) {
+    const mine = new Set(profile?.herramientas || []);
+    body.replaceChildren(
+      ...mineFirst(PRIVACIDAD, (x) => mine.has(x.herramienta)).map((x) =>
         el(
           'tr',
           {},
-          el('th', { scope: 'row', text: rowLabel }),
-          ...GRID_COLS.map(([col, colLabel]) => {
-            const key = `${grid}:${row}:${col}`;
-            const input = el('input', { type: 'text', maxlength: '60', autocomplete: 'off', 'data-cell': key, 'aria-label': `${label} · ${rowLabel} · ${colLabel}` });
-            input.value = saved[key] || '';
-            return el('td', {}, input);
-          }),
+          el('th', { scope: 'row' }, x.label, mine.has(x.herramienta) ? el('span', { class: 'k t-accent', text: ' · tu IA' }) : null),
+          el('td', { text: x.entrena }),
+          el('td', {}, x.apagar, x.sinRastro ? el('span', { class: 'cell-sub' }, el('b', { text: 'Sin rastro:' }), ` ${x.sinRastro}`) : null),
+          el('td', {}, `${x.ojo} `, el('a', { href: x.fuente, rel: 'noopener', text: 'Fuente oficial' })),
         ),
       ),
     );
-  });
+  }
+  const verified = $('[data-privacidad-verificada]');
+  if (verified && catalog.PRIVACIDAD_VERIFICADA) verified.textContent = catalog.PRIVACIDAD_VERIFICADA;
+}
+
+function renderInstall() {
+  const steps = $('[data-instalar]');
+  if (steps && INSTALAR_SKILL?.pasos?.length) {
+    steps.replaceChildren(
+      ...INSTALAR_SKILL.pasos.map((p, i) =>
+        el('li', { class: 'flow__step' }, el('span', { class: 'flow__n', text: String(i + 1) }), el('div', { class: 'flow__content' }, el('p', {}, inline(p)))),
+      ),
+    );
+  }
+  const nota = $('[data-instalar-nota]');
+  if (nota && INSTALAR_SKILL?.nota) nota.textContent = INSTALAR_SKILL.nota;
+
+  const table = $('[data-skills-zip]');
+  if (table) {
+    const mine = new Set(profile?.tareas || []);
+    table.replaceChildren(
+      ...mineFirst(TAREAS, (t) => mine.has(t.id)).map((t) =>
+        el(
+          'tr',
+          {},
+          el(
+            'th',
+            { scope: 'row' },
+            t.skill.titulo,
+            mine.has(t.id) ? el('span', { class: 'k t-accent', text: ' · tuya' }) : null,
+            el('code', { class: 'cell-file', text: `${t.skill.slug}.zip` }),
+          ),
+          el('td', { text: t.skill.descripcion }),
+        ),
+      ),
+    );
+  }
+}
+
+// One copyable test per task; the reader's tasks first.
+function renderTests() {
+  const host = $('[data-pruebas]');
+  if (host) {
+    const mine = new Set(profile?.tareas || []);
+    host.replaceChildren(
+      ...mineFirst(TAREAS.filter((t) => t.prueba), (t) => mine.has(t.id)).map((t) =>
+        el(
+          'li',
+          { class: 'q', 'data-copy-scope': true, 'data-prueba': t.id },
+          el('div', { class: 'q__head' }, el('p', { class: 'q__n', text: mine.has(t.id) ? `${t.label} · tuya` : t.label }), copyButton()),
+          el('p', { class: 'q__text', 'data-copy-src': true, text: t.prueba }),
+        ),
+      ),
+    );
+  }
+
+  const check = $('[data-esperado-check]');
+  if (check && ESPERADO.con.length) {
+    check.replaceChildren(
+      ...ESPERADO.con.map((t, i) =>
+        el(
+          'li',
+          {},
+          el(
+            'label',
+            { class: 'check' },
+            el('input', { type: 'checkbox', 'data-check': `con-${i + 1}` }),
+            el('span', { class: 'check__box', 'aria-hidden': 'true' }, icon('i-check')),
+            el('span', { class: 'check__text' }, el('span', { class: 'check__main', text: t })),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 // Laura's extracts and the full 04_VERIFICACION.md come from the same generator as
@@ -269,7 +318,9 @@ renderSkills();
 renderRoutes();
 renderLaura();
 renderCatalogText();
-renderGrids();
+renderPrivacy();
+renderInstall();
+renderTests();
 
 /* ---------- Toast (polite live region) ---------- */
 
@@ -635,7 +686,7 @@ lists.forEach((list) => {
   $$('input[data-check]', list).forEach((b) =>
     b.addEventListener('change', () => {
       saveList(list);
-      if (b.checked && $$('input[data-check]', list).every((x) => x.checked)) toast('Protocolo completo.');
+      if (b.checked && $$('input[data-check]', list).every((x) => x.checked)) toast(list.dataset.doneMsg || 'Protocolo completo.');
     }),
   );
   const reset = $('[data-check-reset]', list);
@@ -649,33 +700,9 @@ lists.forEach((list) => {
 
 loadChecks();
 
-/* ---------- Model grid persistence ---------- */
-
-function saveGrid() {
-  const data = {};
-  $$('[data-cell]').forEach((input) => {
-    const v = input.value.trim();
-    if (v) data[input.dataset.cell] = v;
-  });
-  store.set(GRID_KEY, JSON.stringify(data));
-}
-
-$$('[data-cell]').forEach((input) => input.addEventListener('input', saveGrid));
-const gridReset = $('[data-grid-reset]');
-if (gridReset)
-  twoTapReset(gridReset, 'Borrar las grillas', () => {
-    $$('[data-cell]').forEach((input) => (input.value = ''));
-    saveGrid();
-    toast('Grillas borradas.');
-  });
-
 // Keep two open tabs in sync.
 addEventListener('storage', (e) => {
   if (e.key === CHECK_KEY) loadChecks();
-  if (e.key === GRID_KEY) {
-    const saved = readGrid();
-    $$('[data-cell]').forEach((input) => (input.value = saved[input.dataset.cell] || ''));
-  }
 });
 
 /* ---------- Tables become cards on phones: labels from the header ---------- */
