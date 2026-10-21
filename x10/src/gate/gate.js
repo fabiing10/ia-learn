@@ -10,9 +10,11 @@ const MAX_AGE = 60 * 60 * 14; // 14 hours: the day of the workshop
 const HTML = { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' };
 
 // A ten-digit key is guessable without a brake. Failed attempts are counted per
-// client in this instance's memory (best effort: Vercel may run several) and
-// the client is locked out for a while after too many. Pair it with a rate-limit
-// rule in the Vercel firewall for a global limit.
+// client in this instance's memory (best effort: Vercel may run several); after
+// too many, further WRONG guesses from that client get 429 for a while. The
+// right key always enters: a venue shares one public IP, so a lockout that
+// also blocked the right key would let anyone in the room lock the presenter
+// out. Pair it with a rate-limit rule in the Vercel firewall for a global limit.
 export const MAX_FAILS = 8;
 export const LOCK_MS = 15 * 60 * 1000;
 const fails = new Map();
@@ -128,13 +130,6 @@ export async function gateResponse(request, secret, cookieSecret) {
   const expected = await token(secret, cookieSecret);
   if (request.method === 'POST') {
     const id = clientId(request);
-    const lock = lockState(id);
-    if (lock.blocked) {
-      return new Response(page({ error: `Demasiados intentos. Vuelve a intentarlo en ${Math.ceil(lock.retryAfterS / 60)} minutos.`, action }), {
-        status: 429,
-        headers: { ...HTML, 'Retry-After': String(lock.retryAfterS) },
-      });
-    }
     let clave = '';
     try {
       const form = await request.formData();
@@ -154,6 +149,13 @@ export async function gateResponse(request, secret, cookieSecret) {
       });
     }
     noteFailure(id);
+    const lock = lockState(id);
+    if (lock.blocked) {
+      return new Response(page({ error: `Demasiados intentos. Vuelve a intentarlo en ${Math.ceil(lock.retryAfterS / 60)} minutos.`, action }), {
+        status: 429,
+        headers: { ...HTML, 'Retry-After': String(lock.retryAfterS) },
+      });
+    }
     await new Promise((r) => setTimeout(r, 800)); // slow every wrong guess down
     return new Response(page({ error: 'Clave incorrecta.', action }), { status: 401, headers: HTML });
   }

@@ -70,17 +70,20 @@ test('the lock page escapes what it echoes', () => {
   assert.doesNotMatch(page({ error: '<script>', action: '/x"' }), /<script>|action="\/x"/);
 });
 
-test('after too many wrong keys a client is locked out, even with the right key; the lock expires', async () => {
+test('after too many wrong keys, further wrong keys get 429; the right key still enters (a shared venue IP cannot lock the presenter out)', async () => {
   clearFailures();
   const ip = '198.51.100.7';
-  for (let i = 0; i < MAX_FAILS; i++) assert.equal((await gate(post('0000000000', ip))).status, 401);
-  const locked = await gate(post('1234567890', ip));
+  for (let i = 0; i < MAX_FAILS - 1; i++) assert.equal((await gate(post('0000000000', ip))).status, 401);
+  const locked = await gate(post('0000000001', ip));
   assert.equal(locked.status, 429);
   assert.ok(Number(locked.headers.get('retry-after')) > 0);
   assert.match(await locked.text(), /Demasiados intentos/);
+  assert.equal((await gate(post('0000000002', ip))).status, 429, 'stays locked for wrong keys');
+  assert.equal((await gate(post('1234567890', ip))).status, 303, 'the right key always enters');
   // another client is unaffected
-  assert.equal((await gate(post('1234567890', '198.51.100.8'))).status, 303);
+  assert.equal((await gate(post('0000000000', '198.51.100.8'))).status, 401);
   // the lock is forgotten once its time passes
+  for (let i = 0; i < MAX_FAILS; i++) noteFailure(ip);
   assert.equal(lockState(ip, Date.now() + 16 * 60 * 1000).blocked, false);
   clearFailures();
 });
