@@ -8,8 +8,8 @@ import { zip } from './zip.js';
 import { REGLA_CITAS, REGLA_FUENTES, resolve, skillTexto } from './generator.js';
 
 const ucFirst = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-/** "2. Fuentes: texto" → "Texto" (the rule without its number and label). */
-const ruleBody = (rule) => rule.replace(/^\d+\.\s+[^:]+:\s*/, '');
+/** "2. Fuentes: texto" → "Fuentes: texto" (the rule without its number; the label keeps the bullet capitalised). */
+const ruleBody = (rule) => rule.replace(/^\d+\.\s+/, '');
 const list = (items) => items.map((i) => `- ${i}`).join('\n');
 
 function skillMd(t, r) {

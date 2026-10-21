@@ -58,6 +58,14 @@ test('SKILL.md: frontmatter, the procedure, the always-on rules and the closing'
   }
 });
 
+test('the always-on rules keep their label, so no bullet starts in lowercase', () => {
+  for (const s of buildSkills(laura())) {
+    assert.ok(s.contenido.includes('- Fuentes: primero revisa 03_FUENTES.md'), `${s.tarea}: fuentes`);
+    assert.ok(s.contenido.includes('- Citas: cada sentencia, norma o artículo que cites'), `${s.tarea}: citas`);
+    assert.doesNotMatch(s.contenido, /^- [a-záéíóúñ]/m, `${s.tarea}: lowercase bullet`);
+  }
+});
+
 test('the contracts skill carries the positions table: the criterion search cannot find', () => {
   const [contratos] = buildSkills(laura());
   assert.ok(contratos.contenido.includes('| Limitación de responsabilidad | Tope igual al valor del contrato, recíproco |'));

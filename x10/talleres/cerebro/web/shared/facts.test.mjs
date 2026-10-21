@@ -3,6 +3,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import * as catalog from './catalog.js';
 import { buildFiles } from './generator.js';
 import { buildVault } from './vault.js';
@@ -29,6 +30,14 @@ const T323_PRINCIPIOS = [
   'seriedad y verificación', 'prevención de riesgos', 'igualdad y equidad', 'control humano',
   'regulación ética', 'adecuación a buenas prácticas', 'seguimiento continuo', 'idoneidad',
 ];
+
+test('the landing tells the brain ZIP and the skill ZIPs apart (a lawyer uploaded the brain as a skill)', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const brain = html.slice(html.indexOf('id="bajar-zip"') - 600, html.indexOf('id="bajar-zip"'));
+  const skills = html.slice(html.indexOf('id="skills-t"'), html.indexOf('id="bajar-skills"'));
+  assert.ok(brain.includes('No es una skill'), 'brain card says it is not a skill');
+  assert.ok(skills.includes('Estos sí son skills'), 'skills card says these are the skills');
+});
 
 test('never "sin vigencia" for the Decreto 491; the repeal is art. 5 (and 6) by the Ley 2207', () => {
   for (const [where, text] of allTexts()) {
