@@ -1,0 +1,319 @@
+<!-- BLOQUE 3 · Prompts (Parte A, diapositivas 9 a 16). Generated from the script:
+     the <pre> texts are the script's prompts, character by character. -->
+
+<section id="prompt-0" data-block="3" data-bg-alpha="0.2" data-ctrl="pbox" class="pslide s-tight">
+  <header class="pslide__head">
+    <h2 class="pslide__title" data-in><span>Prompt 0</span> — Cargar la especificación</h2>
+  </header>
+  <div class="pslide__grid">
+    <div class="pslide__hace" data-in>
+      <p class="pslide__label">Qué hace</p>
+      <p>le da a la herramienta toda la SPEC y le pide que la entienda <b>sin construir nada</b>. Es la prueba del adivino en vivo: si pregunta algo, es porque la SPEC tenía un hueco.</p>
+    </div>
+<div class="pbox" data-pbox>
+<pre data-tool="lovable">Eres mi par de desarrollo para construir un prototipo (MVP). Te voy a dar la especificación completa.
+NO construyas nada todavía. Léela y respóndeme en máximo 8 líneas:
+1) Qué vas a construir, en una frase.
+2) Qué NO vas a construir.
+3) Qué dudas tienes sobre las reglas R1 a R10. Si no tienes dudas, dilo.
+Restricciones que aplican a todo el proyecto: aplicación web de una sola página, sin backend, sin base de datos externa, sin login, sin API keys, datos de ejemplo dentro del código, interfaz en español, datos ficticios.
+
+--- ESPECIFICACIÓN ---
+[pegar aquí el contenido de SPEC-semaforo-liquidaciones.md]</pre>
+<pre data-tool="code">Lee @SPEC-semaforo-liquidaciones.md. No construyas nada todavía. Respóndeme en máximo 8 líneas: qué vas a construir, qué no, y qué dudas tienes sobre las reglas R1-R10.</pre>
+<pre data-tool="artifact">Eres mi par de desarrollo para construir un prototipo (MVP). Te voy a dar la especificación completa.
+NO construyas nada todavía. Léela y respóndeme en máximo 8 líneas:
+1) Qué vas a construir, en una frase.
+2) Qué NO vas a construir.
+3) Qué dudas tienes sobre las reglas R1 a R10. Si no tienes dudas, dilo.
+Restricciones que aplican a todo el proyecto: aplicación web de una sola página, sin backend, sin base de datos externa, sin login, sin API keys, datos de ejemplo dentro del código, interfaz en español, datos ficticios.
+
+--- ESPECIFICACIÓN ---
+[pegar aquí el contenido de SPEC-semaforo-liquidaciones.md]</pre>
+</div>
+    <div class="pslide__verse" data-in>
+      <p class="pslide__label">Qué debe verse</p>
+      <p>un resumen correcto y, si hay dudas, preguntas precisas. Respondan con precisión y avancen. Si dice "no tengo dudas", avancen.</p>
+    </div>
+    <div class="pslide__porque" data-in>
+      <p class="pslide__label">Por qué importa</p>
+      <p>la SPEC es la fuente de verdad. Si la herramienta la entiende mal aquí, lo arrastra en todas las capas.</p>
+    </div>
+  </div>
+</section>
+
+<section id="prompt-1" data-block="3" data-bg-alpha="0.2" data-ctrl="pbox" class="pslide s-tight">
+  <header class="pslide__head">
+    <h2 class="pslide__title" data-in><span>Prompt 1</span> — Esqueleto y datos de ejemplo</h2>
+  </header>
+  <div class="pslide__grid">
+    <div class="pslide__hace" data-in>
+      <p class="pslide__label">Qué hace</p>
+      <p>crea la aplicación mínima: una tabla con los 10 contratos ficticios. Nada de cálculos todavía.</p>
+    </div>
+<div class="pbox" data-pbox>
+<pre data-tool="lovable">Siguiendo la SPEC, construye SOLO la capa 1:
+- una app React de una sola página.
+- Los 10 contratos de ejemplo de la SPEC, cargados en el código como un arreglo de objetos con TODOS los campos del modelo de datos, incluyendo la lista de chequeo documental según R7 y R8 con los estados variados que indica la SPEC.
+- Pantalla 1 (Inventario): una tabla con las columnas Número, Contratista, Tipo, Valor (formato pesos colombianos), Fecha terminación, Estado ejecución, Estado liquidación.
+- Un título "Semáforo de Liquidaciones Contractuales" y un subtítulo con la fecha de hoy.
+Todavía NO calcules plazos, semáforo ni completitud. No agregues otras pantallas ni funcionalidades.
+Antes de escribir código, dime en 3 líneas qué vas a hacer.</pre>
+<pre data-tool="code">Siguiendo la SPEC, construye SOLO la capa 1:
+- un único archivo index.html con HTML, CSS y JavaScript, sin dependencias externas salvo, si quieres, una hoja de estilos por CDN.
+- Los 10 contratos de ejemplo de la SPEC, cargados en el código como un arreglo de objetos con TODOS los campos del modelo de datos, incluyendo la lista de chequeo documental según R7 y R8 con los estados variados que indica la SPEC.
+- Pantalla 1 (Inventario): una tabla con las columnas Número, Contratista, Tipo, Valor (formato pesos colombianos), Fecha terminación, Estado ejecución, Estado liquidación.
+- Un título "Semáforo de Liquidaciones Contractuales" y un subtítulo con la fecha de hoy.
+Todavía NO calcules plazos, semáforo ni completitud. No agregues otras pantallas ni funcionalidades.
+Antes de escribir código, dime en 3 líneas qué vas a hacer.</pre>
+<pre data-tool="artifact">Siguiendo la SPEC, construye SOLO la capa 1:
+- un único archivo index.html con HTML, CSS y JavaScript, sin dependencias externas salvo, si quieres, una hoja de estilos por CDN.
+- Los 10 contratos de ejemplo de la SPEC, cargados en el código como un arreglo de objetos con TODOS los campos del modelo de datos, incluyendo la lista de chequeo documental según R7 y R8 con los estados variados que indica la SPEC.
+- Pantalla 1 (Inventario): una tabla con las columnas Número, Contratista, Tipo, Valor (formato pesos colombianos), Fecha terminación, Estado ejecución, Estado liquidación.
+- Un título "Semáforo de Liquidaciones Contractuales" y un subtítulo con la fecha de hoy.
+Todavía NO calcules plazos, semáforo ni completitud. No agregues otras pantallas ni funcionalidades.
+Antes de escribir código, dime en 3 líneas qué vas a hacer.</pre>
+</div>
+    <div class="pslide__verse" data-in>
+      <p class="pslide__label">Qué debe verse</p>
+      <p>una tabla con 10 filas, valores en pesos, fechas de la SPEC.</p>
+    </div>
+    <div class="pslide__falla" data-in>
+      <p class="pslide__label">Si falla</p>
+      <p>"Faltan los contratos X y Y de la SPEC; agrégalos sin modificar lo demás."</p>
+      <p>"Los valores se ven sin formato; muéstralos como $ 2.450.000.000."</p>
+    </div>
+    <div class="pslide__porque" data-in>
+      <p class="pslide__label">Por qué importa</p>
+      <p>"dime en 3 líneas qué vas a hacer" evita que la herramienta se vaya por otro camino. Es la forma más barata de corregir: antes de que escriba código.</p>
+    </div>
+  </div>
+</section>
+
+<section id="prompt-2" data-block="3" data-bg-alpha="0.2" data-ctrl="pbox" class="pslide pslide--wide s-tight">
+  <header class="pslide__head bm-head--notes">
+    <h2 class="pslide__title" data-in><span>Prompt 2</span> — Motor de plazos y semáforo</h2>
+    <button class="notas__btn" type="button" data-notas-toggle aria-expanded="false" aria-controls="notas-prompt-2">Nota técnica <kbd>N</kbd></button>
+  </header>
+  <div class="pslide__grid">
+    <div class="pslide__hace" data-in>
+      <p class="pslide__label">Qué hace</p>
+      <p>convierte las reglas R1-R6 y R10 en lógica. Es la capa donde el conocimiento jurídico de ustedes se vuelve software.</p>
+    </div>
+<div class="pbox" data-pbox>
+<pre>Siguiendo la SPEC, implementa SOLO las reglas R1 a R6 y R10:
+- Para cada contrato calcula: requiere liquidación (R1), fecha límite bilateral (R2), fecha límite unilateral (R3), fecha máxima (R4), etapa vigente y días restantes (R5), color del semáforo (R6).
+- "Hoy" es la fecha del sistema del navegador.
+- Agrega a la tabla del inventario las columnas: Semáforo (un círculo de color con el nombre del color como tooltip), Etapa vigente, Días restantes, Fecha límite de la etapa.
+- Ordena la tabla según R10.
+- Implementa los cálculos en una función separada y pura (recibe un contrato y la fecha de hoy, devuelve los resultados) para que sea fácil de probar.
+No cambies el modelo de datos ni la estructura de la tabla existente; solo agrega columnas. No agregues filtros ni otras pantallas todavía.
+Antes de escribir código, muéstrame cómo quedaría el cálculo para el contrato SUM-014-2025 con hoy = 2026-11-05.</pre>
+</div>
+    <div class="pslide__verse" data-in>
+      <p class="pslide__label">Qué debe verse (hoy = 2026-11-05)</p>
+      <table class="pslide__table">
+        <thead>
+          <tr><th scope="col">Contrato</th><th scope="col">Etapa</th><th scope="col" class="num">Días</th><th scope="col">Semáforo</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">CONS-007-2022</th><td>Competencia perdida</td><td class="num">0</td><td><i class="sem sem--negro" aria-hidden="true"></i>Negro</td></tr>
+          <tr><th scope="row">SUM-021-2025</th><td>Extemporánea</td><td class="num">~644</td><td><i class="sem sem--rojo" aria-hidden="true"></i>Rojo</td></tr>
+          <tr><th scope="row">SUM-014-2025</th><td>Unilateral</td><td class="num">15</td><td><i class="sem sem--naranja" aria-hidden="true"></i>Naranja</td></tr>
+          <tr><th scope="row">INT-005-2025</th><td>Bilateral</td><td class="num">45</td><td><i class="sem sem--amarillo" aria-hidden="true"></i>Amarillo</td></tr>
+          <tr><th scope="row">CONV-008-2026</th><td>Bilateral</td><td class="num">88</td><td><i class="sem sem--verde" aria-hidden="true"></i>Verde</td></tr>
+          <tr><th scope="row">OBRA-009-2026</th><td>Bilateral</td><td class="num">115</td><td><i class="sem sem--verde" aria-hidden="true"></i>Verde</td></tr>
+          <tr><th scope="row">OBRA-001-2025</th><td>Bilateral</td><td class="num">130</td><td><i class="sem sem--verde" aria-hidden="true"></i>Verde</td></tr>
+          <tr><th scope="row">CONV-003-2026</th><td>En ejecución</td><td class="num">–</td><td><i class="sem sem--gris" aria-hidden="true"></i>Gris</td></tr>
+          <tr><th scope="row">PS-102-2026</th><td>No requiere</td><td class="num">–</td><td><i class="sem sem--gris" aria-hidden="true"></i>Gris</td></tr>
+          <tr><th scope="row">CONS-011-2025</th><td>Liquidada</td><td class="num">–</td><td><i class="sem sem--gris" aria-hidden="true"></i>Gris</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pslide__falla" data-in>
+      <p class="pslide__label">Si falla</p>
+      <p>"Para SUM-014-2025 esperaba etapa Unilateral con fecha límite 2026-11-20 y 15 días; obtuve [X]. Revisa R2 y R3: sin plazo pactado, bilateral = terminación + 4 meses; unilateral = bilateral + 2 meses. Corrige solo eso."</p>
+    </div>
+    <div class="pslide__porque" data-in>
+      <p class="pslide__label">Por qué importa</p>
+      <p>aquí los abogados verifican el cálculo. Si una regla les parece incorrecta, <b>cambien la SPEC primero</b> y luego pidan a la herramienta que la actualice. La SPEC manda, no el código.</p>
+    </div>
+  </div>
+  <div class="notas" id="notas-prompt-2" role="note">
+    <p class="notas__label">Nota técnica para quien edite la presentación</p>
+    <p>los días dependen de la fecha; si la sesión se repite, recalcular SUM-014 e INT-005, que son los sensibles.</p>
+  </div>
+  <aside class="notes">
+    <p><strong>Nota técnica para quien edite la presentación</strong></p>
+    <p>los días dependen de la fecha; si la sesión se repite, recalcular SUM-014 e INT-005, que son los sensibles.</p>
+  </aside>
+</section>
+
+<section id="prompt-3" data-block="3" data-bg-alpha="0.2" data-ctrl="pbox" class="pslide s-tight">
+  <header class="pslide__head">
+    <h2 class="pslide__title" data-in><span>Prompt 3</span> — Ficha del contrato y lista de chequeo</h2>
+  </header>
+  <div class="pslide__grid">
+    <div class="pslide__hace" data-in>
+      <p class="pslide__label">Qué hace</p>
+      <p>abre el detalle de un contrato, muestra las tres fechas límite y permite marcar cada documento (Sí / No / N/A). Aparece el primer control humano: observaciones y "validado".</p>
+    </div>
+<div class="pbox" data-pbox>
+<pre>Siguiendo la SPEC, construye la Pantalla 2 (Ficha del contrato):
+- Al hacer clic en una fila del inventario se abre la ficha (puede ser un panel lateral o una vista que reemplaza la tabla, con botón "Volver al inventario").
+- Muestra todos los campos del contrato y las tres fechas límite calculadas (bilateral, unilateral, máxima), resaltando la etapa vigente y su semáforo.
+- Muestra la lista de chequeo documental según R7 y R8 para el tipo del contrato, con cada documento editable entre "Sí", "No" y "N/A".
+- Calcula y muestra el porcentaje de completitud documental según R9, y agrégalo también como columna "Completitud (%)" en el inventario.
+- Campo de observaciones (texto libre) y botón "Marcar como validado por humano" que cambia el campo validado_por_humano y muestra ✓ en el inventario.
+- Los cambios se reflejan de inmediato en el inventario (por ahora solo en memoria; no hace falta guardarlos al recargar).
+No modifiques el motor de cálculo de la capa 2. No agregues el tablero ni el generador de oficios todavía.</pre>
+</div>
+    <div class="pslide__verse" data-in>
+      <p class="pslide__label">Qué debe verse</p>
+      <p>clic en OBRA-001-2025 → 9 documentos (7 base + 2 de obra), 2 en "No", completitud 78 %. Cambiar un "No" a "Sí" → 89 % y la tabla lo refleja.</p>
+    </div>
+    <div class="pslide__falla" data-in>
+      <p class="pslide__label">Si falla</p>
+      <p>"Para tipo Obra la lista debe tener 9 documentos: los 7 de R7 más 'Acta de entrega y recibo de obra' y 'Amparo de estabilidad de obra actualizado'. Corrige solo la lista de Obra."</p>
+    </div>
+    <div class="pslide__porque" data-in>
+      <p class="pslide__label">Por qué importa</p>
+      <p>"no modifiques el motor de cálculo" protege lo que ya funciona. Cada prompt agrega; ninguno reescribe.</p>
+    </div>
+  </div>
+</section>
+
+<section id="prompt-4" data-block="3" data-bg-alpha="0.2" data-ctrl="pbox" class="pslide s-tight">
+  <header class="pslide__head">
+    <h2 class="pslide__title" data-in><span>Prompt 4</span> — Tablero de control</h2>
+  </header>
+  <div class="pslide__grid">
+    <div class="pslide__hace" data-in>
+      <p class="pslide__label">Qué hace</p>
+      <p>resume el inventario: contadores por color, valor en riesgo y los cinco más urgentes. Es lo que el jefe quiere ver.</p>
+    </div>
+<div class="pbox" data-pbox>
+<pre>Siguiendo la SPEC, construye la Pantalla 3 (Tablero), accesible desde una pestaña o botón "Tablero" junto al inventario:
+- Contadores: número de contratos por color de semáforo (Verde, Amarillo, Naranja, Rojo, Negro, Gris), cada uno con su color.
+- Indicador "Contratos con competencia perdida" y "Valor total en riesgo" (suma del valor de los contratos en Rojo y Negro, formato pesos).
+- Lista "Top 5 más urgentes" según el orden de R10, mostrando número, contratista, etapa, días restantes y completitud.
+- Al hacer clic en un contrato del Top 5 se abre su ficha.
+Reutiliza las funciones de cálculo existentes; no dupliques lógica. No modifiques las pantallas 1 y 2.</pre>
+</div>
+    <div class="pslide__verse" data-in>
+      <p class="pslide__label">Qué debe verse</p>
+      <p class="pslide__counts"><span><i class="sem sem--verde" aria-hidden="true"></i>Verde 3</span> · <span><i class="sem sem--amarillo" aria-hidden="true"></i>Amarillo 1</span> · <span><i class="sem sem--naranja" aria-hidden="true"></i>Naranja 1</span> · <span><i class="sem sem--rojo" aria-hidden="true"></i>Rojo 1</span> · <span><i class="sem sem--negro" aria-hidden="true"></i>Negro 1</span> · <span><i class="sem sem--gris" aria-hidden="true"></i>Gris 3</span> · <span>Competencia perdida 1</span> · <span>Valor en riesgo <span class="nowrap">$ 715.000.000</span>.</span></p>
+    </div>
+    <div class="pslide__porque" data-in>
+      <p class="pslide__label">Por qué importa</p>
+      <p>"reutiliza las funciones; no dupliques lógica". Si el tablero calculara por su cuenta, tendríamos dos verdades.</p>
+    </div>
+  </div>
+</section>
+
+<section id="prompt-5" data-block="3" data-bg-alpha="0.2" data-ctrl="pbox" class="pslide s-tight">
+  <header class="pslide__head">
+    <h2 class="pslide__title" data-in><span>Prompt 5</span> — Oficio de requerimiento</h2>
+  </header>
+  <div class="pslide__grid">
+    <div class="pslide__hace" data-in>
+      <p class="pslide__label">Qué hace</p>
+      <p>genera el primer documento de salida: un borrador de oficio al contratista con los documentos faltantes. Con bloque de firma vacío.</p>
+    </div>
+<div class="pbox" data-pbox>
+<pre data-tool="lovable">Siguiendo la SPEC (sección "Documento – Oficio de requerimiento de documentos"), agrega en la ficha del contrato un botón "Generar oficio de requerimiento":
+- Genera un texto plano con: ciudad "Bogotá D.C." y fecha de hoy en formato largo en español; destinatario (nombre del contratista); referencia (número y objeto del contrato); un párrafo que informe que el contrato se encuentra en etapa de liquidación [etapa vigente] con fecha límite [fecha límite de la etapa]; la frase "Para adelantar el trámite de liquidación, se requiere allegar los siguientes documentos:" seguida de la lista numerada de los documentos cuyo estado es "No"; un párrafo con plazo de entrega de diez (10) días hábiles contados a partir del recibo de la comunicación; y un bloque de firma "[Nombre y cargo del funcionario responsable]".
+- Si no hay documentos en "No", en lugar del oficio muestra el mensaje "Este contrato no tiene documentos pendientes."
+- Muestra el texto en un cuadro de solo lectura con botones "Copiar al portapapeles" y "Descargar .txt".
+- Si el contrato no requiere liquidación o ya está liquidado, el botón debe estar deshabilitado con un mensaje explicativo.
+No modifiques nada más. Muéstrame primero el texto que generarías para OBRA-001-2025.</pre>
+<pre data-tool="code">Siguiendo la SPEC (sección "Documento – Oficio de requerimiento de documentos"), agrega en la ficha del contrato un botón "Generar oficio de requerimiento":
+- Genera un texto plano con: ciudad "Bogotá D.C." y fecha de hoy en formato largo en español; destinatario (nombre del contratista); referencia (número y objeto del contrato); un párrafo que informe que el contrato se encuentra en etapa de liquidación [etapa vigente] con fecha límite [fecha límite de la etapa]; la frase "Para adelantar el trámite de liquidación, se requiere allegar los siguientes documentos:" seguida de la lista numerada de los documentos cuyo estado es "No"; un párrafo con plazo de entrega de diez (10) días hábiles contados a partir del recibo de la comunicación; y un bloque de firma "[Nombre y cargo del funcionario responsable]".
+- Si no hay documentos en "No", en lugar del oficio muestra el mensaje "Este contrato no tiene documentos pendientes."
+- Muestra el texto en un cuadro de solo lectura con botones "Copiar al portapapeles" y "Descargar .txt".
+- Si el contrato no requiere liquidación o ya está liquidado, el botón debe estar deshabilitado con un mensaje explicativo.
+No modifiques nada más. Muéstrame primero el texto que generarías para OBRA-001-2025.</pre>
+<pre data-tool="artifact">Siguiendo la SPEC (sección "Documento – Oficio de requerimiento de documentos"), agrega en la ficha del contrato un botón "Generar oficio de requerimiento":
+- Genera un texto plano con: ciudad "Bogotá D.C." y fecha de hoy en formato largo en español; destinatario (nombre del contratista); referencia (número y objeto del contrato); un párrafo que informe que el contrato se encuentra en etapa de liquidación [etapa vigente] con fecha límite [fecha límite de la etapa]; la frase "Para adelantar el trámite de liquidación, se requiere allegar los siguientes documentos:" seguida de la lista numerada de los documentos cuyo estado es "No"; un párrafo con plazo de entrega de diez (10) días hábiles contados a partir del recibo de la comunicación; y un bloque de firma "[Nombre y cargo del funcionario responsable]".
+- Si no hay documentos en "No", en lugar del oficio muestra el mensaje "Este contrato no tiene documentos pendientes."
+- Muestra el texto en un cuadro de solo lectura con botones "Copiar al portapapeles" y "Descargar .txt".
+- Si el contrato no requiere liquidación o ya está liquidado, el botón debe estar deshabilitado con un mensaje explicativo.
+El botón 'Descargar .txt' debe usar la capacidad de descargas del artifact; si no está disponible, ocúltalo.
+No modifiques nada más. Muéstrame primero el texto que generarías para OBRA-001-2025.</pre>
+</div>
+    <div class="pslide__verse" data-in>
+      <p class="pslide__label">Qué debe verse</p>
+      <p>el oficio de OBRA-001-2025 lista exactamente los 2 documentos en "No". OBRA-009-2026: "sin documentos pendientes". PS-102-2026: botón deshabilitado.</p>
+    </div>
+    <div class="pslide__porque" data-in>
+      <p class="pslide__label">Por qué importa</p>
+      <p>el oficio es un <b>borrador</b>. No se envía, no se radica, no se firma. El bloque de firma vacío es la responsabilidad humana hecha diseño.</p>
+    </div>
+  </div>
+</section>
+
+<section id="prompt-6" data-block="3" data-bg-alpha="0.2" data-ctrl="pbox" class="pslide s-tight">
+  <header class="pslide__head">
+    <h2 class="pslide__title" data-in><span>Prompt 6</span> — Persistencia, nuevos contratos y filtros</h2>
+  </header>
+  <div class="pslide__grid">
+    <div class="pslide__hace" data-in>
+      <p class="pslide__label">Qué hace</p>
+      <p>que nada se pierda al recargar, que se puedan registrar contratos nuevos, y filtrar. Con esto la herramienta ya es usable, no solo demostrable.</p>
+    </div>
+<div class="pbox" data-pbox>
+<pre data-tool="lovable">Siguiendo la SPEC, agrega:
+1. Guardado automático de todos los contratos y sus cambios en localStorage del navegador, para que al recargar la página no se pierdan. Si no hay nada guardado, carga los 10 de ejemplo. Agrega un botón "Restablecer datos de ejemplo" con confirmación.
+2. Botón "Exportar JSON" (descarga todos los contratos) y "Importar JSON" (carga un archivo exportado por esta misma app, reemplazando los datos tras confirmación).
+3. Botón "Nuevo contrato" que abre un formulario con todos los campos del modelo de datos (los campos de lista de opciones como selectores; las fechas con selector de fecha). Al guardar, la lista de chequeo se crea automáticamente según el tipo (R7 y R8) con todos los documentos en "No", y el contrato aparece en el inventario con su semáforo calculado.
+4. Filtros en el inventario por tipo, color de semáforo y estado de liquidación, y un buscador por número o contratista.
+Envuelve las lecturas y escrituras de localStorage en try/catch para que la app funcione aunque el almacenamiento falle. No modifiques el motor de cálculo ni el generador de oficios.</pre>
+<pre data-tool="code">Siguiendo la SPEC, agrega:
+1. Guardado automático de todos los contratos y sus cambios en localStorage del navegador, para que al recargar la página no se pierdan. Si no hay nada guardado, carga los 10 de ejemplo. Agrega un botón "Restablecer datos de ejemplo" con confirmación.
+2. Botón "Exportar JSON" (descarga todos los contratos) y "Importar JSON" (carga un archivo exportado por esta misma app, reemplazando los datos tras confirmación).
+3. Botón "Nuevo contrato" que abre un formulario con todos los campos del modelo de datos (los campos de lista de opciones como selectores; las fechas con selector de fecha). Al guardar, la lista de chequeo se crea automáticamente según el tipo (R7 y R8) con todos los documentos en "No", y el contrato aparece en el inventario con su semáforo calculado.
+4. Filtros en el inventario por tipo, color de semáforo y estado de liquidación, y un buscador por número o contratista.
+Envuelve las lecturas y escrituras de localStorage en try/catch para que la app funcione aunque el almacenamiento falle. No modifiques el motor de cálculo ni el generador de oficios.</pre>
+<pre data-tool="artifact">Siguiendo la SPEC, agrega:
+1. Guarda los contratos y sus cambios en el almacenamiento del artifact, en modo compartido, para que no se pierdan al recargar y para que quien reciba el link vea el mismo inventario. Si no está disponible, modo solo lectura con un aviso. Confirmaciones dentro de la página (no uses confirm()).
+2. Botón "Exportar JSON" (descarga todos los contratos) y "Importar JSON" (carga un archivo exportado por esta misma app, reemplazando los datos tras confirmación).
+3. Botón "Nuevo contrato" que abre un formulario con todos los campos del modelo de datos (los campos de lista de opciones como selectores; las fechas con selector de fecha). Al guardar, la lista de chequeo se crea automáticamente según el tipo (R7 y R8) con todos los documentos en "No", y el contrato aparece en el inventario con su semáforo calculado.
+4. Filtros en el inventario por tipo, color de semáforo y estado de liquidación, y un buscador por número o contratista.
+Envuelve las lecturas y escrituras de localStorage en try/catch para que la app funcione aunque el almacenamiento falle. No modifiques el motor de cálculo ni el generador de oficios.</pre>
+</div>
+    <div class="pslide__verse" data-in>
+      <p class="pslide__label">Qué debe verse</p>
+      <p>crear un contrato tipo Suministro terminado hace 3 meses sin plazo pactado → Naranja o Amarillo según los días; recargar → sigue ahí; exportar → importar en otra pestaña → mismos datos.</p>
+    </div>
+    <div class="pslide__porque" data-in>
+      <p class="pslide__label">Por qué importa</p>
+      <p>aquí se ve la diferencia entre herramientas: en un archivo local los datos viven en su navegador; en un artifact, en el almacenamiento compartido que ve su equipo. Y en ninguno de los dos hay datos reales.</p>
+    </div>
+  </div>
+</section>
+
+<section id="prompt-7" data-block="3" data-bg-alpha="0.2" data-ctrl="pbox" class="pslide s-tight">
+  <header class="pslide__head">
+    <h2 class="pslide__title" data-in><span>Prompt 7 (opcional)</span> — Lectura por palabras clave</h2>
+  </header>
+  <div class="pslide__grid">
+    <div class="pslide__hace" data-in>
+      <p class="pslide__label">Qué hace</p>
+      <p>simula la "lectura" de un informe sin IA: busca palabras clave y <b>sugiere</b> marcar documentos; la persona confirma uno por uno. Es la antesala de la IA real.</p>
+    </div>
+<div class="pbox" data-pbox>
+<pre>Agrega en la ficha del contrato un cuadro de texto "Pegar texto del informe final de supervisión" y un botón "Detectar documentos mencionados".
+Al hacer clic, busca en el texto pegado (sin distinguir mayúsculas ni tildes) palabras clave asociadas a cada documento de la lista de chequeo, por ejemplo: "acta de inicio" → Acta de inicio; "recibo final" o "acta de terminación" → Acta de terminación / recibo final; "seguridad social" o "parafiscales" → Certificación de aportes; "póliza" o "garantía" → Garantías actualizadas; "informe final" → Informe final del contratista; "pago" o "balance" → Certificación de pagos.
+Muestra una lista de sugerencias: "El informe menciona [documento]; ¿marcar como Sí?" con un botón por cada una. Nunca cambies el estado automáticamente: el usuario confirma uno por uno.
+No modifiques nada más.</pre>
+</div>
+    <div class="pslide__verse" data-in>
+      <p class="pslide__label">Prueba</p>
+      <p>pegar "Se suscribió acta de recibo final el 20 de septiembre; el contratista allegó certificación de pagos de seguridad social y parafiscales; la póliza se encuentra en trámite de actualización." → debe sugerir 3 documentos.</p>
+    </div>
+    <div class="pslide__porque" data-in>
+      <p class="pslide__label">Por qué importa</p>
+      <p>el flujo "sugerir → humano confirma" ya queda construido. Cuando llegue la IA real (con API key y protección de datos), solo cambia el motor, no el flujo.</p>
+    </div>
+  </div>
+</section>

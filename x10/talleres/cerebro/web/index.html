@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#0B0F1A" />
     <title>Cerebro · Construye tus skills</title>
-    <meta name="description" content="Escribe lo que la IA no puede buscar de ti y llévatelo como skill: para cualquier tarea, para pasar de una idea a la spec, o el cerebro jurídico completo. Sirve en Claude, ChatGPT y Gemini. Nada se envía a ningún servidor." />
+    <meta name="description" content="Escribe lo que la IA no puede buscar de ti y llévatelo como skill: para cualquier tarea, para pasar de una idea a la spec, de un brief a un MVP, o el cerebro jurídico completo. Sirve en Claude, ChatGPT y Gemini. Nada se envía a ningún servidor." />
     <meta property="og:title" content="Cerebro · Construye tus skills" />
     <meta property="og:description" content="La IA no es tu asistente junior; es tu sistema. Y los sistemas se diseñan." />
     <meta property="og:type" content="website" />
@@ -111,7 +111,7 @@
         <div class="wrap wrap--wide">
           <p class="eyebrow" id="construir-eyebrow">Paso 1 · Construye</p>
 
-          <!-- Three cerebros (shared/cerebros.js). Deep links #skill, #ideacion, #juridico and ?c= pick one. -->
+          <!-- Four cerebros (shared/cerebros.js). Deep links #skill, #ideacion, #mvp, #juridico and ?c= pick one. -->
           <div class="cerebros" role="tablist" aria-label="Elige qué construyes" id="cerebros">
             <button class="cerebros__tab" type="button" role="tab" id="cerebro-skill" data-cerebro="skill" aria-controls="cerebro-panel" aria-selected="true" tabindex="0">
               <span class="cerebros__label"><span class="cerebros__full">Skill general</span><span class="cerebros__corto" aria-hidden="true">Skill</span></span>
@@ -120,6 +120,10 @@
             <button class="cerebros__tab" type="button" role="tab" id="cerebro-ideacion" data-cerebro="ideacion" aria-controls="cerebro-panel" aria-selected="false" tabindex="-1">
               <span class="cerebros__label"><span class="cerebros__full">Ideación</span><span class="cerebros__corto" aria-hidden="true">Ideación</span></span>
               <span class="cerebros__sub">De la idea a la spec y al primer prompt</span>
+            </button>
+            <button class="cerebros__tab" type="button" role="tab" id="cerebro-mvp" data-cerebro="mvp" aria-controls="cerebro-panel" aria-selected="false" tabindex="-1">
+              <span class="cerebros__label"><span class="cerebros__full">De brief a MVP</span><span class="cerebros__corto" aria-hidden="true">Brief→MVP</span></span>
+              <span class="cerebros__sub">Del brief a la spec, las capas y los prompts</span>
             </button>
             <button class="cerebros__tab" type="button" role="tab" id="cerebro-juridico" data-cerebro="juridico" aria-controls="cerebro-panel" aria-selected="false" tabindex="-1">
               <span class="cerebros__label"><span class="cerebros__full">Jurídico</span><span class="cerebros__corto" aria-hidden="true">Jurídico</span></span>
@@ -144,6 +148,7 @@
           <div class="build">
             <form class="build__form" id="perfil-skill" data-form="skill" novalidate aria-label="Tu skill"></form>
             <form class="build__form" id="perfil-ideacion" data-form="ideacion" novalidate aria-label="Tu idea" hidden></form>
+            <form class="build__form" id="perfil-mvp" data-form="mvp" novalidate aria-label="Tu brief" hidden></form>
             <form class="build__form" id="perfil" data-form="juridico" novalidate aria-label="Tu perfil" hidden></form>
 
             <div class="build__out">
@@ -211,9 +216,10 @@
 
             <div class="load__side">
               <!-- The new cerebros: one list from descargas() (shared/cerebros.js). -->
-              <div class="dl surface" id="descargas-card" data-solo="skill ideacion" aria-labelledby="descargas-t">
+              <div class="dl surface" id="descargas-card" data-solo="skill ideacion mvp" aria-labelledby="descargas-t">
                 <h3 class="h3" id="descargas-t">Descárgala</h3>
                 <p class="dl__lead" id="descargas-lead">El ZIP de la skill va a Claude tal cual: súbelo sin descomprimirlo. El kit trae además el README con la ruta de cada herramienta y las instrucciones para ChatGPT y Gemini.</p>
+                <p class="dl__aviso" id="descargas-aviso" hidden></p>
                 <ul class="dl__files dl__files--nota" id="descargas" aria-label="Descargar la skill"></ul>
                 <details class="skills-how">
                   <summary>Cómo instalarla en Claude</summary>

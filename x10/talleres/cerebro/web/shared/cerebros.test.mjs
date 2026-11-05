@@ -1,4 +1,4 @@
-// The registry the landing reads: three cerebros, each one able to build, paste,
+// The registry the landing reads: four cerebros, each one able to build, paste,
 // download and test from its own profile.
 
 import test from 'node:test';
@@ -9,24 +9,26 @@ import { KEYS } from './store.js';
 import { INTRO_CARGA, PERFIL_LAURA, TAREAS } from './catalog.js';
 import { FIJOS, buildPaste } from './generator.js';
 import { INSTRUCCION_PEGAR } from './skill-general.js';
+import { CABECERA_GPT } from './brief-a-mvp.content.js';
+import { ARCHIVOS_MVP, CONFIRM3_MVP, buildMvp } from './brief-a-mvp.js';
 
 const byId = Object.fromEntries(CEREBROS.map((c) => [c.id, c]));
 const isZip = (bytes) => bytes instanceof Uint8Array && bytes[0] === 0x50 && bytes[1] === 0x4b;
 const ascii = (bytes) => new TextDecoder('latin1').decode(bytes);
 
-test('three cerebros, skill first; labels and examples as the plan says', () => {
-  assert.deepEqual(CEREBROS.map((c) => c.id), ['skill', 'ideacion', 'juridico']);
-  assert.deepEqual(CEREBROS.map((c) => c.label), ['Skill general', 'Ideación', 'Jurídico']);
-  assert.deepEqual(CEREBROS.map((c) => c.corto), ['Skill', 'Ideación', 'Jurídico']);
-  assert.deepEqual(CEREBROS.map((c) => c.ejemplo.nombre), ['Daniel', 'Sofía', 'Laura']);
-  assert.deepEqual(CEREBROS.map((c) => c.principal), ['SKILL.md', 'SKILL.md', '00_ADN.md']);
+test('four cerebros, skill first, brief→MVP before the legal one; labels and examples as the plans say', () => {
+  assert.deepEqual(CEREBROS.map((c) => c.id), ['skill', 'ideacion', 'mvp', 'juridico']);
+  assert.deepEqual(CEREBROS.map((c) => c.label), ['Skill general', 'Ideación', 'De brief a MVP', 'Jurídico']);
+  assert.deepEqual(CEREBROS.map((c) => c.corto), ['Skill', 'Ideación', 'Brief→MVP', 'Jurídico']);
+  assert.deepEqual(CEREBROS.map((c) => c.ejemplo.nombre), ['Daniel', 'Sofía', 'Grupo 7 · Semáforo de Liquidaciones', 'Laura']);
+  assert.deepEqual(CEREBROS.map((c) => c.principal), ['SKILL.md', 'SKILL.md', 'SKILL.md', '00_ADN.md']);
   for (const c of CEREBROS) {
     for (const k of ['sub', 'eyebrow', 'titulo', 'lead', 'cargarLead', 'pruebaLead']) assert.ok(typeof c[k] === 'string' && c[k], `${c.id}.${k}`);
   }
 });
 
 test('each cerebro stores its profile under its own contract key', () => {
-  assert.deepEqual(CEREBROS.map((c) => c.storeKey), [KEYS.perfilSkill, KEYS.perfilIdeacion, KEYS.perfil]);
+  assert.deepEqual(CEREBROS.map((c) => c.storeKey), [KEYS.perfilSkill, KEYS.perfilIdeacion, KEYS.perfilMvp, KEYS.perfil]);
 });
 
 test('cerebroById: known ids, null otherwise', () => {
@@ -60,6 +62,11 @@ test('descargas(): every entry is a named ZIP whose bytes start with PK', () => 
 test('descargas(): the skill ZIP and the whole kit of each new cerebro', () => {
   assert.deepEqual(byId.skill.descargas(byId.skill.perfilEjemplo).map((d) => d.archivo), ['resumen-de-reunion.zip', 'resumen-de-reunion-kit.zip']);
   assert.deepEqual(byId.ideacion.descargas(byId.ideacion.perfilEjemplo).map((d) => d.archivo), ['ideacion-de-producto.zip', 'ideacion-kit.zip']);
+  assert.deepEqual(
+    byId.mvp.descargas(byId.mvp.perfilEjemplo).map((d) => [d.archivo, d.titulo, d.nota]),
+    [['brief-a-mvp.zip', 'Skill para Claude', 'Súbela sin descomprimir'], ['brief-a-mvp-kit.zip', 'Todo', 'README, instrucciones, primer mensaje y la skill']],
+  );
+  assert.ok(ascii(byId.mvp.descargas(byId.mvp.perfilEjemplo)[0].bytes()).includes('brief-a-mvp/SKILL.md'));
   const skill = ascii(byId.skill.descargas(byId.skill.perfilEjemplo)[0].bytes());
   assert.ok(skill.includes('resumen-de-reunion/SKILL.md'));
 });
@@ -94,11 +101,16 @@ test('prueba(): a question and the two columns; legal keeps one tab per chosen t
   assert.match(sinTareas.aviso, /No elegiste tareas/);
   assert.equal(byId.skill.prueba(byId.skill.perfilEjemplo).pregunta, byId.skill.perfilEjemplo.ejemploEntrada);
   assert.equal(byId.ideacion.prueba(byId.ideacion.perfilEjemplo).pregunta, byId.ideacion.perfilEjemplo.frase);
+  const pm = buildMvp(byId.mvp.perfilEjemplo)['PRIMER_MENSAJE.md'];
+  assert.equal(byId.mvp.prueba(byId.mvp.perfilEjemplo).pregunta, pm.slice(pm.indexOf('\n---\n\n') + 6).trimEnd(), 'brief→MVP: the first message is the test');
+  assert.equal(byId.mvp.pruebaLarga, true);
+  assert.ok(CEREBROS.filter((c) => c.id !== 'mvp').every((c) => !c.pruebaLarga));
 });
 
 test('paste(): the new cerebros start with the skill header; legal is the five files as today', () => {
   assert.ok(byId.skill.paste(byId.skill.perfilEjemplo).startsWith(`${INSTRUCCION_PEGAR}\n\n`));
   assert.ok(byId.ideacion.paste(byId.ideacion.perfilEjemplo).startsWith(`${INSTRUCCION_PEGAR}\n\n`));
+  assert.ok(byId.mvp.paste(byId.mvp.perfilEjemplo).startsWith(`${CABECERA_GPT}\n\n`), 'brief→MVP: the draft header');
   assert.equal(byId.juridico.paste(PERFIL_LAURA), buildPaste(PERFIL_LAURA));
   assert.ok(byId.juridico.paste(PERFIL_LAURA).startsWith(INTRO_CARGA));
 });
@@ -186,6 +198,10 @@ test('«Te llevas» lists files of the cerebro, each with its one-line descripti
   }
   assert.deepEqual(byId.skill.llevas.items.map((x) => x.archivo), ['SKILL.md', 'INSTRUCCIONES_GPT.md', 'README.md']);
   assert.equal(byId.ideacion.llevas.items.length, 6);
+  assert.deepEqual(byId.mvp.llevas.items.map((x) => x.archivo), [
+    'SKILL.md', 'INSTRUCCIONES_GPT.md', 'PRIMER_MENSAJE.md', 'references/plantilla-spec-mvp.md', 'references/tabla-de-recorte.md',
+    'references/prompts-por-capa.md', 'references/herramientas.md', 'references/reglas-de-mesa.md', 'README.md',
+  ]);
 });
 
 test('elegirCerebro: hash, then ?c=, then the saved tab, then skill', () => {
@@ -207,6 +223,13 @@ test('short names for tabs and the map, two letters for the dock', () => {
   assert.equal(inicialDock('INSTRUCCIONES_GPT.md'), 'IN');
   assert.equal(inicialDock('references/reglas-de-mesa.md'), 'RE');
   assert.equal(inicialDock('references/plantilla-spec.md'), 'PL');
+  // Within a cerebro's list, two files never share their letters.
+  for (const c of CEREBROS) {
+    const dock = c.archivos.map((f) => inicialDock(f, c.archivos));
+    assert.equal(new Set(dock).size, dock.length, `${c.id}: ${dock.join(' ')}`);
+  }
+  assert.deepEqual(byId.ideacion.archivos.map((f) => inicialDock(f, byId.ideacion.archivos)), byId.ideacion.archivos.map((f) => inicialDock(f)), 'ideación unchanged');
+  assert.deepEqual(ARCHIVOS_MVP.map((f) => inicialDock(f, ARCHIVOS_MVP)), ['R', 'SK', 'IN', 'PM', 'PL', 'TA', 'PC', 'HE', 'RE']);
 });
 
 test('the landing has one tab per cerebro, in order, with its label, short label and sub-label', () => {
@@ -221,4 +244,38 @@ test('the landing has one tab per cerebro, in order, with its label, short label
     assert.ok(tab.includes(`<span class="cerebros__sub">${c.sub}</span>`), `${c.id} sub`);
   }
   assert.match(strip, /role="tablist"/);
+});
+
+test('brief→MVP: the nine fields of PROMPT 1, in order, with their labels and hints', () => {
+  const c = byId.mvp;
+  assert.deepEqual(c.campos.map((f) => [f.id, f.tipo]), [
+    ['brief', 'textarea'], ['sector', 'radio'], ['herramienta', 'radio'], ['nivel', 'radio'], ['tiempo', 'radio'],
+    ['restricciones', 'lines'], ['nombre', 'text'], ['tono', 'cards'], ['herramientas', 'checkbox'],
+  ]);
+  assert.deepEqual(c.campos.map((f) => f.label), [
+    'Tu brief o tu idea', 'Sector', 'Con qué vas a construir', 'Tu experiencia construyendo', 'Tiempo disponible',
+    'Tus límites', '¿Cómo quieres que la IA te llame?', 'Cómo quieres que te responda', 'La IA que usas hoy',
+  ]);
+  assert.deepEqual(c.campos.filter((f) => f.opcional).map((f) => f.id), ['restricciones', 'nombre']);
+  const f = Object.fromEntries(c.campos.map((x) => [x.id, x]));
+  assert.ok(f.brief.hint.startsWith('Pega el brief completo (nombre y entidad, usuario, problema, reto, solución, flujo, qué NO hará, datos, humano responsable, cómo sabremos que funciona)'));
+  assert.equal(f.tiempo.hint, 'Define cuántas capas entran en el MVP.');
+  assert.deepEqual(f.herramienta.opciones.map((o) => o.label), ['Lovable', 'Claude (artifact)', 'Claude Code', 'Codex', 'Gemini AI Studio', 'No sé aún']);
+  assert.deepEqual(f.sector.opciones.map((o) => o.label), byId.ideacion.campos.find((x) => x.id === 'sector').opciones.map((o) => o.label));
+  assert.deepEqual(f.nivel.opciones.map((o) => o.label), byId.ideacion.campos.find((x) => x.id === 'nivel').opciones.map((o) => o.label));
+  assert.deepEqual(f.tono.opciones, byId.ideacion.campos.find((x) => x.id === 'tono').opciones);
+  assert.deepEqual(f.herramientas.opciones, byId.ideacion.campos.find((x) => x.id === 'herramientas').opciones);
+  assert.equal(c.ejemplo.del, 'del Grupo 7');
+  assert.deepEqual(c.confirm3, CONFIRM3_MVP);
+  assert.equal(c.titulo, 'Tu brief escribe tu skill de construcción');
+  assert.equal(c.sub, 'Del brief a la spec, las capas y los prompts');
+});
+
+test('descargasHabilitadas: only brief→MVP gates its ZIPs, on the brief', () => {
+  const c = byId.mvp;
+  assert.equal(c.descargasHabilitadas(c.perfilEjemplo), true);
+  assert.equal(c.descargasHabilitadas(c.perfilVacio), false);
+  assert.equal(c.descargasHabilitadas({ ...c.perfilVacio, brief: 'Quiero una app que ordene turnos' }), true);
+  assert.ok(c.descargasAviso.includes('campo 01'));
+  for (const x of CEREBROS.filter((y) => y.id !== 'mvp')) assert.equal(x.descargasHabilitadas, undefined, x.id);
 });

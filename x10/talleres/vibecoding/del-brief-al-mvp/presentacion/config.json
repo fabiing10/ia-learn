@@ -1,0 +1,49 @@
+{
+  "titulo": "Del brief al MVP · Sesión práctica",
+  "fecha": "5 de noviembre de 2026",
+  "marca": {
+    "acento": "›",
+    "texto": "vibe coding"
+  },
+  "segmentos": 5,
+  "bloques": {
+    "0": {
+      "num": "00",
+      "name": "Portada e índice"
+    },
+    "1": {
+      "num": "01",
+      "name": "Método"
+    },
+    "2": {
+      "num": "02",
+      "name": "El caso"
+    },
+    "3": {
+      "num": "03",
+      "name": "Prompts"
+    },
+    "4": {
+      "num": "04",
+      "name": "Prueba y cierre"
+    }
+  },
+  "tema": {
+    "particulas": {
+      "dark": {
+        "gold": "#3AC7E8",
+        "cyan": "#E8B53A"
+      },
+      "light": {
+        "gold": "#1597B5",
+        "cyan": "#B07A0C"
+      }
+    },
+    "forma": "chevron"
+  },
+  "qr": {
+    "landing": "https://x10.expert/vibecoding/",
+    "cerebro": "https://x10.expert/cerebro/#mvp"
+  },
+  "expositor": "Fabián Zapata"
+}

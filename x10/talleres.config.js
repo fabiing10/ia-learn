@@ -55,6 +55,25 @@ export const TALLERES = [
     web: { root: 'talleres/vibecoding/web', base: '/vibecoding/', out: 'dist/vibecoding' },
   },
   {
+    // Practical session of Vibe Coding: a public deck that participants open
+    // themselves to copy the prompts (no landing, no web pages of its own).
+    slug: 'brief-mvp',
+    nombre: 'Del brief al MVP · Sesión práctica',
+    resumen: 'Hoy construimos, con sus herramientas, un producto que funciona.',
+    fecha: '5 de noviembre de 2026',
+    marca: { acento: '›', color: '#3AC7E8' },
+    enlaces: { presentacion: '/vibecoding/del-brief-al-mvp/' },
+    deck: {
+      slides: 'talleres/vibecoding/del-brief-al-mvp/presentacion/slides',
+      config: 'talleres/vibecoding/del-brief-al-mvp/presentacion/config.json',
+      qr: 'talleres/vibecoding/del-brief-al-mvp/presentacion/qr',
+      js: 'talleres/vibecoding/del-brief-al-mvp/presentacion/js',
+      css: 'talleres/vibecoding/del-brief-al-mvp/presentacion/deck.css',
+      public: 'talleres/vibecoding/del-brief-al-mvp/presentacion/public',
+      out: 'dist/vibecoding/del-brief-al-mvp',
+    },
+  },
+  {
     slug: 'cerebro',
     nombre: 'Cerebro · IA generativa y skills',
     resumen: 'Un cerebro es lo que la IA no puede buscar de ti, escrito una vez. Tres constructores: una skill general, la skill de ideación del curso de vibe coding y el cerebro jurídico.',

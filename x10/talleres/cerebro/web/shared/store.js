@@ -1,5 +1,5 @@
 // Profile persistence in this browser only: one localStorage key per cerebro
-// (`cj-perfil-skill`, `cj-perfil-ideacion`, `cj-perfil` for the legal one) and the
+// (`cj-perfil-skill`, `cj-perfil-ideacion`, `cj-perfil-mvp`, `cj-perfil` for the legal one) and the
 // chosen tab in `cj-cerebro`. Every access is wrapped: private windows, blocked
 // storage or quota errors just mean the profile lives for this visit.
 
@@ -9,6 +9,7 @@ export const KEYS = {
   perfil: 'cj-perfil',
   perfilSkill: 'cj-perfil-skill',
   perfilIdeacion: 'cj-perfil-ideacion',
+  perfilMvp: 'cj-perfil-mvp',
   cerebro: 'cj-cerebro',
   theme: 'cj-theme',
   encuesta: 'cj-encuesta',
@@ -71,11 +72,11 @@ export function saveCerebro(id, storage = localStore()) {
   }
 }
 
-/** «Borrar mis datos»: the three profiles, the tab choice and the theme. */
+/** «Borrar mis datos»: the four profiles, the tab choice and the theme. */
 export function clearData(storage = localStore()) {
   try {
     if (!storage) return false;
-    for (const k of [KEYS.perfil, KEYS.perfilSkill, KEYS.perfilIdeacion, KEYS.cerebro, KEYS.theme]) storage.removeItem(k);
+    for (const k of [KEYS.perfil, KEYS.perfilSkill, KEYS.perfilIdeacion, KEYS.perfilMvp, KEYS.cerebro, KEYS.theme]) storage.removeItem(k);
     return true;
   } catch {
     return false;

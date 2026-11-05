@@ -674,3 +674,28 @@ slides (D updates `smoke.mjs`; C keeps ≥ 24).
 - Pegar, Proyecto o skill (deck and landing): «Pegar: vale para este chat. Proyecto: vale
   para todos los chats del proyecto. Skill: la IA la aplica sola, en cualquier chat,
   cuando aparece la tarea.»
+
+---
+
+## Fourth cerebro · «De brief a MVP» (`mvp`, 5 Nov 2026)
+
+Spec: the user's brief `05-Instrucciones-Claude-Code-Cerebro-modo-brief-a-mvp` (kept outside
+the repo) and the review `insumos/brief-a-mvp/04-Revision-Cerebro-Ideacion-y-skill-brief-a-mvp.md`.
+Behaves like Ideación: nine fields → nine files → tabs → copy → two ZIPs.
+
+- Skill `brief-a-mvp`: name and description are fixed (activation depends on them); the
+  body, the five references, the GPT cabecera, the README and the Grupo 7 brief come
+  verbatim from `insumos/brief-a-mvp/skill-brief-a-mvp/` through
+  `web/shared/brief-a-mvp.content.js`, which a test keeps equal to the insumo files.
+  Change the content there, never in the JS. `brief-a-mvp.content.test.mjs` compares every
+  export with its file (mapping in its header) and keeps the `description` ≤ 200 characters,
+  the limit claude.ai enforces on upload. The README's opening, routes and «Probar» check are
+  read from `README_BORRADOR` by structure in `brief-a-mvp.js`.
+- Parametrised only: presentation line, the three «Qué necesito» bullets, `- Límite:` lines
+  and the public-sector rule, tone sentence, example name, the public section of
+  `tabla-de-recorte.md`, the «(la mía)» block of `herramientas.md`, PRIMER_MENSAJE,
+  INSTRUCCIONES_GPT (cabecera + SKILL body + references), README routes and «Probar».
+- Evals (`insumos/.../evals/`) never ship in the ZIPs.
+- Ideación stays untouched (decision of the brief). The review's points 7–8 (tool-specific
+  cabecera and a public-sector example inside Ideación) are deferred until the user reopens them.
+- Store key `cj-perfil-mvp`; tab id `mvp`, deep link `#mvp`.

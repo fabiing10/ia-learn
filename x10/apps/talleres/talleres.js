@@ -26,7 +26,8 @@ function card(t) {
   const head = el('div', { class: 'hub-card__head' });
   head.append(el('span', { class: 'hub-card__mark', 'aria-hidden': 'true' }, t.marca?.acento || '·'));
   const title = el('h2', { class: 'hub-card__title' });
-  title.append(el('a', { href: t.enlaces.landing }, t.nombre));
+  // A workshop without a landing (a deck-only session) opens its deck.
+  title.append(el('a', { href: t.enlaces.landing || t.enlaces.presentacion }, t.nombre));
   head.append(title);
 
   const date = el('p', { class: 'hub-card__date' }, isPlaceholder(t.fecha) ? 'Fecha por confirmar' : t.fecha);

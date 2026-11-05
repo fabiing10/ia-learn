@@ -1,6 +1,6 @@
-// /cerebro/ — the page attendees open from the QR. Three cerebros as tabs of
-// «Construir» (shared/cerebros.js): a general skill, the ideation skill and the
-// legal brain. Everything below the tabs reads the active one: profile → files →
+// /cerebro/ — the page attendees open from the QR. Four cerebros as tabs of
+// «Construir» (shared/cerebros.js): a general skill, the ideation skill, the
+// brief-to-MVP skill and the legal brain. Everything below the tabs reads the active one: profile → files →
 // copy, ZIPs, test, and the vault for the legal brain. Everything runs in the
 // browser; nothing is sent anywhere.
 
@@ -68,6 +68,9 @@ function perfilDe(c) {
 let profile = perfilDe(cerebro);
 let files = cerebro.build(profile);
 
+/** «de Laura», or the cerebro's own wording («del Grupo 7»), for the example button and toasts. */
+const delEjemplo = (c) => c.ejemplo.del ?? `de ${c.ejemplo.nombre}`;
+
 /** The tabs of a cerebro's files: its list, plus any extra file its profile adds (references/material.md). */
 const nombres = (c, fs) => [...c.archivos, ...Object.keys(fs).filter((n) => !c.archivos.includes(n))];
 
@@ -101,7 +104,12 @@ function formFor(c) {
       onChange: (campo, next, { typing }) => {
         if (c !== cerebro) return;
         if (typing) applyTyping(next, campo);
-        else apply(next, [campo]);
+        else {
+          // A click right after typing: the typed text goes first, so its pending
+          // (older) snapshot never lands after this change and undoes it.
+          applyTyping.flush();
+          apply(next, [campo]);
+        }
       },
       onFocusField: (campo) => c === cerebro && mapa.highlight(campo),
     };
@@ -163,7 +171,7 @@ function reset(next, message, opts) {
 }
 
 $('perfil-blanco').addEventListener('click', () => reset(cerebro.perfilVacio, cerebro.vacio.toast));
-$('perfil-laura').addEventListener('click', () => reset(cerebro.perfilEjemplo, `Volviste al ejemplo de ${cerebro.ejemplo.nombre}.`));
+$('perfil-laura').addEventListener('click', () => reset(cerebro.perfilEjemplo, `Volviste al ejemplo ${delEjemplo(cerebro)}.`));
 
 let lastSaveOk = true;
 function state(saveOk = lastSaveOk) {
@@ -235,21 +243,27 @@ function renderDescargas() {
     return;
   }
   $('descargas-lead').textContent = cerebro.dlLead;
+  // A cerebro may hold its ZIPs until the profile has what they need (brief→MVP: the brief).
+  const ok = descargasListas();
+  const aviso = $('descargas-aviso');
+  aviso.hidden = ok;
+  aviso.textContent = ok ? '' : cerebro.descargasAviso;
   $('descargas').innerHTML = list
     .map(
       (d) =>
-        `<li><button class="file-dl" type="button" data-descarga="${esc(d.id)}"><span data-icon="${d.tipo === 'todo' ? 'zip' : 'download'}"></span><span class="file-dl__two"><code>${esc(d.archivo)}</code><small>${esc(d.titulo)} · ${esc(d.nota)}</small></span></button></li>`,
+        `<li><button class="file-dl" type="button" data-descarga="${esc(d.id)}"${ok ? '' : ' disabled aria-describedby="descargas-aviso"'}><span data-icon="${d.tipo === 'todo' ? 'zip' : 'download'}"></span><span class="file-dl__two"><code>${esc(d.archivo)}</code><small>${esc(d.titulo)} · ${esc(d.nota)}</small></span></button></li>`,
     )
     .join('');
   paintIcons($('descargas'));
 }
+const descargasListas = () => cerebro.descargasHabilitadas?.(profile) ?? true;
 $('bajar-skills').addEventListener('click', (e) => {
   const b = e.target.closest('[data-skill]');
   if (b) descargar(descarga((d) => d.tipo === 'skill' && d.id === b.dataset.skill));
 });
 $('descargas').addEventListener('click', (e) => {
   const b = e.target.closest('[data-descarga]');
-  if (b) descargar(descarga((d) => d.id === b.dataset.descarga));
+  if (b && descargasListas()) descargar(descarga((d) => d.id === b.dataset.descarga));
 });
 for (const [pasos, nota] of [['skills-pasos', 'skills-nota'], ['descargas-pasos', 'descargas-nota']]) {
   $(pasos).innerHTML = INSTALAR_SKILL.pasos.map((x) => `<li>${inline(x)}</li>`).join('');
@@ -345,6 +359,12 @@ function renderPruebas() {
     panel.setAttribute('aria-label', 'La prueba');
     $('pregunta').textContent = pr.pregunta;
   }
+  // A whole first message (brief→MVP) keeps its lines and its table.
+  const q = $('pregunta');
+  q.classList.toggle('question__text--largo', !!cerebro.pruebaLarga);
+  // Scrolled in place, so it takes keyboard focus.
+  if (cerebro.pruebaLarga) q.setAttribute('tabindex', '0');
+  else q.removeAttribute('tabindex');
   const nota = $('pregunta-nota');
   nota.hidden = !pr.aviso;
   nota.textContent = pr.aviso || '';
@@ -399,7 +419,7 @@ $('bajar-boveda').addEventListener('click', () => {
 
 // ── Privacidad ──
 
-// Clears the three profiles and the tab choice; every cerebro goes back to its
+// Clears the four profiles and the tab choice; every cerebro goes back to its
 // example and nothing is saved again until the next edit. The open tab stays.
 $('borrar-datos').addEventListener('click', () => {
   const ok = clearData();
@@ -412,7 +432,7 @@ $('borrar-datos').addEventListener('click', () => {
   }
   reset(
     cerebro.perfilEjemplo,
-    ok ? `Borrado de este navegador. Volviste al ejemplo de ${cerebro.ejemplo.nombre}.` : 'Este navegador no guarda datos: no había nada que borrar.',
+    ok ? `Borrado de este navegador. Volviste al ejemplo ${delEjemplo(cerebro)}.` : 'Este navegador no guarda datos: no había nada que borrar.',
     { save: false },
   );
 });
@@ -422,7 +442,7 @@ $('borrar-datos').addEventListener('click', () => {
 const dock = $('dock');
 const dockFiles = $('dock-files');
 function renderDock(list) {
-  dockFiles.innerHTML = list.map((n) => `<span class="dock__node" data-archivo="${n}" title="${n}">${inicialDock(n)}</span>`).join('');
+  dockFiles.innerHTML = list.map((n) => `<span class="dock__node" data-archivo="${n}" title="${n}">${inicialDock(n, list)}</span>`).join('');
 }
 dockFiles.addEventListener('click', () => $('archivos').scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'start' }));
 
@@ -483,12 +503,12 @@ function renderTextos() {
   $('construir-eyebrow').textContent = cerebro.eyebrow;
   $('construir-t').textContent = cerebro.titulo;
   $('construir-lead').textContent = cerebro.lead;
-  $('perfil-ejemplo-label').textContent = `Volver al ejemplo de ${cerebro.ejemplo.nombre}`;
+  $('perfil-ejemplo-label').textContent = `Volver al ejemplo ${delEjemplo(cerebro)}`;
   $('cargar-lead').textContent = cerebro.cargarLead;
   $('prueba-lead').textContent = cerebro.pruebaLead;
 }
 
-/** Blocks that exist for some cerebros only: data-solo="juridico", data-solo="skill ideacion". */
+/** Blocks that exist for some cerebros only: data-solo="juridico", data-solo="skill ideacion mvp". */
 function syncSolo() {
   for (const el of document.querySelectorAll('[data-solo]')) el.hidden = !el.dataset.solo.split(' ').includes(cerebro.id);
 }

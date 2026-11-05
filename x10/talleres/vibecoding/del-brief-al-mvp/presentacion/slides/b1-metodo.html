@@ -1,0 +1,99 @@
+<!-- BLOQUE 1 · Método (Parte A, diapositivas 2 a 5) -->
+
+<section id="recorrido" data-block="1" data-bg-alpha="0.3" class="bm-slide bm-path s-tight">
+  <header class="bm-head">
+    <p class="vc-kicker" data-in>Dónde estamos en el recorrido</p>
+    <h2 class="bm-title" data-split="words">Tres sesiones, un camino</h2>
+  </header>
+  <ol class="bm-steps" data-in="stagger">
+    <li class="is-done">
+      <span class="bm-steps__n" aria-hidden="true">1</span>
+      <b>Ideación</b><span class="sr-only"> (hecho)</span>
+      <p>la idea en una frase: quién la usa y qué le resuelve.</p>
+    </li>
+    <li class="is-done">
+      <span class="bm-steps__n" aria-hidden="true">2</span>
+      <b>Brief</b><span class="sr-only"> (hecho)</span>
+      <p>los diez campos: usuario, problema, reto, solución, flujo, qué NO hará, datos, humano responsable, cómo sabremos que funciona.</p>
+    </li>
+    <li class="is-done">
+      <span class="bm-steps__n" aria-hidden="true">3</span>
+      <b>Especificación</b><span class="sr-only"> (hecho)</span>
+      <p>la prueba del adivino: todo lo que la herramienta tendría que adivinar, escrito.</p>
+    </li>
+    <li class="is-today">
+      <span class="bm-steps__n" aria-hidden="true">4</span>
+      <b>Construcción (hoy)</b>
+      <p>la SPEC se convierte en prompts por capas y cada capa se prueba antes de la siguiente.</p>
+    </li>
+  </ol>
+  <p class="bm-foot" data-in>Ustedes ya tienen su brief. Hoy usamos uno de ejemplo para aprender el método; al final lo aplican al suyo.</p>
+</section>
+
+<section id="mvp" data-block="1" data-bg-alpha="0.25" class="bm-slide bm-mvp s-tight">
+  <header class="bm-head">
+    <p class="vc-kicker" data-in>Qué es un MVP (y qué no)</p>
+    <h2 class="bm-title" data-split="words">Un MVP se demuestra en cinco minutos con datos inventados</h2>
+  </header>
+  <table class="bm-table bm-table--yesno" data-in>
+    <thead>
+      <tr><th scope="col">Un MVP SÍ es</th><th scope="col">Un MVP NO es</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Una pantalla (máximo tres)</td><td>Un sistema de información</td></tr>
+      <tr><td>Un flujo de principio a fin</td><td>Doce funcionalidades a medias</td></tr>
+      <tr><td>Datos sintéticos dentro de la app</td><td>Conexión a SECOP, Orfeo, correo, bases institucionales</td></tr>
+      <tr><td>Reglas escritas por ustedes</td><td>Jurisprudencia "consultada" por la IA</td></tr>
+      <tr><td>Un botón "validado por humano"</td><td>Firma, radicación, notificación</td></tr>
+      <tr><td>Se prueba con 3 casos</td><td>Se mide con 100 expedientes</td></tr>
+    </tbody>
+  </table>
+  <p class="bm-punch" data-in>Si no lo puedes demostrar hoy con datos inventados, no es MVP: es roadmap. <em>Y está bien tener roadmap.</em></p>
+</section>
+
+<section id="patron" data-block="1" data-bg-alpha="0.25" class="bm-slide bm-pattern s-tight">
+  <header class="bm-head">
+    <p class="vc-kicker" data-in>El patrón que comparten sus ocho retos</p>
+    <h2 class="bm-title" data-split="words">Son el mismo producto con distinto contenido</h2>
+  </header>
+  <ol class="bm-chain" data-in="stagger" aria-label="Cadena de cinco eslabones">
+    <li><b>Entrada</b><span>documento, caso, factura, expediente</span></li>
+    <li><b>Criterios</b><span>lista de chequeo, reglas, repositorio</span></li>
+    <li><b>Análisis</b><span>contrastar; hallazgos con fuente</span></li>
+    <li><b>Salida</b><span>ficha, matriz, semáforo, borrador</span></li>
+    <li class="is-human"><b>Validación humana</b><span>revisa, ajusta, aprueba</span></li>
+  </ol>
+  <ul class="bm-tags" data-in="stagger" aria-label="Los ocho retos">
+    <li>RetenIA</li>
+    <li>Planeación</li>
+    <li>Municipios</li>
+    <li>Liquidaciones</li>
+    <li>IDARTES</li>
+    <li>DisciplinIA</li>
+    <li>IDU</li>
+    <li>Órganos de control</li>
+  </ul>
+  <p class="bm-punch" data-in>Ninguno necesita inventar una aplicación. <em>Cada eslabón de la cadena es un prompt.</em></p>
+</section>
+
+<section id="recorte" data-block="1" data-bg-alpha="0.25" class="bm-slide bm-cut s-tight">
+  <header class="bm-head">
+    <p class="vc-kicker" data-in>La regla de recorte</p>
+    <h2 class="bm-title" data-split="words">De lo pretencioso a lo viable, sin perder la idea</h2>
+  </header>
+  <table class="bm-table bm-table--cut" data-in>
+    <thead>
+      <tr><th scope="col">Lo que pide el brief</th><th scope="col">Lo que construimos hoy</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Consulta SECOP / bases de la entidad</td><td>10 registros de ejemplo en la app</td></tr>
+      <tr><td>Lee el PDF / el buzón</td><td>Un cuadro donde se pega texto</td></tr>
+      <tr><td>Consulta jurisprudencia y conceptos</td><td>5-10 reglas escritas por ustedes, visibles en la app</td></tr>
+      <tr><td>Alertas por correo</td><td>Semáforo y lista ordenada por urgencia</td></tr>
+      <tr><td>Firma, radica, notifica</td><td>Botón "Marcar como validado" y bloque de firma vacío</td></tr>
+      <tr><td>Genera Word, Excel, PPT</td><td>Un documento en texto con Copiar y Descargar</td></tr>
+      <tr><td>"Que la IA analice y decida"</td><td>Reglas explícitas; la IA al final, solo para sugerir</td></tr>
+    </tbody>
+  </table>
+  <p class="bm-gold" data-in><b>Regla de oro</b> Todo lo determinístico (plazos, cálculos, estados, listas de chequeo) se construye con reglas, no con IA.</p>
+</section>

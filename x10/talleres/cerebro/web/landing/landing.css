@@ -2,7 +2,7 @@
 @import '../shared/base.css';
 
 /* /cerebro/ — opened from a QR on phones and projected at 150 % zoom while the
-   presenter edits an example profile. Three cerebros as tabs of «Construir».
+   presenter edits an example profile. Four cerebros as tabs of «Construir».
    Mobile first; from 900 px the build area is the form on the left and, sticky on
    the right, the map over the files. */
 
@@ -464,14 +464,15 @@ code {
   font-size: clamp(1rem, 1.4vw, 1.125rem);
 }
 
-/* ── Build: the three cerebros (tabs) ──
-   Cards with a sub-label from 641 px; a one-row segmented control with the short
-   labels on phones (the full label and the sub-label stay for screen readers). */
+/* ── Build: the four cerebros (tabs) ──
+   Cards with a sub-label: four in a row from 1000 px, two by two below. On phones,
+   two rows of pills with the short labels (the full label and the sub-label stay
+   for screen readers). */
 .cerebros {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 6px;
-  max-width: 64rem;
+  max-width: 80rem;
   margin: 14px 0 clamp(22px, 3vw, 30px);
   padding: 5px;
   border: 1px solid var(--line);
@@ -554,11 +555,18 @@ code {
   color: var(--text-2);
 }
 
+@media (min-width: 1000px) {
+  .cerebros {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 640px) {
+  /* Two rows of pills: the strip's corners follow the pills' (23 px + 4 px padding). */
   .cerebros {
     gap: 4px;
     padding: 4px;
-    border-radius: 999px;
+    border-radius: 27px;
   }
 
   .cerebros__tab {
@@ -1773,6 +1781,23 @@ fieldset.field > legend + * {
   font-size: clamp(1rem, 1.8vw, 1.15rem);
 }
 
+/* A whole first message (brief→MVP): its lines and its table, scrolled in place. */
+.question__text--largo {
+  max-height: min(60vh, 30rem);
+  overflow: auto;
+  font-family: var(--mono);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.question__text--largo:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
 .compare {
   margin-top: 18px;
   border: 1px solid var(--line);
@@ -2079,19 +2104,33 @@ fieldset.field > legend + * {
   backdrop-filter: blur(12px);
   box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.6);
   transform: translateX(-50%);
+  /* Its content's width (left: 50% would cap it at half the screen), never wider than
+     the phone: with many files (brief→MVP has nine) the nodes shrink. */
+  width: max-content;
+  max-width: calc(100vw - 24px);
 }
 
 .dock__files {
   display: flex;
+  align-items: center;
   gap: 6px;
+  min-width: 0;
   cursor: pointer;
 }
 
+.dock__files:has(> :nth-child(7)) {
+  gap: clamp(3px, 1vw, 6px);
+}
+
+/* 30 px while there is room (every cerebro up to six files); down to 20 px when not.
+   The width, not a flex-basis, so the dock's own width counts 30 px per node. */
 .dock__node {
   display: grid;
   place-items: center;
+  flex: 0 1 auto;
   width: 30px;
-  height: 30px;
+  min-width: 20px;
+  aspect-ratio: 1;
   border-radius: 50%;
   border: 1.5px solid color-mix(in srgb, var(--syn) 55%, var(--line));
   color: var(--text-2);
@@ -2274,6 +2313,27 @@ fieldset.field > legend + * {
 .dl__empty {
   color: var(--text-3);
   font-size: var(--fs-sm);
+}
+
+/* A cerebro that holds its ZIPs (brief→MVP without a brief) says why. */
+.dl__aviso {
+  margin: 8px 0 4px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-s);
+  background: var(--accent-soft);
+  color: var(--text);
+  font-size: var(--fs-sm);
+}
+
+.file-dl:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.file-dl:disabled:hover {
+  border-color: transparent;
+  background: var(--surface);
 }
 
 .skills-how summary {

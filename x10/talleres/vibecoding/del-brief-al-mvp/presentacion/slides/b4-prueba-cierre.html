@@ -1,0 +1,69 @@
+<!-- BLOQUE 4 · Prueba y cierre (Parte A, diapositivas 17 y 18). The <pre>
+     texts are the script's prompts, character by character. -->
+
+<section id="prueba" data-block="4" data-bg-alpha="0.2" data-ctrl="pbox" class="bm-slide bm-final s-tight">
+  <header class="bm-head">
+    <p class="vc-kicker" data-in>Prueba final y qué hacer cuando falla</p>
+    <h2 class="bm-title" data-split="words">El MVP está listo cuando pasa los 8 casos</h2>
+  </header>
+  <div class="bm-final__grid">
+<div class="pbox bm-final__test" data-pbox data-pbox-label="Prompt de prueba">
+<pre>Verifica la aplicación contra estos casos con hoy = 2026-11-05 y dime, caso por caso, si el resultado coincide. Si alguno no coincide, explica por qué antes de corregir:
+1. SUM-014-2025 → etapa Unilateral, fecha límite 2026-11-20, 15 días, Naranja.
+2. CONS-007-2022 → Competencia perdida, Negro.
+3. SUM-021-2025 → Extemporánea, Rojo, fecha máxima 2028-08-10.
+4. INT-005-2025 → Bilateral, fecha límite 2026-12-20, 45 días, Amarillo.
+5. PS-102-2026 → No requiere, Gris, sin fechas límite.
+6. CONS-011-2025 → Liquidada bilateral, Gris, botón de oficio deshabilitado.
+7. OBRA-001-2025 → Bilateral, 2027-03-15, Verde, 9 documentos en la lista, oficio con exactamente los documentos en "No".
+8. Tablero → Verde 3, Amarillo 1, Naranja 1, Rojo 1, Negro 1, Gris 3; valor en riesgo $ 715.000.000.</pre>
+</div>
+<div class="pbox bm-final__fix" data-pbox data-pbox-label="Plantilla de corrección">
+<pre>En [pantalla/función], para el caso [contrato o dato concreto], esperaba [resultado A] y obtuve [resultado B].
+La regla aplicable es [Rn de la SPEC]: "[copiar la regla]".
+Corrige solo eso. No modifiques nada que ya funcione. Dime en 2 líneas qué cambiaste.</pre>
+</div>
+<div class="pbox bm-final__over" data-pbox data-pbox-label="Plantilla «no te pases»">
+<pre>Agregaste [X] y no lo pedí. Elimínalo y deja la aplicación exactamente como estaba más lo que pedí en el último prompt. Recuerda las restricciones: sin backend, sin base de datos externa, sin login, sin API keys.</pre>
+</div>
+  </div>
+  <p class="bm-gold bm-final__rule" data-in><b>Regla</b> <span>nunca escriban "no funciona". Si después de dos correcciones sigue fallando, retrocedan (Lovable: historial; Claude Code/Codex: "deshaz los cambios del último prompt"; claude.ai: editar el mensaje anterior) y repitan el prompt de la capa con la regla más explícita.</span></p>
+</section>
+
+<section id="su-brief" data-block="4" data-bg-alpha="0.25" class="bm-slide bm-next s-tight">
+  <header class="bm-head">
+    <p class="vc-kicker" data-in>Ahora con su brief</p>
+    <h2 class="bm-title" data-split="words">El contenido cambia; el método es el mismo</h2>
+  </header>
+  <div class="bm-next__grid">
+    <div class="bm-next__col" data-in>
+      <p class="bm-label">Artifact o Claude Code (cuándo cada uno)</p>
+      <ul class="bm-next__list">
+        <li><b>Artifact:</b> validar la idea, demostrar, compartir un link, herramienta de equipo. Sin backend, sin APIs externas, sin dominio propio. Lo de hoy cabe completo.</li>
+        <li><b>Claude Code / Codex:</b> base de datos real, usuarios, integraciones, dominio institucional. Ustedes operan el producto.</li>
+        <li class="is-key"><b>El puente:</b> la misma SPEC sirve para los dos.</li>
+      </ul>
+    </div>
+    <div class="bm-next__col" data-in>
+      <p class="bm-label">Lo que sigue para cada grupo</p>
+      <ol class="bm-next__steps">
+        <li>Instalen la skill <code>brief-a-mvp</code> (descarga: <code>brief-a-mvp.zip</code>) en claude.ai o Claude Code.</li>
+        <li>Péguenle su brief: devuelve el recorte, la SPEC y los prompts por capas para su herramienta.</li>
+        <li>Construyan la capa 1 y 2 esta semana; traigan el resultado.</li>
+      </ol>
+      <div class="bm-next__get">
+        <!-- The skill is generated in Cerebro (tab «De brief a MVP»), so the
+             button links there instead of shipping a copy of the zip. -->
+        <a class="dl dl--link" href="https://x10.expert/cerebro/#mvp" target="_blank" rel="noopener">
+          <span class="dl__icon" aria-hidden="true"></span>
+          <span class="dl__name">brief-a-mvp.zip</span>
+          <span class="dl__desc">en x10.expert/cerebro, pestaña «De brief a MVP».</span>
+        </a>
+        <figure class="vc-qr bm-next__qr">
+          <div class="qrbox qrbox--vc-sm" data-qr="cerebro"></div>
+        </figure>
+      </div>
+    </div>
+  </div>
+  <p class="bm-punch" data-in>Hoy no aprendieron a pedirle cosas a una IA. <em>Aprendieron a describir un producto tan bien que la IA no tenga que adivinar.</em></p>
+</section>

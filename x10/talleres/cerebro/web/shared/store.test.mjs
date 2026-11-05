@@ -8,6 +8,7 @@ import {
 import { PERFIL_LAURA, PERFIL_VACIO } from './catalog.js';
 import { EJEMPLO_SKILL, normalizeSkill } from './skill-general.js';
 import { EJEMPLO_IDEACION, normalizeIdeacion } from './ideacion.js';
+import { EJEMPLO_MVP, normalizeMvp } from './brief-a-mvp.js';
 
 const memory = () => {
   const m = new Map();
@@ -22,12 +23,14 @@ const broken = {
 // The two fields loadProfileFor/saveProfileFor read from a cerebro of cerebros.js.
 const SKILL = { storeKey: 'cj-perfil-skill', normalize: normalizeSkill };
 const IDEACION = { storeKey: 'cj-perfil-ideacion', normalize: normalizeIdeacion };
+const MVP = { storeKey: 'cj-perfil-mvp', normalize: normalizeMvp };
 
 test('keys are the contract ones', () => {
   assert.deepEqual(KEYS, {
     perfil: 'cj-perfil',
     perfilSkill: 'cj-perfil-skill',
     perfilIdeacion: 'cj-perfil-ideacion',
+    perfilMvp: 'cj-perfil-mvp',
     cerebro: 'cj-cerebro',
     theme: 'cj-theme',
     encuesta: 'cj-encuesta',
@@ -61,10 +64,12 @@ test('each cerebro saves under its own key, normalized by its own module', () =>
   const s = memory();
   assert.equal(saveProfileFor(SKILL, { ...EJEMPLO_SKILL, pasos: 'Uno\n\n- Dos\n' }, s), true);
   assert.equal(saveProfileFor(IDEACION, { ...EJEMPLO_IDEACION, sector: 'nope' }, s), true);
+  assert.equal(saveProfileFor(MVP, { ...EJEMPLO_MVP, restricciones: 'Uno\n\n- Dos' }, s), true);
   assert.deepEqual(JSON.parse(s.m.get('cj-perfil-skill')).pasos, ['Uno', 'Dos']);
   assert.equal(JSON.parse(s.m.get('cj-perfil-ideacion')).sector, null);
   assert.deepEqual(loadProfileFor(SKILL, s), normalizeSkill({ ...EJEMPLO_SKILL, pasos: ['Uno', 'Dos'] }));
   assert.deepEqual(loadProfileFor(IDEACION, s), normalizeIdeacion({ ...EJEMPLO_IDEACION, sector: null }));
+  assert.deepEqual(loadProfileFor(MVP, s), normalizeMvp({ ...EJEMPLO_MVP, restricciones: ['Uno', 'Dos'] }));
   assert.equal(s.m.has('cj-perfil'), false, 'the legal key is untouched');
 });
 
@@ -91,9 +96,9 @@ test('the chosen tab is remembered as a plain id', () => {
   assert.equal(saveCerebro('skill', broken), false);
 });
 
-test('clearData removes the three profiles, the tab choice and the theme', () => {
+test('clearData removes the four profiles, the tab choice and the theme', () => {
   const s = memory();
-  for (const k of ['cj-perfil', 'cj-perfil-skill', 'cj-perfil-ideacion', 'cj-cerebro']) s.setItem(k, '{}');
+  for (const k of ['cj-perfil', 'cj-perfil-skill', 'cj-perfil-ideacion', 'cj-perfil-mvp', 'cj-cerebro']) s.setItem(k, '{}');
   s.setItem('cj-theme', 'light');
   s.setItem('otra', 'x');
   assert.equal(clearData(s), true);

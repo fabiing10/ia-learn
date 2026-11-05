@@ -29,6 +29,8 @@ const CHECKS = [
   { path: '/vibecoding/presentacion/', expect: { min: ['.reveal .slides section[id]', 30], text: '›vibe coding', count: ['.hud__bar .segbar__seg', 7] } },
   { path: '/vibecoding/playbook/', expect: { selector: '#ruta-a' } },
   { path: '/vibecoding/panel/', expect: { text: 'Panel' } },
+  // Del brief al MVP (practical session: deck only)
+  { path: '/vibecoding/del-brief-al-mvp/', expect: { min: ['.reveal .slides section[id]', 19], text: '›vibe coding' } },
   // Cerebro Jurídico
   { path: '/cerebro/', expect: { selector: '[role="tablist"] [data-cerebro="skill"]', count: ['#construir', 1] } },
   { path: '/cerebro/offline/', expect: { selector: '#construir' } },

@@ -1,0 +1,130 @@
+<!-- BLOQUE 2 · El caso (Parte A, diapositivas 6 a 8) -->
+
+<section id="caso" data-block="2" data-bg-alpha="0.25" class="bm-slide bm-case s-tight">
+  <header class="bm-head bm-head--notes">
+    <div>
+      <p class="vc-kicker" data-in>El caso de hoy: Semáforo de Liquidaciones Contractuales</p>
+      <h2 class="bm-title" data-split="words">Un caso real en miniatura</h2>
+    </div>
+    <button class="notas__btn" type="button" data-notas-toggle aria-expanded="false" aria-controls="notas-caso">Nota para el facilitador <kbd>N</kbd></button>
+  </header>
+  <div class="bm-case__grid">
+    <div class="bm-case__main">
+      <blockquote class="bm-quote" data-in>
+        <p class="bm-label">Momento de valor</p>
+        <p class="bm-quote__text">"Cuando el abogado de contratación abre la herramienta, ve en segundos qué contratos están próximos a vencer su plazo de liquidación, qué documentos faltan en cada uno, y puede generar el oficio de requerimiento al contratista."</p>
+      </blockquote>
+      <p class="bm-why" data-in><b>Por qué este caso:</b> es autónomo (sin SECOP, correo ni PDF), no es trivial (motor de plazos legales + documentos), el conocimiento experto es de ustedes, y cabe en seis prompts.</p>
+    </div>
+    <ul class="bm-cards" data-in="stagger">
+      <li><b>Entrada</b><span>10 contratos ficticios</span></li>
+      <li><b>Criterios</b><span>10 reglas (plazos, semáforo, lista de chequeo)</span></li>
+      <li><b>Salida</b><span>inventario con semáforo, ficha, tablero, oficio</span></li>
+      <li class="is-human"><b>Validación</b><span>editar, observar, marcar validado</span></li>
+    </ul>
+  </div>
+  <ul class="bm-downloads" data-in="stagger" aria-label="Descargas">
+    <li>
+      <a class="dl" href="assets/Brief-Semaforo-de-Liquidaciones.pdf" download>
+        <span class="dl__icon" aria-hidden="true"></span>
+        <span class="dl__name">Brief-Semaforo-de-Liquidaciones.pdf</span>
+        <span class="dl__desc">la definición del producto (el brief llevado a MVP).</span>
+      </a>
+    </li>
+    <li>
+      <a class="dl" href="assets/SPEC-semaforo-liquidaciones.pdf" download>
+        <span class="dl__icon" aria-hidden="true"></span>
+        <span class="dl__name">SPEC-semaforo-liquidaciones.pdf</span>
+        <span class="dl__desc">la especificación para leer.</span>
+      </a>
+    </li>
+    <li>
+      <a class="dl" href="assets/SPEC-semaforo-liquidaciones.md" download>
+        <span class="dl__icon" aria-hidden="true"></span>
+        <span class="dl__name">SPEC-semaforo-liquidaciones.md</span>
+        <span class="dl__desc">la especificación para pegar en la herramienta.</span>
+      </a>
+    </li>
+  </ul>
+  <div class="notas" id="notas-caso" role="note">
+    <p class="notas__label">Nota para el facilitador</p>
+    <p>las reglas de plazo están simplificadas (4 meses bilateral + 2 unilateral + 2 años). Es el momento de que los abogados discutan los matices; eso va al roadmap.</p>
+  </div>
+  <aside class="notes">
+    <p><strong>Nota para el facilitador</strong></p>
+    <p>las reglas de plazo están simplificadas (4 meses bilateral + 2 unilateral + 2 años). Es el momento de que los abogados discutan los matices; eso va al roadmap.</p>
+  </aside>
+</section>
+
+<section id="capas" data-block="2" data-bg-alpha="0.25" class="bm-slide bm-layers-slide s-tight">
+  <header class="bm-head">
+    <p class="vc-kicker" data-in>Cómo lo vamos a construir</p>
+    <h2 class="bm-title" data-split="words">Por capas, y cada capa se prueba antes de la siguiente</h2>
+  </header>
+  <div class="bm-layers-slide__grid">
+    <ol class="bm-layers" data-in="stagger" aria-label="Capas">
+      <li><span class="bm-layers__n">0</span>Cargar la SPEC (sin construir)</li>
+      <li><span class="bm-layers__n">1</span>Esqueleto y datos de ejemplo</li>
+      <li><span class="bm-layers__n">2</span>Motor de plazos y semáforo</li>
+      <li><span class="bm-layers__n">3</span>Ficha y lista de chequeo</li>
+      <li><span class="bm-layers__n">4</span>Tablero</li>
+      <li><span class="bm-layers__n">5</span>Oficio de requerimiento</li>
+      <li><span class="bm-layers__n">6</span>Persistencia, nuevos contratos y filtros</li>
+      <li class="is-opt"><span class="bm-layers__n">7</span>(opcional) Lectura por palabras clave</li>
+    </ol>
+    <aside class="vc-rules bm-rules" data-in aria-label="Las reglas de mesa">
+      <p class="vc-rules__title">Las reglas de mesa</p>
+      <ol>
+        <li>Un cambio por mensaje.</li>
+        <li>Describe lo que ves, no lo que crees que falla.</li>
+        <li>Prueba antes de pedir lo siguiente.</li>
+        <li>Si se rompió, vuelve a la versión anterior antes de arreglar.</li>
+        <li>Nunca pegues datos reales.</li>
+      </ol>
+    </aside>
+    <figure class="bm-cycle" data-in="fade">
+      <figcaption class="bm-label">Ciclo</figcaption>
+      <div class="bm-cycle__ring">
+        <svg viewBox="0 0 480 400" aria-hidden="true">
+          <defs>
+            <marker id="bm-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z" />
+            </marker>
+          </defs>
+          <path class="bm-cycle__arc" d="M310.4 67.6 A150 150 0 0 1 389.9 205.2" marker-end="url(#bm-arrow)" />
+          <path class="bm-cycle__arc" d="M319.5 327.2 A150 150 0 0 1 160.5 327.2" marker-end="url(#bm-arrow)" />
+          <path class="bm-cycle__arc bm-cycle__arc--yes" d="M90.1 205.2 A150 150 0 0 1 169.6 67.6" marker-end="url(#bm-arrow)" />
+        </svg>
+        <ol class="bm-cycle__nodes">
+          <li class="is-top">Pegar prompt</li>
+          <li class="is-right">Mirar "qué debe verse"</li>
+          <li class="is-left">¿Coincide?</li>
+        </ol>
+      </div>
+      <ul class="bm-cycle__out">
+        <li class="is-yes"><b>Sí:</b> siguiente capa.</li>
+        <li class="is-no"><b>No:</b> plantilla de corrección (máximo 2 intentos) → retroceder.</li>
+      </ul>
+    </figure>
+  </div>
+</section>
+
+<section id="herramienta" data-block="2" data-bg-alpha="0.25" class="bm-slide bm-tools s-tight">
+  <header class="bm-head">
+    <p class="vc-kicker" data-in>Elige tu herramienta</p>
+    <h2 class="bm-title" data-split="words">La misma SPEC, cinco caminos</h2>
+  </header>
+  <table class="bm-table bm-table--tools" data-in>
+    <thead>
+      <tr><th scope="col">Herramienta</th><th scope="col">Cómo empezar</th><th scope="col">Instrucción técnica que va en todos los prompts</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">Lovable</th><td data-label="Cómo empezar">New project</td><td data-label="Instrucción técnica">"App web React de una sola página. Sin backend, sin Supabase, sin login, sin API keys. Datos de ejemplo en el código."</td></tr>
+      <tr><th scope="row">Gemini AI Studio</th><td data-label="Cómo empezar">Build</td><td data-label="Instrucción técnica">"App web de una sola página. Sin backend, sin base de datos externa, sin claves."</td></tr>
+      <tr><th scope="row">Claude Code</th><td data-label="Cómo empezar">Carpeta nueva con <code>SPEC-semaforo-liquidaciones.md</code> adentro</td><td data-label="Instrucción técnica">"Un único archivo index.html con HTML, CSS y JavaScript. Sin backend, sin login, sin API keys."</td></tr>
+      <tr><th scope="row">Codex</th><td data-label="Cómo empezar">Carpeta nueva, modo <i>This computer</i> (no Cloud)</td><td data-label="Instrucción técnica">Igual que Claude Code</td></tr>
+      <tr><th scope="row">Claude (artifact)</th><td data-label="Cómo empezar">Chat nuevo en claude.ai</td><td data-label="Instrucción técnica">"Un único artifact HTML de una sola página. Sin backend, sin APIs externas. Guardado en el almacenamiento del artifact; descarga por capacidad."</td></tr>
+    </tbody>
+  </table>
+  <p class="bm-punch" data-in>Elijan una y terminen en esa. <em>Cambiar de herramienta a mitad de camino cuesta más que terminar.</em></p>
+</section>

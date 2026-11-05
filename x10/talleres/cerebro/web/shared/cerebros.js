@@ -1,7 +1,8 @@
-// The registry /cerebro/ reads (CEREBRO-GENERAL.md, B): three cerebros as tabs of
+// The registry /cerebro/ reads (CEREBRO-GENERAL.md, B): four cerebros as tabs of
 // «Construir». Each entry says how its form looks, which files its profile writes,
 // what «Cargar» copies and downloads, and what «Prueba» compares. The landing never
-// asks which cerebro is active beyond the flags here (rutas, cuenta, boveda).
+// asks which cerebro is active beyond the flags here (rutas, cuenta, boveda) and the
+// optional hooks (descargasHabilitadas, pruebaLarga, ejemplo.del).
 // Pure ES module, no DOM: cerebros.test.mjs checks every entry.
 
 import {
@@ -18,6 +19,10 @@ import {
   SLUG_IDEACION, TONOS_IDEACION, VACIO_IDEACION, buildIdeacion, normalizeIdeacion, pasteIdeacion, pruebaIdeacion,
   zipIdeacion, zipTodoIdeacion,
 } from './ideacion.js';
+import {
+  ARCHIVOS_MVP, CAMPOS_MVP, CONFIRM3_MVP, EJEMPLO_MVP, HERRAMIENTAS_MVP, NIVELES_MVP, SECTORES_MVP, SLUG_MVP, TIEMPOS,
+  TONOS_MVP, VACIO_MVP, buildMvp, descargasHabilitadas, normalizeMvp, pasteMvp, pruebaMvp, zipMvp, zipTodoMvp,
+} from './brief-a-mvp.js';
 import { zip } from './zip.js';
 
 export const CEREBRO_INICIAL = 'skill';
@@ -201,6 +206,82 @@ const ideacion = {
   },
 };
 
+// ── De brief a MVP (encargo 05): the brief-a-mvp skill of the workshop ──
+
+const CAMPOS_FORM_MVP = [
+  { id: 'brief', tipo: 'textarea', n: 1, label: 'Tu brief o tu idea', rows: 10, max: 12000, placeholder: 'Pega aquí tu brief completo, o tu idea en una frase: quién la usa y qué le resuelve.', hint: 'Pega el brief completo (nombre y entidad, usuario, problema, reto, solución, flujo, qué NO hará, datos, humano responsable, cómo sabremos que funciona) o, si no lo tienes, tu idea en una frase: quién la usa y qué le resuelve.' },
+  { id: 'sector', tipo: 'radio', n: 2, label: 'Sector', opciones: SECTORES_MVP },
+  { id: 'herramienta', tipo: 'radio', n: 3, label: 'Con qué vas a construir', opciones: HERRAMIENTAS_MVP, hint: 'Caja cerrada (Lovable, AI Studio): todo armado, sin instalar nada. Artifact (Claude): una página con link para compartir. Caja abierta (Claude Code, Codex): archivos en tu computador. Si no sabes, la skill te recomienda una.' },
+  { id: 'nivel', tipo: 'radio', n: 4, label: 'Tu experiencia construyendo', opciones: NIVELES_MVP, hint: 'Con «nunca» o «algo con IA», cada prompt trae «qué debe verse» y «si falla».' },
+  { id: 'tiempo', tipo: 'radio', n: 5, label: 'Tiempo disponible', opciones: TIEMPOS, hint: 'Define cuántas capas entran en el MVP.' },
+  { id: 'restricciones', tipo: 'lines', n: 6, label: 'Tus límites', rows: 3, opcional: true, placeholder: 'No usa datos reales de contratos ni contratistas', hint: 'Lo que tu producto nunca hace o lo que nunca pegas. Uno por línea. «No usa datos reales» y «no decide, firma ni radica» ya van incluidos.' },
+  { id: 'nombre', tipo: 'text', n: 7, label: '¿Cómo quieres que la IA te llame?', max: 60, opcional: true, placeholder: 'Ej.: Fabián', autocomplete: 'given-name', hint: 'Va en la presentación de la skill y en el README.' },
+  tonoCampo(8, TONOS_MVP),
+  herramientasCampo(9, 'Donde instalas la skill. Sus rutas salen primero en el README.'),
+];
+
+const mvp = {
+  id: 'mvp',
+  label: 'De brief a MVP',
+  corto: 'Brief→MVP',
+  sub: 'Del brief a la spec, las capas y los prompts',
+  eyebrow: EYEBROW,
+  titulo: 'Tu brief escribe tu skill de construcción',
+  lead: 'La skill del taller: pega tu brief o tu idea y recibe el recorte a MVP, la SPEC de una página y los prompts paso a paso para construirla hoy.',
+  // `del` words the example button and toasts: «Volver al ejemplo del Grupo 7».
+  ejemplo: { nombre: 'Grupo 7 · Semáforo de Liquidaciones', del: 'del Grupo 7', descripcion: 'Grupo 7, Semáforo de Liquidaciones. Cámbialo por tu brief.' },
+  vacio: { estado: 'Empieza por tu brief o tu idea.', toast: 'En blanco. Pega tu brief o tu idea en el campo 01.' },
+  mio: 'Tu brief',
+  formLabel: 'Tu brief',
+  storeKey: 'cj-perfil-mvp',
+  campos: CAMPOS_FORM_MVP,
+  mapa: CAMPOS_MVP,
+  fijos: null,
+  archivos: ARCHIVOS_MVP,
+  principal: 'SKILL.md',
+  perfilEjemplo: EJEMPLO_MVP,
+  perfilVacio: VACIO_MVP,
+  normalize: normalizeMvp,
+  same: sameBy(normalizeMvp),
+  cambios: cambiosBy(normalizeMvp, CAMPOS_FORM_MVP.map((f) => [f.id, f.mapa ?? f.id])),
+  build: buildMvp,
+  paste: pasteMvp,
+  descargas(profile) {
+    return [
+      { id: 'skill', tipo: 'skill', archivo: `${SLUG_MVP}.zip`, titulo: 'Skill para Claude', nota: 'Súbela sin descomprimir', aviso: 'Súbelo a Claude sin descomprimirlo.', bytes: () => zipMvp(profile) },
+      { id: 'todo', tipo: 'todo', archivo: `${SLUG_MVP}-kit.zip`, titulo: 'Todo', nota: 'README, instrucciones, primer mensaje y la skill', aviso: 'Descomprímelo: el README trae los pasos.', bytes: () => zipTodoMvp(profile) },
+    ];
+  },
+  // Without a brief the skill has nothing to build from: the ZIPs wait (encargo, PROMPT 5).
+  descargasHabilitadas,
+  descargasAviso: 'Pega tu brief o tu idea en el campo 01 para descargar la skill.',
+  prueba: pruebaMvp,
+  pruebaLarga: true, // the test is the whole first message, brief table included
+  rutas: false,
+  cuenta: true,
+  boveda: false,
+  confirm3: CONFIRM3_MVP,
+  cargarLead: CARGAR_LEAD_SKILL,
+  dlLead: 'El ZIP de la skill va a Claude tal cual, con sus cinco referencias: súbelo sin descomprimirlo. El kit trae además el README, las instrucciones para ChatGPT y Gemini y tu primer mensaje.',
+  pruebaLead: NOTA_PRUEBA,
+  comparar: { sin: 'Sin la skill', con: 'Con la skill' },
+  copiar: { titulo: 'Tu skill De brief a MVP, para pegar en un chat', prueba: 'Prueba copiada. Hazla en el chat con tu skill.' },
+  llevas: {
+    titulo: 'Te llevas',
+    items: [
+      { archivo: 'SKILL.md', que: LLEVAS_SKILL['SKILL.md'] },
+      { archivo: 'INSTRUCCIONES_GPT.md', que: LLEVAS_SKILL['INSTRUCCIONES_GPT.md'] },
+      { archivo: 'PRIMER_MENSAJE.md', que: 'Lo que envías primero, con tu brief' },
+      { archivo: 'references/plantilla-spec-mvp.md', que: 'Plantilla de la SPEC de una página' },
+      { archivo: 'references/tabla-de-recorte.md', que: 'Qué se recorta y con qué se sustituye' },
+      { archivo: 'references/prompts-por-capa.md', que: 'Un prompt por capa' },
+      { archivo: 'references/herramientas.md', que: 'Cada herramienta y su caja' },
+      { archivo: 'references/reglas-de-mesa.md', que: 'Reglas de mesa' },
+      { archivo: 'README.md', que: LLEVAS_SKILL['README.md'] },
+    ],
+  },
+};
+
 // ── Jurídico: the existing legal brain, unchanged ──
 
 const SIN_TAREAS = 'No elegiste tareas: esta es la prueba de contratos, la del taller. Elige tus tareas y aparece la prueba de cada una.';
@@ -294,7 +375,7 @@ const juridico = {
   },
 };
 
-export const CEREBROS = [skill, ideacion, juridico];
+export const CEREBROS = [skill, ideacion, mvp, juridico];
 
 export const cerebroById = (id) => CEREBROS.find((c) => c.id === id) ?? null;
 
@@ -313,5 +394,19 @@ export function elegirCerebro({ hash = '', search = '', guardado = null } = {}) 
 /** 'references/plantilla-spec.md' → 'plantilla-spec'; '00_ADN.md' → '00_ADN'. */
 export const nombreCorto = (file) => file.replace(/^references\//, '').replace(/\.md$/, '');
 
-/** The two letters of a file in the phone dock; the README keeps its single R. */
-export const inicialDock = (file) => (file === 'README.md' ? 'R' : nombreCorto(file).slice(0, 2).toUpperCase());
+const dosLetras = (file) => (file === 'README.md' ? 'R' : nombreCorto(file).slice(0, 2).toUpperCase());
+/** 'PRIMER_MENSAJE.md' → 'PM', 'references/prompts-por-capa.md' → 'PC': first and last word. */
+const extremos = (file) => {
+  const w = nombreCorto(file).split(/[-_\s]+/).filter(Boolean);
+  return (w[0][0] + w[w.length - 1][0]).toUpperCase();
+};
+
+/**
+ * The two letters of a file in the phone dock; the README keeps its single R. With
+ * the cerebro's file list, two files that would share their letters (PRIMER_MENSAJE
+ * and prompts-por-capa) use the initials of their first and last words instead.
+ */
+export function inicialDock(file, lista = []) {
+  const base = dosLetras(file);
+  return lista.some((f) => f !== file && dosLetras(f) === base) ? extremos(file) : base;
+}

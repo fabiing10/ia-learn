@@ -29,7 +29,7 @@ Code and comments in English.
 
 | Route | Folder (under `x10/talleres/cerebro/web/`) | Owner |
 |---|---|---|
-| `/cerebro/` | `index.html` + `landing/` (three cerebro tabs: `form.js` legal form, `form-generic.js` schema form, `mapa.js`, `archivos.js`, `main.js`) | worker A |
+| `/cerebro/` | `index.html` + `landing/` (four cerebro tabs: `form.js` legal form, `form-generic.js` schema form, `mapa.js`, `archivos.js`, `main.js`) | worker A |
 | shared web code | `shared/` (except `theme.css`) | worker A |
 | `/cerebro/playbook/` | `playbook/` | worker B |
 | `/cerebro/presentacion/` | `../presentacion/` (the deck) | coordinator |
@@ -47,8 +47,8 @@ Build and dev:
 The plan's promise is "Nada se envía a ningún servidor" (§6.1, §6.15). So:
 - No Supabase, no fetch to any API, no analytics, no CDNs, no external fonts or images.
 - Each cerebro keeps its profile in its own `localStorage` key (it stays on the device; say so):
-  `cj-perfil` (Jurídico), `cj-perfil-skill` (Skill general), `cj-perfil-ideacion` (Ideación);
-  the active tab in `cj-cerebro`. «Borrar mis datos» removes the three profiles, the tab choice
+  `cj-perfil` (Jurídico), `cj-perfil-skill` (Skill general), `cj-perfil-ideacion` (Ideación),
+  `cj-perfil-mvp` (De brief a MVP); the active tab in `cj-cerebro`. «Borrar mis datos» removes the four profiles, the tab choice
   and the theme. `shared/store.js`: `KEYS`, `loadProfileFor/saveProfileFor(cerebro)` (legal:
   `loadProfile/saveProfile`), `loadCerebro/saveCerebro`. Theme choice in `localStorage` key `cj-theme`. The intro survey (`/cerebro/encuesta/`) keeps its
   draft in `cj-encuesta` and, without Supabase env vars, its demo rows in `cj-demo-submissions`
@@ -85,9 +85,9 @@ legal tab keeps one test per chosen task) · `#boveda` (Obsidian vault ZIP; lega
 `hidden` otherwise, and so is its nav link)
 
 Cerebro tabs, inside `#construir` above the toolbar: `#cerebros` (`role="tablist"`), one button
-per cerebro with `data-cerebro="skill|ideacion|juridico"` and id `cerebro-<id>`, controlling
+per cerebro with `data-cerebro="skill|ideacion|mvp|juridico"` and id `cerebro-<id>`, controlling
 `#cerebro-panel`. Default `skill`. Deep links select a tab and scroll to `#construir`:
-`/cerebro/#skill`, `/cerebro/#ideacion`, `/cerebro/#juridico`, or `?c=<id>` (precedence: hash,
+`/cerebro/#skill`, `/cerebro/#ideacion`, `/cerebro/#mvp`, `/cerebro/#juridico`, or `?c=<id>` (precedence: hash,
 `?c=`, `cj-cerebro`, `skill`). The deck QR `construir` points to `#skill`, `ideacion` to
 `#ideacion`. Elements shown for some cerebros only carry `data-solo="<ids>"`.
 
@@ -102,14 +102,17 @@ per cerebro with `data-cerebro="skill|ideacion|juridico"` and id `cerebro-<id>`,
 
 ## Cerebros registry
 
-`shared/cerebros.js` is what the landing reads: `CEREBROS` (skill, ideacion, juridico),
+`shared/cerebros.js` is what the landing reads: `CEREBROS` (skill, ideacion, mvp, juridico),
 `cerebroById`, `elegirCerebro({ hash, search, guardado })`, `nombreCorto`, `inicialDock`.
 Each entry carries its copy (label, sub, titulo, lead, leads of Cargar and Prueba,
 confirm3, «Te llevas»), its form (`campos`: field schema for `landing/form-generic.js`, or
 `null` for the legal custom form), its map (`mapa`, optional `fijos`), `archivos` and
 `principal`, `perfilEjemplo`/`perfilVacio`/`normalize`/`same`/`cambios`, and
-`build`/`paste`/`descargas`/`prueba` plus the flags `rutas`, `cuenta`, `boveda`. The general
-generators are `shared/skill-general.js` and `shared/ideacion.js` (CEREBRO-GENERAL.md, A).
+`build`/`paste`/`descargas`/`prueba` plus the flags `rutas`, `cuenta`, `boveda`, and the optional
+`descargasHabilitadas`/`descargasAviso` (ZIPs wait until the profile has what they need),
+`pruebaLarga` and `ejemplo.del`. The general generators are `shared/skill-general.js`,
+`shared/ideacion.js` (CEREBRO-GENERAL.md, A) and `shared/brief-a-mvp.js`, whose fixed texts live in
+`shared/brief-a-mvp.content.js` (the workshop draft, `insumos/brief-a-mvp/`).
 
 ## Shared catalog (worker A writes it first; worker B may import it read-only)
 

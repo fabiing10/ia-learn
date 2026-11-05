@@ -1,0 +1,1919 @@
+/* «Del brief al MVP» deck: the Vibe Coding look plus the components of a
+   practical session that participants open themselves.
+   Canvas 1920×1080 (every px is a projector px), and a reading mode for phones
+   (html.is-doc, see js/lectura.js) where the slides become one scrolling page. */
+@import '../../presentacion/deck.css';
+
+/* =========================================================
+   Generic components (no deck-specific selectors; ready to move to src/)
+   ---------------------------------------------------------
+   .pbox    prompt block: <pre> per tool, tabs, «Copiar», own scroll  (js/prompt.js)
+   .pslide  «prompt» slide: title · Qué hace · prompt · Qué debe verse ·
+            Si falla · Por qué importa
+   .dl      download button: <a class="dl" download href="assets/…">
+   .toc     slide index: links to #/<id>
+   .notas   facilitator note toggled with N or its button  (js/notas.js)
+   .sem     traffic-light dot: <i class="sem sem--verde"></i>
+   ========================================================= */
+
+:root {
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  --sem-verde: #2fbf71;
+  --sem-amarillo: #f2c14e;
+  --sem-naranja: #f08c2e;
+  --sem-rojo: #e5484d;
+  --sem-negro: #05070d;
+  --sem-gris: #8a93a6;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- .sem · traffic-light dot ---------- */
+
+.sem {
+  display: inline-block;
+  flex: none;
+  width: 0.72em;
+  height: 0.72em;
+  margin-right: 0.4em;
+  border-radius: 50%;
+  vertical-align: -0.04em;
+  background: var(--sem-gris);
+  box-shadow: 0 0 0 2px var(--line-strong);
+}
+
+.sem--verde { background: var(--sem-verde); }
+.sem--amarillo { background: var(--sem-amarillo); }
+.sem--naranja { background: var(--sem-naranja); }
+.sem--rojo { background: var(--sem-rojo); }
+.sem--negro { background: var(--sem-negro); }
+.sem--gris { background: var(--sem-gris); }
+
+/* ---------- .pbox · prompt block ---------- */
+
+.pbox {
+  --pbox-fs: 23px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 2px solid var(--line-strong);
+  border-radius: 22px;
+  background: var(--bg-raise);
+}
+
+.pbox__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex: none;
+  padding: 12px 12px 12px 18px;
+  border-bottom: 2px solid var(--line);
+  border-radius: 20px 20px 0 0;
+  background: var(--bg-raise);
+}
+
+.pbox__label {
+  font: 700 22px/1.2 var(--font-display);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.pbox__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+
+.pbox__tab {
+  padding: 9px 18px 10px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-2);
+  font: 600 21px/1.1 var(--font-display);
+  cursor: pointer;
+  transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out);
+}
+
+.pbox__tab:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+.pbox__tab[aria-selected='true'] {
+  color: var(--text);
+  border-color: var(--gold);
+  background: var(--gold-soft);
+}
+
+.pbox__tab:focus-visible,
+.pbox__copy:focus-visible,
+.pbox__scroll:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.pbox__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+  padding: 10px 22px 11px 16px;
+  border: 2px solid var(--gold);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: 700 22px/1 var(--font-display);
+  cursor: pointer;
+  transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out);
+}
+
+.pbox__copy:hover {
+  background: var(--gold-soft);
+}
+
+.pbox__copy.is-done {
+  background: var(--gold);
+  color: var(--c-ink-dark);
+}
+
+.pbox__copy-icon {
+  position: relative;
+  width: 17px;
+  height: 21px;
+  border: 3px solid currentColor;
+  border-radius: 4px;
+}
+
+.pbox__copy-icon::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: -8px;
+  width: 14px;
+  height: 17px;
+  border: 3px solid currentColor;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 4px;
+}
+
+.pbox__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: 0 0 20px 20px;
+}
+
+.pbox pre {
+  display: block;
+  margin: 0;
+  padding: 18px 22px 22px;
+  font: 500 var(--pbox-fs) / 1.42 var(--font-mono);
+  color: var(--text);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  tab-size: 2;
+}
+
+.pbox pre[hidden] {
+  display: none;
+}
+
+/* ---------- .pslide · prompt slide ---------- */
+
+.reveal .slides section.pslide {
+  gap: 26px;
+}
+
+.pslide__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  flex: none;
+}
+
+.pslide__title {
+  font: 700 60px/1.04 var(--font-display);
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.pslide__title span {
+  color: var(--gold-text);
+}
+
+/* Children in reading order: hace · pbox · verse · falla · porque.
+   Left: what it does and the prompt (it takes all the height left);
+   right: what to expect, the fix and why it matters. */
+.pslide__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 600px;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    'hace verse'
+    'box verse'
+    'box falla'
+    'box porque';
+  gap: 22px 44px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Long expected-results (a table): «Si falla» moves under the prompt. */
+.pslide--wide .pslide__grid {
+  grid-template-columns: minmax(0, 1fr) 640px;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    'hace verse'
+    'box verse'
+    'falla porque';
+}
+
+.pslide__hace { grid-area: hace; }
+.pslide__grid > .pbox { grid-area: box; }
+.pslide__verse { grid-area: verse; }
+.pslide__falla { grid-area: falla; }
+.pslide__porque { grid-area: porque; align-self: end; }
+
+.pslide__label {
+  margin-bottom: 8px;
+  font: 700 21px/1.2 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
+.pslide__text,
+:where(.pslide__verse, .pslide__falla, .pslide__porque) > p:not(.pslide__label) {
+  font-size: 27px;
+  line-height: 1.34;
+  color: var(--text);
+}
+
+.pslide__hace p:not(.pslide__label) {
+  font-size: 29px;
+  line-height: 1.3;
+}
+
+.pslide__falla p:not(.pslide__label) {
+  color: var(--text-2);
+}
+
+.pslide__porque {
+  padding: 22px 26px 24px;
+  border-radius: 20px;
+  border-left: 6px solid var(--gold);
+  background: var(--gold-soft);
+}
+
+/* Inter keeps the script's straight quotes straight */
+.pslide__porque p:not(.pslide__label) {
+  font: 600 27px/1.32 var(--font-body);
+  letter-spacing: -0.01em;
+}
+
+/* Expected results as a table (slide 11) and as counters (slide 13) */
+.pslide__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.pslide__table th,
+.pslide__table td {
+  padding: 7px 8px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.pslide__table thead th {
+  padding-top: 0;
+  font: 700 17px/1.2 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  border-bottom: 2px solid var(--line-strong);
+}
+
+.pslide__table tbody th {
+  font: 600 21px/1.2 var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+.pslide__table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.pslide__counts span {
+  white-space: nowrap;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* ---------- .dl · download button ---------- */
+
+.dl {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 18px;
+  row-gap: 4px;
+  align-items: center;
+  padding: 16px 22px 18px 18px;
+  border: 2px solid var(--line-strong);
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 200ms var(--ease-out), background-color 200ms var(--ease-out);
+}
+
+.dl:hover {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+}
+
+.dl:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.dl__icon {
+  grid-row: 1 / span 2;
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: var(--gold);
+}
+
+/* arrow into a tray */
+.dl__icon::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 9px;
+  width: 4px;
+  height: 18px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: var(--c-ink-dark);
+}
+
+.dl__icon::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 17px;
+  width: 11px;
+  height: 11px;
+  margin-left: -6.5px;
+  border: solid var(--c-ink-dark);
+  border-width: 0 4px 4px 0;
+  transform: rotate(45deg);
+}
+
+/* arrow to the right, centred (the icon is smaller in reading mode) */
+.dl--link .dl__icon::before {
+  top: calc(50% - 2px);
+  left: calc(50% - 10px);
+  width: 20px;
+  height: 4px;
+  margin: 0;
+}
+
+.dl--link .dl__icon::after {
+  top: calc(50% - 6px);
+  left: calc(50% - 1px);
+  margin: 0;
+  transform: rotate(-45deg);
+}
+
+.dl__name {
+  min-width: 0;
+  font: 700 23px/1.15 var(--font-display);
+  letter-spacing: -0.005em;
+  overflow-wrap: anywhere;
+}
+
+.dl__desc {
+  font-size: 21px;
+  line-height: 1.3;
+  color: var(--text-2);
+}
+
+/* ---------- .toc · slide index ---------- */
+
+.toc {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(var(--toc-rows, 6), auto);
+  grid-template-columns: repeat(var(--toc-cols, 3), minmax(0, 1fr));
+  gap: 14px 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toc a {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 12px;
+  padding: 14px 18px 16px 14px;
+  border-radius: 16px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 27px;
+  line-height: 1.22;
+  transition: background-color 200ms var(--ease-out);
+}
+
+.toc a:hover {
+  background: var(--surface-2);
+}
+
+.toc a:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.toc__n {
+  font: 700 26px/1 var(--font-display);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-3);
+  text-align: right;
+}
+
+.toc .is-prompt .toc__n {
+  color: var(--gold-text);
+}
+
+/* ---------- .notas · facilitator note ---------- */
+
+.notas__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+  padding: 8px 12px 9px 18px;
+  border: 2px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-2);
+  font: 600 20px/1.1 var(--font-display);
+  cursor: pointer;
+}
+
+.notas__btn:hover,
+.notas__btn[aria-expanded='true'] {
+  color: var(--text);
+  border-color: var(--cyan);
+}
+
+.notas__btn:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.notas__btn kbd {
+  padding: 3px 9px 4px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  font: 700 17px/1 var(--font-mono);
+}
+
+/* Slide mode: a sticky note over the slide, never moves the layout. */
+.notas {
+  display: none;
+  position: absolute;
+  z-index: 5;
+  right: var(--pad-x);
+  top: 200px;
+  width: 700px;
+  padding: 24px 28px 26px;
+  border-radius: 20px;
+  border: 2px solid var(--cyan);
+  background: var(--bg-raise);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  font-size: 25px;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+html.show-notas .notas {
+  display: block;
+}
+
+.notas__label {
+  margin-bottom: 8px;
+  font: 700 19px/1.2 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cyan-text);
+}
+
+/* =========================================================
+   Slides of this deck
+   ========================================================= */
+
+.reveal .slides section.bm-slide {
+  --sp-top: 122px;
+  gap: 34px;
+}
+
+.bm-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: none;
+}
+
+.bm-head .vc-kicker {
+  font-size: 32px;
+}
+
+.bm-head--notes {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.bm-head--notes > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bm-title {
+  font: 700 66px/1.02 var(--font-display);
+  letter-spacing: -0.032em;
+  text-wrap: balance;
+  max-width: 1600px;
+}
+
+.bm-label {
+  margin-bottom: 10px;
+  font: 700 22px/1.2 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
+.bm-punch {
+  font: 600 40px/1.18 var(--font-display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  max-width: 1560px;
+}
+
+.bm-foot {
+  font-size: 34px;
+  line-height: 1.35;
+  color: var(--text-2);
+  max-width: 1500px;
+}
+
+/* ---------- Portada ---------- */
+
+.reveal .slides section.bm-cover {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+}
+
+.bm-cover__text {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 1240px;
+}
+
+.bm-cover__line {
+  font-size: 44px;
+  line-height: 1.25;
+  color: var(--text-2);
+  text-wrap: balance;
+}
+
+.bm-cover__qr {
+  align-self: flex-end;
+}
+
+/* ---------- Tables ---------- */
+
+.bm-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 30px;
+  line-height: 1.3;
+}
+
+.bm-table th,
+.bm-table td {
+  padding: 13px 24px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 2px solid var(--line);
+}
+
+.bm-table thead th {
+  padding-top: 0;
+  font: 700 22px/1.2 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+  border-bottom-color: var(--line-strong);
+}
+
+.bm-table tbody th {
+  font: 700 30px/1.25 var(--font-display);
+}
+
+.bm-table code {
+  font: 600 0.9em/1 var(--font-mono);
+  color: var(--gold-text);
+  overflow-wrap: anywhere;
+}
+
+.bm-table--yesno td:first-child {
+  color: var(--text);
+}
+
+.bm-table--yesno td:last-child {
+  color: var(--text-2);
+}
+
+.bm-table--yesno thead th:last-child {
+  color: var(--cyan-text);
+}
+
+.bm-table--cut td:first-child {
+  width: 46%;
+  color: var(--text-2);
+}
+
+.bm-table--cut td:last-child {
+  position: relative;
+  padding-left: 64px;
+}
+
+.bm-table--cut td:last-child::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 0.72em;
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--gold);
+}
+
+.bm-table--cut td:last-child::after {
+  content: '';
+  position: absolute;
+  left: 32px;
+  top: calc(0.72em - 5px);
+  width: 9px;
+  height: 9px;
+  border: solid var(--gold);
+  border-width: 3px 3px 0 0;
+  transform: rotate(45deg);
+}
+
+.bm-table--tools {
+  font-size: 26px;
+}
+
+.bm-table--tools tbody th {
+  width: 290px;
+  font-size: 28px;
+}
+
+.bm-table--tools td:nth-child(2) {
+  width: 440px;
+  color: var(--text-2);
+}
+
+/* ---------- Recorrido ---------- */
+
+.bm-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+  margin: auto 0;
+}
+
+.bm-steps li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 30px 30px 34px;
+  border-radius: 26px;
+  border: 2px solid var(--line);
+  background: var(--surface);
+}
+
+/* connector to the next step */
+.bm-steps li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 62px;
+  right: -30px;
+  width: 32px;
+  height: 3px;
+  background: var(--line-strong);
+}
+
+.bm-steps__n {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid var(--line-strong);
+  font: 700 30px/1 var(--font-display);
+  color: var(--text-2);
+}
+
+.bm-steps .is-done .bm-steps__n {
+  position: relative;
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--c-ink-dark);
+  font-size: 0;
+}
+
+/* check mark for done steps */
+.bm-steps .is-done .bm-steps__n::before {
+  content: '';
+  width: 14px;
+  height: 26px;
+  margin-top: -6px;
+  border: solid var(--c-ink-dark);
+  border-width: 0 5px 5px 0;
+  transform: rotate(45deg);
+}
+
+.bm-steps b {
+  font: 700 46px/1.05 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.bm-steps p {
+  font-size: 32px;
+  line-height: 1.35;
+  color: var(--text-2);
+}
+
+.bm-steps .is-today {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+}
+
+.bm-steps .is-today .bm-steps__n {
+  border-color: var(--gold);
+  color: var(--gold-text);
+}
+
+.bm-steps .is-today b {
+  color: var(--gold-text);
+}
+
+.bm-steps .is-today p {
+  color: var(--text);
+}
+
+/* ---------- MVP sí / no ---------- */
+
+.reveal .slides section.bm-mvp {
+  gap: 32px;
+}
+
+.bm-mvp .bm-table {
+  font-size: 32px;
+}
+
+.bm-mvp .bm-punch {
+  margin-top: auto;
+}
+
+/* ---------- Patrón: cadena de cinco ---------- */
+
+.bm-chain {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 52px;
+  margin-top: auto;
+}
+
+.bm-chain li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 290px;
+  padding: 32px 28px 32px;
+  border-radius: 24px;
+  border: 2px solid var(--line-strong);
+  background: var(--surface);
+}
+
+.bm-chain li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -42px;
+  width: 22px;
+  height: 22px;
+  margin-top: -11px;
+  border: solid var(--gold);
+  border-width: 5px 5px 0 0;
+  transform: rotate(45deg);
+}
+
+.bm-chain b {
+  font: 700 42px/1.05 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.bm-chain span {
+  font-size: 31px;
+  line-height: 1.32;
+  color: var(--text-2);
+}
+
+.bm-chain .is-human {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+}
+
+.bm-chain .is-human b {
+  color: var(--gold-text);
+}
+
+.bm-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.bm-tags li {
+  padding: 12px 24px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--line);
+  font: 600 29px/1 var(--font-display);
+  color: var(--text-2);
+}
+
+.bm-pattern .bm-punch {
+  margin-top: auto;
+}
+
+/* ---------- Regla de recorte ---------- */
+
+.reveal .slides section.bm-cut {
+  gap: 28px;
+}
+
+.bm-gold {
+  display: flex;
+  gap: 28px;
+  align-items: baseline;
+  margin-top: auto;
+  padding: 26px 34px 28px;
+  border-radius: 24px;
+  border: 3px solid var(--gold);
+  background: var(--gold-soft);
+  font: 600 34px/1.25 var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+.bm-gold b {
+  flex: none;
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
+/* ---------- El caso ---------- */
+
+.reveal .slides section.bm-case {
+  gap: 30px;
+}
+
+.bm-case__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 640px;
+  gap: 48px;
+  align-items: start;
+}
+
+.bm-case__main {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.bm-quote {
+  margin: 0;
+  padding: 0 0 0 34px;
+  border-left: 6px solid var(--gold);
+}
+
+.bm-quote__text {
+  font: 600 37px/1.3 var(--font-body);
+  letter-spacing: -0.012em;
+}
+
+.bm-why {
+  font-size: 29px;
+  line-height: 1.38;
+  color: var(--text-2);
+}
+
+.bm-why b {
+  color: var(--text);
+}
+
+.bm-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.bm-cards li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 170px;
+  padding: 24px 24px 26px;
+  border-radius: 22px;
+  border: 2px solid var(--line-strong);
+  background: var(--surface);
+}
+
+.bm-cards b {
+  font: 700 22px/1.2 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
+.bm-cards span {
+  font: 600 29px/1.25 var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.bm-cards .is-human {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+}
+
+.bm-downloads {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: auto;
+}
+
+/* ---------- Capas, reglas y ciclo ---------- */
+
+.bm-layers-slide__grid {
+  display: grid;
+  grid-template-columns: 560px 520px minmax(0, 1fr);
+  gap: 44px;
+  flex: 1;
+  min-height: 0;
+  align-items: start;
+}
+
+.bm-layers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bm-layers li {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px 16px 12px 10px;
+  border-radius: 14px;
+  font-size: 30px;
+  line-height: 1.25;
+}
+
+.bm-layers li:nth-child(odd) {
+  background: var(--surface);
+}
+
+.bm-layers__n {
+  font: 700 32px/1 var(--font-display);
+  color: var(--gold-text);
+  text-align: right;
+}
+
+.bm-layers .is-opt {
+  color: var(--text-2);
+}
+
+.bm-layers .is-opt .bm-layers__n {
+  color: var(--text-3);
+}
+
+.bm-rules ol {
+  gap: 18px;
+  list-style: decimal;
+  font-size: 30px;
+}
+
+.bm-cycle {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.bm-cycle__ring {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 480 / 400;
+}
+
+.bm-cycle__ring svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.bm-cycle__arc {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.bm-cycle__arc--yes {
+  stroke: var(--gold);
+}
+
+.bm-cycle marker path {
+  fill: var(--text-2);
+}
+
+.bm-cycle__nodes li {
+  position: absolute;
+  width: 41%;
+  transform: translate(-50%, -50%);
+  padding: 12px 14px 13px;
+  border-radius: 18px;
+  border: 2px solid var(--line-strong);
+  background: var(--bg-raise);
+  font: 600 24px/1.22 var(--font-body);
+  text-align: center;
+}
+
+.bm-cycle__nodes .is-top {
+  left: 50%;
+  top: 12.5%;
+}
+
+.bm-cycle__nodes .is-right {
+  left: 78%;
+  top: 70%;
+}
+
+.bm-cycle__nodes .is-left {
+  left: 22%;
+  top: 70%;
+  border-color: var(--gold);
+  color: var(--gold-text);
+}
+
+.bm-cycle__out {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 25px;
+  line-height: 1.3;
+}
+
+.bm-cycle__out li {
+  padding-left: 18px;
+  border-left: 5px solid var(--line-strong);
+  color: var(--text-2);
+}
+
+.bm-cycle__out .is-yes {
+  border-color: var(--gold);
+}
+
+.bm-cycle__out .is-no {
+  border-color: var(--sem-naranja);
+}
+
+.bm-cycle__out b {
+  color: var(--text);
+}
+
+/* ---------- Herramientas ---------- */
+
+.reveal .slides section.bm-tools {
+  gap: 30px;
+}
+
+.bm-tools .bm-punch {
+  margin-top: auto;
+  font-size: 36px;
+}
+
+/* ---------- Índice ---------- */
+
+.reveal .slides section.bm-index {
+  gap: 40px;
+}
+
+.bm-index nav {
+  margin: auto 0;
+}
+
+/* ---------- Prueba final: three prompt blocks and the rule ---------- */
+
+.reveal .slides section.bm-final {
+  --sp-top: 100px;
+  gap: 26px;
+}
+
+/* Left: the test prompt; right: the two templates. Each box is as tall as its
+   text and scrolls on its own if the area is shorter. */
+.bm-final__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 720px;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas:
+    'test fix'
+    'test over';
+  gap: 18px 32px;
+  flex: 1;
+  min-height: 0;
+}
+
+.bm-final__grid .pbox {
+  --pbox-fs: 20px;
+  align-self: start;
+  max-height: 100%;
+}
+
+.bm-final__grid .pbox pre {
+  padding: 14px 20px 16px;
+  line-height: 1.36;
+}
+
+.bm-final__grid .pbox__bar {
+  padding-block: 8px;
+}
+
+.bm-final__test { grid-area: test; }
+.bm-final__fix { grid-area: fix; }
+.bm-final__over { grid-area: over; }
+
+.bm-final__rule.bm-gold {
+  flex: none;
+  margin-top: 0;
+  padding: 16px 28px 18px;
+  font: 500 25px/1.32 var(--font-body);
+  letter-spacing: -0.005em;
+}
+
+/* ---------- Ahora con su brief ---------- */
+
+.reveal .slides section.bm-next {
+  gap: 34px;
+}
+
+.bm-next__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 64px;
+  align-items: start;
+}
+
+.bm-next__col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.bm-next__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bm-next__list li {
+  padding: 18px 24px 20px;
+  border-radius: 20px;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  font-size: 29px;
+  line-height: 1.32;
+  color: var(--text-2);
+}
+
+.bm-next__list b {
+  color: var(--text);
+}
+
+.bm-next__list .is-key {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+  color: var(--text);
+}
+
+.bm-next__list .is-key b {
+  color: var(--gold-text);
+}
+
+.reveal .bm-next__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 1.3em;
+  list-style: decimal;
+  font-size: 30px;
+  line-height: 1.32;
+}
+
+.bm-next__steps li::marker {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold-text);
+}
+
+.bm-next__steps code {
+  font: 600 0.88em/1 var(--font-mono);
+  color: var(--gold-text);
+  white-space: nowrap;
+}
+
+.bm-next__get {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 26px;
+}
+
+.bm-next__get .dl {
+  flex: 1;
+  min-width: 0;
+}
+
+.bm-next__qr .qrbox.qrbox--vc-sm {
+  width: 196px;
+  height: 196px;
+  padding: 14px;
+  border-radius: 22px;
+}
+
+.bm-next .bm-punch {
+  margin-top: auto;
+}
+
+/* =========================================================
+   Reading mode for phones (html.is-doc, js/lectura.js)
+   The Reveal deck stays hidden; .doc holds a clone of every slide as one
+   scrolling page. Sizes here are CSS px on a phone, not projector px.
+   ========================================================= */
+
+.doc {
+  display: none;
+}
+
+html.is-doc,
+html.is-doc body {
+  height: auto !important;
+  overflow-y: visible !important;
+}
+
+/* The root's overflow goes to the viewport. Body clips instead of hiding:
+   overflow-x: hidden would make it a scroll container that never scrolls,
+   and the sticky prompt bars (Copiar) would never stick. */
+html.is-doc {
+  overflow-x: hidden !important;
+}
+
+html.is-doc body {
+  overflow-x: clip !important;
+}
+
+html.is-doc .reveal,
+html.is-doc #gl,
+html.is-doc .curtain {
+  display: none !important;
+}
+
+html.is-doc .doc {
+  display: block;
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 16px 88px;
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+:where(.doc) :where(h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote, table) {
+  margin: 0;
+  padding: 0;
+}
+
+:where(.doc) :where(ul, ol) {
+  list-style: none;
+}
+
+.doc em {
+  font-style: normal;
+  color: var(--gold-text);
+}
+
+.doc > section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 36px 0 40px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 4px;
+}
+
+.doc aside.notes,
+.doc .vc-qr {
+  display: none;
+}
+
+.doc__top {
+  position: fixed;
+  right: 16px;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 10;
+  padding: 10px 18px 11px;
+  border-radius: 999px;
+  border: 2px solid var(--gold);
+  background: var(--bg-raise);
+  color: var(--text);
+  font: 700 15px/1 var(--font-display);
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* type */
+.doc .t-mega {
+  font-size: 46px;
+}
+
+.doc .t-lead {
+  font-size: 22px;
+}
+
+.doc .vc-kicker {
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.doc .bm-title,
+.doc .pslide__title {
+  font-size: 27px;
+  line-height: 1.12;
+}
+
+.doc .bm-head,
+.doc .bm-head--notes > div {
+  gap: 6px;
+}
+
+.doc .bm-head--notes {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.doc .bm-label,
+.doc .pslide__label,
+.doc .notas__label,
+.doc .pbox__label {
+  font-size: 13px;
+}
+
+.doc .bm-punch {
+  font-size: 20px;
+}
+
+.doc .bm-foot,
+.doc .bm-why,
+.doc .pslide__text,
+.doc :where(.pslide__verse, .pslide__falla) > p:not(.pslide__label),
+.doc .pslide__hace p:not(.pslide__label) {
+  font-size: 17px;
+}
+
+.doc .pslide__porque p:not(.pslide__label) {
+  font-size: 17px;
+}
+
+/* portada */
+.doc .bm-cover {
+  min-height: 70vh;
+  justify-content: center;
+}
+
+.doc .bm-cover__text {
+  gap: 14px;
+}
+
+.doc .bm-cover__line {
+  font-size: 19px;
+}
+
+.doc .vc-cover__meta {
+  margin-top: 6px;
+  font-size: 15px;
+}
+
+/* tables */
+.doc .bm-table {
+  font-size: 15px;
+}
+
+.doc .bm-table th,
+.doc .bm-table td {
+  padding: 8px 8px 9px;
+}
+
+.doc .bm-table thead th {
+  font-size: 12px;
+}
+
+.doc .bm-table tbody th {
+  font-size: 16px;
+}
+
+.doc .bm-mvp .bm-table {
+  font-size: 15px;
+}
+
+.doc .bm-table--cut td:last-child {
+  padding-left: 30px;
+}
+
+.doc .bm-table--cut td:last-child::before {
+  left: 6px;
+  width: 14px;
+}
+
+.doc .bm-table--cut td:last-child::after {
+  left: 12px;
+  width: 7px;
+  height: 7px;
+  border-width: 2px 2px 0 0;
+  top: calc(0.72em - 4px);
+}
+
+/* a 3-column table becomes one card per row */
+.doc .bm-table--tools thead {
+  display: none;
+}
+
+.doc .bm-table--tools,
+.doc .bm-table--tools tbody,
+.doc .bm-table--tools tr,
+.doc .bm-table--tools th,
+.doc .bm-table--tools td {
+  display: block;
+  width: auto;
+}
+
+.doc .bm-table--tools tr {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.doc .bm-table--tools th,
+.doc .bm-table--tools td {
+  padding: 2px 0;
+  border: 0;
+}
+
+.doc .bm-table--tools td::before {
+  content: attr(data-label);
+  display: block;
+  font: 700 12px/1.4 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
+/* recorrido */
+.doc .bm-steps {
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 0;
+}
+
+.doc .bm-steps li {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  column-gap: 14px;
+  row-gap: 4px;
+  padding: 14px 16px;
+  border-radius: 16px;
+}
+
+.doc .bm-steps li::after {
+  display: none;
+}
+
+.doc .bm-steps__n {
+  grid-row: 1 / span 2;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  border-width: 2px;
+}
+
+.doc .bm-steps .is-done .bm-steps__n::before {
+  width: 9px;
+  height: 17px;
+  margin-top: -4px;
+  border-width: 0 3px 3px 0;
+}
+
+.doc .bm-steps b {
+  font-size: 20px;
+}
+
+.doc .bm-steps p {
+  font-size: 16px;
+}
+
+/* patrón */
+.doc .bm-chain {
+  grid-template-columns: 1fr;
+  gap: 26px;
+  margin: 0;
+}
+
+.doc .bm-chain li {
+  min-height: 0;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 16px;
+}
+
+.doc .bm-chain li:not(:last-child)::after {
+  top: auto;
+  right: auto;
+  left: 50%;
+  bottom: -21px;
+  width: 11px;
+  height: 11px;
+  margin: 0 0 0 -6px;
+  border-width: 3px 3px 0 0;
+  transform: rotate(135deg);
+}
+
+.doc .bm-chain b {
+  font-size: 20px;
+}
+
+.doc .bm-chain span {
+  font-size: 16px;
+}
+
+.doc .bm-tags {
+  gap: 8px;
+}
+
+.doc .bm-tags li {
+  padding: 7px 12px 8px;
+  font-size: 14px;
+}
+
+.doc .bm-gold {
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 16px 18px;
+  border-radius: 16px;
+  font-size: 18px;
+}
+
+.doc .bm-gold b {
+  font-size: 13px;
+}
+
+/* el caso */
+.doc .bm-case__grid,
+.doc .bm-layers-slide__grid {
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+
+.doc .pslide__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.doc .bm-quote {
+  padding-left: 16px;
+  border-left-width: 4px;
+}
+
+.doc .bm-quote__text {
+  font-size: 19px;
+}
+
+.doc .bm-cards {
+  gap: 10px;
+}
+
+.doc .bm-cards li {
+  min-height: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.doc .bm-cards b {
+  font-size: 12px;
+}
+
+.doc .bm-cards span {
+  font-size: 16px;
+}
+
+.doc .bm-downloads {
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 0;
+}
+
+.doc .dl {
+  column-gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.doc .dl__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  transform: scale(0.82);
+}
+
+.doc .dl__name {
+  font-size: 15px;
+}
+
+.doc .dl__desc {
+  font-size: 14px;
+}
+
+/* capas */
+.doc .bm-layers li {
+  grid-template-columns: 26px minmax(0, 1fr);
+  padding: 6px 10px;
+  font-size: 16px;
+}
+
+.doc .bm-layers__n {
+  font-size: 17px;
+}
+
+.doc .vc-rules {
+  padding: 16px 18px;
+  border-radius: 16px;
+}
+
+.doc .vc-rules__title {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.doc .bm-rules ol {
+  gap: 8px;
+  font-size: 16px;
+}
+
+.doc .bm-cycle__ring {
+  max-width: 420px;
+}
+
+/* border-box: 41 % of the ring including padding, or the side nodes reach
+   past the 16 px gutter */
+.doc .bm-cycle__nodes li {
+  box-sizing: border-box;
+  padding: 6px 6px 7px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.doc .bm-cycle__out {
+  font-size: 15px;
+}
+
+/* índice */
+.doc .toc {
+  grid-auto-flow: row;
+  grid-template-columns: 1fr;
+  grid-template-rows: none;
+  gap: 2px;
+}
+
+.doc .toc a {
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 8px;
+  padding: 9px 8px 10px 4px;
+  font-size: 16px;
+}
+
+.doc .toc__n {
+  font-size: 15px;
+}
+
+/* prompt slides */
+.doc .pbox {
+  --pbox-fs: 13.5px;
+  border-radius: 14px;
+}
+
+.doc .pslide__table {
+  font-size: 14px;
+}
+
+.doc .pslide__table th,
+.doc .pslide__table td {
+  padding: 5px 4px 6px;
+}
+
+/* the stage column wraps so the four columns fit 358 px */
+.doc .pslide__table td:not(.num):not(:last-child) {
+  white-space: normal;
+}
+
+.doc .pslide__table thead th {
+  font-size: 12px;
+}
+
+.doc .pslide__table tbody th {
+  font-size: 13px;
+}
+
+.doc .pslide__head {
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* the whole prompt is visible; its bar (tabs + Copiar) follows the scroll */
+.doc .pbox__scroll {
+  overflow: visible;
+  border-radius: 0 0 12px 12px;
+}
+
+.doc .pbox__bar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 12px 12px 0 0;
+}
+
+.doc .pbox__tabs {
+  gap: 4px;
+}
+
+.doc .pbox__tab {
+  padding: 6px 10px 7px;
+  font-size: 13px;
+}
+
+.doc .pbox__copy {
+  gap: 8px;
+  margin-left: auto;
+  padding: 8px 14px 9px 10px;
+  font-size: 15px;
+}
+
+.doc .pbox__copy-icon {
+  transform: scale(0.7);
+}
+
+.doc .pbox pre {
+  padding: 12px 12px 14px;
+}
+
+.doc .pslide__porque {
+  margin: 0;
+  padding: 14px 16px 16px;
+  border-radius: 14px;
+  border-left-width: 4px;
+}
+
+.doc .notas__btn {
+  align-self: flex-start;
+  padding: 6px 8px 7px 12px;
+  font-size: 14px;
+}
+
+.doc .notas__btn kbd {
+  display: none;
+}
+
+.doc .notas {
+  position: static;
+  width: auto;
+  padding: 14px 16px;
+  border-radius: 14px;
+  box-shadow: none;
+  font-size: 16px;
+}
+
+/* prueba final */
+.doc .bm-final__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.doc .bm-final__grid .pbox {
+  --pbox-fs: 13.5px;
+  max-height: none;
+}
+
+.doc .bm-final__rule.bm-gold {
+  padding: 14px 16px 16px;
+  font-size: 16px;
+}
+
+/* ahora con su brief */
+.doc .bm-next__grid {
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+
+.doc .bm-next__list {
+  gap: 10px;
+}
+
+.doc .bm-next__list li {
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 16px;
+}
+
+.doc .bm-next__steps {
+  gap: 8px;
+  padding-left: 1.4em;
+  list-style: decimal;
+  font-size: 16px;
+}
+
+.doc .bm-next__steps code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.doc .bm-next__get {
+  margin-top: 14px;
+}

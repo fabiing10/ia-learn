@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: semaforo-liquidaciones
+expected_outcome: |
+  La respuesta sigue la plantilla de nueve secciones de la skill. No hace más de tres preguntas y ninguna sobre lo que el brief ya responde. El recorte sustituye SECOP por diez registros de ejemplo, el correo por un semáforo y las actas por un solo oficio. La SPEC trae diez contratos ficticios, entre seis y doce reglas numeradas con ejemplo, un bloque de validación humana y al menos cinco casos de prueba con resultado concreto. Hay entre seis y ocho prompts por capa en bloques de código, con la cabecera "un único archivo index.html, sin backend" y "qué debe verse" después de cada uno, más prueba final, plantilla de corrección y "no te pases". No propone Supabase, login ni API keys. Cierra con "Lo que aún adivinaría".
