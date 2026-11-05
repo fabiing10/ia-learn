@@ -1,0 +1,75 @@
+﻿numero,orden,documento,estado
+OBRA-001-2025,1,Acta de inicio,Sí
+OBRA-001-2025,2,Informes de supervisión o interventoría,Sí
+OBRA-001-2025,3,Acta de terminación / recibo final,Sí
+OBRA-001-2025,4,Informe final del contratista,Sí
+OBRA-001-2025,5,Certificación de pagos y balance financiero,Sí
+OBRA-001-2025,6,Certificación de aportes a seguridad social y parafiscales,Sí
+OBRA-001-2025,7,Garantías actualizadas para la etapa de liquidación,No
+OBRA-001-2025,8,Acta de entrega y recibo de obra,Sí
+OBRA-001-2025,9,Amparo de estabilidad de obra actualizado,No
+SUM-014-2025,1,Acta de inicio,Sí
+SUM-014-2025,2,Informes de supervisión o interventoría,Sí
+SUM-014-2025,3,Acta de terminación / recibo final,Sí
+SUM-014-2025,4,Informe final del contratista,Sí
+SUM-014-2025,5,Certificación de pagos y balance financiero,Sí
+SUM-014-2025,6,Certificación de aportes a seguridad social y parafiscales,No
+SUM-014-2025,7,Garantías actualizadas para la etapa de liquidación,Sí
+CONS-007-2022,1,Acta de inicio,Sí
+CONS-007-2022,2,Informes de supervisión o interventoría,Sí
+CONS-007-2022,3,Acta de terminación / recibo final,Sí
+CONS-007-2022,4,Informe final del contratista,No
+CONS-007-2022,5,Certificación de pagos y balance financiero,Sí
+CONS-007-2022,6,Certificación de aportes a seguridad social y parafiscales,Sí
+CONS-007-2022,7,Garantías actualizadas para la etapa de liquidación,No
+CONS-007-2022,8,Entregables / productos aprobados por el supervisor,No
+CONV-003-2026,1,Acta de inicio,Sí
+CONV-003-2026,2,Informes de supervisión o interventoría,Sí
+CONV-003-2026,3,Acta de terminación / recibo final,No
+CONV-003-2026,4,Informe final del contratista,No
+CONV-003-2026,5,Certificación de pagos y balance financiero,No
+CONV-003-2026,6,Certificación de aportes a seguridad social y parafiscales,Sí
+CONV-003-2026,7,Garantías actualizadas para la etapa de liquidación,No
+CONV-003-2026,8,Informe de ejecución de recursos,No
+CONV-003-2026,9,Acta de reintegro de saldos y rendimientos financieros,No
+INT-005-2025,1,Acta de inicio,Sí
+INT-005-2025,2,Informes de supervisión o interventoría,Sí
+INT-005-2025,3,Acta de terminación / recibo final,Sí
+INT-005-2025,4,Informe final del contratista,Sí
+INT-005-2025,5,Certificación de pagos y balance financiero,Sí
+INT-005-2025,6,Certificación de aportes a seguridad social y parafiscales,Sí
+INT-005-2025,7,Garantías actualizadas para la etapa de liquidación,Sí
+INT-005-2025,8,Entregables / productos aprobados por el supervisor,No
+OBRA-009-2026,1,Acta de inicio,Sí
+OBRA-009-2026,2,Informes de supervisión o interventoría,Sí
+OBRA-009-2026,3,Acta de terminación / recibo final,Sí
+OBRA-009-2026,4,Informe final del contratista,Sí
+OBRA-009-2026,5,Certificación de pagos y balance financiero,Sí
+OBRA-009-2026,6,Certificación de aportes a seguridad social y parafiscales,Sí
+OBRA-009-2026,7,Garantías actualizadas para la etapa de liquidación,Sí
+OBRA-009-2026,8,Acta de entrega y recibo de obra,Sí
+OBRA-009-2026,9,Amparo de estabilidad de obra actualizado,Sí
+SUM-021-2025,1,Acta de inicio,Sí
+SUM-021-2025,2,Informes de supervisión o interventoría,Sí
+SUM-021-2025,3,Acta de terminación / recibo final,Sí
+SUM-021-2025,4,Informe final del contratista,Sí
+SUM-021-2025,5,Certificación de pagos y balance financiero,No
+SUM-021-2025,6,Certificación de aportes a seguridad social y parafiscales,Sí
+SUM-021-2025,7,Garantías actualizadas para la etapa de liquidación,No
+CONS-011-2025,1,Acta de inicio,Sí
+CONS-011-2025,2,Informes de supervisión o interventoría,Sí
+CONS-011-2025,3,Acta de terminación / recibo final,Sí
+CONS-011-2025,4,Informe final del contratista,Sí
+CONS-011-2025,5,Certificación de pagos y balance financiero,Sí
+CONS-011-2025,6,Certificación de aportes a seguridad social y parafiscales,Sí
+CONS-011-2025,7,Garantías actualizadas para la etapa de liquidación,Sí
+CONS-011-2025,8,Entregables / productos aprobados por el supervisor,Sí
+CONV-008-2026,1,Acta de inicio,Sí
+CONV-008-2026,2,Informes de supervisión o interventoría,Sí
+CONV-008-2026,3,Acta de terminación / recibo final,No
+CONV-008-2026,4,Informe final del contratista,No
+CONV-008-2026,5,Certificación de pagos y balance financiero,Sí
+CONV-008-2026,6,Certificación de aportes a seguridad social y parafiscales,Sí
+CONV-008-2026,7,Garantías actualizadas para la etapa de liquidación,Sí
+CONV-008-2026,8,Informe de ejecución de recursos,No
+CONV-008-2026,9,Acta de reintegro de saldos y rendimientos financieros,No

@@ -1,4 +1,4 @@
-<!-- BLOQUE 2 · El caso (Parte A, diapositivas 6 a 8) -->
+<!-- BLOQUE 2 · El caso (Parte A, diapositivas 6, 6a, 7 y 8) -->
 
 <section id="caso" data-block="2" data-bg-alpha="0.25" class="bm-slide bm-case s-tight">
   <header class="bm-head bm-head--notes">
@@ -54,6 +54,83 @@
     <p><strong>Nota para el facilitador</strong></p>
     <p>las reglas de plazo están simplificadas (4 meses bilateral + 2 unilateral + 2 años). Es el momento de que los abogados discutan los matices; eso va al roadmap.</p>
   </aside>
+</section>
+
+<!-- Parte A, diapositiva 6a: the sample data live in an Excel file. Prompt-slide
+     parts (labels, pbox, «Por qué importa»); the <pre> is the script's prompt,
+     character by character. -->
+<section id="datos-excel" data-block="2" data-bg-alpha="0.2" data-ctrl="pbox" class="pslide bm-data s-tight">
+  <header class="bm-data__head">
+    <p class="vc-kicker" data-in>Tus datos en Excel</p>
+    <h2 class="pslide__title" data-split="words">Los datos de ejemplo viven en un Excel, no en un documento</h2>
+  </header>
+  <div class="bm-data__grid">
+    <div class="bm-data__main">
+      <p class="bm-data__text" data-in>La SPEC describe el modelo de datos. Los diez contratos y su lista de chequeo están en <code>contratos-ejemplo.xlsx</code>: dos hojas, <b>Contratos</b> y <b>Documentos</b>, con los nombres de columna de la SPEC. Es el archivo que ustedes tendrían si exportaran su inventario. Cuando apliquen el método a su brief, reemplazan este Excel por el suyo: mismas columnas, sus filas.</p>
+      <div class="bm-data__cols" data-in>
+        <p class="pslide__label" id="cols-contratos">Hoja Contratos</p>
+        <ul class="chips" aria-labelledby="cols-contratos">
+          <li><code>numero</code></li>
+          <li><code>contratista</code></li>
+          <li><code>objeto</code></li>
+          <li><code>tipo</code></li>
+          <li><code>valor</code></li>
+          <li><code>fecha_inicio</code></li>
+          <li><code>fecha_terminacion</code></li>
+          <li><code>plazo_liquidacion_pactado_meses</code></li>
+          <li><code>supervisor</code></li>
+          <li><code>estado_ejecucion</code></li>
+          <li><code>estado_liquidacion</code></li>
+          <li><code>fecha_liquidacion</code></li>
+          <li><code>observaciones</code></li>
+          <li><code>validado_por_humano</code></li>
+        </ul>
+        <p class="pslide__label" id="cols-documentos">Hoja Documentos</p>
+        <ul class="chips" aria-labelledby="cols-documentos">
+          <li><code>numero</code></li>
+          <li><code>orden</code></li>
+          <li><code>documento</code></li>
+          <li><code>estado</code></li>
+        </ul>
+      </div>
+<div class="pbox" data-pbox data-pbox-label="Prompt · se envía justo antes del Prompt 1">
+<pre>Antes de construir, toma los datos de ejemplo del archivo contratos-ejemplo.xlsx que te adjunto (hojas "Contratos" y "Documentos"), no de la SPEC. Lee las dos hojas, respeta los nombres de columna tal como están y no inventes filas ni cambies valores. Conviértelos en el arreglo de contratos del código, cada uno con su lista de chequeo, y confírmame en 3 líneas cuántos contratos y cuántos documentos leíste. Si una columna no coincide con la SPEC, dímelo antes de construir. Luego construye SOLO la capa 1 como dice el Prompt 1.</pre>
+</div>
+    </div>
+    <div class="bm-data__side">
+      <ul class="bm-data__dl" data-in="stagger" aria-label="Descargas">
+        <li>
+          <a class="dl" href="assets/contratos-ejemplo.xlsx" download>
+            <span class="dl__icon" aria-hidden="true"></span>
+            <span class="dl__name">contratos-ejemplo.xlsx</span>
+            <span class="dl__desc">las dos hojas y una hoja Leeme.</span>
+          </a>
+        </li>
+        <li>
+          <a class="dl" href="assets/contratos-ejemplo.csv" download>
+            <span class="dl__icon" aria-hidden="true"></span>
+            <span class="dl__name">contratos-ejemplo.csv</span>
+            <span class="dl__desc">la hoja Contratos, por si la herramienta no acepta Excel.</span>
+          </a>
+        </li>
+        <li>
+          <a class="dl" href="assets/documentos-ejemplo.csv" download>
+            <span class="dl__icon" aria-hidden="true"></span>
+            <span class="dl__name">documentos-ejemplo.csv</span>
+            <span class="dl__desc">la hoja Documentos.</span>
+          </a>
+        </li>
+      </ul>
+      <div class="bm-data__how" data-in>
+        <p class="pslide__label">Cómo adjuntarlo</p>
+        <p><b>Lovable y AI Studio:</b> adjunta el archivo en el chat; si no lo acepta, pega el contenido de los dos CSV. <b>Claude (artifact):</b> adjunta el <code>.xlsx</code> al chat. <b>Claude Code / Codex:</b> guarda el archivo en la carpeta <code>semaforo</code> y escribe "Lee @contratos-ejemplo.xlsx".</p>
+      </div>
+      <div class="pslide__porque" data-in>
+        <p class="pslide__label">Por qué importa</p>
+        <p>el código no es la fuente de verdad de los datos; su Excel sí. Cuando cambien un contrato, cambian el archivo, no el código. Todos los datos son ficticios; nunca suban los reales.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="capas" data-block="2" data-bg-alpha="0.25" class="bm-slide bm-layers-slide s-tight">

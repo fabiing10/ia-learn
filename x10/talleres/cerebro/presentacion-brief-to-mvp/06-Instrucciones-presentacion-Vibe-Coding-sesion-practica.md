@@ -37,6 +37,49 @@ Cuatro pasos en línea, los tres primeros marcados como hechos y el cuarto como 
 
 **Nota al pie:** Ustedes ya tienen su brief. Hoy usamos uno de ejemplo para aprender el método; al final lo aplican al suyo.
 
+## 1a · Herramientas de hoy (onboarding) — va después del índice y antes de «Dónde estamos en el recorrido»
+
+**Título:** Antes de empezar: su herramienta, lista
+
+Tres tarjetas grandes, una por herramienta, cada una con enlace, pasos y la señal de "listo":
+
+| Herramienta | Enlace | Pasos | Listo cuando |
+|---|---|---|---|
+| **Claude** (artifact en claude.ai) | claude.ai | Crear cuenta o entrar. Abrir un chat nuevo. | Puedes escribir en un chat nuevo. En Free construyes y demuestras en pantalla; compartir por link, almacenamiento y descargas del artifact piden Pro. |
+| **Codex** (app de escritorio) | developers.openai.com/codex/app → Descargar para macOS o Windows | Descargar el instalador, abrirlo, entrar con la cuenta de ChatGPT. Elegir una carpeta nueva y el modo *This computer* (no Cloud). | Ves el chat de Codex con tu carpeta abierta. Codex viene con los planes Plus y Pro de ChatGPT. |
+| **Lovable** | lovable.dev | Crear cuenta gratuita. *New project*. | Ves el editor: chat a la izquierda, vista previa a la derecha. |
+
+Debajo, dos opciones más en una línea: **Claude Code** (terminal o app de escritorio: claude.com/claude-code) y **Gemini AI Studio** (aistudio.google.com → *Build*).
+
+**En todas:** una carpeta nueva llamada `semaforo` en su computador, con `SPEC-semaforo-liquidaciones.md` adentro (se descarga en "El caso de hoy").
+
+**Frase:** Elijan una y terminen en esa. Si hoy no pueden instalar nada: Lovable o Claude.
+
+**Enlaces verificados el 5 de noviembre de 2026.** La página de Codex redirige a learn.chatgpt.com/docs/app y trae el botón "Download for macOS (Apple Silicon)" y la app para Windows.
+
+## 1b · El brief que elegimos — va justo después de «Herramientas de hoy»
+
+**Título:** El brief del Grupo 7, tal como lo escribieron
+
+Los diez campos del brief, en dos columnas de tarjetas cortas:
+
+| Campo | Contenido |
+|---|---|
+| Nombre y entidad | Semáforo de Liquidaciones Contractuales. Oficina de contratación de una entidad pública colombiana. |
+| Usuario | Abogado o profesional de la oficina de contratación responsable del cierre (liquidación) de contratos y convenios. |
+| Problema | La información del cierre está dispersa; calcular términos y verificar documentos toma de una a dos horas por contrato, y los plazos se vencen sin que nadie lo note. |
+| Reto | ¿Cómo podríamos ver en segundos qué contratos están próximos a vencer su plazo de liquidación y qué documentos faltan, sin sustituir la revisión jurídica? |
+| Solución pedida | Inventario desde SECOP, cálculo de términos y alertas por correo, revisión documental contra listas de chequeo, análisis financiero, generación de actas y oficios, consulta de normativa, informes e indicadores. |
+| Flujo principal | Consolidar el inventario → calcular y alertar → revisar el expediente → generar documentos → el profesional revisa, valida y tramita. |
+| Qué NO hará | No decide si procede la liquidación ni declara la pérdida de competencia. No firma, radica ni notifica. |
+| Datos | Contratos y convenios (número, contratista, objeto, valor, plazo, fechas, supervisor, estado), documentos del expediente, informes, garantías. |
+| Humano responsable | El profesional de la oficina de contratación revisa cada caso, decide y tramita. |
+| Cómo sabremos que funciona | Menos tiempo de revisión por contrato y cero plazos de liquidación vencidos sin alerta. |
+
+**Frase:** Un brief completo y ambicioso. En "El caso de hoy" lo vemos recortado a lo que cabe en una sesión.
+
+**Descarga:** `Brief-Semaforo-de-Liquidaciones.pdf` (el mismo archivo de "El caso de hoy").
+
 ## 3 · Qué es un MVP (y qué no)
 
 **Título:** Un MVP se demuestra en cinco minutos con datos inventados
@@ -99,6 +142,28 @@ Cuatro tarjetas: **Entrada:** 10 contratos ficticios · **Criterios:** 10 reglas
 - `SPEC-semaforo-liquidaciones.md` — la especificación para pegar en la herramienta.
 
 **Nota para el facilitador (visible en modo presentador o como texto pequeño):** las reglas de plazo están simplificadas (4 meses bilateral + 2 unilateral + 2 años). Es el momento de que los abogados discutan los matices; eso va al roadmap.
+
+## 6a · Tus datos en Excel
+
+**Título:** Los datos de ejemplo viven en un Excel, no en un documento
+
+**Texto:** La SPEC describe el modelo de datos. Los diez contratos y su lista de chequeo están en `contratos-ejemplo.xlsx`: dos hojas, **Contratos** y **Documentos**, con los nombres de columna de la SPEC. Es el archivo que ustedes tendrían si exportaran su inventario. Cuando apliquen el método a su brief, reemplazan este Excel por el suyo: mismas columnas, sus filas.
+
+Tabla pequeña con las columnas de la hoja Contratos: numero · contratista · objeto · tipo · valor · fecha_inicio · fecha_terminacion · plazo_liquidacion_pactado_meses · supervisor · estado_ejecucion · estado_liquidacion · fecha_liquidacion · observaciones · validado_por_humano. Y de la hoja Documentos: numero · orden · documento · estado.
+
+**Descargas (tres botones):**
+- `contratos-ejemplo.xlsx` — las dos hojas y una hoja Leeme.
+- `contratos-ejemplo.csv` — la hoja Contratos, por si la herramienta no acepta Excel.
+- `documentos-ejemplo.csv` — la hoja Documentos.
+
+**Prompt (botón Copiar), se envía justo antes del Prompt 1:**
+```
+Antes de construir, toma los datos de ejemplo del archivo contratos-ejemplo.xlsx que te adjunto (hojas "Contratos" y "Documentos"), no de la SPEC. Lee las dos hojas, respeta los nombres de columna tal como están y no inventes filas ni cambies valores. Conviértelos en el arreglo de contratos del código, cada uno con su lista de chequeo, y confírmame en 3 líneas cuántos contratos y cuántos documentos leíste. Si una columna no coincide con la SPEC, dímelo antes de construir. Luego construye SOLO la capa 1 como dice el Prompt 1.
+```
+
+**Cómo adjuntarlo:** Lovable y AI Studio: adjunta el archivo en el chat; si no lo acepta, pega el contenido de los dos CSV. Claude (artifact): adjunta el `.xlsx` al chat. Claude Code / Codex: guarda el archivo en la carpeta `semaforo` y escribe "Lee @contratos-ejemplo.xlsx".
+
+**Por qué importa:** el código no es la fuente de verdad de los datos; su Excel sí. Cuando cambien un contrato, cambian el archivo, no el código. Todos los datos son ficticios; nunca suban los reales.
 
 ## 7 · Cómo lo vamos a construir
 

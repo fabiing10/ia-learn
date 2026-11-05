@@ -1,0 +1,11 @@
+﻿numero,contratista,objeto,tipo,valor,fecha_inicio,fecha_terminacion,plazo_liquidacion_pactado_meses,supervisor,estado_ejecucion,estado_liquidacion,fecha_liquidacion,observaciones,validado_por_humano
+OBRA-001-2025,Constructora Andina S.A.S.,Construcción de la sede administrativa norte,Obra,2450000000,2025-09-15,2026-09-15,6,Carlos Méndez,Terminado,Pendiente,,,FALSO
+SUM-014-2025,Suministros del Norte Ltda.,Suministro de equipos de cómputo,Suministro,180000000,2025-11-20,2026-05-20,,Laura Pineda,Terminado,Pendiente,,,FALSO
+CONS-007-2022,Estudios Urbanos Consultores S.A.,Estudio de movilidad urbana,Consultoría,620000000,2022-10-01,2023-06-30,,Jorge Ruiz,Terminado,Pendiente,,,FALSO
+PS-102-2026,Ana María Torres,Apoyo profesional a la oficina de contratación,Prestación de servicios profesionales,54000000,2026-02-01,2026-10-30,,Patricia Gómez,Terminado,No requiere,,,FALSO
+CONV-003-2026,Alcaldía Municipal de Villanueva,Convenio para el mejoramiento de vías terciarias,Convenio,900000000,2026-03-01,2027-02-28,,Carlos Méndez,En ejecución,Pendiente,,,FALSO
+INT-005-2025,Interventorías Técnicas del Oriente S.A.S.,Interventoría de la sede administrativa norte,Interventoría,310000000,2025-11-20,2026-07-20,5,Laura Pineda,Terminado,Pendiente,,,FALSO
+OBRA-009-2026,Vías y Puentes del Sur S.A.S.,Mantenimiento de puentes peatonales,Obra,1780000000,2026-02-28,2026-10-28,4,Jorge Ruiz,Terminado,En trámite,,,FALSO
+SUM-021-2025,Dotaciones Institucionales S.A.S.,Dotación de mobiliario escolar,Suministro,95000000,2025-10-10,2026-02-10,,Patricia Gómez,Terminado,Pendiente,,,FALSO
+CONS-011-2025,Planeación Estratégica Consultores Ltda.,Plan estratégico institucional 2026-2030,Consultoría,240000000,2025-09-01,2026-03-01,,Carlos Méndez,Terminado,Liquidada bilateral,2026-06-15,,FALSO
+CONV-008-2026,Fundación Cultura Viva,Convenio de formación cultural comunitaria,Convenio,450000000,2026-01-15,2026-10-01,,Laura Pineda,Terminado,Pendiente,,,FALSO

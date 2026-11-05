@@ -14,6 +14,9 @@
    .toc     slide index: links to #/<id>
    .notas   facilitator note toggled with N or its button  (js/notas.js)
    .sem     traffic-light dot: <i class="sem sem--verde"></i>
+   .chips   compact list of <code> chips: <ul class="chips"><li><code>…</code></li></ul>
+   .src     small source / verification line
+   .bm-todo placeholder the presenter still has to confirm, e.g. {{VERIFICAR_…}}
    ========================================================= */
 
 :root {
@@ -534,6 +537,48 @@ html.show-notas .notas {
   color: var(--cyan-text);
 }
 
+/* ---------- .chips · compact <code> list ---------- */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chips code {
+  display: block;
+  padding: 3px 10px 5px;
+  border-radius: 9px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-2);
+  font: 500 18px/1.2 var(--font-mono);
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- .src · source line ---------- */
+
+.src {
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--text-3);
+}
+
+/* ---------- .bm-todo · placeholder still to confirm ---------- */
+
+.bm-todo {
+  display: inline-block;
+  padding: 0 8px 2px;
+  border: 2px dashed var(--line-strong);
+  border-radius: 8px;
+  font: 600 0.8em/1.3 var(--font-mono);
+  color: var(--text-3);
+  overflow-wrap: anywhere;
+}
+
 /* =========================================================
    Slides of this deck
    ========================================================= */
@@ -717,6 +762,14 @@ html.show-notas .notas {
 .bm-table--tools td:nth-child(2) {
   width: 440px;
   color: var(--text-2);
+}
+
+/* five rows of up to three lines: tighter rows keep the closing line above
+   the progress bar */
+.bm-table--tools tbody th,
+.bm-table--tools tbody td {
+  padding-top: 10px;
+  padding-bottom: 11px;
 }
 
 /* ---------- Recorrido ---------- */
@@ -1149,11 +1202,12 @@ html.show-notas .notas {
 /* ---------- Herramientas ---------- */
 
 .reveal .slides section.bm-tools {
-  gap: 30px;
+  gap: 26px;
 }
 
 .bm-tools .bm-punch {
   margin-top: auto;
+  padding-bottom: 4px;
   font-size: 36px;
 }
 
@@ -1165,6 +1219,296 @@ html.show-notas .notas {
 
 .bm-index nav {
   margin: auto 0;
+}
+
+/* 21 entries: three columns of seven */
+.bm-index .toc {
+  --toc-rows: 7;
+  gap: 8px 40px;
+}
+
+.bm-index .toc a {
+  padding: 11px 18px 13px 14px;
+  font-size: 26px;
+}
+
+/* ---------- Herramientas de hoy: three tool cards ---------- */
+
+.reveal .slides section.bm-onboard {
+  gap: 22px;
+}
+
+.bm-onboard__tools {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bm-onboard__tools > li {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 26px 24px;
+  border-radius: 24px;
+  border: 2px solid var(--line-strong);
+  background: var(--surface);
+}
+
+.bm-onboard__name {
+  font: 700 42px/1.05 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.bm-onboard__name span {
+  font: 500 22px/1.2 var(--font-display);
+  letter-spacing: 0;
+  color: var(--text-2);
+}
+
+.bm-onboard__link {
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+/* the URL as an external-link pill (opens in a new tab) */
+.bm-onboard__link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  padding: 7px 16px 8px;
+  border: 2px solid var(--gold);
+  border-radius: 999px;
+  color: var(--text);
+  font: 700 22px/1.2 var(--font-display);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: background-color 200ms var(--ease-out);
+}
+
+.bm-onboard__link a::after {
+  content: '↗' / '';
+  color: var(--gold-text);
+}
+
+.bm-onboard__link a:hover {
+  background: var(--gold-soft);
+}
+
+.bm-onboard a:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.bm-onboard .bm-label {
+  margin-bottom: 6px;
+  font-size: 19px;
+}
+
+.bm-onboard__steps p:not(.bm-label),
+.bm-onboard__ready p:not(.bm-label) {
+  font-size: 24px;
+  line-height: 1.32;
+}
+
+/* the «ready» signal sits at the foot of every card */
+.bm-onboard__ready {
+  margin-top: auto;
+  padding: 12px 18px 14px;
+  border-radius: 16px;
+  border-left: 5px solid var(--gold);
+  background: var(--gold-soft);
+}
+
+.bm-onboard__row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 26px;
+}
+
+.bm-onboard__row p:not(.bm-label) {
+  font-size: 22px;
+  line-height: 1.36;
+  color: var(--text-2);
+}
+
+.bm-onboard__row b {
+  color: var(--text);
+}
+
+/* URLs and file names are typed from the screen: never split them */
+.bm-onboard__row :is(a, code) {
+  white-space: nowrap;
+}
+
+.bm-onboard__row a {
+  color: var(--gold-text);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.bm-onboard code,
+.bm-data code {
+  font: 600 0.9em/1 var(--font-mono);
+  color: var(--gold-text);
+  overflow-wrap: anywhere;
+}
+
+/* the bottom padding keeps the italic run inside the content box */
+.bm-onboard .bm-punch {
+  margin-top: auto;
+  padding-bottom: 4px;
+  font-size: 36px;
+}
+
+/* the verification date, top right of the header */
+.bm-onboard .bm-head .src {
+  flex: none;
+  padding-top: 8px;
+}
+
+/* ---------- El brief elegido: ten fields in two columns ---------- */
+
+.reveal .slides section.bm-brief {
+  --sp-top: 104px;
+  gap: 22px;
+}
+
+.bm-brief__fields {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(5, auto);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 24px;
+  margin: 0;
+}
+
+.bm-brief__fields > div {
+  padding: 9px 18px 11px;
+  border-radius: 16px;
+  border: 2px solid var(--line-strong);
+  background: var(--surface);
+}
+
+.bm-brief__fields dt {
+  margin-bottom: 3px;
+  font: 700 15px/1.2 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
+.bm-brief__fields dd {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.28;
+  color: var(--text);
+}
+
+.bm-brief__foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 560px;
+  align-items: center;
+  gap: 40px;
+  margin-top: auto;
+}
+
+/* Inter keeps the script's straight quotes ("El caso de hoy") straight */
+.bm-brief .bm-punch {
+  font: 600 30px/1.22 var(--font-body);
+  letter-spacing: -0.012em;
+}
+
+/* ---------- Tus datos en Excel: a prompt slide with data and downloads ---------- */
+
+.reveal .slides section.bm-data {
+  gap: 24px;
+}
+
+.bm-data__head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: none;
+}
+
+.bm-data__head .vc-kicker {
+  font-size: 30px;
+}
+
+/* Left: text, columns and the prompt (it takes the height left);
+   right: downloads, how to attach, why it matters. */
+.bm-data__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 600px;
+  gap: 44px;
+  flex: 1;
+  min-height: 0;
+}
+
+.bm-data__main,
+.bm-data__side {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 0;
+}
+
+.bm-data__side {
+  gap: 16px;
+}
+
+.bm-data__main > .pbox {
+  --pbox-fs: 21px;
+  flex: 1;
+}
+
+.bm-data__text {
+  font-size: 25px;
+  line-height: 1.36;
+}
+
+.bm-data__cols .pslide__label {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.bm-data__cols .chips + .pslide__label {
+  margin-top: 12px;
+}
+
+.bm-data__dl {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bm-data__dl .dl {
+  padding: 10px 20px 12px 16px;
+}
+
+.bm-data__how p:not(.pslide__label) {
+  font-size: 22px;
+  line-height: 1.36;
+}
+
+.bm-data__side .pslide__porque {
+  margin-top: auto;
+  padding: 18px 22px 20px;
+}
+
+.bm-data__side .pslide__porque p:not(.pslide__label) {
+  font-size: 24px;
 }
 
 /* ---------- Prueba final: three prompt blocks and the rule ---------- */
@@ -1916,4 +2260,150 @@ html.is-doc .doc {
 
 .doc .bm-next__get {
   margin-top: 14px;
+}
+
+/* herramientas de hoy */
+.doc .bm-onboard__tools,
+.doc .bm-onboard__row {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.doc .bm-onboard__tools > li {
+  gap: 10px;
+  padding: 14px 16px 16px;
+  border-radius: 16px;
+}
+
+.doc .bm-onboard__name {
+  font-size: 22px;
+}
+
+.doc .bm-onboard__name span {
+  font-size: 14px;
+}
+
+.doc .bm-onboard__link {
+  font-size: 15px;
+}
+
+.doc .bm-onboard__link a {
+  gap: 8px;
+  padding: 6px 12px 7px;
+  font-size: 15px;
+}
+
+.doc .bm-onboard .bm-label {
+  margin-bottom: 4px;
+}
+
+.doc .bm-onboard__steps p:not(.bm-label),
+.doc .bm-onboard__ready p:not(.bm-label),
+.doc .bm-onboard__row p:not(.bm-label) {
+  font-size: 16px;
+}
+
+.doc .bm-onboard__row :is(a, code) {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.doc .bm-onboard__ready {
+  padding: 10px 12px 12px;
+  border-radius: 12px;
+  border-left-width: 4px;
+}
+
+.doc .src {
+  font-size: 13px;
+}
+
+/* el brief elegido */
+.doc .bm-brief__fields {
+  grid-auto-flow: row;
+  grid-template-rows: none;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.doc .bm-brief__fields > div {
+  padding: 10px 12px 12px;
+  border-radius: 12px;
+}
+
+.doc .bm-brief__fields dt {
+  font-size: 12px;
+}
+
+.doc .bm-brief__fields dd {
+  font-size: 16px;
+}
+
+.doc .bm-brief__foot {
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 0;
+}
+
+/* tus datos en Excel: one column in the script's order */
+.doc .bm-data__head {
+  gap: 6px;
+}
+
+.doc .bm-data__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.doc .bm-data__main,
+.doc .bm-data__side {
+  display: contents;
+}
+
+.doc .bm-data__text {
+  order: 1;
+  font-size: 17px;
+}
+
+.doc .bm-data__cols {
+  order: 2;
+}
+
+.doc .bm-data__dl {
+  order: 3;
+  gap: 10px;
+}
+
+.doc .bm-data__main > .pbox {
+  order: 4;
+  --pbox-fs: 13.5px;
+}
+
+.doc .bm-data__how {
+  order: 5;
+}
+
+.doc .bm-data__side .pslide__porque {
+  order: 6;
+  margin: 0;
+}
+
+.doc .bm-data__cols .pslide__label {
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.doc .chips {
+  gap: 6px;
+}
+
+.doc .chips code {
+  padding: 3px 7px 4px;
+  border-radius: 7px;
+  font-size: 12.5px;
+}
+
+.doc .bm-data__how p:not(.pslide__label) {
+  font-size: 16px;
 }
