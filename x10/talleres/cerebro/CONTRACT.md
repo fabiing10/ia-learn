@@ -1,7 +1,10 @@
-# Cerebro Jurídico — contract for the web pages
+# Cerebro — contract for the web pages
 
 Read this before touching `x10/talleres/cerebro/`. Source of truth for routes, data,
-anchors and ownership while several agents work in parallel.
+anchors and ownership while several agents work in parallel. Since 5 Nov 2026 the
+workshop is **Cerebro** (general: IA generativa y skills) and `CEREBRO-GENERAL.md`
+overrides this file where the two disagree; the legal brain below is now one of three
+*cerebros* on the landing and the complete worked example.
 
 ## Context
 
@@ -26,7 +29,7 @@ Code and comments in English.
 
 | Route | Folder (under `x10/talleres/cerebro/web/`) | Owner |
 |---|---|---|
-| `/cerebro/` | `index.html` + `landing/` | worker A |
+| `/cerebro/` | `index.html` + `landing/` (three cerebro tabs: `form.js` legal form, `form-generic.js` schema form, `mapa.js`, `archivos.js`, `main.js`) | worker A |
 | shared web code | `shared/` (except `theme.css`) | worker A |
 | `/cerebro/playbook/` | `playbook/` | worker B |
 | `/cerebro/presentacion/` | `../presentacion/` (the deck) | coordinator |
@@ -43,8 +46,11 @@ Build and dev:
 
 The plan's promise is "Nada se envía a ningún servidor" (§6.1, §6.15). So:
 - No Supabase, no fetch to any API, no analytics, no CDNs, no external fonts or images.
-- The profile may be kept in `localStorage` key `cj-perfil` (it stays on the device; say so).
-  Theme choice in `localStorage` key `cj-theme`. The intro survey (`/cerebro/encuesta/`) keeps its
+- Each cerebro keeps its profile in its own `localStorage` key (it stays on the device; say so):
+  `cj-perfil` (Jurídico), `cj-perfil-skill` (Skill general), `cj-perfil-ideacion` (Ideación);
+  the active tab in `cj-cerebro`. «Borrar mis datos» removes the three profiles, the tab choice
+  and the theme. `shared/store.js`: `KEYS`, `loadProfileFor/saveProfileFor(cerebro)` (legal:
+  `loadProfile/saveProfile`), `loadCerebro/saveCerebro`. Theme choice in `localStorage` key `cj-theme`. The intro survey (`/cerebro/encuesta/`) keeps its
   draft in `cj-encuesta` and, without Supabase env vars, its demo rows in `cj-demo-submissions`
   and an offline queue in `cj-queue`. Its rows carry name and email; the deck reads only the
   counts returned by the SQL function `cj_intro_summary`.
@@ -64,7 +70,7 @@ Same family as x10 and Vibe Coding, its own accent:
   `--gold-soft`); secondary teal `#4FE0C0` (`--cyan`, `--cyan-text`). Ink `#0B0F1A`,
   paper `#F7F5F0`. Light theme text accents: violet `#5A3FD6`, teal `#0B7A63`.
 - Motif: neurons and synapses (nodes, connections, pulses travelling along them). Brand
-  mark: `§` in the accent + "cerebro jurídico". No "×" (x10) or "›" (Vibe Coding) motifs.
+  mark: `§` in the accent + "cerebro". No "×" (x10) or "›" (Vibe Coding) motifs.
 - Default dark, light toggle, respect `prefers-color-scheme` and `prefers-reduced-motion`
   (every animation has a static equivalent).
 - Mobile-first for the landing (attendees scan a QR with their phone), comfortable on a
@@ -73,9 +79,17 @@ Same family as x10 and Vibe Coding, its own accent:
 
 ## Landing anchors (worker A must create these ids; the deck's QR codes point to them)
 
-`#inicio` · `#construir` (profile + live files) · `#cargar` (copy all + how to load it per
-tool, account privacy check, skill ZIPs) · `#prueba` (one test per chosen task,
-with/without brain) · `#boveda` (Obsidian vault ZIP)
+`#inicio` · `#construir` (cerebro tabs + profile + live files) · `#cargar` (copy all + how to
+load it per tool, account privacy check, skill ZIPs) · `#prueba` (with/without the skill; the
+legal tab keeps one test per chosen task) · `#boveda` (Obsidian vault ZIP; legal tab only,
+`hidden` otherwise, and so is its nav link)
+
+Cerebro tabs, inside `#construir` above the toolbar: `#cerebros` (`role="tablist"`), one button
+per cerebro with `data-cerebro="skill|ideacion|juridico"` and id `cerebro-<id>`, controlling
+`#cerebro-panel`. Default `skill`. Deep links select a tab and scroll to `#construir`:
+`/cerebro/#skill`, `/cerebro/#ideacion`, `/cerebro/#juridico`, or `?c=<id>` (precedence: hash,
+`?c=`, `cj-cerebro`, `skill`). The deck QR `construir` points to `#skill`, `ideacion` to
+`#ideacion`. Elements shown for some cerebros only carry `data-solo="<ids>"`.
 
 ## Playbook anchors (worker B must create exactly these ids; landing and deck link to them)
 
@@ -85,6 +99,17 @@ with/without brain) · `#boveda` (Obsidian vault ZIP)
 `#cinco-archivos` `#ejemplo-laura` `#mantenimiento` `#niveles` `#construir-y-cargar`
 `#rutas-de-carga` `#pregunta-de-prueba` `#escalar` `#obsidian` `#notebooklm` `#nivel-3`
 `#grilla` `#verificar` `#red-team` `#marco-colombiano` `#recursos` `#glosario` `#manana`
+
+## Cerebros registry
+
+`shared/cerebros.js` is what the landing reads: `CEREBROS` (skill, ideacion, juridico),
+`cerebroById`, `elegirCerebro({ hash, search, guardado })`, `nombreCorto`, `inicialDock`.
+Each entry carries its copy (label, sub, titulo, lead, leads of Cargar and Prueba,
+confirm3, «Te llevas»), its form (`campos`: field schema for `landing/form-generic.js`, or
+`null` for the legal custom form), its map (`mapa`, optional `fijos`), `archivos` and
+`principal`, `perfilEjemplo`/`perfilVacio`/`normalize`/`same`/`cambios`, and
+`build`/`paste`/`descargas`/`prueba` plus the flags `rutas`, `cuenta`, `boveda`. The general
+generators are `shared/skill-general.js` and `shared/ideacion.js` (CEREBRO-GENERAL.md, A).
 
 ## Shared catalog (worker A writes it first; worker B may import it read-only)
 

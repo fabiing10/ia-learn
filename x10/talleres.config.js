@@ -56,9 +56,9 @@ export const TALLERES = [
   },
   {
     slug: 'cerebro',
-    nombre: 'Cerebro Jurídico',
-    resumen: 'Arquitectura, IA y automatización para servicios jurídicos: cinco archivos que le dicen a cualquier IA quién eres, cómo trabajas, qué nunca hace y cómo se verifica.',
-    fecha: '21 de octubre de 2026 · Pontificia Universidad Javeriana, Bogotá',
+    nombre: 'Cerebro · IA generativa y skills',
+    resumen: 'Un cerebro es lo que la IA no puede buscar de ti, escrito una vez. Tres constructores: una skill general, la skill de ideación del curso de vibe coding y el cerebro jurídico.',
+    fecha: 'Clase abierta · 2026',
     marca: { acento: '§', color: '#9D86FF' },
     enlaces: {
       landing: '/cerebro/',

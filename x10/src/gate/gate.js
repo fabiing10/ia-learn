@@ -102,7 +102,7 @@ export function page({ error = '', action = '' } = {}) {
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Uso interno · Cerebro Jurídico</title>
+<title>Uso interno · Cerebro</title>
 <style>
   :root { color-scheme: dark; }
   body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0B0F1A; color: #E8E6F0; font: 500 17px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
@@ -119,7 +119,7 @@ export function page({ error = '', action = '' } = {}) {
 </head>
 <body>
 <main>
-  <p class="mark">§ cerebro jurídico</p>
+  <p class="mark">§ cerebro</p>
   <h1>Presentación de uso interno</h1>
   <p>Esta página es solo para el expositor.</p>
   <form method="post" action="${esc(action)}" autocomplete="off">

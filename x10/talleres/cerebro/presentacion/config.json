@@ -1,9 +1,9 @@
 {
-  "titulo": "Cerebro Jurídico · Arquitectura, IA y automatización aplicadas a los servicios jurídicos",
-  "fecha": "Miércoles 21 de octubre de 2026 · 15:30",
+  "titulo": "Cerebro · IA generativa y skills: lo que la IA no puede buscar de ti",
+  "fecha": "{{FECHA_CLASE}}",
   "marca": {
     "acento": "§",
-    "texto": "cerebro jurídico"
+    "texto": "cerebro"
   },
   "segmentos": 6,
   "bloques": {
@@ -17,15 +17,15 @@
     },
     "2": {
       "num": "02",
-      "name": "Paso 1 · Su cerebro"
+      "name": "Cómo funciona"
     },
     "3": {
       "num": "03",
-      "name": "Paso 2 · La bóveda"
+      "name": "Una skill"
     },
     "4": {
       "num": "04",
-      "name": "Modelos y verificación"
+      "name": "Evidencia y verificación"
     },
     "5": {
       "num": "05",
@@ -49,13 +49,14 @@
   },
   "qr": {
     "landing": "https://x10.expert/cerebro/",
-    "construir": "https://x10.expert/cerebro/#construir",
+    "construir": "https://x10.expert/cerebro/#skill",
+    "ideacion": "https://x10.expert/cerebro/#ideacion",
     "prueba": "https://x10.expert/cerebro/#prueba",
     "playbook": "https://x10.expert/cerebro/playbook/",
     "encuesta": "https://x10.expert/cerebro/encuesta/"
   },
   "urlCorta": "x10.expert/cerebro",
-  "evento": "Clase abierta · Innovación y tecnología para los servicios jurídicos · Pontificia Universidad Javeriana",
+  "evento": "Clase · Cerebro: IA generativa y skills",
   "expositor": "Fabián Zapata",
   "cargo": "Fundador de Zeta Innovation · Director de Innovación de GLab",
   "contacto": "WhatsApp 314 366 6151",
@@ -75,6 +76,6 @@
     "con": "4 rojas, 3 amarillas, 1 verde. Según tus posiciones son [ROJO] la Tercera, la Quinta, la Séptima y la Novena; [AMARILLO] la Cuarta, la Octava y la Décima; [VERDE] la Sexta. … Décima · Ley y controversias [AMARILLO] Ley colombiana, pero el arbitraje es en Medellín y no en Bogotá. … Me detengo en YO DECIDO: tú defines qué es innegociable para firmar este mes."
   },
   "encuesta": {
-    "sesion": "javeriana-2026-10-21"
+    "sesion": "cerebro-skills"
   }
 }

@@ -1,26 +1,31 @@
-// Encuesta de entrada: who is in the room before the Cerebro Jurídico class.
-// Pure data and logic shared by /cerebro/encuesta/ and the deck's live slide
-// (presentacion/js/sala.js). Name and email are collected for follow-up and
-// stay in the row; they never enter the aggregates the deck reads.
+// Intro survey: who is in the room before the Cerebro class (generative AI and
+// skills), for any profession. Pure data and logic shared by /cerebro/encuesta/
+// and the deck's live slide (presentacion/js/sala.js). Name and email are
+// collected for follow-up and stay in the row; they never enter the aggregates
+// the deck reads.
 //
 // Supabase: rows go to workshop_submissions (workshop 'cerebro', form 'intro');
 // the public function cj_intro_summary(session) returns { total, counts } where
 // counts[question][option] = how many people chose it. summarize() below does
-// the same in JS for demo mode and tests: keep the two in step.
+// the same in JS for demo mode and tests: keep the two in step. The function
+// only knows question ids (single: rol, favorita, plan, frecuencia, proyectos,
+// skill, entrena, alucino; multi: herramientas, usos), never option ids, so
+// options, titles and help texts can change freely; question ids and kinds
+// cannot without a new migration.
 
 export const WORKSHOP = 'cerebro';
 export const FORM = 'intro';
-export const SESSION_DEFAULT = 'javeriana-2026-10-21';
+export const SESSION_DEFAULT = 'cerebro-skills';
 
 const o = (id, text, hint = '') => ({ id, text, hint });
 
 export const CONTACTO = {
   id: 'contacto',
   titulo: '¿Quién eres?',
-  ayuda: 'Para enviarte el playbook y el kit del taller. Solo tú y el expositor ven estos datos; la sala ve porcentajes.',
+  ayuda: 'Para enviarte el kit de la clase y el playbook. Solo tú y el expositor ven estos datos; la sala ve porcentajes.',
   campos: [
-    { id: 'nombre', label: 'Nombre y apellido', placeholder: 'Laura Gómez', max: 80, autocomplete: 'name' },
-    { id: 'email', label: 'Correo', placeholder: 'laura@despacho.co', max: 254, autocomplete: 'email', type: 'email' },
+    { id: 'nombre', label: 'Nombre y apellido', placeholder: 'Sofía Ruiz', max: 80, autocomplete: 'name' },
+    { id: 'email', label: 'Correo', placeholder: 'sofia@correo.co', max: 254, autocomplete: 'email', type: 'email' },
   ],
 };
 
@@ -28,22 +33,22 @@ export const PREGUNTAS = [
   {
     id: 'rol',
     tipo: 'una',
-    titulo: '¿Cómo ejerces?',
+    titulo: '¿Qué haces hoy?',
     ayuda: 'Lo más cercano a tu día a día.',
     opciones: [
-      o('litigante', 'Litigante o práctica propia'),
-      o('firma', 'Abogado/a de firma'),
-      o('inhouse', 'In-house', 'Abogado/a de empresa'),
-      o('publico', 'Sector público', 'Entidad, juzgado, órgano de control'),
-      o('docente', 'Docente o investigador/a'),
       o('estudiante', 'Estudiante'),
+      o('emprendedor', 'Emprendedor/a'),
+      o('empresa', 'Profesional en una empresa'),
+      o('independiente', 'Independiente o freelance'),
+      o('docente', 'Docente o investigador/a'),
+      o('publico', 'Sector público', 'Una entidad u órgano público'),
       o('otro', 'Otro'),
     ],
   },
   {
     id: 'herramientas',
     tipo: 'varias',
-    titulo: '¿Qué IA usas en tu trabajo?',
+    titulo: '¿Qué IA usas?',
     ayuda: 'Marca todas las que uses.',
     exclusivo: 'ninguna',
     opciones: [
@@ -52,8 +57,8 @@ export const PREGUNTAS = [
       o('gemini', 'Gemini'),
       o('copilot', 'Microsoft Copilot'),
       o('perplexity', 'Perplexity'),
-      o('notebooklm', 'NotebookLM'),
-      o('juridica', 'Una IA jurídica', 'Lexis+, vLex, Tirant, Harvey…'),
+      o('notebooklm', 'Gemini Notebook (NotebookLM)'),
+      o('otra', 'Otra'),
       o('ninguna', 'Ninguna todavía'),
     ],
   },
@@ -72,14 +77,14 @@ export const PREGUNTAS = [
     opciones: [
       o('gratis', 'Gratuita'),
       o('pago', 'De pago, personal', 'Plus, Pro, Max…'),
-      o('empresa', 'Empresarial o del despacho', 'Team, Business, Enterprise'),
+      o('empresa', 'Empresarial o de tu organización', 'Team, Business, Enterprise'),
       o('nose', 'No sé'),
     ],
   },
   {
     id: 'frecuencia',
     tipo: 'una',
-    titulo: '¿Cada cuánto la usas para trabajar?',
+    titulo: '¿Cada cuánto la usas para trabajar o estudiar?',
     opciones: [
       o('diario', 'Todos los días'),
       o('semanal', 'Varias veces por semana'),
@@ -90,24 +95,25 @@ export const PREGUNTAS = [
   {
     id: 'usos',
     tipo: 'varias',
-    titulo: '¿Para qué la usas más?',
+    titulo: '¿Para qué la usas?',
     ayuda: 'Marca todo lo que hayas hecho al menos una vez.',
     exclusivo: 'nada',
     opciones: [
-      o('redactar', 'Redactar escritos o conceptos'),
-      o('jurisprudencia', 'Buscar jurisprudencia o normas'),
-      o('contratos', 'Revisar contratos'),
-      o('peticiones', 'Responder peticiones o PQRS'),
-      o('expedientes', 'Resumir expedientes o documentos'),
-      o('clientes', 'Explicarle algo a un cliente'),
-      o('nada', 'Nada todavía'),
+      o('escribir', 'Escribir o redactar'),
+      o('resumir', 'Resumir o estudiar'),
+      o('construir', 'Programar o construir apps'),
+      o('datos', 'Analizar datos o tablas'),
+      o('buscar', 'Buscar información'),
+      o('imagenes', 'Imágenes, diseño o video'),
+      o('ideas', 'Pensar ideas o decidir'),
+      o('nada', 'Nada aún'),
     ],
   },
   {
     id: 'proyectos',
     tipo: 'una',
-    titulo: '¿Usas Proyectos o Gems?',
-    ayuda: 'Un espacio con instrucciones y archivos que cada chat ya conoce (Proyectos en ChatGPT y Claude, Gems en Gemini).',
+    titulo: '¿Usas Proyectos (ChatGPT, Claude) o Gems (Gemini)?',
+    ayuda: 'Un espacio con instrucciones y archivos que cada chat ya conoce.',
     opciones: [
       o('uso', 'Sí, los uso'),
       o('conozco', 'Los conozco, no los uso'),
@@ -117,7 +123,7 @@ export const PREGUNTAS = [
   {
     id: 'skill',
     tipo: 'una',
-    titulo: '¿Has creado una skill, un GPT o una Gem propia?',
+    titulo: '¿Has creado una skill, un GPT personalizado o una Gem?',
     ayuda: 'Un asistente con tus instrucciones, hecho por ti.',
     opciones: [
       o('si', 'Sí, al menos una'),
@@ -139,12 +145,12 @@ export const PREGUNTAS = [
   {
     id: 'alucino',
     tipo: 'una',
-    titulo: '¿Alguna vez la IA te citó una sentencia que no existía?',
+    titulo: '¿La IA te ha dado un dato, una cita o una fuente que no existía?',
     ayuda: 'Sin pena: nadie ve tu respuesta, solo el total de la sala.',
     opciones: [
       o('si', 'Sí, me pasó'),
       o('no', 'No, siempre existían'),
-      o('noverifique', 'No sé, no las verifico'),
+      o('noverifique', 'No lo verifiqué'),
     ],
   },
 ];
@@ -303,7 +309,8 @@ export function kpis(summary) {
     total,
     activos,
     activosPct: pct(activos, total),
-    favorita: top('favorita', 1)[0] ?? null,
+    // "Otra" is a bucket, not a tool: the headline names a specific one.
+    favorita: top('favorita', 2).find((x) => x.id !== 'otra') ?? null,
     proyectosPct: pct(proyectos, total),
     skillPct: pct(skill, total),
     entrenaRiesgoPct: pct(entrenaRiesgo, total),

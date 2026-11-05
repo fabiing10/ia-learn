@@ -1,4 +1,4 @@
-// Cerebro Jurídico slide behaviours. Each one is decoration on top of content
+// Cerebro slide behaviours. Each one is decoration on top of content
 // that is already readable (see util.js for the rule).
 import { gsap, defineCtrl } from '@engine/core/motion.js';
 import { state } from '@engine/core/state.js';
@@ -170,21 +170,24 @@ defineCtrl('cj-halluc', {
     if (lite) return;
     const slots = $$(slide, '.cj-slot[data-reel]');
     const stamp = slide.querySelector('.cj-cite__stamp');
-    const digits = (n) => Array.from({ length: n }, () => Math.floor(Math.random() * 10)).join('');
+    // data-reel is a pattern: every # rolls as a random digit ("20##" → "2017").
+    // The older short forms "T-" and "20" stay readable as "T-###" and "20##".
+    const pattern = (reel) => (reel.includes('#') ? reel : reel === 'T-' ? 'T-###' : `${reel}##`);
+    const roll = (reel) => pattern(reel).replace(/#/g, () => String(Math.floor(Math.random() * 10)));
     slots.forEach((s) => (s.dataset.final ??= s.textContent));
     rounds(slide, () => {
-      const roll = { t: 0 };
+      const clock = { t: 0 };
       return gsap
         .timeline()
         .set(stamp, { autoAlpha: 0 })
         .call(() => slots.forEach((s) => s.classList.add('is-rolling')))
-        .to(roll, {
+        .to(clock, {
           t: 1,
           duration: 1.8,
           ease: 'none',
           onUpdate: () =>
             slots.forEach((s) => {
-              s.textContent = s.dataset.reel === 'T-' ? `T-${digits(3)}` : `20${digits(2)}`;
+              s.textContent = roll(s.dataset.reel);
             }),
         })
         .call(() =>

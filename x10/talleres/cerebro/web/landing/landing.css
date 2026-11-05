@@ -1,9 +1,10 @@
 @import '../shared/theme.css';
 @import '../shared/base.css';
 
-/* /cerebro/ — opened from a QR on phones at minute 3 and projected at 150 % zoom
-   while the presenter edits Laura's profile. Mobile first; from 900 px the build
-   area is the form on the left and, sticky on the right, the map over the files. */
+/* /cerebro/ — opened from a QR on phones and projected at 150 % zoom while the
+   presenter edits an example profile. Three cerebros as tabs of «Construir».
+   Mobile first; from 900 px the build area is the form on the left and, sticky on
+   the right, the map over the files. */
 
 :root {
   --sec-pad: clamp(56px, 8vw, 104px);
@@ -463,6 +464,141 @@ code {
   font-size: clamp(1rem, 1.4vw, 1.125rem);
 }
 
+/* ── Build: the three cerebros (tabs) ──
+   Cards with a sub-label from 641 px; a one-row segmented control with the short
+   labels on phones (the full label and the sub-label stay for screen readers). */
+.cerebros {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  max-width: 64rem;
+  margin: 14px 0 clamp(22px, 3vw, 30px);
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--r-m) + 5px);
+  background: var(--surface);
+}
+
+.cerebros__tab {
+  position: relative;
+  display: grid;
+  gap: 3px;
+  align-content: start;
+  justify-items: start;
+  min-width: 0;
+  min-height: 68px;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--r-m);
+  background: transparent;
+  color: var(--text-2);
+  text-align: left;
+  transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+.cerebros__tab:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+.cerebros__tab[aria-selected='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.cerebros__tab:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.cerebros__label {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+/* The neuron dot: hollow, lit on the active tab. */
+.cerebros__label::before {
+  content: '';
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--text-3);
+  transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+}
+
+.cerebros__tab[aria-selected='true'] .cerebros__label::before {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+.cerebros__corto {
+  display: none;
+}
+
+.cerebros__sub {
+  padding-left: 18px;
+  color: var(--text-3);
+  font-size: var(--fs-xs);
+  line-height: 1.35;
+}
+
+.cerebros__tab[aria-selected='true'] .cerebros__sub {
+  color: var(--text-2);
+}
+
+@media (max-width: 640px) {
+  .cerebros {
+    gap: 4px;
+    padding: 4px;
+    border-radius: 999px;
+  }
+
+  .cerebros__tab {
+    align-content: center;
+    justify-items: center;
+    min-height: 46px;
+    padding: 6px 8px;
+    border-radius: 999px;
+    text-align: center;
+  }
+
+  .cerebros__label {
+    gap: 7px;
+    font-size: 0.98rem;
+  }
+
+  .cerebros__corto {
+    display: inline;
+  }
+
+  .cerebros__full,
+  .cerebros__sub {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+@media (max-width: 359px) {
+  .cerebros__label::before {
+    display: none;
+  }
+}
+
 /* ── Build: toolbar ── */
 .toolbar {
   display: flex;
@@ -879,11 +1015,14 @@ fieldset.field > legend + * {
   font-size: 0.72rem;
 }
 
+/* --filas (set by mapa.js) is the longest column; more than eleven rows (the skill
+   form) packs the nodes tighter and lets the stage grow just enough. */
 .mapa__stage {
   position: relative;
   display: grid;
   grid-template-columns: auto minmax(64px, 1fr) auto;
   height: 252px;
+  min-height: calc(var(--filas, 11) * 19px);
 }
 
 @media (min-width: 900px) {
@@ -893,8 +1032,18 @@ fieldset.field > legend + * {
 
   .mapa__stage {
     height: clamp(188px, 27vh, 248px);
+    min-height: calc(var(--filas, 11) * 17px);
     grid-template-columns: auto minmax(120px, 1fr) auto;
   }
+}
+
+.mapa__stage.is-dense .node {
+  min-height: 16px;
+  font-size: 0.72rem;
+}
+
+.mapa__stage.is-dense .node--out .node__label {
+  font-size: 0.68rem;
 }
 
 @media (max-width: 359px) {
@@ -991,6 +1140,16 @@ fieldset.field > legend + * {
 }
 
 .node--fijo .node__dot {
+  border-style: dashed;
+  border-color: var(--text-3);
+}
+
+/* A file no field writes (fixed text, like the ideation references). */
+.node--quieto {
+  color: var(--text-3);
+}
+
+.node--quieto .node__dot {
   border-style: dashed;
   border-color: var(--text-3);
 }
@@ -1701,12 +1860,10 @@ fieldset.field > legend + * {
     text-transform: uppercase;
   }
 
-  .compare__cell--sin::after {
-    content: 'Sin cerebro';
-  }
-
+  /* «Sin cerebro» / «Sin la skill»: main.js writes the side's name in data-lado. */
+  .compare__cell--sin::after,
   .compare__cell--con::after {
-    content: 'Con cerebro';
+    content: attr(data-lado);
   }
 }
 
@@ -2107,6 +2264,11 @@ fieldset.field > legend + * {
   font-size: var(--fs-xs);
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* The general cerebros' downloads: the note wraps instead of being cut. */
+.dl__files--nota .file-dl__two small {
+  white-space: normal;
 }
 
 .dl__empty {

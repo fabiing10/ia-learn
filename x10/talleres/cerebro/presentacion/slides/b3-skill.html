@@ -1,0 +1,288 @@
+<!-- BLOQUE 3 · Una skill (6:25–18:00) -->
+
+<section id="pse" data-block="3" data-bg-alpha="0.2" class="cj-three s-tight">
+  <p class="cj-kicker" data-in>Tres formas de darle su criterio a la IA</p>
+  <h2 class="t-h2" data-split="words">Pegar, Proyecto o skill.</h2>
+  <div class="cj-three__cols" data-in="stagger">
+    <article class="cj-three__col">
+      <p class="cj-three__name">Pegar en el chat</p>
+      <p class="cj-three__sub">vale para este chat</p>
+      <ul>
+        <li>Todo en el primer mensaje.</li>
+        <li>Sirve en cualquier IA, hoy mismo.</li>
+        <li>Vive solo en ese chat: el siguiente arranca vacío.</li>
+      </ul>
+      <p class="cj-three__num"><b>Para empezar</b><span>ahora, sin configurar nada</span></p>
+    </article>
+    <article class="cj-three__col cj-three__col--on">
+      <p class="cj-three__name">Proyecto</p>
+      <p class="cj-three__sub">o Gem · vale para todos los chats del proyecto</p>
+      <ul>
+        <li>Instrucciones y archivos, cargados una vez.</li>
+        <li>Cada chat del Proyecto arranca con todo puesto.</li>
+        <li>Vive en una sola herramienta.</li>
+      </ul>
+      <p class="cj-three__num"><b>85 %</b><span>de los criterios, en 15 casos medidos con abogados</span></p>
+    </article>
+    <article class="cj-three__col">
+      <p class="cj-three__name">Skill</p>
+      <p class="cj-three__sub">la IA la aplica sola, en cualquier chat</p>
+      <ul>
+        <li>Una tarea empaquetada: pasos, reglas, formato.</li>
+        <li>Se activa sola cuando aparece la tarea.</li>
+        <li>Con el Proyecto, usa el contexto primero.</li>
+      </ul>
+      <p class="cj-three__num"><b>55 %</b><span>sola, en ese banco: no llevaba reglas ni verificación</span></p>
+    </article>
+  </div>
+  <p class="cj-three__foot fragment">Pegar: vale para este chat. Proyecto: vale para todos los chats del proyecto. Skill: la IA la aplica sola, en cualquier chat, cuando aparece la tarea.</p>
+  <aside class="notes">
+    <p><strong>PSE · Pegar, Proyecto o skill</strong> · 6:25 · 45 s · clic: la frase final</p>
+    <p>"Hay tres formas de ponerle su criterio a la IA. Pegarlo en el chat: funciona en cualquiera, hoy, pero la mesa se vacía al abrir otro chat. Un Proyecto, o una Gem: se carga una vez y cada chat del proyecto arranca con todo. Y una skill: una tarea empaquetada que la IA aplica sola cuando aparece, en cualquier chat."</p>
+    <p>"Lo medimos con abogados, en 15 casos: el Proyecto completo cumplió el 85 % de los criterios; la skill sola, el 55 %, porque esa skill no llevaba las reglas ni la verificación; sin nada, el 22 %. Por eso la skill que construyen hoy trae reglas y verificación adentro. No compiten: Proyecto para el contexto, skill para llevar la tarea a donde estén."</p>
+  </aside>
+</section>
+
+<section id="skillmd" data-block="3" data-bg-alpha="0.2" class="cj-skillmd s-tight">
+  <p class="cj-kicker" data-in>Una skill por dentro</p>
+  <h2 class="t-h2" data-split="words">La descripción decide cuándo se activa.</h2>
+  <div class="cj-skillmd__pair">
+    <figure class="cj-file" data-in="mask">
+      <figcaption class="cj-file__name">resumen-de-reunion/SKILL.md</figcaption>
+      <div class="cj-file__head">
+        <p class="cj-file__rule">---</p>
+        <p><b>name:</b> resumen-de-reunion</p>
+        <p class="cj-file__desc"><b>description:</b> «Convierte notas de reunión en decisiones, compromisos con responsable y fecha, y pendientes. Úsala cuando te pego notas o la transcripción de una reunión, <mark>aunque no lo pida con esas palabras</mark>.»</p>
+        <p class="cj-file__rule">---</p>
+      </div>
+      <ol class="cj-file__body">
+        <li># Resumen de reunión</li>
+        <li>## Cuándo usarla</li>
+        <li>## Qué te entrego</li>
+        <li>## Pasos</li>
+        <li>## Reglas que siempre aplican</li>
+        <li>## Formato de salida</li>
+        <li>## Ejemplo</li>
+        <li>## Cómo sé que quedó bien</li>
+      </ol>
+    </figure>
+    <div class="cj-skillmd__right">
+      <p class="cj-skillmd__label">Cómo se activa sola, en Claude</p>
+      <ol class="cj-skillmd__steps" data-in="stagger">
+        <li><b>1</b><span>Lee el nombre y la descripción de cada skill instalada.</span></li>
+        <li><b>2</b><span>Usted pega unas notas: la tarea coincide con la descripción.</span></li>
+        <li><b>3</b><span>Abre el SKILL.md completo y sigue sus pasos, reglas y formato.</span></li>
+      </ol>
+      <p class="cj-skillmd__gpt fragment">Para ChatGPT y Gemini, la misma skill sale como <code>INSTRUCCIONES_GPT.md</code>: va completa en un Proyecto o una Gem.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><strong>SKILL.md · La descripción decide cuándo se activa</strong> · 7:10 · 45 s · los tres pasos entran solos · clic: ChatGPT y Gemini</p>
+    <p>"Una skill es una carpeta con un archivo de texto, SKILL.md. Arriba, dos líneas: el nombre y la descripción. Abajo, el procedimiento: cuándo usarla, qué le entrega usted, los pasos, las reglas, el formato, un ejemplo y cómo sabe que quedó bien. Claude no lee todo eso en cada chat: lee el nombre y la descripción de cada skill, y cuando la tarea coincide, abre el resto. Por eso la descripción es insistente a propósito: «aunque no lo pida con esas palabras». Si la descripción es tímida, la skill no se activa."</p>
+    <p>Clic: "Para ChatGPT y Gemini, el formulario escribe la misma skill como instrucciones: se pegan en un Proyecto, un GPT o una Gem."</p>
+    <p>Fuente: documentación de Agent Skills de Anthropic (el nombre y la descripción se cargan primero; el cuerpo, cuando la tarea coincide). Verifícala antes de la clase. La descripción del ejemplo está abreviada en la diapositiva.</p>
+  </aside>
+</section>
+
+<section id="campos" data-block="3" data-bg-alpha="0.2" class="cj-fields cj-fields--skill s-tight">
+  <p class="cj-kicker" data-in>El formulario · qué mueve qué</p>
+  <h2 class="t-h2" data-split="words">Qué campo mueve qué.</h2>
+  <div class="cj-fields__grid" data-in="stagger">
+    <div class="cj-fields__stack">
+      <article class="cj-fields__card cj-fields__card--crit">
+        <h3>Cuándo se activa <span>la descripción</span></h3>
+        <ul>
+          <li><b>Nombre</b><span>el nombre de la skill y de su carpeta</span></li>
+          <li><b>Qué hace</b><span>la primera frase de la descripción</span></li>
+          <li><b>Cuándo</b><span>las situaciones que la activan</span></li>
+        </ul>
+      </article>
+      <article class="cj-fields__card cj-fields__card--form">
+        <h3>Cómo le habla <span>a usted</span></h3>
+        <ul>
+          <li><b>Tono</b><span>claro, didáctico o solo lo esencial</span></li>
+          <li><b>Quién soy</b><span>su rol, en una línea</span></li>
+        </ul>
+      </article>
+    </div>
+    <article class="cj-fields__card cj-fields__card--ctl">
+      <h3>Qué hace y qué nunca hace <span>pasos y reglas</span></h3>
+      <ul>
+        <li><b>Qué entrego</b><span>lo que pide antes de empezar si falta</span></li>
+        <li><b>Pasos</b><span>en orden, y dónde se detiene</span></li>
+        <li><b>Reglas</b><span>lo que siempre aplica y lo que nunca pasa</span></li>
+        <li><b>Material</b><span>lo que lee antes del paso 1 · references/material.md</span></li>
+      </ul>
+    </article>
+    <div class="cj-fields__stack">
+      <article class="cj-fields__card cj-fields__card--out">
+        <h3>Cómo entrega <span>y cómo sabe que quedó bien</span></h3>
+        <ul>
+          <li><b>Formato</b><span>la plantilla, igual siempre</span></li>
+          <li><b>Ejemplo</b><span>una entrada y su salida</span></li>
+          <li><b>Verifico</b><span>«Cómo sé que quedó bien»</span></li>
+        </ul>
+      </article>
+      <article class="cj-fields__card cj-fields__card--none">
+        <h3>Solo el README <span>no llega al modelo</span></h3>
+        <ul>
+          <li><b>IA que usas</b><span>elige las rutas de instalación. No cambia ninguna respuesta.</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+  <p class="cj-fields__foot fragment">Un formulario, dos formatos: SKILL.md para Claude e INSTRUCCIONES_GPT.md para ChatGPT y Gemini.</p>
+  <aside class="notes">
+    <p><strong>Campos · Qué mueve qué</strong> · 7:55 · 35 s · clic: la frase final</p>
+    <p>"Antes de que abran el formulario, esto es lo que hace cada campo. Nombre, qué hace y cuándo escriben la descripción: deciden cuándo se activa. Pasos y reglas deciden qué hace y qué nunca hace. Formato, ejemplo y verifico deciden cómo entrega y cómo sabe que quedó bien. Tono y quién soy, cómo le habla. Y uno no llega al modelo: la IA que usan solo elige las rutas de instalación del README. Cambiar de ChatGPT a Claude no cambia una sola respuesta; cambiar un paso, sí."</p>
+    <p>Consejo para la sala: "Llénenlo como se lo explicarían a alguien nuevo en su equipo."</p>
+  </aside>
+</section>
+
+<section id="tres" data-block="3" data-bg-alpha="0.2" class="cj-tres s-tight">
+  <p class="cj-kicker" data-in>En la landing · tres pestañas</p>
+  <h2 class="t-h2" data-split="words">Tres cerebros, un mismo método.</h2>
+  <div class="cj-tres__pair">
+    <ol class="cj-tres__rows" data-in="stagger">
+      <li class="is-on">
+        <b>Skill general</b>
+        <span>Una skill para cualquier tarea.</span>
+        <em>Daniel, coordinador de proyectos · «Resumen de reunión»</em>
+      </li>
+      <li>
+        <b>Ideación</b>
+        <span>De la idea a la spec y al primer prompt.</span>
+        <em>Sofía, estudiante · «Quiero una app que organice las solicitudes de mantenimiento de mi edificio»</em>
+      </li>
+      <li>
+        <b>Jurídico</b>
+        <span>El cerebro de un abogado: cinco archivos y sus skills.</span>
+        <em>Laura, litigante · el ejemplo que verán al final</em>
+      </li>
+    </ol>
+    <figure class="cj-qr cj-tres__qr" data-in="fade">
+      <div class="qrbox qrbox--cj-md" data-qr="construir"></div>
+      <figcaption><b>x10.expert/cerebro</b><span>elijan la pestaña</span></figcaption>
+    </figure>
+  </div>
+  <ol class="cj-tres__method fragment">
+    <li>Quién es usted</li>
+    <li>Cómo hace la tarea</li>
+    <li>Qué nunca hace</li>
+    <li>Cómo se verifica</li>
+  </ol>
+  <aside class="notes">
+    <p><strong>Tres · Tres cerebros, un mismo método</strong> · 8:30 · 30 s · clic: el método</p>
+    <p>"En la landing hay tres pestañas. Skill general, para cualquier tarea: el ejemplo es Daniel, que resume reuniones. Ideación, la skill del curso de vibe coding: convierte una idea en una spec de una página y en el primer mensaje para la herramienta. Y Jurídico, el cerebro de un abogado, que es el ejemplo que medimos y que verán al final."</p>
+    <p>Clic: "Las tres siguen el mismo método: quién es usted, cómo hace la tarea, qué nunca hace y cómo se verifica. Cambia el oficio; el método no."</p>
+  </aside>
+</section>
+
+<section id="c07" data-block="3" data-hud="off" data-bg="field" data-bg-alpha="0.45" data-ctrl="exercise" class="cj-go">
+  <figure class="cj-go__qr" data-in="scale">
+    <div class="qrbox qrbox--cj-xl" data-qr="construir"></div>
+  </figure>
+  <div class="cj-go__text">
+    <p class="cj-kicker" data-in>Paso 1 · Construyan su skill</p>
+    <p class="cj-go__url" data-in><span data-config="urlCorta" data-ph="URL_CORTA"></span></p>
+    <p class="t-lead" data-split="lines">Funciona en celular y en computador.</p>
+    <p class="t-lead t-gold" data-split="lines">Nada se envía a ningún servidor.</p>
+    <div class="cj-go__timer fragment">
+      <div class="timer" data-timer="300" aria-label="Temporizador de 5 minutos">
+        <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="timer__bg" cx="60" cy="60" r="54" /><circle class="timer__ring" cx="60" cy="60" r="54" /></svg>
+        <span class="timer__time">5:00</span>
+      </div>
+      <p><b>Su skill</b><span>nombre, qué hace, cuándo, pasos, reglas, formato</span></p>
+    </div>
+    <figure class="cj-go__alt" data-in="fade">
+      <div class="qrbox qrbox--cj-xs" data-qr="ideacion"></div>
+      <figcaption><b>¿Vienen del curso de vibe coding?</b><span>Este abre la pestaña Ideación.</span></figcaption>
+    </figure>
+  </div>
+  <aside class="notes">
+    <p><strong>C07 · QR</strong> · 9:00 · 6 min en total · clic: arranca el temporizador de 5 minutos</p>
+    <p>"Escaneen. Se abre la pestaña Skill general con el ejemplo de Daniel. Pulsen «Empezar en blanco» y escriban una tarea suya, la que más repiten: un informe, un resumen, una revisión, una respuesta a clientes, una tarea de la universidad. Nombre, qué hace, cuándo se usa, los pasos, las reglas y el formato. Mientras escriben, a la derecha se va escribiendo su SKILL.md."</p>
+    <p>"Quienes vienen del curso de vibe coding: el QR pequeño abre la pestaña Ideación. Escriban su frase, «Quiero una app que… para…», y salen con la skill que convierte su idea en una spec y en el primer mensaje para Lovable, Base44, Claude Code o Codex."</p>
+    <p>"Levanten el celular cuando lo tengan abierto." Luego proyecta la landing y, a mitad del tiempo, cambia un paso del ejemplo de Daniel: que vean cómo se reescribe el archivo.</p>
+  </aside>
+</section>
+
+<section id="c10" data-block="3" data-bg-alpha="0.2" data-ctrl="cj-priv" class="cj-priv s-tight">
+  <p class="cj-kicker" data-in>Antes de pegar · dos minutos, en el celular</p>
+  <h2 class="t-h2" data-split="words">¿Su cuenta entrena con lo que sube?</h2>
+  <div class="cj-priv__table" role="table" aria-label="Si cada cuenta entrena con sus datos y cómo apagarlo" data-in="stagger">
+    <div class="cj-priv__row cj-priv__row--head" role="row">
+      <span role="columnheader">Cuenta</span><span role="columnheader">¿Entrena?</span><span role="columnheader">Cómo apagarlo</span>
+    </div>
+    <div class="cj-priv__row" role="row">
+      <b role="cell">Claude Free, Pro y Max</b>
+      <span role="cell" class="cj-priv__yes">Sí, salvo que lo apague</span>
+      <span role="cell">Configuración → Privacidad → <q>Help improve our AI models</q></span>
+    </div>
+    <div class="cj-priv__row" role="row">
+      <b role="cell">ChatGPT Free, Go, Plus y Pro</b>
+      <span role="cell" class="cj-priv__yes">Sí, por defecto</span>
+      <span role="cell">Configuración → Controles de datos → <q>Improve the model for everyone</q></span>
+    </div>
+    <div class="cj-priv__row" role="row">
+      <b role="cell">Gemini personal</b>
+      <span role="cell" class="cj-priv__yes">Sí, con la actividad activada (por defecto)</span>
+      <span role="cell">Desactivar <q>Keep Activity</q> o usar chats temporales</span>
+    </div>
+    <div class="cj-priv__row" role="row">
+      <b role="cell">Claude Team o Enterprise · ChatGPT Business o Enterprise</b>
+      <span role="cell" class="cj-priv__no">No</span>
+      <span role="cell">Nada que apagar</span>
+    </div>
+  </div>
+  <p class="cj-priv__warn fragment"><b>Ojo</b> El pulgar arriba o abajo envía la conversación completa: en Claude se guarda 5 años; en ChatGPT se puede usar para entrenar. Aunque haya apagado el entrenamiento.</p>
+  <p class="cj-priv__safe fragment">Chat incógnito (Claude) o temporal (ChatGPT, Gemini): no entrena.</p>
+  <aside class="notes">
+    <p><strong>C10 · ¿Su cuenta entrena?</strong> · 15:00 · 50 s · que lo hagan en el celular ahora · clic 1: el pulgar · clic 2: incógnito</p>
+    <p>"Antes de pegar su skill, un minuto. Abran la configuración de la IA que usan. En Claude, ChatGPT y Gemini personales, lo que suben puede usarse para entrenar, salvo que lo apaguen. Las cuentas empresariales no entrenan. Y un detalle que casi nadie sabe: el pulgar arriba o abajo envía la conversación completa, aunque hayan apagado el entrenamiento." Manos arriba: "¿quién lo acaba de apagar?"</p>
+    <p>Fuentes, verificadas el 20 oct. 2026: privacy.claude.com/en/articles/10023580 (entrenamiento opcional en Free, Pro y Max; con el entrenamiento activo se guarda hasta 5 años; el pulgar guarda la conversación 5 años aunque esté apagado; incógnito nunca entrena) · help.openai.com/en/articles/5722486 (Free, Go, Plus y Pro entrenan salvo que se apague; el pulgar permite entrenar con esa conversación; el chat temporal no entrena) · support.google.com/gemini/answer/13594961 ("Keep Activity" activo por defecto desde los 18 años; revisores humanos leen algunas conversaciones y las guardan hasta 3 años). Los nombres de los ajustes son los de la interfaz en inglés; en español aparecen traducidos.</p>
+  </aside>
+</section>
+
+<section id="c12" data-block="3" data-bg-alpha="0.2" data-ctrl="cj-load" class="cj-load s-tight">
+  <p class="cj-kicker" data-in>Ahora, cárguenla</p>
+  <div class="cj-load__pair">
+    <div class="cj-load__left">
+      <h2 class="t-h2" data-split="words">Copien todo. Chat nuevo. Peguen.</h2>
+      <p class="cj-load__btn" data-in><span>Copiar todo para pegar en un chat</span><i class="cj-load__cursor" aria-hidden="true"></i></p>
+      <p class="cj-load__hands" data-in>Levanten la mano cuando vean las tres líneas.</p>
+    </div>
+    <figure class="cj-chat" data-in="mask">
+      <p class="cj-chat__me">Guarda estas instrucciones como una skill para este chat. Cuando termines de leerlas, confírmame en tres líneas: (1) cómo se llama la skill y cuándo se activa, (2) qué me vas a pedir antes de empezar, (3) con qué sección vas a cerrar cada respuesta.<span class="cj-chat__files">SKILL: Resumen de reunión · QUÉ HACE: … · CUÁNDO USARLA · PASOS · …</span></p>
+      <ol class="cj-chat__ai">
+        <li><b>1</b><span>«Resumen de reunión»: la uso cuando me pegues notas o la transcripción de una reunión.</span></li>
+        <li><b>2</b><span>Te pido las notas completas, la fecha y el nombre de la reunión, y quiénes asistieron.</span></li>
+        <li><b>3</b><span>Cierro cada respuesta con «Para revisar»: lo que debes confirmar antes de usarla.</span></li>
+      </ol>
+      <figcaption>Ejemplo con la skill de Daniel</figcaption>
+    </figure>
+  </div>
+  <aside class="notes">
+    <p><strong>C12 · Cárguenla</strong> · 15:50 · 50 s · las tres líneas se escriben solas</p>
+    <p>"Botón 'Copiar todo para pegar en un chat'. Abran un chat nuevo en la IA que usan, peguen y envíen. Si funcionó, lo primero que les responde son tres líneas: cómo se llama la skill y cuándo se activa, qué les va a pedir antes de empezar y con qué sección cierra. Levanten la mano cuando las vean."</p>
+    <p>"Esto vale para este chat. Para dejarla fija, el README trae la ruta de cada herramienta: en Claude, el ZIP en Skills; en ChatGPT o Gemini, INSTRUCCIONES_GPT.md en un Proyecto o una Gem."</p>
+  </aside>
+</section>
+
+<section id="c13" data-block="3" data-bg-alpha="0.2" data-ctrl="cj-copy" class="cj-question s-tight">
+  <p class="cj-kicker" data-in>La prueba · dos chats</p>
+  <h2 class="t-h2" data-split="words">La prueba: una tarea suya.</h2>
+  <blockquote class="cj-question__q" data-in data-copy-src="pregunta">Notas del comité del 3 de noviembre: Ana propone mover el taller al 20; Luis dice que confirma el salón el viernes; nadie definió quién avisa a los colegios.</blockquote>
+  <div class="cj-question__row" data-in>
+    <button class="cj-copybtn" type="button" data-copy="pregunta"><span class="cj-copybtn__label">Copiar el ejemplo</span></button>
+    <p class="cj-lane cj-lane--on"><b>Con skill</b><span>en el chat donde la pegaron</span></p>
+    <p class="cj-lane"><b>Sin skill</b><span>en un chat temporal o incógnito</span></p>
+  </div>
+  <p class="cj-question__back fragment">Mejor: una entrada real de su tarea. Compare el proceso, no solo la respuesta.</p>
+  <aside class="notes">
+    <p><strong>C13 · La prueba</strong> · 16:40 · 80 s · clic: una entrada real</p>
+    <p>"No les voy a pedir que pesquen un error. Les voy a pedir que le encarguen una tarea. Peguen una entrada real de su tarea, lo mismo que le darían a un colega, en el chat con su skill. Y, si les da tiempo, en un chat temporal o incógnito, sin skill. Quien no tenga una a mano, use las notas de Daniel." La diferencia está en el proceso, no en el tema.</p>
+    <p>Con la skill de Daniel deben ver: pide lo que falta de «Qué te entrego» (la fecha, los asistentes), separa decisiones, compromisos y pendientes, deja «avisar a los colegios» en pendientes sin inventar responsable, entrega en el formato de siempre y cierra con «Para revisar». Sin skill: un resumen correcto, en otro formato, que completa lo que falta con supuestos.</p>
+    <p>La landing (#prueba) tiene la prueba de cada skill, con lo que deben ver en cada chat.</p>
+  </aside>
+</section>

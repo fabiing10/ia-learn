@@ -2,8 +2,12 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { KEYS, clearData, loadProfile, sameProfile, saveProfile } from './store.js';
+import {
+  KEYS, clearData, loadCerebro, loadProfile, loadProfileFor, sameProfile, saveCerebro, saveProfile, saveProfileFor,
+} from './store.js';
 import { PERFIL_LAURA, PERFIL_VACIO } from './catalog.js';
+import { EJEMPLO_SKILL, normalizeSkill } from './skill-general.js';
+import { EJEMPLO_IDEACION, normalizeIdeacion } from './ideacion.js';
 
 const memory = () => {
   const m = new Map();
@@ -15,8 +19,21 @@ const broken = {
   removeItem() { throw new Error('SecurityError'); },
 };
 
+// The two fields loadProfileFor/saveProfileFor read from a cerebro of cerebros.js.
+const SKILL = { storeKey: 'cj-perfil-skill', normalize: normalizeSkill };
+const IDEACION = { storeKey: 'cj-perfil-ideacion', normalize: normalizeIdeacion };
+
 test('keys are the contract ones', () => {
-  assert.deepEqual(KEYS, { perfil: 'cj-perfil', theme: 'cj-theme', encuesta: 'cj-encuesta', demo: 'cj-demo-submissions', queue: 'cj-queue' });
+  assert.deepEqual(KEYS, {
+    perfil: 'cj-perfil',
+    perfilSkill: 'cj-perfil-skill',
+    perfilIdeacion: 'cj-perfil-ideacion',
+    cerebro: 'cj-cerebro',
+    theme: 'cj-theme',
+    encuesta: 'cj-encuesta',
+    demo: 'cj-demo-submissions',
+    queue: 'cj-queue',
+  });
 });
 
 test('save then load returns the normalized profile', () => {
@@ -40,9 +57,43 @@ test('nothing stored, garbage or a broken storage give null, never an exception'
   assert.equal(clearData(broken), false);
 });
 
-test('clearData removes the profile and the theme', () => {
+test('each cerebro saves under its own key, normalized by its own module', () => {
   const s = memory();
-  s.setItem('cj-perfil', '{}');
+  assert.equal(saveProfileFor(SKILL, { ...EJEMPLO_SKILL, pasos: 'Uno\n\n- Dos\n' }, s), true);
+  assert.equal(saveProfileFor(IDEACION, { ...EJEMPLO_IDEACION, sector: 'nope' }, s), true);
+  assert.deepEqual(JSON.parse(s.m.get('cj-perfil-skill')).pasos, ['Uno', 'Dos']);
+  assert.equal(JSON.parse(s.m.get('cj-perfil-ideacion')).sector, null);
+  assert.deepEqual(loadProfileFor(SKILL, s), normalizeSkill({ ...EJEMPLO_SKILL, pasos: ['Uno', 'Dos'] }));
+  assert.deepEqual(loadProfileFor(IDEACION, s), normalizeIdeacion({ ...EJEMPLO_IDEACION, sector: null }));
+  assert.equal(s.m.has('cj-perfil'), false, 'the legal key is untouched');
+});
+
+test('loadProfileFor: nothing, garbage, an array or a broken storage give null', () => {
+  assert.equal(loadProfileFor(SKILL, memory()), null);
+  const g = memory();
+  g.setItem('cj-perfil-skill', '{not json');
+  assert.equal(loadProfileFor(SKILL, g), null);
+  g.setItem('cj-perfil-skill', '[1,2]');
+  assert.equal(loadProfileFor(SKILL, g), null);
+  assert.equal(loadProfileFor(SKILL, broken), null);
+  assert.equal(loadProfileFor(SKILL, null), null);
+  assert.equal(saveProfileFor(SKILL, EJEMPLO_SKILL, broken), false);
+  assert.equal(saveProfileFor(SKILL, EJEMPLO_SKILL, null), false);
+});
+
+test('the chosen tab is remembered as a plain id', () => {
+  const s = memory();
+  assert.equal(loadCerebro(s), null);
+  assert.equal(saveCerebro('ideacion', s), true);
+  assert.equal(s.m.get('cj-cerebro'), 'ideacion');
+  assert.equal(loadCerebro(s), 'ideacion');
+  assert.equal(loadCerebro(broken), null);
+  assert.equal(saveCerebro('skill', broken), false);
+});
+
+test('clearData removes the three profiles, the tab choice and the theme', () => {
+  const s = memory();
+  for (const k of ['cj-perfil', 'cj-perfil-skill', 'cj-perfil-ideacion', 'cj-cerebro']) s.setItem(k, '{}');
   s.setItem('cj-theme', 'light');
   s.setItem('otra', 'x');
   assert.equal(clearData(s), true);

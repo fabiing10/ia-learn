@@ -1,22 +1,46 @@
-// The live files: six tabs and a monospace preview rewritten on every change.
-// Lines that changed flash, the preview scrolls to the first of them, and the
-// tabs of the other files that changed blink so nothing happens off screen.
+// The live files: one tab per file of the active cerebro and a monospace preview
+// rewritten on every change. Lines that changed flash, the preview scrolls to the
+// first of them, and the tabs of the other files that changed blink so nothing
+// happens off screen. `setArchivos` swaps the tab set when the cerebro changes.
 
-import { ARCHIVOS } from '../shared/generator.js';
+import { nombreCorto } from '../shared/cerebros.js';
 import { renderPreview } from '../shared/preview.js';
 import { bindCopy, downloadText, reducedMotion } from '../shared/ui.js';
 
 const slug = (name) => name.replace(/\W+/g, '-').toLowerCase();
+// 'references/plantilla-spec.md' is too long for a tab: 'plantilla-spec'.
+const etiqueta = (name) => (name.startsWith('references/') ? nombreCorto(name) : name);
 
 export function mountArchivos({ tabs, panel, pre, meta, copyBtn, downBtn }) {
+  let list = [];
   let files = null;
-  let active = '00_ADN.md';
+  let active = null;
 
-  tabs.innerHTML = ARCHIVOS.map(
-    (n) =>
-      `<button class="tab" type="button" role="tab" id="tab-${slug(n)}" data-archivo="${n}" aria-controls="${panel.id}" aria-selected="false" tabindex="-1"><span class="tab__name">${n}</span><i class="tab__dot" aria-hidden="true"></i></button>`,
-  ).join('');
-  const tab = (n) => tabs.querySelector(`[data-archivo="${n}"]`);
+  const tab = (n) => tabs.querySelector(`[data-archivo="${CSS.escape(n)}"]`);
+
+  function renderTabs() {
+    tabs.innerHTML = list
+      .map(
+        (n) =>
+          `<button class="tab" type="button" role="tab" id="tab-${slug(n)}" data-archivo="${n}" aria-controls="${panel.id}" aria-selected="false" tabindex="-1"${
+            etiqueta(n) === n ? '' : ` title="${n}"`
+          }><span class="tab__name">${etiqueta(n)}</span><i class="tab__dot" aria-hidden="true"></i></button>`,
+      )
+      .join('');
+  }
+
+  /**
+   * New tab set. `reset` (a new cerebro) forgets the previous files, so the next
+   * update() shows `principal` without diff; otherwise (a file appeared in the same
+   * cerebro) the files stay and the next update() still flashes what changed.
+   */
+  function setArchivos(next, principal = next[0], { reset = true } = {}) {
+    list = [...next];
+    active = list.includes(principal) ? principal : list[0];
+    if (reset) files = null;
+    renderTabs();
+    if (!reset && files?.[active] !== undefined) select(active);
+  }
 
   function show(name, prev) {
     const text = files[name];
@@ -24,10 +48,10 @@ export function mountArchivos({ tabs, panel, pre, meta, copyBtn, downBtn }) {
     pre.innerHTML = html;
     const lines = text.trimEnd().split('\n').length;
     meta.textContent = `${lines} líneas${changed ? ` · ${changed} ${changed === 1 ? 'cambió' : 'cambiaron'}` : ''}`;
+    clearTimeout(show.t);
     if (changed) {
       const first = pre.querySelector('.is-new');
       pre.scrollTo({ top: Math.max(0, first.offsetTop - pre.clientHeight * 0.28), behavior: reducedMotion() ? 'auto' : 'smooth' });
-      clearTimeout(show.t);
       show.t = setTimeout(() => {
         for (const l of pre.querySelectorAll('.is-new')) l.classList.remove('is-new');
         meta.textContent = `${lines} líneas`;
@@ -59,19 +83,21 @@ export function mountArchivos({ tabs, panel, pre, meta, copyBtn, downBtn }) {
 
   // Roving focus: arrows, Home and End move between tabs.
   tabs.addEventListener('keydown', (e) => {
-    const i = ARCHIVOS.indexOf(active);
-    const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: ARCHIVOS.length - 1 }[e.key];
+    const i = list.indexOf(active);
+    const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: list.length - 1 }[e.key];
     if (to === undefined) return;
     e.preventDefault();
-    select(ARCHIVOS[(to + ARCHIVOS.length) % ARCHIVOS.length], { focus: true });
+    select(list[(to + list.length) % list.length], { focus: true });
   });
 
-  bindCopy(copyBtn, () => files[active], { done: 'Copiado', message: `Copiaste ${active}.` });
-  downBtn.addEventListener('click', () => downloadText(active, files[active]));
+  // The toast names the file copied at click time (toast() reads it through textContent).
+  bindCopy(copyBtn, () => files[active], { done: 'Copiado', message: { toString: () => `Copiaste ${active}.` } });
+  downBtn.addEventListener('click', () => downloadText(active.split('/').pop(), files[active]));
 
   const blinkTimers = new Map();
   function blink(name) {
     const t = tab(name);
+    if (!t) return;
     clearTimeout(blinkTimers.get(name));
     t.classList.remove('is-changed');
     void t.offsetWidth;
@@ -88,5 +114,15 @@ export function mountArchivos({ tabs, panel, pre, meta, copyBtn, downBtn }) {
     if (changed.includes(active)) show(active, prev[active]);
   }
 
-  return { update, select, get active() { return active; } };
+  return {
+    setArchivos,
+    update,
+    select,
+    get active() {
+      return active;
+    },
+    get list() {
+      return list;
+    },
+  };
 }

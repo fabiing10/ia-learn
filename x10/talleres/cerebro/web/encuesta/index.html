@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#0B0F1A" />
-    <title>Encuesta de entrada · Cerebro Jurídico</title>
+    <title>Encuesta de entrada · Cerebro</title>
     <meta name="description" content="Un minuto, diez toques: cuéntanos cómo usas la IA antes de empezar. La sala ve porcentajes; tu nombre y correo solo los ve el expositor." />
-    <meta property="og:title" content="¿Cómo usas la IA? · Cerebro Jurídico" />
+    <meta property="og:title" content="¿Cómo usas la IA? · Cerebro" />
     <meta property="og:description" content="Encuesta de entrada de un minuto. Al final ves cómo llega la sala." />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_CO" />
@@ -34,7 +34,7 @@
   </head>
   <body>
     <header class="ebar">
-      <a class="mark" href="/cerebro/" aria-label="Cerebro Jurídico, ir a la página del taller"><span class="mark__chev" aria-hidden="true">§</span>cerebro jurídico</a>
+      <a class="mark" href="/cerebro/" aria-label="Cerebro, ir a la página de la clase"><span class="mark__chev" aria-hidden="true">§</span>cerebro</a>
       <div class="ebar__progress" id="progress" hidden>
         <span class="ebar__step" id="step" aria-live="polite"></span>
         <div class="ebar__track" aria-hidden="true"><i id="bar"></i></div>
@@ -47,9 +47,9 @@
       <section class="screen screen--intro" id="intro" aria-labelledby="intro-t">
         <p class="eyebrow">Encuesta de entrada · 1 minuto</p>
         <h1 class="screen__title" id="intro-t">¿Cómo usas la IA hoy?</h1>
-        <p class="screen__lead">Tu nombre y correo, y diez preguntas de un toque. La sala ve solo porcentajes; tu nombre y tu correo los ve únicamente el expositor, para enviarte el playbook y el kit.</p>
+        <p class="screen__lead">Tu nombre y correo, y diez preguntas de un toque. La sala ve solo porcentajes; tu nombre y tu correo los ve únicamente el expositor, para enviarte el kit de la clase y el playbook.</p>
         <ul class="intro__chips" aria-hidden="true">
-          <li>Qué IA usas</li><li>Qué cuenta tienes</li><li>Para qué la usas</li><li>Proyectos y skills</li><li>Si verificas las citas</li>
+          <li>Qué IA usas</li><li>Qué cuenta tienes</li><li>Para qué la usas</li><li>Proyectos y skills</li><li>Si verificas lo que dice</li>
         </ul>
         <div class="intro__go">
           <button class="btn btn--primary btn--lg" id="start" type="button">Empezar <span data-icon="arrow"></span></button>
@@ -65,14 +65,14 @@
         <p class="screen__lead" id="c-help"></p>
         <form class="contact" id="contact-form" novalidate>
           <label>Nombre y apellido
-            <input id="f-nombre" name="nombre" type="text" autocomplete="name" maxlength="80" placeholder="Laura Gómez" required />
+            <input id="f-nombre" name="nombre" type="text" autocomplete="name" maxlength="80" placeholder="Sofía Ruiz" required />
             <span class="contact__err" id="e-nombre" role="alert"></span>
           </label>
           <label>Correo
-            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="laura@despacho.co" required />
+            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="sofia@correo.co" required />
             <span class="contact__err" id="e-email" role="alert"></span>
           </label>
-          <p class="contact__note">Al enviar la encuesta autorizas el uso de estos datos solo para el contacto de este taller (Ley 1581 de 2012). Puedes pedir que se borren escribiendo al expositor.</p>
+          <p class="contact__note">Al enviar la encuesta autorizas el uso de estos datos solo para el contacto de esta clase (Ley 1581 de 2012). Puedes pedir que se borren escribiendo al expositor.</p>
         </form>
         <div class="q__nav">
           <button class="btn btn--quiet" id="c-back" type="button"><span class="flip" data-icon="arrow"></span>Atrás</button>
@@ -102,7 +102,7 @@
         <p class="screen__lead" id="done-status" role="status"></p>
         <div class="room" id="room" aria-live="polite"></div>
         <div class="done__actions">
-          <a class="btn btn--primary" href="/cerebro/">Construir mi cerebro <span data-icon="arrow"></span></a>
+          <a class="btn btn--primary" href="/cerebro/">Construir mi skill <span data-icon="arrow"></span></a>
           <button class="btn btn--quiet btn--sm" id="retry" type="button" hidden>Reintentar el envío</button>
         </div>
       </section>

@@ -22,7 +22,7 @@ const CHECKS = [
   { path: '/panel/', expect: { text: 'Panel en vivo' } },
   { path: '/playbook/', expect: { selector: '#rctf' } },
   // platform hub
-  { path: '/talleres/', expect: { selector: 'a[href="/x10/"]', text: 'Cerebro Jurídico' } },
+  { path: '/talleres/', expect: { selector: 'a[href="/x10/"]', text: 'Cerebro' } },
   // Vibe Coding
   { path: '/vibecoding/', expect: { selector: '#salida form' } },
   { path: '/vibecoding/encuesta/', expect: { selector: '#start', text: '¿Dónde estás con la IA?' } },
@@ -30,10 +30,10 @@ const CHECKS = [
   { path: '/vibecoding/playbook/', expect: { selector: '#ruta-a' } },
   { path: '/vibecoding/panel/', expect: { text: 'Panel' } },
   // Cerebro Jurídico
-  { path: '/cerebro/', expect: { selector: '#construir' } },
+  { path: '/cerebro/', expect: { selector: '[role="tablist"] [data-cerebro="skill"]', count: ['#construir', 1] } },
   { path: '/cerebro/offline/', expect: { selector: '#construir' } },
   { path: '/cerebro/encuesta/', expect: { selector: '#start', text: '¿Cómo usas la IA hoy?' } },
-  { path: '/cerebro/presentacion/', expect: { min: ['.reveal .slides section[id]', 24], text: '§cerebro jurídico', count: ['.hud__bar .segbar__seg', 6] } },
+  { path: '/cerebro/presentacion/', expect: { min: ['.reveal .slides section[id]', 24], text: '§cerebro', count: ['.hud__bar .segbar__seg', 6] } },
   { path: '/cerebro/playbook/', expect: { selector: '#verificar' } },
 ];
 

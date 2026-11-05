@@ -15,7 +15,15 @@ const LAYERS = [
   { x: 220, n: 6 },
   { x: 390, n: 5 },
 ];
-const PICKS = ['diez', 'diez', 'veinte', 'diez', 'quince', 'diez', 'treinta'];
+
+// The order the sampled word lands in, round after round. The slide sets it
+// (data-picks="a,a,b,…" on the stage); otherwise the bars cycle, favouring the first.
+function picksOf(slide, bars) {
+  const own = slide.querySelector('[data-picks]')?.dataset.picks;
+  if (own) return own.split(',').map((w) => w.trim()).filter(Boolean);
+  const words = bars.map((b) => b.dataset.word);
+  return words.flatMap((w, i) => (i ? [words[0], w] : [w]));
+}
 
 defineCtrl('cj-predict', {
   build(slide) {
@@ -46,11 +54,12 @@ defineCtrl('cj-predict', {
     const bars = $$(slide, '.cj-predict__bars li');
     const nodes = (l) => $$(slide, `.cj-pn__node[data-layer="${l}"]`);
     const pulses = (l) => $$(slide, `.cj-pn__pulse[data-layer="${l}"]`);
+    const picks = picksOf(slide, bars);
     blank.dataset.final ??= blank.textContent;
     gsap.fromTo(slide.querySelectorAll('.cj-predict__bars s'), { scaleX: 0 }, { scaleX: 1, duration: 1, ease: 'expo.out', stagger: 0.1, delay: 0.5 });
     rounds(slide, (i) => {
-      const word = PICKS[i % PICKS.length];
-      const target = bars.find((b) => b.dataset.word === word);
+      const word = picks[i % picks.length];
+      const target = bars.find((b) => b.dataset.word === word) || bars[0];
       const tl = gsap.timeline({ delay: i === 0 ? 0.9 : 0 });
       tl.call(() => {
         blank.textContent = blank.dataset.final;
@@ -68,7 +77,7 @@ defineCtrl('cj-predict', {
         tl.call(() => bars.forEach((x) => x.classList.toggle('is-pick', x === b)), null, `>+${k === 0 ? 0.05 : 0.09}`),
       );
       tl.call(() => {
-        blank.textContent = word;
+        blank.textContent = target.dataset.word;
         blank.classList.add('is-filled', target.classList.contains('is-old') ? 'is-old' : target.classList.contains('is-ok') ? 'is-ok' : 'is-meh');
         fire(0.3);
       });
@@ -155,18 +164,22 @@ defineCtrl('cj-vault', {
 
 /* ── C16 · open book: fragments become points, the question pulls the nearest ── */
 
+// One cluster per source document; its short label comes from the document
+// list (li[data-cl]) so the slide owns the example.
 const CLUSTERS = [
-  { x: 150, y: 140, label: 'Ley 1755' },
-  { x: 430, y: 110, label: 'Decreto 491' },
-  { x: 470, y: 330, label: 'Ley 2207' },
-  { x: 180, y: 380, label: 'CPACA' },
-  { x: 320, y: 450, label: 'T-323' },
+  { x: 150, y: 140 },
+  { x: 430, y: 110 },
+  { x: 470, y: 330 },
+  { x: 180, y: 380 },
+  { x: 320, y: 450 },
 ];
 const STAR = { x: 300, y: 215 };
 
 defineCtrl('cj-rag', {
   build(slide) {
     const space = slide.querySelector('.cj-rag__space');
+    const docs = $$(slide, '.cj-rag__docs li');
+    const label = (ci) => docs[ci]?.dataset.cl || docs[ci]?.textContent.trim() || '';
     const r = rand(1755);
     const pts = [];
     CLUSTERS.forEach((c, ci) => {
@@ -189,7 +202,7 @@ defineCtrl('cj-rag', {
     );
     CLUSTERS.forEach((c, ci) => {
       const t = svg('text', { x: c.x, y: c.y - 92, class: `cj-rag__cl c${ci}` }, space);
-      t.textContent = c.label;
+      t.textContent = label(ci);
     });
     const star = svg('g', { class: 'cj-rag__star', transform: `translate(${STAR.x} ${STAR.y})` }, space);
     svg('path', { d: 'M0 -22 L6 -7 L22 -7 L9 3 L14 19 L0 9 L-14 19 L-9 3 L-22 -7 L-6 -7 Z' }, star);

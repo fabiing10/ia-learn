@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#0B0F1A" />
-    <title>Cerebro Jurídico · Construye el tuyo</title>
-    <meta name="description" content="Describe tu práctica y recibe tu cerebro jurídico: cinco archivos que le dicen a cualquier IA quién eres, cómo trabajas, qué nunca hace y cómo se verifica. Nada se envía a ningún servidor." />
-    <meta property="og:title" content="Cerebro Jurídico" />
-    <meta property="og:description" content="La IA no es tu abogado junior; es tu sistema. Y los sistemas se diseñan." />
+    <title>Cerebro · Construye tus skills</title>
+    <meta name="description" content="Escribe lo que la IA no puede buscar de ti y llévatelo como skill: para cualquier tarea, para pasar de una idea a la spec, o el cerebro jurídico completo. Sirve en Claude, ChatGPT y Gemini. Nada se envía a ningún servidor." />
+    <meta property="og:title" content="Cerebro · Construye tus skills" />
+    <meta property="og:description" content="La IA no es tu asistente junior; es tu sistema. Y los sistemas se diseñan." />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_CO" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230B0F1A%22/%3E%3Ctext x=%2250%22 y=%2272%22 font-family=%22Georgia,serif%22 font-size=%2266%22 font-weight=%22700%22 text-anchor=%22middle%22 fill=%22%239D86FF%22%3E%C2%A7%3C/text%3E%3C/svg%3E" />
@@ -53,12 +53,12 @@
 
     <header class="bar" id="bar">
       <div class="bar__in">
-        <a class="mark bar__mark" href="#inicio" aria-label="Cerebro jurídico, volver al inicio"><span class="mark__sec" aria-hidden="true">§</span>cerebro jurídico</a>
+        <a class="mark bar__mark" href="#inicio" aria-label="Cerebro, volver al inicio"><span class="mark__sec" aria-hidden="true">§</span>cerebro</a>
         <nav class="bar__nav" aria-label="Secciones">
           <a href="#construir">Construir</a>
           <a href="#cargar">Cargar</a>
           <a href="#prueba">Prueba</a>
-          <a href="#boveda">Bóveda</a>
+          <a href="#boveda" data-solo="juridico" hidden>Bóveda</a>
           <a href="/cerebro/playbook/">Playbook</a>
         </nav>
         <button class="icon-btn bar__theme" id="theme" type="button" aria-label="Cambiar a tema claro"></button>
@@ -71,30 +71,29 @@
         <div class="hero__glyph" aria-hidden="true">§</div>
         <div class="wrap hero__grid">
           <div class="hero__main">
-            <p class="eyebrow">Arquitectura, IA y automatización aplicadas a los servicios jurídicos</p>
+            <p class="eyebrow">Cerebro · IA generativa y skills</p>
             <h1 class="hero__title" id="hero-title">
-              <span class="hero__line">La IA no es tu abogado junior;</span>
+              <span class="hero__line">La IA no es tu asistente junior;</span>
               <span class="hero__line hero__line--accent">es tu sistema.</span>
               <span class="hero__line hero__line--soft">Y los sistemas se diseñan.</span>
             </h1>
-            <p class="hero__lead"><b>La IA ya sabe buscar; tu criterio no está en internet.</b> Describe tu práctica en diez campos y recibe tu <b>cerebro jurídico</b>: cinco archivos que le dicen a cualquier IA quién eres, cómo trabajas, qué nunca hace y cómo se verifica, y tus tareas como skills para Claude.</p>
+            <p class="hero__lead"><b>La IA ya sabe buscar; tu criterio no está en internet.</b> Un cerebro es lo que la IA no puede buscar de ti, escrito una vez: quién eres, cómo haces cada tarea, qué nunca hace y cómo se verifica. Una skill es ese cerebro empacado para que la IA lo aplique sola cuando aparece la tarea.</p>
             <p class="hero__promise"><span data-icon="lock"></span>Funciona en celular y en computador. Nada se envía a ningún servidor.</p>
             <div class="hero__ctas">
-              <a class="btn btn--primary btn--lg" href="#construir">Construir mi cerebro <span data-icon="down"></span></a>
+              <a class="btn btn--primary btn--lg" href="#construir">Construir mi skill <span data-icon="down"></span></a>
               <a class="link" href="/cerebro/playbook/"><span data-icon="book"></span>Abrir el playbook</a>
             </div>
           </div>
 
+          <!-- The active cerebro's files; main.js rewrites it when the tab changes. -->
           <aside class="leave" aria-labelledby="leave-title">
-            <h2 class="leave__title" id="leave-title">Te llevas cinco archivos</h2>
-            <ol class="leave__list">
-              <li><code>00_ADN.md</code><span>Quién soy y qué es un buen trabajo para mí</span></li>
-              <li><code>01_LINEAS_ROJAS.md</code><span>Lo que nunca pasa</span></li>
-              <li><code>02_PLAYBOOK.md</code><span>Cómo hago cada tarea</span></li>
-              <li><code>03_FUENTES.md</code><span>Con qué razona la IA</span></li>
-              <li><code>04_VERIFICACION.md</code><span>Cómo sé que puedo usarlo</span></li>
+            <h2 class="leave__title" id="leave-title">Te llevas</h2>
+            <ol class="leave__list" id="leave-list">
+              <li><code>SKILL.md</code><span>La skill, para Claude</span></li>
+              <li><code>INSTRUCCIONES_GPT.md</code><span>La misma skill para ChatGPT y Gemini</span></li>
+              <li><code>README.md</code><span>Cómo instalarla y probarla</span></li>
             </ol>
-            <p class="leave__foot">Más un <code>README.md</code> para cargarlo y mantenerlo, y una skill por tarea para instalar en Claude. Los archivos sirven en Claude, ChatGPT, Gemini, Copilot o un modelo local.</p>
+            <p class="leave__foot" id="leave-foot" hidden></p>
           </aside>
         </div>
 
@@ -110,22 +109,42 @@
       <!-- Construir -->
       <section class="sec sec--build" id="construir" aria-labelledby="construir-t">
         <div class="wrap wrap--wide">
+          <p class="eyebrow" id="construir-eyebrow">Paso 1 · Construye</p>
+
+          <!-- Three cerebros (shared/cerebros.js). Deep links #skill, #ideacion, #juridico and ?c= pick one. -->
+          <div class="cerebros" role="tablist" aria-label="Elige qué construyes" id="cerebros">
+            <button class="cerebros__tab" type="button" role="tab" id="cerebro-skill" data-cerebro="skill" aria-controls="cerebro-panel" aria-selected="true" tabindex="0">
+              <span class="cerebros__label"><span class="cerebros__full">Skill general</span><span class="cerebros__corto" aria-hidden="true">Skill</span></span>
+              <span class="cerebros__sub">Una skill para cualquier tarea</span>
+            </button>
+            <button class="cerebros__tab" type="button" role="tab" id="cerebro-ideacion" data-cerebro="ideacion" aria-controls="cerebro-panel" aria-selected="false" tabindex="-1">
+              <span class="cerebros__label"><span class="cerebros__full">Ideación</span><span class="cerebros__corto" aria-hidden="true">Ideación</span></span>
+              <span class="cerebros__sub">De la idea a la spec y al primer prompt</span>
+            </button>
+            <button class="cerebros__tab" type="button" role="tab" id="cerebro-juridico" data-cerebro="juridico" aria-controls="cerebro-panel" aria-selected="false" tabindex="-1">
+              <span class="cerebros__label"><span class="cerebros__full">Jurídico</span><span class="cerebros__corto" aria-hidden="true">Jurídico</span></span>
+              <span class="cerebros__sub">El cerebro de un abogado: cinco archivos y sus skills</span>
+            </button>
+          </div>
+
+          <div class="cerebros__panel" role="tabpanel" id="cerebro-panel" aria-labelledby="cerebro-skill">
           <header class="sec__head">
-            <p class="eyebrow">Paso 1 · Construye</p>
-            <h2 class="sec__title" id="construir-t">Tu perfil escribe tus archivos</h2>
-            <p class="sec__lead">Diez campos, los dos últimos opcionales. Mientras respondes, tus archivos se reescriben al lado. Arranca con el ejemplo de Laura, litigante: cámbialo por lo tuyo.</p>
+            <h2 class="sec__title" id="construir-t">Tu perfil escribe tu skill</h2>
+            <p class="sec__lead" id="construir-lead">Una skill es un procedimiento escrito que la IA aplica sola cuando aparece la tarea. Llena los campos como se los explicarías a alguien nuevo en tu equipo; al lado se escribe tu SKILL.md.</p>
           </header>
 
           <div class="toolbar" role="group" aria-label="Perfil">
             <p class="toolbar__state" id="perfil-estado" aria-live="polite"></p>
             <div class="toolbar__actions">
               <button class="btn btn--ghost btn--sm" id="perfil-blanco" type="button"><span data-icon="blank"></span>Empezar en blanco</button>
-              <button class="btn btn--ghost btn--sm" id="perfil-laura" type="button"><span data-icon="reset"></span>Volver al ejemplo de Laura</button>
+              <button class="btn btn--ghost btn--sm" id="perfil-laura" type="button"><span data-icon="reset"></span><span id="perfil-ejemplo-label">Volver al ejemplo de Daniel</span></button>
             </div>
           </div>
 
           <div class="build">
-            <form class="build__form" id="perfil" novalidate aria-label="Tu perfil"></form>
+            <form class="build__form" id="perfil-skill" data-form="skill" novalidate aria-label="Tu skill"></form>
+            <form class="build__form" id="perfil-ideacion" data-form="ideacion" novalidate aria-label="Tu idea" hidden></form>
+            <form class="build__form" id="perfil" data-form="juridico" novalidate aria-label="Tu perfil" hidden></form>
 
             <div class="build__out">
               <figure class="mapa surface" id="mapa" aria-labelledby="mapa-t">
@@ -152,6 +171,7 @@
               </div>
             </div>
           </div>
+          </div>
         </div>
       </section>
 
@@ -161,7 +181,7 @@
           <header class="sec__head">
             <p class="eyebrow">Paso 2 · Carga</p>
             <h2 class="sec__title" id="cargar-t">Pégalo en la IA que ya usas</h2>
-            <p class="sec__lead">Un botón copia los cinco archivos con una instrucción al inicio. Abre un chat nuevo, pega y envía.</p>
+            <p class="sec__lead" id="cargar-lead">Un botón copia la skill con una instrucción al inicio. Abre un chat nuevo, pega y envía. Para dejarla fija, el README trae la ruta de cada herramienta.</p>
           </header>
 
           <div class="account surface" aria-labelledby="cuenta-t">
@@ -181,22 +201,34 @@
                 <li>Pega y envía. No escribas nada más todavía.</li>
                 <li>Si funcionó, te responde con <b>tres líneas</b>:</li>
               </ol>
-              <ol class="confirm3" aria-label="La confirmación que esperas">
-                <li><span class="confirm3__n">1</span><span><b>Quién eres</b>: tu rol, tus áreas, cómo te llama.</span></li>
-                <li><span class="confirm3__n">2</span><span><b>Tus líneas rojas</b>: confidencialidad y lo que nunca delegas.</span></li>
-                <li><span class="confirm3__n">3</span><span><b>Cómo va a verificar</b>: fuentes con enlace oficial, [NO VERIFICADO] y el cierre "Verificación pendiente".</span></li>
+              <ol class="confirm3" id="confirm3" aria-label="La confirmación que esperas">
+                <li><span class="confirm3__n">1</span><span><b>Cómo se llama la skill</b> y cuándo se activa.</span></li>
+                <li><span class="confirm3__n">2</span><span><b>Qué te va a pedir</b> antes de empezar.</span></li>
+                <li><span class="confirm3__n">3</span><span><b>Con qué sección cierra</b> cada respuesta: «Para revisar».</span></li>
               </ol>
               <p class="load__why">La confirmación obliga al modelo a procesar el paquete antes de tu primera pregunta y te muestra en diez segundos si la carga funcionó. Si responde otra cosa, vuelve a pegar en un chat nuevo.</p>
             </div>
 
             <div class="load__side">
-              <div class="dl surface">
+              <!-- The new cerebros: one list from descargas() (shared/cerebros.js). -->
+              <div class="dl surface" id="descargas-card" data-solo="skill ideacion" aria-labelledby="descargas-t">
+                <h3 class="h3" id="descargas-t">Descárgala</h3>
+                <p class="dl__lead" id="descargas-lead">El ZIP de la skill va a Claude tal cual: súbelo sin descomprimirlo. El kit trae además el README con la ruta de cada herramienta y las instrucciones para ChatGPT y Gemini.</p>
+                <ul class="dl__files dl__files--nota" id="descargas" aria-label="Descargar la skill"></ul>
+                <details class="skills-how">
+                  <summary>Cómo instalarla en Claude</summary>
+                  <ol class="route-steps" id="descargas-pasos"></ol>
+                  <p class="route-note" id="descargas-nota"></p>
+                </details>
+              </div>
+              <!-- Jurídico: the brain ZIP is not a skill; the task ZIPs are. -->
+              <div class="dl surface" data-solo="juridico" hidden>
                 <h3 class="h3">Descárgalo</h3>
                 <p class="dl__lead">Para subirlo a un Proyecto o una Gem, o guardarlo en tu equipo. <b>No es una skill</b>: estos cinco archivos van a la base de conocimiento del Proyecto.</p>
                 <button class="btn btn--ghost" id="bajar-zip" type="button"><span data-icon="zip"></span>Descargar todo (.zip)</button>
                 <ul class="dl__files" id="bajar-archivos" aria-label="Descargar un archivo"></ul>
               </div>
-              <div class="dl surface" aria-labelledby="skills-t">
+              <div class="dl surface" data-solo="juridico" aria-labelledby="skills-t" hidden>
                 <h3 class="h3" id="skills-t">Tus skills para Claude</h3>
                 <p class="dl__lead"><b>Estos sí son skills.</b> Cada tarea de tu playbook como skill: Claude la usa sola cuando aparece la tarea, en cualquier chat. Un ZIP por skill; súbelo sin descomprimir.</p>
                 <ul class="dl__files" id="bajar-skills" aria-label="Descargar una skill"></ul>
@@ -209,7 +241,7 @@
             </div>
           </div>
 
-          <div class="routes surface">
+          <div class="routes surface" data-solo="juridico" hidden>
             <div class="routes__head">
               <h3 class="h3">Para dejarlo fijo y no pegarlo cada vez</h3>
               <button class="btn btn--ghost btn--sm" id="copiar-sistema" type="button"><span data-icon="copy"></span><span data-label>Copiar bloque de sistema</span></button>
@@ -227,25 +259,25 @@
           <header class="sec__head">
             <p class="eyebrow">Paso 3 · Prueba</p>
             <h2 class="sec__title" id="prueba-t">La prueba: una tarea tuya</h2>
-            <p class="sec__lead">Copia la prueba de una de tus tareas. Hazla en el chat donde pegaste tu cerebro y, si te da tiempo, en un chat temporal o incógnito, sin cerebro. Compara el proceso, no solo la respuesta.</p>
+            <p class="sec__lead" id="prueba-lead">Hazla en un chat con la skill y en otro sin ella. Compara el proceso, no solo la respuesta.</p>
           </header>
 
-          <div class="routes__tabs pruebas__tabs" role="tablist" aria-label="Pruebas por tarea" id="pruebas-tabs"></div>
-          <figure class="question surface" role="tabpanel" id="pruebas-panel">
+          <div class="routes__tabs pruebas__tabs" role="tablist" aria-label="Pruebas por tarea" id="pruebas-tabs" hidden></div>
+          <figure class="question surface" role="group" id="pruebas-panel">
             <blockquote class="question__text" id="pregunta"></blockquote>
             <button class="btn btn--primary" id="copiar-pregunta" type="button"><span data-icon="copy"></span><span data-label>Copiar prueba</span></button>
             <p class="question__note" id="pregunta-nota" hidden></p>
           </figure>
 
-          <div class="compare" role="table" aria-label="Sin cerebro y con cerebro">
+          <div class="compare" role="table" aria-label="Sin la skill y con la skill" id="comparar" data-modo="skill">
             <div class="compare__head" role="row">
-              <span role="columnheader" class="compare__h compare__h--sin">Sin cerebro: lo que suele pasar</span>
-              <span role="columnheader" class="compare__h compare__h--con">Con cerebro: lo que debes ver</span>
+              <span role="columnheader" class="compare__h compare__h--sin" id="comparar-sin">Sin la skill: lo que suele pasar</span>
+              <span role="columnheader" class="compare__h compare__h--con" id="comparar-con">Con la skill: lo que debes ver</span>
             </div>
             <div id="comparacion" role="rowgroup"></div>
           </div>
 
-          <details class="reserve surface">
+          <details class="reserve surface" data-solo="juridico" hidden>
             <summary><span>¿Por qué no una pregunta de “cuántos días”?</span><span class="reserve__chev" aria-hidden="true"></span></summary>
             <div class="reserve__body">
               <p class="reserve__why">Porque los modelos que buscan en internet ya responden bien ese tipo de preguntas. El 20 de octubre de 2026 le pedimos a un modelo con búsqueda una sentencia con número, ponente y cita textual, y la comprobamos en la relatoría oficial de la Corte Constitucional: todo correcto. Lo que ningún buscador encuentra es tu criterio: qué aceptas, dónde se detiene la IA y qué nunca subes. Eso es lo que muestra esta prueba.</p>
@@ -255,7 +287,7 @@
       </section>
 
       <!-- Bóveda -->
-      <section class="sec sec--alt" id="boveda" aria-labelledby="boveda-t">
+      <section class="sec sec--alt" id="boveda" aria-labelledby="boveda-t" data-solo="juridico" hidden>
         <div class="wrap vault">
           <div class="vault__text">
             <header class="sec__head">
@@ -285,7 +317,7 @@
     <footer class="foot">
       <div class="wrap foot__grid">
         <div class="foot__brand">
-          <a class="mark" href="#inicio"><span class="mark__sec" aria-hidden="true">§</span>cerebro jurídico</a>
+          <a class="mark" href="#inicio"><span class="mark__sec" aria-hidden="true">§</span>cerebro</a>
           <p class="foot__who"><b>Fabián Zapata</b> — Fundador de Zeta Innovation · Director de Innovación de GLab</p>
           <a class="link" href="/cerebro/playbook/"><span data-icon="book"></span>Abrir el playbook</a>
         </div>
@@ -295,8 +327,8 @@
           <button class="btn btn--ghost btn--sm" id="borrar-datos" type="button"><span data-icon="trash"></span>Borrar mis datos</button>
         </div>
         <div class="foot__legal">
-          <h2 class="foot__h">Aviso</h2>
-          <p>Las normas citadas son semilla para verificación en fuente oficial; no constituyen asesoría jurídica.</p>
+          <h2 class="foot__h" data-solo="juridico" hidden>Aviso</h2>
+          <p data-solo="juridico" hidden>Las normas citadas son semilla para verificación en fuente oficial; no constituyen asesoría jurídica.</p>
           <p class="foot__last">La herramienta va a cambiar el año entrante. Tu cerebro, no.</p>
         </div>
       </div>

@@ -5,6 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import * as catalog from './catalog.js';
+import { CEREBROS } from './cerebros.js';
 import { buildFiles } from './generator.js';
 import { buildVault } from './vault.js';
 
@@ -17,11 +18,17 @@ const PROFILES = [
   { ...PERFIL_LAURA, herramientas: ['ninguna'], confidencialidad: 'sensible' },
 ];
 
-/** Every text the attendee can see or download, labelled by origin. */
+/** Every text the attendee can see or download, labelled by origin: the legal brain and the two general cerebros. */
 function allTexts() {
-  const out = [['catalog', JSON.stringify(catalog)]];
+  const out = [['catalog', JSON.stringify(catalog)], ['cerebros', JSON.stringify(CEREBROS)]];
   for (const p of PROFILES) for (const [n, t] of Object.entries(buildFiles(p))) out.push([n, t]);
   for (const [n, t] of Object.entries(buildVault(PERFIL_LAURA, { today: '2026-10-20' }))) out.push([`vault/${n}`, t]);
+  for (const c of CEREBROS.filter((x) => x.campos)) {
+    for (const p of [c.perfilEjemplo, c.perfilVacio]) {
+      for (const [n, t] of Object.entries(c.build(p))) out.push([`${c.id}/${n}`, t]);
+      out.push([`${c.id}/paste`, c.paste(p)]);
+    }
+  }
   return out;
 }
 

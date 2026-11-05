@@ -1,4 +1,4 @@
-// Helpers shared by the Cerebro Jurídico slide controllers.
+// Helpers shared by the Cerebro slide controllers.
 // Rule for every controller: the markup and CSS already show the final state,
 // so lite mode (key M, reduced motion, speaker view) and the PDF need no JS.
 // Controllers only animate *from* an initial state, and undo what they add.

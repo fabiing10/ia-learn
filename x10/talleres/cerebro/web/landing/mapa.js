@@ -1,62 +1,85 @@
-// The "neural" map of §6.4: profile fields (left) wired to the six files (right).
-// Nodes are HTML so labels stay crisp at any zoom; the synapses are SVG paths
-// measured from the nodes. When a field changes, pulses travel along its
-// synapses with GSAP and the files they reach light up. With reduced motion the
-// same synapses and files get a static highlight instead.
+// The "neural" map of §6.4: profile fields (left) wired to the files they write
+// (right), for the active cerebro. Nodes are HTML so labels stay crisp at any zoom;
+// the synapses are SVG paths measured from the nodes. When a field changes, pulses
+// travel along its synapses with GSAP and the files they reach light up. With
+// reduced motion the same synapses and files get a static highlight instead.
+// `set()` rewires the stage for another cerebro: the legal one adds the dashed
+// «Bloques fijos» node; a file no field feeds (fixed text) is drawn quiet.
 
 import { gsap } from 'gsap';
-import { ARCHIVOS, CAMPOS, FIJOS } from '../shared/generator.js';
+import { nombreCorto } from '../shared/cerebros.js';
 import { reducedMotion } from '../shared/ui.js';
 
 const SVG = 'http://www.w3.org/2000/svg';
-const ENTRADAS = [...CAMPOS, FIJOS];
-const short = (file) => file.replace(/\.md$/, '');
 const sel = (attr, value) => `[${attr}="${CSS.escape(value)}"]`;
 
-export function mountMapa(stage, { onPickFile, onPickField, live }) {
-  stage.innerHTML = `
-    <svg class="mapa__svg" focusable="false"><g class="mapa__edges"></g><g class="mapa__pulses"></g></svg>
-    <ul class="mapa__col mapa__col--in">${ENTRADAS.map(
-      (c) =>
-        `<li class="node node--in${c === FIJOS ? ' node--fijo' : ''}" data-campo="${c.id}"><span class="node__label">${c.label}</span><i class="node__dot"><i class="node__ring"></i></i></li>`,
-    ).join('')}</ul>
-    <ul class="mapa__col mapa__col--out">${ARCHIVOS.map(
-      (a) =>
-        `<li class="node node--out" data-archivo="${a}"><i class="node__dot"><i class="node__ring"></i></i><span class="node__label">${short(a)}</span></li>`,
-    ).join('')}</ul>`;
-
-  const svg = stage.querySelector('svg');
-  const gEdges = svg.querySelector('.mapa__edges');
-  const gPulses = svg.querySelector('.mapa__pulses');
-
-  // One synapse per (field, file) pair, with its two pulse strokes.
-  const edges = [];
-  for (const c of ENTRADAS) {
-    for (const a of c.archivos) {
-      // Pulses measure their dash in pathLength units (0–100); base edges in px.
-      const make = (cls, parent, pathLength) => {
-        const p = document.createElementNS(SVG, 'path');
-        p.setAttribute('class', cls);
-        if (pathLength) p.setAttribute('pathLength', '100');
-        parent.append(p);
-        return p;
-      };
-      edges.push({
-        from: c.id,
-        to: a,
-        base: make(`edge${c === FIJOS ? ' edge--fijo' : ''}`, gEdges, false),
-        halo: make('pulse pulse--halo', gPulses, true),
-        core: make('pulse pulse--core', gPulses, true),
-      });
-    }
-  }
+export function mountMapa(stage, { mapa, archivos, fijos = null, onPickFile, onPickField, live }) {
+  let entradas = [];
+  let edges = [];
+  let svg = null;
 
   const nodeIn = (id) => stage.querySelector(`.node--in${sel('data-campo', id)}`);
   const nodeOut = (file) => stage.querySelector(`.node--out${sel('data-archivo', file)}`);
+  const isFijo = (c) => fijos && c.id === fijos.id;
+
+  /** Rebuilds nodes and synapses for a cerebro's fields, files and optional fixed blocks. */
+  function set(next) {
+    gsap.killTweensOf(stage.querySelectorAll('.pulse, .node__ring'));
+    fijos = next.fijos ?? null;
+    entradas = fijos ? [...next.mapa, fijos] : [...next.mapa];
+    const fed = new Set(entradas.flatMap((c) => c.archivos));
+    const filas = Math.max(entradas.length, next.archivos.length);
+    stage.style.setProperty('--filas', String(filas));
+    stage.classList.toggle('is-dense', filas > 11);
+    stage.classList.remove('has-focus');
+    stage.innerHTML = `
+    <svg class="mapa__svg" focusable="false"><g class="mapa__edges"></g><g class="mapa__pulses"></g></svg>
+    <ul class="mapa__col mapa__col--in">${entradas
+      .map(
+        (c) =>
+          `<li class="node node--in${isFijo(c) ? ' node--fijo' : ''}" data-campo="${c.id}"><span class="node__label">${c.label}</span><i class="node__dot"><i class="node__ring"></i></i></li>`,
+      )
+      .join('')}</ul>
+    <ul class="mapa__col mapa__col--out">${next.archivos
+      .map(
+        (a) =>
+          `<li class="node node--out${fed.has(a) ? '' : ' node--quieto'}" data-archivo="${a}"><i class="node__dot"><i class="node__ring"></i></i><span class="node__label">${nombreCorto(a)}</span></li>`,
+      )
+      .join('')}</ul>`;
+
+    svg = stage.querySelector('svg');
+    const gEdges = svg.querySelector('.mapa__edges');
+    const gPulses = svg.querySelector('.mapa__pulses');
+
+    // One synapse per (field, file) pair, with its two pulse strokes.
+    edges = [];
+    for (const c of entradas) {
+      for (const a of c.archivos) {
+        if (!next.archivos.includes(a)) continue;
+        // Pulses measure their dash in pathLength units (0–100); base edges in px.
+        const make = (cls, parent, pathLength) => {
+          const p = document.createElementNS(SVG, 'path');
+          p.setAttribute('class', cls);
+          if (pathLength) p.setAttribute('pathLength', '100');
+          parent.append(p);
+          return p;
+        };
+        edges.push({
+          from: c.id,
+          to: a,
+          base: make(`edge${isFijo(c) ? ' edge--fijo' : ''}`, gEdges, false),
+          halo: make('pulse pulse--halo', gPulses, true),
+          core: make('pulse pulse--core', gPulses, true),
+        });
+      }
+    }
+    focused = null;
+    layout();
+  }
 
   function layout() {
     const box = stage.getBoundingClientRect();
-    if (!box.width) return;
+    if (!box.width || !svg) return;
     svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
     svg.setAttribute('width', box.width);
     svg.setAttribute('height', box.height);
@@ -75,7 +98,6 @@ export function mountMapa(stage, { onPickFile, onPickField, live }) {
 
   new ResizeObserver(layout).observe(stage);
   document.fonts?.ready.then(layout);
-  layout();
 
   // ── Static highlight: which files does this field feed? ──
 
@@ -93,15 +115,20 @@ export function mountMapa(stage, { onPickFile, onPickField, live }) {
 
   const timers = new Map();
   const flash = (el, cls, ms) => {
+    if (!el) return;
     clearTimeout(timers.get(el));
     el.classList.remove(cls);
     void el.offsetWidth;
     el.classList.add(cls);
-    timers.set(el, setTimeout(() => el.classList.remove(cls), ms));
+    timers.set(el, setTimeout(() => {
+      el.classList.remove(cls);
+      timers.delete(el);
+    }, ms));
   };
 
   const ring = (node) => {
-    const r = node.querySelector('.node__ring');
+    const r = node?.querySelector('.node__ring');
+    if (!r) return;
     gsap.fromTo(r, { scale: 1, opacity: 0.8 }, { scale: 3.2, opacity: 0, duration: 0.8, ease: 'power2.out', overwrite: true });
   };
 
@@ -143,7 +170,7 @@ export function mountMapa(stage, { onPickFile, onPickField, live }) {
     });
   }
 
-  /** Several fields at once (reset to Laura or to blank): a cascade. */
+  /** Several fields at once (reset to the example or to blank): a cascade. */
   function cascade(campos, changed) {
     campos.forEach((c, i) => gsap.delayedCall(reducedMotion() ? 0 : i * 0.09, () => pulse(c, changed)));
   }
@@ -153,7 +180,7 @@ export function mountMapa(stage, { onPickFile, onPickField, live }) {
   let visible = false;
   new IntersectionObserver(([entry]) => (visible = entry.isIntersecting)).observe(stage);
   const idle = () => {
-    if (visible && !document.hidden && !reducedMotion() && performance.now() > quietUntil && !focused) {
+    if (edges.length && visible && !document.hidden && !reducedMotion() && performance.now() > quietUntil && !focused) {
       const e = edges[Math.floor(Math.random() * edges.length)];
       gsap
         .timeline()
@@ -170,17 +197,19 @@ export function mountMapa(stage, { onPickFile, onPickField, live }) {
     const out = e.target.closest('.node--out');
     if (out) return onPickFile?.(out.dataset.archivo);
     const inn = e.target.closest('.node--in');
-    if (inn && inn.dataset.campo !== FIJOS.id) onPickField?.(inn.dataset.campo);
+    if (inn && !inn.classList.contains('node--fijo')) onPickField?.(inn.dataset.campo);
   });
 
   let liveTimer;
   function announce(campo, changed) {
     if (!live || !changed.length) return;
-    const label = ENTRADAS.find((c) => c.id === campo)?.label ?? campo;
+    const label = entradas.find((c) => c.id === campo)?.label ?? campo;
     clearTimeout(liveTimer);
     const verb = changed.length === 1 ? 'se reescribió' : 'se reescribieron';
     liveTimer = setTimeout(() => (live.textContent = `${label}: ${verb} ${changed.join(', ')}.`), 600);
   }
 
-  return { layout, highlight, pulse, cascade, announce };
+  set({ mapa, archivos, fijos });
+
+  return { set, layout, highlight, pulse, cascade, announce };
 }

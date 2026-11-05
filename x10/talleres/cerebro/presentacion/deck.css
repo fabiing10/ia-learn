@@ -1,4 +1,4 @@
-/* Cerebro Jurídico deck: the shared x10 engine and styles with the violet accent
+/* Cerebro deck: the shared x10 engine and styles with the violet accent
    (neurons) and teal secondary (synapses). Canvas 1920×1080, every px is a
    projector px. Animations only ever start from these final states. */
 @import '../accent.css';
@@ -666,6 +666,20 @@
 
 .cj-map__rows li:nth-child(5)::after {
   animation-delay: 1.6s;
+}
+
+.cj-map__rows li:nth-child(6)::after {
+  animation-delay: 2s;
+}
+
+/* Six rows (the skill sections) need a little less air than five */
+.cj-map__rows:has(li:nth-child(6)) {
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.cj-map__rows:has(li:nth-child(6)) li {
+  padding: 10px 26px 12px;
 }
 
 @keyframes cj-dart {
@@ -2938,9 +2952,10 @@ html.is-print .cj-still {
   overflow-wrap: anywhere;
 }
 
+/* minmax(0, …): long live labels (nowrap) ellipsize instead of widening the grid */
 .cj-sala__grid {
   display: grid;
-  grid-template-columns: 760px 1fr;
+  grid-template-columns: 760px minmax(0, 1fr);
   gap: 56px;
   margin-top: 32px;
 }
@@ -2996,9 +3011,13 @@ html.is-print .cj-still {
 
 .cj-sala__lists {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 36px;
   margin-top: 10px;
+}
+
+.cj-sala__lists > div {
+  min-width: 0;
 }
 
 .cj-sala__label {
@@ -3029,8 +3048,13 @@ html.is-print .cj-still {
 }
 
 .cj-sala__lists li span {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.cj-sala__lists li b {
+  flex: none;
 }
 
 .cj-sala__lists li b {
@@ -3353,4 +3377,386 @@ html.is-print .cj-still {
 
 .cj-ab__foot b {
   color: var(--gold-text);
+}
+
+/* =========================================================
+   Cerebro general · pieces added when the class became general
+   (skill anatomy, three cerebros, ideation QR, where it fails,
+   the general "what is not delegated")
+   ========================================================= */
+
+/* C07 · the small ideation QR under the timer */
+.qrbox.qrbox--cj-xs {
+  width: 176px;
+  height: 176px;
+  padding: 12px;
+  border-radius: 22px;
+}
+
+.cj-go__alt {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  margin: 8px 0 0;
+}
+
+.cj-go__alt figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-display);
+}
+
+.cj-go__alt b {
+  font-size: 32px;
+  color: var(--text);
+}
+
+.cj-go__alt span {
+  font: 500 26px/1.25 var(--font-body);
+  color: var(--text-2);
+}
+
+/* C11 · the four places it fails today */
+.cj-halluc__where {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.cj-halluc__where li {
+  padding: 8px 22px 10px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, #ff7a7a 60%, var(--line));
+  font: 600 28px/1.1 var(--font-display);
+  color: var(--text);
+}
+
+.cj-halluc .cj-halluc__pair {
+  margin-top: 16px;
+}
+
+.cj-halluc .cj-cite__text {
+  font-size: 44px;
+  line-height: 1.32;
+}
+
+.cj-cite__text i {
+  font-style: italic;
+}
+
+:root[data-theme='light'] .cj-halluc__where li {
+  border-color: #b33a3a;
+}
+
+/* SKILL.md · the file on the left, how it activates on the right */
+.cj-skillmd__pair {
+  display: grid;
+  grid-template-columns: 860px minmax(0, 1fr);
+  gap: 56px;
+  flex: 1;
+  margin-top: 28px;
+  align-items: start;
+}
+
+.cj-file {
+  margin: 0;
+  padding: 24px 32px 26px;
+  border-radius: 28px;
+  border: 2px solid var(--line-strong);
+  background: var(--bg-raise);
+  font: 500 24px/1.34 ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  color: var(--text-2);
+}
+
+.cj-file__name {
+  margin-bottom: 14px;
+  font: 600 24px/1 var(--font-display);
+  color: var(--text-3);
+}
+
+.cj-file__head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 20px 16px;
+  border-radius: 16px;
+  border: 2px solid var(--gold);
+  background: var(--gold-soft);
+  color: var(--text);
+}
+
+.cj-file__head b {
+  color: var(--gold-text);
+}
+
+.cj-file__rule {
+  color: var(--text-3);
+}
+
+.cj-file__desc mark {
+  padding: 0 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--cyan) 26%, transparent);
+  color: var(--text);
+}
+
+.cj-file__body {
+  display: flex;
+  flex-direction: column;
+  margin-top: 14px;
+  padding-left: 20px;
+}
+
+.cj-file__body li:first-child {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* one-line title: the file needs the height */
+.cj-skillmd .t-h2 {
+  font-size: 84px;
+}
+
+.cj-skillmd__right {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.cj-skillmd__label {
+  font: 600 30px/1.2 var(--font-display);
+  color: var(--text-3);
+}
+
+.cj-skillmd__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cj-skillmd__steps li {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 20px;
+  align-items: start;
+  padding: 20px 26px 22px;
+  border-radius: 22px;
+  border: 2px solid var(--line);
+  background: color-mix(in srgb, var(--bg-raise) 88%, transparent);
+  font: 500 32px/1.28 var(--font-body);
+}
+
+.cj-skillmd__steps li:nth-child(2) {
+  border-color: var(--gold);
+}
+
+.cj-skillmd__steps b {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #0b0f1a;
+  font: 700 30px/1 var(--font-display);
+}
+
+.cj-skillmd__gpt {
+  font: 500 30px/1.3 var(--font-body);
+  color: var(--text-2);
+}
+
+/* Campos · the general skill form: three columns, two of them stacked */
+.cj-fields--skill .cj-fields__grid {
+  grid-template-columns: 1fr 1.08fr 1fr;
+}
+
+.cj-fields--skill .cj-fields__card li,
+.cj-fields--skill .cj-fields__card--crit li {
+  grid-template-columns: 170px 1fr;
+}
+
+.cj-fields__card--out {
+  border-color: color-mix(in srgb, var(--gold) 55%, var(--line));
+}
+
+.cj-fields__card--out h3 {
+  color: var(--gold-text);
+}
+
+/* Tres · three cerebros, one method */
+.cj-tres__pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 64px;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.cj-tres__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cj-tres__rows li {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 30px;
+  row-gap: 6px;
+  align-items: baseline;
+  padding: 22px 32px 24px;
+  border-radius: 26px;
+  border: 2px solid var(--line-strong);
+  background: color-mix(in srgb, var(--bg-raise) 88%, transparent);
+}
+
+.cj-tres__rows li.is-on {
+  border-color: var(--gold);
+}
+
+.cj-tres__rows b {
+  grid-row: span 2;
+  align-self: center;
+  font: 700 46px/1.05 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.cj-tres__rows li.is-on b {
+  color: var(--gold-text);
+}
+
+.cj-tres__rows span {
+  font: 600 34px/1.2 var(--font-display);
+  color: var(--text);
+}
+
+.cj-tres__rows em {
+  font: 500 25px/1.3 var(--font-body);
+  font-style: normal;
+  color: var(--text-3);
+}
+
+.cj-tres__qr figcaption b {
+  font-size: 34px;
+}
+
+.cj-tres__qr figcaption span {
+  font-size: 26px;
+}
+
+.cj-tres__method {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: auto;
+  counter-reset: cj-step;
+}
+
+.cj-tres__method li {
+  padding-top: 14px;
+  border-top: 4px solid var(--cyan);
+  font: 600 32px/1.2 var(--font-display);
+  color: var(--cyan-text);
+  counter-increment: cj-step;
+}
+
+.cj-tres__method li::before {
+  content: counter(cj-step) ' · ';
+  color: var(--text-3);
+}
+
+/* C22 · general: three rows on the left, the seal on the right */
+.cj-court__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 1060px;
+  margin-top: 40px;
+}
+
+.cj-court__rows li {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 28px;
+  align-items: baseline;
+  padding: 24px 32px 26px;
+  border-radius: 26px;
+  border: 2px solid var(--line-strong);
+  background: color-mix(in srgb, var(--bg-raise) 88%, transparent);
+}
+
+.cj-court__rows b {
+  font: 700 40px/1.1 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.cj-court__rows li:not(:first-child) b {
+  color: var(--gold-text);
+}
+
+.cj-court__rows span {
+  font: 500 32px/1.3 var(--font-body);
+  color: var(--text-2);
+}
+
+.cj-court__src {
+  max-width: 1060px;
+  margin-top: auto;
+  font: 500 26px/1.35 var(--font-body);
+  color: var(--text-3);
+}
+
+.cj-court--general .cj-court__stamp {
+  top: 470px;
+}
+
+/* C16 · the general example has longer document names and a two-line title:
+   a wider list, a slightly smaller point cloud, a smaller title */
+.cj-rag .t-h2 {
+  font-size: 84px;
+}
+
+.cj-rag .cj-rag__stage {
+  grid-template-columns: 380px 560px minmax(0, 1fr);
+}
+
+.cj-rag .cj-rag__space {
+  width: 560px;
+  height: 452px;
+}
+
+/* C07 · with the ideation QR the text column needs smaller leads */
+.cj-go .t-lead {
+  font-size: 54px;
+}
+
+.cj-go .cj-go__text {
+  gap: 22px;
+}
+
+.cj-go .cj-go__timer {
+  margin-top: 6px;
+}
+
+.cj-go .cj-go__timer .timer {
+  width: 170px;
+  height: 170px;
+}
+
+/* C17 · «Observar» fits inside its node */
+.cj-loop__node text {
+  font-size: 24px;
+}
+
+/* Reserve · keep the legal C22 cards and the concept map clear of the progress bar */
+.cj-court:not(.cj-court--general) .cj-court__cards article p:last-child {
+  font-size: 30px;
+}
+
+.cj-concepts__art {
+  height: 590px;
 }

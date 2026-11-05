@@ -1,0 +1,183 @@
+<!-- BLOQUE 2 · Cómo funciona (3:10–6:25) -->
+
+<section id="c08" data-block="2" data-bg-alpha="0.2" data-ctrl="cj-predict" class="cj-predict s-tight">
+  <p class="cj-kicker" data-in>Cómo responde la máquina <span class="cj-tag">ilustración</span></p>
+  <h2 class="t-h2" data-split="words">Sin búsqueda, estima.</h2>
+  <div class="cj-predict__stage" data-picks="ocho,ocho,nueve,ocho,diez,ocho,doce">
+    <p class="cj-predict__sentence" data-in>
+      <span class="tk">El</span> <span class="tk">sistema</span> <span class="tk">solar</span> <span class="tk">tiene</span>
+      <span class="tk tk--blank" data-blank>____</span> <span class="tk">planetas</span>
+    </p>
+    <svg class="cj-predict__net" viewBox="0 0 440 460" aria-hidden="true" data-in="fade"></svg>
+    <ol class="cj-predict__bars" data-in="stagger">
+      <li data-p="75" data-word="ocho" class="is-ok"><b>ocho</b><i><s></s></i><small>Unión Astronómica Internacional, 2006 · vigente</small></li>
+      <li data-p="44" data-word="nueve" class="is-old"><b>nueve</b><i><s></s></i><small>contaba a Plutón · antes de 2006</small></li>
+      <li data-p="25" data-word="diez"><b>diez</b><i><s></s></i><small>Eris, el «décimo planeta» de 2005</small></li>
+      <li data-p="19" data-word="doce"><b>doce</b><i><s></s></i><small>una propuesta de 2006 que no se aprobó</small></li>
+    </ol>
+  </div>
+  <p class="cj-predict__foot fragment">Con búsqueda, consulta la fuente y la cita. Pero su criterio no está en ninguna fuente: ahí sigue estimando, y elige la respuesta promedio.</p>
+  <aside class="notes">
+    <p><strong>C08 · Cómo responde la máquina</strong> · 3:10 · 45 s · el hueco se llena distinto en cada vuelta · clic: con búsqueda</p>
+    <p>"Un modelo de lenguaje no consulta una base de datos: calcula cuál es la palabra más probable después de las anteriores, según todo lo que leyó. Durante décadas se escribió «nueve planetas»; por eso esa opción sigue pesando aunque desde 2006 sean ocho. Casi siempre acierta. A veces elige otra continuación probable, y la dice con el mismo tono." Las barras son una ilustración, no una medición.</p>
+    <p>"Con búsqueda, abre la fuente y la cita. Pero hay algo que no está en ninguna fuente: su criterio, cómo hace usted su trabajo. Ahí sigue estimando, y le da la respuesta promedio. Eso es lo que corrige una skill."</p>
+    <p>Datos, por si preguntan: la Unión Astronómica Internacional definió «planeta» en agosto de 2006 y Plutón pasó a planeta enano; un borrador previo de esa misma asamblea proponía doce planetas. Eris se anunció en 2005 y se le llamó «el décimo planeta». La búsqueda web está en todos los planes de Claude y de ChatGPT, con citas y enlaces (verificado el 20 oct. 2026 en support.claude.com y help.openai.com); en modo rápido, o si el modelo decide no buscar, vuelve a estimar.</p>
+  </aside>
+</section>
+
+<section id="c09" data-block="2" data-bg-alpha="0.2" data-ctrl="cj-table" class="cj-table s-tight">
+  <p class="cj-kicker" data-in>La mesa de trabajo · ventana de contexto</p>
+  <h2 class="t-h2" data-split="words">Lo que no está en la mesa, no existe.</h2>
+  <div class="cj-table__desk" data-in="fade">
+    <p class="cj-table__label">Ventana de contexto <span>la mesa</span></p>
+    <ul class="cj-table__cards">
+      <li class="is-sys">Instrucciones de sistema</li>
+      <li class="is-file">SKILL.md</li>
+      <li class="is-file">references/material.md</li>
+      <li class="is-doc">El archivo que subiste</li>
+      <li class="is-doc">La conversación hasta ahora</li>
+      <li class="is-q">Tu pregunta</li>
+      <li class="is-a">La respuesta se escribe aquí</li>
+    </ul>
+  </div>
+  <p class="cj-table__out" data-in>
+    <span>Fuera de la mesa</span><s>otros chats</s><s>archivos no cargados</s><s>lo que dijiste ayer</s>
+  </p>
+  <div class="cj-table__meter fragment">
+    <p class="cj-table__tokens">El modelo lee <b>tokens</b>, fragmentos de palabra: <span class="cj-tokens"><i>in</i><i>compr</i><i>ens</i><i>ible</i></span> <span class="cj-tag">ilustrativo</span></p>
+    <div class="cj-meter">
+      <div class="cj-meter__bar"><s></s></div>
+      <p><b>Una skill como la de hoy: menos de 2.000 tokens.</b> <span>La mesa de un modelo actual: de ~128.000 a más de 1.000.000. Cabe con espacio de sobra.</span></p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><strong>C09 · La mesa de trabajo</strong> · 3:55 · 40 s · clic: tokens y tamaño</p>
+    <p>"Lo que está sobre la mesa, el modelo lo lee. Lo que quedó en el archivador, otra conversación o un documento no cargado, no existe para él. Cada chat nuevo arranca con la mesa vacía. Por eso una skill se escribe: para que esté en la mesa cada vez que aparece la tarea, sin que usted tenga que repetirla."</p>
+    <p>Tamaño: el SKILL.md de una skill sin material de referencia, como la de Daniel, ocupa unos pocos miles de caracteres; aun contando dos caracteres por token, queda por debajo de 2.000 tokens. El material que peguen en references/material.md suma aparte.</p>
+  </aside>
+</section>
+
+<section id="c11" data-block="2" data-bg-alpha="0.2" data-ctrl="cj-halluc" class="cj-halluc s-tight">
+  <p class="cj-kicker" data-in>Alucinación</p>
+  <h2 class="t-h2" data-split="words">Dónde se equivoca hoy.</h2>
+  <ul class="cj-halluc__where" data-in="stagger">
+    <li>Datos exactos</li>
+    <li>Fechas</li>
+    <li>Citas y referencias</li>
+    <li>Código que no existe</li>
+  </ul>
+  <div class="cj-halluc__pair">
+    <figure class="cj-cite" data-in="mask">
+      <p class="cj-cite__label">La forma que aprendió</p>
+      <p class="cj-cite__text"><span class="cj-slot cj-slot--name">Apellido, N.</span> (<span class="cj-slot" data-reel="20##">20##</span>). Un título que suena exacto. <i>Revista de Estudios</i>, <span class="cj-slot" data-reel="##">##</span>, pp. <span class="cj-slot" data-reel="###">###</span>.</p>
+      <p class="cj-cite__stamp">Forma perfecta. Fondo inexistente.</p>
+    </figure>
+    <svg class="cj-flow" viewBox="0 0 780 520" role="img" aria-label="Si buscó en una fuente, cita con enlace: ábralo. Si no buscó y usted le exigió el enlace, dice que no encontró la fuente. Si no, en modo rápido o sin búsqueda, completa el patrón.">
+      <path class="cj-flow__edge" d="M240 120 L240 200" />
+      <path class="cj-flow__edge" d="M240 310 L240 390" />
+      <path class="cj-flow__edge cj-flow__edge--soft" d="M470 65 L530 65" />
+      <path class="cj-flow__edge cj-flow__edge--soft" d="M470 255 L530 255" />
+      <path class="cj-syn cj-syn--bad" pathLength="100" d="M240 120 L240 200" style="--d: 0s" />
+      <path class="cj-syn cj-syn--bad" pathLength="100" d="M240 310 L240 390" style="--d: 0.9s" />
+      <rect class="cj-flow__q" x="10" y="10" width="460" height="110" rx="20" />
+      <text class="cj-flow__t" x="240" y="47">¿Buscó en una</text>
+      <text class="cj-flow__t" x="240" y="83">fuente?</text>
+      <rect class="cj-flow__q" x="10" y="200" width="460" height="110" rx="20" />
+      <text class="cj-flow__t" x="240" y="237">¿Usted le exigió</text>
+      <text class="cj-flow__t" x="240" y="273">el enlace?</text>
+      <rect class="cj-flow__bad" x="10" y="390" width="460" height="120" rx="20" />
+      <text class="cj-flow__t cj-flow__t--bad" x="240" y="432">Completa el patrón</text>
+      <text class="cj-flow__s" x="240" y="476">en modo rápido o sin búsqueda</text>
+      <rect class="cj-flow__ok" x="530" y="10" width="240" height="110" rx="20" />
+      <text class="cj-flow__t cj-flow__t--ok" x="650" y="47">Cita con enlace</text>
+      <text class="cj-flow__s" x="650" y="85">ábralo</text>
+      <rect class="cj-flow__ok" x="530" y="200" width="240" height="110" rx="20" />
+      <text class="cj-flow__t cj-flow__t--ok" x="650" y="237">«No encontré</text>
+      <text class="cj-flow__t cj-flow__t--ok" x="650" y="273">la fuente»</text>
+      <text class="cj-flow__lbl" x="500" y="52">sí</text>
+      <text class="cj-flow__lbl" x="500" y="242">sí</text>
+      <text class="cj-flow__lbl cj-flow__lbl--side" x="258" y="168">no</text>
+      <text class="cj-flow__lbl cj-flow__lbl--bad" x="258" y="358">no</text>
+    </svg>
+  </div>
+  <p class="cj-halluc__def fragment">Su skill ya trae la defensa: «No inventes datos que no te di; si falta un dato, dilo». Y cierra con «Para revisar».</p>
+  <aside class="notes">
+    <p><strong>C11 · Dónde se equivoca hoy</strong> · 4:35 · 40 s · clic: la defensa</p>
+    <p>"Se equivoca donde hay una forma muy estable y un dato exacto: cifras, fechas, citas y referencias, nombres de funciones o librerías de código. La cita bibliográfica tiene una forma perfecta y el modelo la aprendió perfecto. Cuando busca, cita con enlace: ábralo y listo. Cuando no busca, en modo rápido o en un plan sin búsqueda, rellena los huecos con lo probable. Por eso la regla no es 'no inventes': es 'si falta un dato, dilo', y 'cada cita con su enlace'."</p>
+    <p>Clic: "Las skills que construyen hoy ya traen esa regla escrita, y cierran cada respuesta con «Para revisar»: lo que usted debe confirmar antes de usar la salida."</p>
+    <p>Ejemplo, si preguntan: en derecho ya pasó a los tribunales. <span data-config="fuentes.casos"></span> La base de Damien Charlotin registra más de dos mil decisiones desde 2023. En código pasa lo mismo con paquetes que no existen: instale solo lo que pueda abrir en el repositorio oficial.</p>
+  </aside>
+</section>
+
+<section id="c16" data-block="2" data-bg-alpha="0.2" data-ctrl="cj-rag" class="cj-rag s-tight">
+  <p class="cj-kicker" data-in>Libro abierto · RAG</p>
+  <h2 class="t-h2" data-split="words">Examen a libro abierto. El libro lo escoge usted.</h2>
+  <div class="cj-rag__stage">
+    <ul class="cj-rag__docs" data-in="stagger">
+      <li data-cl="Acta">Acta del 3 de noviembre</li>
+      <li data-cl="Plan">Plan operativo 2026</li>
+      <li data-cl="Manual">Manual de la ONG</li>
+      <li data-cl="Presupuesto">Presupuesto del taller</li>
+      <li data-cl="Colegios">Lista de colegios</li>
+    </ul>
+    <svg class="cj-rag__space" viewBox="0 0 620 500" aria-hidden="true" data-in="fade"></svg>
+    <div class="cj-rag__answer" data-in>
+      <p class="cj-rag__q">¿Para cuándo quedó el taller?</p>
+      <p class="cj-rag__a"><b>20 de noviembre</b> <span>Acta del 3 de noviembre, punto 2</span><sup>1</sup></p>
+      <p class="cj-rag__cite"><sup>1</sup> el párrafo exacto de su fuente</p>
+    </div>
+  </div>
+  <ol class="cj-rag__steps" data-in="stagger">
+    <li><b>1</b>Partir en fragmentos</li>
+    <li><b>2</b>Volverlos puntos de significado</li>
+    <li><b>3</b>La pregunta también es un punto</li>
+    <li><b>4</b>Recuperar los más cercanos</li>
+    <li><b>5</b>Responder con eso, y citar</li>
+  </ol>
+  <p class="cj-rag__none fragment">Y cuando no está en sus fuentes, lo dice: «¿Quién avisa a los colegios? No aparece».</p>
+  <aside class="notes">
+    <p><strong>C16 · Libro abierto</strong> · 5:15 · 35 s · clic: "lo dice"</p>
+    <p>"Hay una forma de que no estime: darle el libro. Sus documentos se parten en fragmentos, cada fragmento se vuelve un punto de significado, su pregunta también, y la IA recupera los puntos más cercanos y responde con eso, citando el párrafo. Es un examen a libro abierto, y el libro lo escoge usted." El ejemplo es el de Daniel, coordinador de proyectos en una ONG: los documentos son inventados para la clase.</p>
+    <p>Así funciona Gemini Notebook (antes NotebookLM; Google lo renombró el 16 de julio de 2026 y los enlaces viejos redirigen): gratuito, hasta 50 fuentes por cuaderno, citas en línea. No digas que responde "solo" con sus fuentes: también puede buscar fuentes nuevas si se lo piden.</p>
+    <p>"Esa frase, 'no está en sus fuentes', vale más que cualquier respuesta elegante. En su skill, ese libro es references/material.md."</p>
+  </aside>
+</section>
+
+<section id="c17" data-block="2" data-bg-alpha="0.2" data-ctrl="cj-agent" class="cj-agent s-tight">
+  <p class="cj-kicker" data-in>Agentes · la IA con manos</p>
+  <h2 class="t-h2" data-split="words">Hasta aquí dictaba. Ahora abre el archivador.</h2>
+  <div class="cj-agent__pair">
+    <svg class="cj-loop" viewBox="0 0 640 500" aria-hidden="true" data-in="fade">
+      <path class="cj-loop__ring" d="M320 70 A 180 180 0 1 1 319.9 70" />
+      <path class="cj-loop__pulse" pathLength="100" d="M320 70 A 180 180 0 1 1 319.9 70" />
+      <path class="cj-loop__io" d="M20 250 L140 250" />
+      <path class="cj-loop__io" d="M500 250 L620 250" />
+      <path class="cj-syn" pathLength="100" d="M20 250 L140 250" style="--d: 0s" />
+      <path class="cj-syn" pathLength="100" d="M500 250 L620 250" style="--d: 1.2s" />
+      <g class="cj-loop__node" data-n="0"><circle cx="320" cy="70" r="58" /><text x="320" y="70">Pensar</text></g>
+      <g class="cj-loop__node" data-n="1"><circle cx="476" cy="340" r="58" /><text x="476" y="340">Actuar</text></g>
+      <g class="cj-loop__node" data-n="2"><circle cx="164" cy="340" r="58" /><text x="164" y="340">Observar</text></g>
+      <text class="cj-loop__lbl" x="20" y="226">Orden</text>
+      <text class="cj-loop__lbl" x="620" y="226" text-anchor="end">Resultado</text>
+    </svg>
+    <div class="cj-agent__right">
+      <p class="cj-agent__label">Servidores MCP · un «USB-C» para la IA</p>
+      <ul class="cj-mcp" data-in="stagger">
+        <li><b>Archivos</b><span>una carpeta, y solo esa</span></li>
+        <li><b>Calendario</b><span>reuniones y fechas de entrega</span></li>
+        <li><b>Repositorio</b><span>el código de su proyecto</span></li>
+      </ul>
+      <div class="cj-ask" data-in>
+        <p class="cj-ask__what">Quiere escribir <code>reuniones/2026-11-03 — Resumen.md</code></p>
+        <p class="cj-ask__btns"><span class="is-yes">Permitir</span><span>Denegar</span></p>
+        <i class="cj-ask__cursor" aria-hidden="true"></i>
+      </div>
+      <p class="cj-agent__rule" data-in>Cada escritura pide su permiso.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p><strong>C17 · La IA con manos</strong> · 5:50 · 35 s · el ciclo gira solo</p>
+    <p>"Hasta aquí la IA dictaba: usted copiaba y pegaba. Un agente tiene manos: piensa, actúa (lee un archivo, consulta el calendario, corre una prueba), observa el resultado y vuelve a pensar, hasta terminar. Los conectores MCP son el «USB-C» que le da esas manos. Pero cada vez que va a escribir algo, le pide permiso."</p>
+    <p>"Así trabajan Claude Code y Codex, las herramientas del curso de vibe coding. Y aquí está la conexión con lo de hoy: un agente sin skill es un practicante con llaves de la oficina. Con skill, sigue sus pasos, respeta sus reglas y se detiene donde usted dijo."</p>
+  </aside>
+</section>

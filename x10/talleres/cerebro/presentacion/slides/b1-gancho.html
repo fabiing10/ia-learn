@@ -1,4 +1,4 @@
-<!-- BLOQUE 1 · Gancho y tesis (0–3 min) -->
+<!-- BLOQUE 1 · Gancho y tesis (0:00–3:10) -->
 
 <section id="sala" data-block="1" data-bg-alpha="0.2" data-ctrl="cj-sala" class="cj-sala s-tight">
   <header class="cj-sala__head">
@@ -18,64 +18,96 @@
     </div>
     <div class="cj-sala__side">
       <div class="cj-kpi cj-kpi--warn"><p class="cj-kpi__v" data-sala-kpi="entrena">–</p><p class="cj-kpi__k">no apagó el entrenamiento, o no sabe</p></div>
-      <div class="cj-kpi cj-kpi--warn"><p class="cj-kpi__v" data-sala-kpi="alucino">–</p><p class="cj-kpi__k">ya recibió una sentencia que no existía</p></div>
+      <div class="cj-kpi cj-kpi--warn"><p class="cj-kpi__v" data-sala-kpi="alucino">–</p><p class="cj-kpi__k">ya recibió un dato o una fuente que no existía</p></div>
       <div class="cj-sala__lists">
-        <div><p class="cj-sala__label">Cómo ejercen</p><ol data-sala-list="rol"></ol></div>
+        <div><p class="cj-sala__label">Quiénes son</p><ol data-sala-list="rol"></ol></div>
         <div><p class="cj-sala__label">Para qué la usan</p><ol data-sala-list="usos"></ol></div>
       </div>
     </div>
   </div>
   <p class="cj-sala__status" data-sala-status aria-live="polite"></p>
   <aside class="notes">
-    <p><strong>Sala · ¿Quiénes están en la sala?</strong> · 0:00 · 2 min · resultados en vivo de la encuesta · rompehielo</p>
+    <p><strong>Sala · ¿Quién está en la sala?</strong> · 0:00 · 75 s · resultados en vivo de la encuesta · rompehielo</p>
     <ul>
       <li>Se actualiza cada pocos segundos mientras la diapositiva está en pantalla. Solo porcentajes: nadie queda señalado. Sin internet muestra un aviso y sigues.</li>
-      <li>Lee tres cosas: cuántos usan IA cada semana, cuántos ya usan Proyectos o crearon una skill (eso es lo que construimos hoy), y cuántos ya recibieron una sentencia inventada o no apagaron el entrenamiento (eso es lo que corregimos hoy).</li>
-      <li>"Hoy todos salen con un cerebro cargado, estén en la barra que estén."</li>
-      <li>Sesión: <code>config.json → encuesta.sesion</code> (<code>javeriana-2026-10-21</code>; la encuesta usa la misma con <code>?s=</code>).</li>
+      <li>Lee tres cosas: cuántos usan IA cada semana, cuántos ya usan Proyectos o crearon una skill (eso es lo que construimos hoy), y cuántos ya recibieron un dato o una fuente inventada o no apagaron el entrenamiento (eso es lo que corregimos hoy).</li>
+      <li>"Hoy todos salen con una skill escrita, hagan lo que hagan: estudien, trabajen en una empresa o tengan su propio proyecto."</li>
+      <li>Sesión: <code>config.json → encuesta.sesion</code> (<code>cerebro-skills</code>; la encuesta usa la misma con <code>?s=</code>).</li>
     </ul>
   </aside>
 </section>
 
-<section id="c01" data-block="1" data-hud="off" data-bg="field" data-bg-alpha="0.45" data-ctrl="cj-count" class="cj-stats">
-  <ul class="cj-stats__list">
-    <li data-in>
-      <b class="cj-stats__num" data-count="79" data-suffix=" %">79 %</b>
-      <span>de los profesionales legales ya usa IA en su firma</span>
-    </li>
-    <li data-in>
-      <b class="cj-stats__num" data-count="22" data-suffix=" %">22 %</b>
-      <span>dice que su organización tiene una estrategia de IA definida</span>
-    </li>
-    <li data-in>
-      <b class="cj-stats__num" data-count="2200" data-suffix="+">2.200+</b>
-      <span>decisiones judiciales en el mundo documentan contenido inventado por IA</span>
-    </li>
-  </ul>
-  <p class="cj-src" data-in data-config="fuentes.cifras"></p>
+<section id="c02" data-block="1" data-bg-alpha="0.3" data-ctrl="cj-vs" class="cj-vs">
+  <h2 class="t-h2" data-split="chars">Usar no es tener un sistema</h2>
+  <div class="cj-vs__pair">
+    <div class="cj-vs__col cj-vs__col--oracle" data-in>
+      <svg class="cj-vs__art" viewBox="0 0 640 260" aria-hidden="true">
+        <g class="cj-oracle__q">
+          <text x="148" y="92">?</text>
+          <text x="470" y="78">?</text>
+          <text x="512" y="214">?</text>
+          <text x="104" y="222">?</text>
+        </g>
+        <path class="cj-oracle__ray" d="M320 130 L190 70" />
+        <path class="cj-oracle__ray" d="M320 130 L460 66" />
+        <path class="cj-oracle__ray" d="M320 130 L500 200" />
+        <path class="cj-oracle__ray" d="M320 130 L140 206" />
+        <circle class="cj-oracle__ring" cx="320" cy="130" r="40" />
+        <circle class="cj-node cj-node--lone" cx="320" cy="130" r="26" />
+      </svg>
+      <h3 class="cj-vs__name">Oráculo</h3>
+      <ul class="cj-vs__list">
+        <li>Preguntas sueltas</li>
+        <li>Un chat vacío cada vez</li>
+        <li>Confiar en el tono</li>
+      </ul>
+    </div>
+    <div class="cj-vs__col cj-vs__col--system fragment" data-in>
+      <svg class="cj-vs__art" viewBox="0 0 640 260" aria-hidden="true">
+        <g class="cj-vs__edges">
+          <path pathLength="100" d="M110 130 C 170 70, 230 60, 290 70" />
+          <path pathLength="100" d="M110 130 C 170 190, 230 200, 290 190" />
+          <path pathLength="100" d="M290 70 C 360 70, 400 120, 450 130" />
+          <path pathLength="100" d="M290 190 C 360 190, 400 140, 450 130" />
+          <path pathLength="100" d="M290 70 L290 190" />
+          <path pathLength="100" d="M450 130 C 490 130, 520 130, 560 130" />
+        </g>
+        <g class="cj-vs__pulses">
+          <path class="cj-syn" pathLength="100" d="M110 130 C 170 70, 230 60, 290 70" style="--d: 0s" />
+          <path class="cj-syn" pathLength="100" d="M110 130 C 170 190, 230 200, 290 190" style="--d: 0.5s" />
+          <path class="cj-syn" pathLength="100" d="M290 70 C 360 70, 400 120, 450 130" style="--d: 1.1s" />
+          <path class="cj-syn" pathLength="100" d="M290 190 C 360 190, 400 140, 450 130" style="--d: 1.5s" />
+          <path class="cj-syn" pathLength="100" d="M450 130 C 490 130, 520 130, 560 130" style="--d: 2s" />
+        </g>
+        <circle class="cj-node" cx="110" cy="130" r="22" />
+        <circle class="cj-node" cx="290" cy="70" r="18" />
+        <circle class="cj-node" cx="290" cy="190" r="18" />
+        <circle class="cj-node" cx="450" cy="130" r="22" />
+        <circle class="cj-node cj-node--out" cx="572" cy="130" r="14" />
+      </svg>
+      <h3 class="cj-vs__name">Sistema</h3>
+      <ul class="cj-vs__list">
+        <li>Contexto propio</li>
+        <li>Procedimientos escritos</li>
+        <li>Verificación antes de usar</li>
+      </ul>
+    </div>
+  </div>
   <aside class="notes">
-    <p><strong>C01 · Tres números</strong> · 2:00 · 30 s · deja 5 segundos en silencio antes de hablar</p>
-    <p>Fuentes verificadas el 19 oct. 2026: Clio, Legal Trends Report 2025 (encuesta en EE. UU. de un proveedor: 1.702 profesionales, 1.202 de ellos clientes de Clio; además, solo 40 % usa IA jurídica específica, frente a 58 % en 2024). Thomson Reuters, Future of Professionals 2025 (2.275 profesionales; quienes tienen estrategia son 3,5 veces más propensos a obtener beneficios críticos). Damien Charlotin, AI Hallucination Cases: 2.202 decisiones desde 2023, 1.264 de 2026; la mayoría con personas sin abogado (1.267), 872 con abogados.</p>
-    <p>"Setenta y nueve por ciento de los abogados ya usa IA. Veintidós por ciento dice que su organización tiene una estrategia. Y más de dos mil doscientas decisiones judiciales en el mundo ya documentan contenido inventado por IA; más de mil doscientas son de este año, y tres son colombianas. Esos tres números son el mismo problema: usamos la IA como un oráculo al que le preguntamos cosas, y no como un sistema que diseñamos."</p>
+    <p><strong>C02 · Usar no es tener un sistema</strong> · 1:15 · 25 s · clic: aparece "Sistema"</p>
+    <p>"Casi todos en esta sala ya usan IA. Pero la usan como un oráculo: una pregunta suelta, un chat vacío cada vez, y le creemos por el tono. Hoy no les voy a enseñar a escribir un mejor prompt. Les voy a enseñar a convertir lo que ya saben hacer en un sistema."</p>
+    <p>Clic: "Un sistema tiene tres cosas: contexto propio, procedimientos escritos y verificación antes de usar lo que sale. Eso es lo que van a escribir."</p>
   </aside>
 </section>
 
-<section id="trampa" data-block="1" data-bg-alpha="0.25" data-ctrl="cj-trap" class="cj-trap s-tight">
-  <p class="cj-kicker" data-in>La trampa que preparé para hoy</p>
-  <blockquote class="cj-trap__q" data-in>«Dame la sentencia de la Corte Constitucional que fijó el alcance del derecho de petición frente a entidades privadas, con número, ponente y cita textual.»</blockquote>
-  <ol class="cj-trap__checks">
-    <li class="fragment" data-fragment-index="0"><i aria-hidden="true">✓</i><span>La sentencia existe</span></li>
-    <li class="fragment" data-fragment-index="1"><i aria-hidden="true">✓</i><span>Ponente y fecha correctos</span></li>
-    <li class="fragment" data-fragment-index="2"><i aria-hidden="true">✓</i><span>Cita textual exacta</span></li>
-    <li class="fragment" data-fragment-index="3"><i aria-hidden="true">✓</i><span>Advirtió el cambio de marco de 2015</span></li>
-  </ol>
-  <p class="cj-trap__src fragment" data-fragment-index="3">Lo comprobé en la relatoría oficial de la Corte Constitucional.</p>
-  <p class="cj-trap__end fragment" data-fragment-index="4">La pregunta ya no es si la IA encuentra la norma. <b>Es si conoce su criterio.</b></p>
+<section id="c03" data-block="1" data-hud="off" data-bg="brain" data-bg-center="4.9,-0.1" class="cj-thesis">
+  <p class="cj-kicker" data-in>La tesis</p>
+  <h1 class="t-h1 cj-thesis__a" data-split="words">La IA no es tu asistente junior;</h1>
+  <h1 class="t-h1 cj-thesis__b" data-split="words">es tu <em>sistema.</em></h1>
+  <p class="cj-thesis__c t-lead fragment" data-split="words">Y los sistemas se diseñan.</p>
   <aside class="notes">
-    <p><strong>Trampa · La trampa que preparé</strong> · 2:30 · 90 s · cuatro clics: un ✓ por clic (la fuente sale con el cuarto) · clic final: la frase</p>
-    <p>"Para hoy preparé una trampa: la pregunta que, según todo lo que se publicó hasta hace poco, hace inventar a la IA. Se la hice a un modelo avanzado con búsqueda. No cayó. Y no le creí: lo comprobé en la relatoría oficial." Luego: "La pregunta ya no es si la IA encuentra la norma. Es si conoce su criterio. Y eso es lo que vamos a construir."</p>
-    <p>Lo verificado el 20 oct. 2026 en corteconstitucional.gov.co/relatoria (solo si preguntan): GPT-6 Astra con búsqueda respondió la T-377 de 2000 (Sala Sexta de Revisión, M.P. Alejandro Martínez Caballero, 3 abr. 2000, exp. T-256.199) y citó palabra por palabra los literales e) y f) del fundamento 4. Señaló como fuente de la regla la SU-166 de 1999 (M.P. Martínez Caballero, 17 mar. 1999). Y advirtió el marco nuevo: la C-951 de 2014 (M.P. Martha Victoria Sáchica Méndez, 4 dic. 2014) condicionó el inciso 2 del art. 32 de la Ley 1755 de 2015.</p>
-    <p>Si alguien abre un debate jurídico: "Ese criterio es suyo, no mío: por eso va escrito en su playbook. Mi trabajo es que la IA lo aplique siempre igual."</p>
+    <p><strong>C03 · La tesis</strong> · 1:40 · 20 s · frase sola, grande · clic: "Y los sistemas se diseñan."</p>
+    <p>"Un asistente junior hay que explicarle todo cada vez, y cada vez lo hace un poco distinto. Un sistema se diseña una vez y funciona igual siempre. Hoy cada uno sale con una skill: un procedimiento escrito que la IA aplica sola cuando aparece la tarea. Sirve para un informe, un resumen de reunión, una tarea de la universidad o la idea de una app."</p>
   </aside>
 </section>
 
@@ -87,59 +119,48 @@
   <ol class="cj-crit__cards" data-in="stagger">
     <li>
       <b>Su criterio</b>
-      <span>Qué acepta, qué negocia, qué nunca firma.</span>
-      <code>02_PLAYBOOK</code>
+      <span>Qué acepta, qué negocia, qué nunca hace.</span>
+      <code>SKILL.md · Reglas</code>
     </li>
     <li>
       <b>Su procedimiento</b>
       <span>Los pasos, y dónde se detiene: YO DECIDO.</span>
-      <code>02_PLAYBOOK</code>
+      <code>SKILL.md · Pasos</code>
     </li>
     <li>
       <b>Sus límites</b>
-      <span>Qué nunca se sube, y a qué cuenta.</span>
-      <code>01_LINEAS_ROJAS</code>
+      <span>Qué nunca sube, y a qué cuenta.</span>
+      <code>Reglas</code>
     </li>
     <li>
       <b>Su forma de entregar</b>
-      <span>Formato y tono, igual para todo su equipo.</span>
-      <code>00_ADN</code>
+      <span>Formato y tono, igual siempre.</span>
+      <code>Formato</code>
     </li>
   </ol>
   <p class="cj-crit__foot" data-in>Nada de esto lo encuentra un buscador. Lo escribe usted, una vez.</p>
   <aside class="notes">
-    <p><strong>Criterio · Lo que ningún buscador encuentra</strong> · 4:00 · 60 s · las cuatro tarjetas entran solas</p>
-    <p>"La IA ya sabe buscar normas y sentencias. Lo que no puede buscar es a usted: qué cláusula acepta y cuál nunca firma, en qué orden hace una tarea y dónde quiere que se detenga, qué datos de sus clientes nunca suben y a qué cuenta, y cómo le gusta que le entreguen el trabajo. Eso no está en internet. Eso es lo que van a escribir hoy, en cinco archivos."</p>
-    <p>No digas "la IA ya sabe derecho": el mensaje es que busca bien, no que sepa más que ellos.</p>
-  </aside>
-</section>
-
-<section id="c03" data-block="1" data-hud="off" data-bg="brain" data-bg-center="4.9,-0.1" class="cj-thesis">
-  <p class="cj-kicker" data-in>La tesis</p>
-  <h1 class="t-h1 cj-thesis__a" data-split="words">La IA no es tu abogado junior;</h1>
-  <h1 class="t-h1 cj-thesis__b" data-split="words">es tu <em>sistema.</em></h1>
-  <p class="cj-thesis__c t-lead fragment" data-split="words">Y los sistemas se diseñan.</p>
-  <aside class="notes">
-    <p><strong>C03 · La tesis</strong> · 5:00 · frase sola, grande · clic: "Y los sistemas se diseñan."</p>
-    <p>"Les voy a entregar su cerebro jurídico: cinco archivos que le dicen a cualquier IA quién es usted, cómo trabaja, qué nunca puede hacer y cómo se verifica. Y les voy a mostrar hasta dónde escala eso con un caso real."</p>
+    <p><strong>Criterio · Lo que ningún buscador encuentra</strong> · 2:00 · 45 s · las cuatro tarjetas entran solas</p>
+    <p>"La IA ya sabe buscar: datos, normas, artículos, documentación. Lo que no puede buscar es a usted: qué acepta y qué nunca hace, en qué orden hace una tarea y dónde quiere que se detenga, qué información nunca sube y a qué cuenta, y cómo le gusta que le entreguen el trabajo. Eso no está en internet. Eso es lo que van a escribir hoy, en una skill."</p>
+    <p>No digas "la IA ya sabe más que ustedes": el mensaje es que busca bien, no que sepa su oficio.</p>
   </aside>
 </section>
 
 <section id="c05" data-block="1" data-bg="brain" data-bg-center="-4.4,-0.55" data-ctrl="cj-map" class="cj-map">
   <div class="cj-map__text">
     <p class="cj-kicker" data-in>Analogía</p>
-    <h2 class="cj-map__title t-h2" data-split="words">Un cerebro jurídico hace lo mismo, escrito en cinco archivos.</h2>
+    <h2 class="cj-map__title t-h2" data-split="words">Un cerebro hace lo mismo, escrito en archivos.</h2>
     <ol class="cj-map__rows">
-      <li><span class="cj-map__fn">Identidad y metas</span><code>00_ADN</code><span class="cj-map__what">quién soy, cómo trabajo</span></li>
-      <li><span class="cj-map__fn">Frenos</span><code>01_LINEAS_ROJAS</code><span class="cj-map__what">lo que nunca pasa</span></li>
-      <li><span class="cj-map__fn">Memoria de procedimientos</span><code>02_PLAYBOOK</code><span class="cj-map__what">cómo hago cada tarea</span></li>
-      <li><span class="cj-map__fn">Memoria de conocimientos</span><code>03_FUENTES</code><span class="cj-map__what">normas y sentencias que verifiqué</span></li>
-      <li><span class="cj-map__fn">Detección de errores</span><code>04_VERIFICACION</code><span class="cj-map__what">antes de firmar</span></li>
+      <li><span class="cj-map__fn">Identidad y metas</span><code>Quién soy · Qué hace</code><span class="cj-map__what">para quién trabaja y para qué</span></li>
+      <li><span class="cj-map__fn">Reconocer la situación</span><code>Cuándo usarla</code><span class="cj-map__what">cuándo se activa sola</span></li>
+      <li><span class="cj-map__fn">Memoria de procedimientos</span><code>Pasos</code><span class="cj-map__what">cómo hace la tarea, en orden</span></li>
+      <li><span class="cj-map__fn">Frenos</span><code>Reglas</code><span class="cj-map__what">lo que nunca pasa</span></li>
+      <li><span class="cj-map__fn">Memoria de conocimientos</span><code>references/material.md</code><span class="cj-map__what">lo que lee antes de empezar</span></li>
+      <li><span class="cj-map__fn">Detección de errores</span><code>Cómo sé que quedó bien</code><span class="cj-map__what">antes de usar la salida</span></li>
     </ol>
   </div>
   <aside class="notes">
-    <p><strong>C05 · Cerebro y archivos</strong> · 5:20 · 20 s · las cinco filas se encienden solas</p>
-    <p>Es una analogía, no neurociencia: identidad y metas, control inhibitorio (frenar una acción), memoria procedimental (cómo se hacen las cosas), memoria semántica (conocimientos generales: qué dice el art. 14, no los hechos del caso) y detección de errores y de situaciones propensas a error. "Su IA ya tiene neuronas; le falta todo esto. Y eso es lo que escriben hoy."</p>
+    <p><strong>C05 · Cerebro y archivos</strong> · 2:45 · 25 s · las seis filas se encienden solas</p>
+    <p>Es una analogía, no neurociencia: identidad y metas, reconocer la situación, memoria procedimental (cómo se hacen las cosas), control inhibitorio (frenar una acción), memoria semántica (conocimientos generales) y detección de errores. "Su IA ya tiene neuronas; le falta todo esto. Cada fila es una sección de su SKILL.md. Y eso es lo que escriben hoy."</p>
   </aside>
 </section>
-

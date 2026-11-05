@@ -287,11 +287,11 @@ function renderRoom(summary) {
       <p class="tile__me">${fav ? `${pctText(fav.pct)} la usa más que cualquier otra.` : ''}${myFav ? ` La tuya: ${esc(myFav)}.` : ''}</p></div>
     <div class="tile"><p class="tile__k">Ya usan Proyectos o Gems</p><p class="tile__big">${pctText(k.proyectosPct)}</p>
       <p class="tile__me">Crearon una skill, un GPT o una Gem: ${pctText(k.skillPct)}.</p></div>
-    <div class="tile"><p class="tile__k">Les citaron una sentencia inexistente</p><p class="tile__big">${pctText(k.alucinoPct)}</p>
-      <p class="tile__me">No verifican las citas: ${pctText(k.noVerificaPct)}.</p></div>
+    <div class="tile"><p class="tile__k">Recibieron un dato o una fuente que no existía</p><p class="tile__big">${pctText(k.alucinoPct)}</p>
+      <p class="tile__me">No lo verificaron: ${pctText(k.noVerificaPct)}.</p></div>
     <div class="tile"><p class="tile__k">Su cuenta puede estar entrenando con lo que suben</p><p class="tile__big">${pctText(k.entrenaRiesgoPct)}</p>
-      <p class="tile__me">No lo apagaron o no saben. En el taller lo revisamos.</p></div>
-    <div class="tile tile--wide"><p class="tile__k">Cómo ejercen</p>${list(k.top('rol', 4))}</div>
+      <p class="tile__me">No lo apagaron o no saben. En la clase lo revisamos.</p></div>
+    <div class="tile tile--wide"><p class="tile__k">Qué hacen hoy</p>${list(k.top('rol', 4))}</div>
     <div class="tile tile--wide"><p class="tile__k">Para qué usan la IA</p>${list(k.top('usos', 4))}</div>`;
 }
 
