@@ -825,6 +825,12 @@ fieldset.field > legend + * {
   .field__label {
     padding-right: 220px;
   }
+
+  /* The switch is its own label: its files go below it, never over it. */
+  .field--switch > .feeds {
+    position: static;
+    margin-top: -4px;
+  }
 }
 
 /* Chips: native checkbox/radio, visually hidden, styled through the label. */
@@ -921,6 +927,23 @@ fieldset.field > legend + * {
   80% {
     transform: translateX(-2px);
   }
+}
+
+/* Switch: one chip whose dot becomes a track; the thumb moves right when on. */
+.chip--switch {
+  justify-self: start;
+  max-width: 100%;
+}
+
+.chip--switch .chip__box::before {
+  width: 32px;
+  height: 18px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 8px 50%, var(--text-3) 0 4.5px, transparent 5px);
+}
+
+.chip--switch .chip__input:checked + .chip__box::before {
+  background: var(--accent) radial-gradient(circle at calc(100% - 8px) 50%, var(--bg) 0 4.5px, transparent 5px);
 }
 
 /* Option cards (confidentiality, tone). */

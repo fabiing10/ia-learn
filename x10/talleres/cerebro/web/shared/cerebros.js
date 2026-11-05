@@ -208,8 +208,11 @@ const ideacion = {
 
 // ── De brief a MVP (encargo 05): the brief-a-mvp skill of the workshop ──
 
+// The switch above field 01 (unnumbered: the brief stays «campo 01»): off, the skill is
+// general and the brief goes in the chat; on, the skill carries it (decision of 5 Nov 2026).
 const CAMPOS_FORM_MVP = [
-  { id: 'brief', tipo: 'textarea', n: 1, label: 'Tu brief o tu idea', rows: 10, max: 12000, placeholder: 'Pega aquí tu brief completo, o tu idea en una frase: quién la usa y qué le resuelve.', hint: 'Pega el brief completo (nombre y entidad, usuario, problema, reto, solución, flujo, qué NO hará, datos, humano responsable, cómo sabremos que funciona) o, si no lo tienes, tu idea en una frase: quién la usa y qué le resuelve.' },
+  { id: 'incluirBrief', tipo: 'switch', label: 'Incluir mi brief dentro de la skill', hint: 'Apagado (recomendado): la skill es general y recibe el brief en el chat, como el PRIMER_MENSAJE. Encendido: la skill lleva este brief como punto de partida.' },
+  { id: 'brief', tipo: 'textarea', n: 1, label: 'Tu brief o tu idea', rows: 10, max: 12000, placeholder: 'Pega aquí tu brief completo, o tu idea en una frase: quién la usa y qué le resuelve.', hint: 'Pega el brief completo (nombre y entidad, usuario, problema, reto, solución, flujo, qué NO hará, datos, humano responsable, cómo sabremos que funciona) o, si no lo tienes, tu idea en una frase: quién la usa y qué le resuelve. Opcional mientras la skill no lleve el brief: va al PRIMER_MENSAJE y a la prueba.' },
   { id: 'sector', tipo: 'radio', n: 2, label: 'Sector', opciones: SECTORES_MVP },
   { id: 'herramienta', tipo: 'radio', n: 3, label: 'Con qué vas a construir', opciones: HERRAMIENTAS_MVP, hint: 'Caja cerrada (Lovable, AI Studio): todo armado, sin instalar nada. Artifact (Claude): una página con link para compartir. Caja abierta (Claude Code, Codex): archivos en tu computador. Si no sabes, la skill te recomienda una.' },
   { id: 'nivel', tipo: 'radio', n: 4, label: 'Tu experiencia construyendo', opciones: NIVELES_MVP, hint: 'Con «nunca» o «algo con IA», cada prompt trae «qué debe verse» y «si falla».' },
@@ -252,7 +255,8 @@ const mvp = {
       { id: 'todo', tipo: 'todo', archivo: `${SLUG_MVP}-kit.zip`, titulo: 'Todo', nota: 'README, instrucciones, primer mensaje y la skill', aviso: 'Descomprímelo: el README trae los pasos.', bytes: () => zipTodoMvp(profile) },
     ];
   },
-  // Without a brief the skill has nothing to build from: the ZIPs wait (encargo, PROMPT 5).
+  // A skill that carries the brief has nothing to build from without it: the ZIPs wait
+  // (encargo, PROMPT 5). A general skill (the default) downloads whole.
   descargasHabilitadas,
   descargasAviso: 'Pega tu brief o tu idea en el campo 01 para descargar la skill.',
   prueba: pruebaMvp,

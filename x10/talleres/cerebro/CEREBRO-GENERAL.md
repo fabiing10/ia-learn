@@ -699,3 +699,9 @@ Behaves like Ideación: nine fields → nine files → tabs → copy → two ZIP
 - Ideación stays untouched (decision of the brief). The review's points 7–8 (tool-specific
   cabecera and a public-sector example inside Ideación) are deferred until the user reopens them.
 - Store key `cj-perfil-mvp`; tab id `mvp`, deep link `#mvp`.
+- Switch «Incluir mi brief dentro de la skill» (`incluirBrief`, unnumbered, above field 01), default
+  off (user decision, 5 Nov 2026): the skill is general, so SKILL.md and INSTRUCCIONES_GPT.md never
+  depend on field 01; the brief goes to PRIMER_MENSAJE.md (or `HUECO_BRIEF`) and the README test,
+  the README says which mode it is, and the ZIPs need no brief.
+- On: today's skill plus a last section `## Mi brief` with the brief quoted whole (its headings
+  never open a section), the example named after it, and the ZIPs wait for the brief.

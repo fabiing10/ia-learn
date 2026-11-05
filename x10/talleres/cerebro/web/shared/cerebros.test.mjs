@@ -103,6 +103,10 @@ test('prueba(): a question and the two columns; legal keeps one tab per chosen t
   assert.equal(byId.ideacion.prueba(byId.ideacion.perfilEjemplo).pregunta, byId.ideacion.perfilEjemplo.frase);
   const pm = buildMvp(byId.mvp.perfilEjemplo)['PRIMER_MENSAJE.md'];
   assert.equal(byId.mvp.prueba(byId.mvp.perfilEjemplo).pregunta, pm.slice(pm.indexOf('\n---\n\n') + 6).trimEnd(), 'brief→MVP: the first message is the test');
+  assert.ok(
+    byId.mvp.prueba(byId.mvp.perfilVacio).pregunta.startsWith('Este es mi brief:\n\n[Pega aquí tu brief completo o tu idea en una frase]\n\n'),
+    'brief→MVP in blank: the first message with its blank',
+  );
   assert.equal(byId.mvp.pruebaLarga, true);
   assert.ok(CEREBROS.filter((c) => c.id !== 'mvp').every((c) => !c.pruebaLarga));
 });
@@ -127,18 +131,26 @@ test('only the legal cerebro has the custom form, the fixed blocks, the routes a
   }
 });
 
-test('generic forms: one field per profile key, numbered in order, each wired to a node of the map', () => {
+test('generic forms: one field per profile key, numbered in order (a switch goes unnumbered), each wired to a node of the map', () => {
   for (const c of CEREBROS.filter((x) => x.campos)) {
     assert.deepEqual(c.campos.map((f) => f.id).sort(), Object.keys(c.perfilVacio).sort(), `${c.id}: fields = profile keys`);
-    assert.deepEqual(c.campos.map((f) => f.n), c.campos.map((_, i) => i + 1), `${c.id}: numbering`);
+    const numerados = c.campos.filter((f) => f.tipo !== 'switch');
+    assert.deepEqual(numerados.map((f) => f.n), numerados.map((_, i) => i + 1), `${c.id}: numbering`);
+    for (const f of c.campos.filter((x) => x.tipo === 'switch')) assert.equal(f.n, undefined, `${c.id}.${f.id}: a switch has no number`);
     const mapa = c.mapa.map((m) => m.id);
     for (const f of c.campos) assert.ok(mapa.includes(f.mapa ?? f.id), `${c.id}.${f.id} → map`);
     for (const id of mapa) assert.ok(c.campos.some((f) => (f.mapa ?? f.id) === id), `${c.id}: map node ${id} has a field`);
     for (const f of c.campos) {
-      assert.ok(['text', 'textarea', 'lines', 'radio', 'checkbox', 'cards'].includes(f.tipo), `${c.id}.${f.id} tipo`);
+      assert.ok(['switch', 'text', 'textarea', 'lines', 'radio', 'checkbox', 'cards'].includes(f.tipo), `${c.id}.${f.id} tipo`);
       assert.ok(f.label, `${c.id}.${f.id} label`);
       const lista = Array.isArray(c.perfilVacio[f.id]);
       assert.equal(lista, f.tipo === 'lines' || f.tipo === 'checkbox', `${c.id}.${f.id}: list fields are lines or checkbox`);
+      // A switch is one boolean, off when blank; normalize keeps true and drops anything else.
+      if (f.tipo === 'switch') {
+        assert.equal(c.perfilVacio[f.id], false, `${c.id}.${f.id} off when blank`);
+        assert.equal(c.normalize({ ...c.perfilVacio, [f.id]: true })[f.id], true, `${c.id}.${f.id}=true`);
+        for (const v of ['true', 1, null]) assert.equal(c.normalize({ ...c.perfilVacio, [f.id]: v })[f.id], false, `${c.id}.${f.id}=${v}`);
+      }
       if (['radio', 'checkbox', 'cards'].includes(f.tipo)) {
         assert.ok(f.opciones.length, `${c.id}.${f.id} opciones`);
         // Every option survives the module's normalize: the form never offers a value it drops.
@@ -167,6 +179,9 @@ test('cambios(): the map nodes whose fields differ, in form order', () => {
   assert.deepEqual(s.cambios(s.perfilEjemplo, { ...s.perfilEjemplo, ejemploSalida: 'otra' }), ['ejemplo']);
   assert.deepEqual(s.cambios(s.perfilEjemplo, { ...s.perfilEjemplo, ejemploEntrada: 'x', ejemploSalida: 'y', pasos: ['z'] }), ['pasos', 'ejemplo']);
   assert.deepEqual(byId.juridico.cambios(PERFIL_LAURA, { ...PERFIL_LAURA, nombre: 'Ana' }), ['nombre']);
+  const m = byId.mvp;
+  assert.deepEqual(m.cambios(m.perfilEjemplo, { ...m.perfilEjemplo, incluirBrief: true }), ['incluirBrief']);
+  assert.deepEqual(m.cambios(m.perfilEjemplo, { ...m.perfilEjemplo, incluirBrief: true, brief: 'x' }), ['incluirBrief', 'brief']);
   assert.deepEqual(
     s.cambios(s.perfilEjemplo, s.perfilVacio),
     ['skillNombre', 'queHace', 'cuando', 'entradas', 'pasos', 'reglas', 'formato', 'ejemplo', 'verifico', 'quienSoy', 'nombre', 'herramientas'],
@@ -246,19 +261,27 @@ test('the landing has one tab per cerebro, in order, with its label, short label
   assert.match(strip, /role="tablist"/);
 });
 
-test('brief→MVP: the nine fields of PROMPT 1, in order, with their labels and hints', () => {
+test('brief→MVP: the switch «Incluir mi brief dentro de la skill», then the nine fields of PROMPT 1, with their labels and hints', () => {
   const c = byId.mvp;
   assert.deepEqual(c.campos.map((f) => [f.id, f.tipo]), [
-    ['brief', 'textarea'], ['sector', 'radio'], ['herramienta', 'radio'], ['nivel', 'radio'], ['tiempo', 'radio'],
+    ['incluirBrief', 'switch'], ['brief', 'textarea'], ['sector', 'radio'], ['herramienta', 'radio'], ['nivel', 'radio'], ['tiempo', 'radio'],
     ['restricciones', 'lines'], ['nombre', 'text'], ['tono', 'cards'], ['herramientas', 'checkbox'],
   ]);
   assert.deepEqual(c.campos.map((f) => f.label), [
-    'Tu brief o tu idea', 'Sector', 'Con qué vas a construir', 'Tu experiencia construyendo', 'Tiempo disponible',
+    'Incluir mi brief dentro de la skill', 'Tu brief o tu idea', 'Sector', 'Con qué vas a construir', 'Tu experiencia construyendo', 'Tiempo disponible',
     'Tus límites', '¿Cómo quieres que la IA te llame?', 'Cómo quieres que te responda', 'La IA que usas hoy',
   ]);
   assert.deepEqual(c.campos.filter((f) => f.opcional).map((f) => f.id), ['restricciones', 'nombre']);
   const f = Object.fromEntries(c.campos.map((x) => [x.id, x]));
   assert.ok(f.brief.hint.startsWith('Pega el brief completo (nombre y entidad, usuario, problema, reto, solución, flujo, qué NO hará, datos, humano responsable, cómo sabremos que funciona)'));
+  assert.ok(f.brief.hint.endsWith(' Opcional mientras la skill no lleve el brief: va al PRIMER_MENSAJE y a la prueba.'), 'field 01 says when it is optional');
+  assert.equal(f.brief.n, 1, 'the brief stays field 01');
+  assert.equal(
+    f.incluirBrief.hint,
+    'Apagado (recomendado): la skill es general y recibe el brief en el chat, como el PRIMER_MENSAJE. Encendido: la skill lleva este brief como punto de partida.',
+  );
+  assert.equal(c.perfilEjemplo.incluirBrief, false, 'the example is a general skill');
+  assert.equal(c.perfilVacio.incluirBrief, false);
   assert.equal(f.tiempo.hint, 'Define cuántas capas entran en el MVP.');
   assert.deepEqual(f.herramienta.opciones.map((o) => o.label), ['Lovable', 'Claude (artifact)', 'Claude Code', 'Codex', 'Gemini AI Studio', 'No sé aún']);
   assert.deepEqual(f.sector.opciones.map((o) => o.label), byId.ideacion.campos.find((x) => x.id === 'sector').opciones.map((o) => o.label));
@@ -271,10 +294,13 @@ test('brief→MVP: the nine fields of PROMPT 1, in order, with their labels and 
   assert.equal(c.sub, 'Del brief a la spec, las capas y los prompts');
 });
 
-test('descargasHabilitadas: only brief→MVP gates its ZIPs, on the brief', () => {
+test('descargasHabilitadas: only brief→MVP gates its ZIPs, on the brief, and only when the skill carries it', () => {
   const c = byId.mvp;
   assert.equal(c.descargasHabilitadas(c.perfilEjemplo), true);
-  assert.equal(c.descargasHabilitadas(c.perfilVacio), false);
+  assert.equal(c.descargasHabilitadas(c.perfilVacio), true, 'a general skill is whole without a brief');
+  assert.equal(c.descargasHabilitadas({ ...c.perfilVacio, incluirBrief: true }), false, 'a skill that carries the brief waits for it');
+  assert.equal(c.descargasHabilitadas({ ...c.perfilVacio, incluirBrief: true, brief: 'Quiero una app que ordene turnos' }), true);
+  assert.equal(c.descargasHabilitadas({ ...c.perfilEjemplo, incluirBrief: true }), true);
   assert.equal(c.descargasHabilitadas({ ...c.perfilVacio, brief: 'Quiero una app que ordene turnos' }), true);
   assert.ok(c.descargasAviso.includes('campo 01'));
   for (const x of CEREBROS.filter((y) => y.id !== 'mvp')) assert.equal(x.descargasHabilitadas, undefined, x.id);

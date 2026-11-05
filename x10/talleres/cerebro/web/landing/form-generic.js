@@ -2,7 +2,8 @@
 // schema of cerebros.js with native inputs, radios and checkboxes and the same
 // classes as form.js, so both look and behave alike. Each field shows which files
 // it feeds, from the map the generator is tested on. `lines` fields are a textarea
-// read as one item per line.
+// read as one item per line; a `switch` is one native checkbox with role="switch"
+// (its checked state is the aria-checked the reader hears), read as a boolean.
 
 import { nombreCorto } from '../shared/cerebros.js';
 import { esc, reducedMotion } from '../shared/ui.js';
@@ -63,7 +64,15 @@ export function mountGenericForm(form, { cerebro, onChange, onFocusField }) {
     return `<textarea class="textarea" id="${fid(f.id)}" name="${f.id}" rows="${f.rows || 3}"${max}${ph}${aria}></textarea>`;
   }
 
+  // One on/off option, unnumbered: the chip is its label, with a track for a dot.
+  const sw = (f) => `<div class="field field--switch" data-campo="${nodo(f)}">
+    <label class="chip chip--switch"><input class="chip__input" id="${fid(f.id)}" name="${f.id}" type="checkbox" role="switch" aria-describedby="${describedBy(f)}" /><span class="chip__box">${esc(f.label)}</span></label>
+    ${feeds(f)}
+    ${hint(f)}
+  </div>`;
+
   function field(f) {
+    if (f.tipo === 'switch') return sw(f);
     if (TYPING.has(f.tipo)) {
       return `<div class="field" data-campo="${nodo(f)}">
     <label class="field__label" for="${fid(f.id)}">${numero(f)}${esc(f.label)}</label>
@@ -93,6 +102,7 @@ export function mountGenericForm(form, { cerebro, onChange, onFocusField }) {
     for (const f of campos) {
       if (f.tipo === 'lines') raw[f.id] = control$(f).value.split('\n');
       else if (TYPING.has(f.tipo)) raw[f.id] = control$(f).value;
+      else if (f.tipo === 'switch') raw[f.id] = control$(f).checked;
       else if (f.tipo === 'checkbox') raw[f.id] = checked(f.id);
       else raw[f.id] = checked(f.id)[0] ?? null;
     }
@@ -133,6 +143,7 @@ export function mountGenericForm(form, { cerebro, onChange, onFocusField }) {
     for (const f of campos) {
       if (f.tipo === 'lines') control$(f).value = p[f.id].join('\n');
       else if (TYPING.has(f.tipo)) control$(f).value = p[f.id] ?? '';
+      else if (f.tipo === 'switch') control$(f).checked = p[f.id] === true;
       else if (f.tipo === 'checkbox') for (const i of inputs(f.id)) i.checked = p[f.id].includes(i.value);
       else for (const i of inputs(f.id)) i.checked = i.value === p[f.id];
     }

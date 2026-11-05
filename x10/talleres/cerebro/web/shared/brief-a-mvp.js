@@ -57,8 +57,10 @@ export const TIEMPOS = [
 export const TONOS_MVP = TONOS_IDEACION;
 
 // Which files each form field rewrites («Alimenta» of PROMPT 1); brief-a-mvp.test.mjs
-// checks it against the generator.
+// checks it against the generator. The brief reaches SKILL.md and INSTRUCCIONES_GPT.md
+// only while `incluirBrief` is on; off (the default), PRIMER_MENSAJE.md and the README.
 export const CAMPOS_MVP = [
+  { id: 'incluirBrief', label: 'Brief en la skill', archivos: ['SKILL.md', 'INSTRUCCIONES_GPT.md', 'README.md'] },
   { id: 'brief', label: 'Brief', archivos: ['SKILL.md', 'INSTRUCCIONES_GPT.md', 'PRIMER_MENSAJE.md', 'README.md'] },
   { id: 'sector', label: 'Sector', archivos: ['SKILL.md', 'INSTRUCCIONES_GPT.md', 'PRIMER_MENSAJE.md', 'references/tabla-de-recorte.md'] },
   { id: 'herramienta', label: 'Herramienta', archivos: ['SKILL.md', 'INSTRUCCIONES_GPT.md', 'PRIMER_MENSAJE.md', 'references/herramientas.md', 'README.md'] },
@@ -76,6 +78,7 @@ const MAX_BRIEF = 12000;
 export function normalizeMvp(raw) {
   const p = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
   return {
+    incluirBrief: p.incluirBrief === true,
     brief: texto(p.brief, MAX_BRIEF),
     sector: one(SECTORES_MVP, p.sector),
     herramienta: one(HERRAMIENTAS_MVP, p.herramienta),
@@ -89,7 +92,9 @@ export function normalizeMvp(raw) {
 }
 
 // Grupo 7 · Semáforo de Liquidaciones (PROMPT 1): the brief is the table of the eval.
+// The skill stays general (user decision, 5 Nov 2026): the brief goes in the chat.
 export const EJEMPLO_MVP = Object.freeze({
+  incluirBrief: false,
   brief: texto(EJEMPLO_BRIEF, MAX_BRIEF),
   sector: 'publico',
   herramienta: 'claude-code',
@@ -102,6 +107,7 @@ export const EJEMPLO_MVP = Object.freeze({
 });
 
 export const VACIO_MVP = Object.freeze({
+  incluirBrief: false,
   brief: '',
   sector: null,
   herramienta: null,
@@ -115,6 +121,15 @@ export const VACIO_MVP = Object.freeze({
 
 const TITULO = 'De brief a MVP';
 export const AVISO_SIN_BRIEF = '[Pega tu brief o tu idea en el campo 01 para generar la skill.]';
+/** PRIMER_MENSAJE.md without a brief: the line the person fills in the chat. */
+export const HUECO_BRIEF = '[Pega aquí tu brief completo o tu idea en una frase]';
+/** The last section of SKILL.md when the skill carries the brief: the brief, quoted whole. */
+export const MI_BRIEF = Object.freeze({ titulo: 'Mi brief', entrada: 'Si en el chat no te pego otro brief, parte de este.' });
+/** The README line under the opening: does the skill carry the brief? */
+export const MODO_README = Object.freeze({
+  general: 'Esta skill es general: pégale tu brief en el chat.',
+  conBrief: 'Esta skill lleva tu brief adentro; para otro proyecto, genera otra.',
+});
 export const REGLA_SECTOR_PUBLICO =
   'Sector público: nunca datos reales ni información reservada; la herramienta nunca decide, firma, radica ni notifica; siempre hay un humano responsable que valida.';
 const SECCION_PUBLICA = 'Sustituciones propias del sector público colombiano';
@@ -142,8 +157,14 @@ function resolve(raw) {
   };
 }
 
-/** Downloads need a brief (PROMPT 5, point 2). */
-export const descargasHabilitadas = (raw) => normalizeMvp(raw).brief !== '';
+/**
+ * A general skill (the default) is whole without a brief; one that carries the brief
+ * waits for it before its ZIPs (PROMPT 5, point 2).
+ */
+export function descargasHabilitadas(raw) {
+  const p = normalizeMvp(raw);
+  return !p.incluirBrief || p.brief !== '';
+}
 
 // ── The brief: its fields, and the example's name (PROMPT 2, A, «Ejemplo») ──
 
@@ -303,7 +324,7 @@ function presentacion(r) {
 }
 
 function trasTitulo(text, r) {
-  const intro = [presentacion(r), ...(r.p.brief ? [] : [AVISO_SIN_BRIEF])];
+  const intro = [presentacion(r), ...(r.p.incluirBrief && !r.p.brief ? [AVISO_SIN_BRIEF] : [])];
   const lines = text.split('\n');
   const t = titulos(lines).find(([, n]) => n === 1);
   if (!t) return [...intro, '', ...lines].join('\n');
@@ -365,13 +386,23 @@ function ejemplo(r) {
   return (body) => (nombre ? body.join('\n').split(EJEMPLO_NOMBRE_BORRADOR).join(nombre).split('\n') : body);
 }
 
+/** A text as a Markdown quote: its headings and fences can never open a section of the skill. */
+const cita = (text) => text.split('\n').map((l) => (l ? `> ${l}` : '>')).join('\n');
+
+/**
+ * Only a skill that carries the brief (`incluirBrief`) depends on field 01: the notice
+ * when it is empty, the example's name and, last, «Mi brief». A general skill is the
+ * draft's, whatever the brief says.
+ */
 function skillCuerpo(r) {
+  const conBrief = r.p.incluirBrief;
   let s = trasTitulo(SKILL_CUERPO.trim(), r);
   s = editar(s, 'Qué necesito antes de empezar', necesito(r));
   s = editar(s, 'Reglas que siempre aplican', reglas(r));
   s = editar(s, 'Formato de salida', formato(r));
-  s = editar(s, 'Ejemplo', ejemplo(r));
-  return s.trimEnd();
+  if (conBrief) s = editar(s, 'Ejemplo', ejemplo(r));
+  s = s.trimEnd();
+  return conBrief && r.p.brief ? [s, `## ${MI_BRIEF.titulo}`, MI_BRIEF.entrada, cita(r.p.brief)].join('\n\n') : s;
 }
 
 const skillMd = (cuerpo) => md([SKILL_FRONTMATTER, cuerpo]);
@@ -454,7 +485,7 @@ function primerMensajeMd(r) {
     'Pégalo en un chat con la skill instalada (o después de pegar INSTRUCCIONES_GPT.md).',
     '---',
     'Este es mi brief:',
-    r.p.brief || AVISO_SIN_BRIEF,
+    r.p.brief || HUECO_BRIEF,
     [contexto, PEDIDO].filter(Boolean).join('\n'),
   ]);
 }
@@ -485,6 +516,9 @@ export const README_BASE = (() => {
 
 /** The check after the test: the last paragraph of the draft's «Probar». */
 export const README_PROBAR = parrafosDeSeccion('Probar').at(-1) ?? '';
+
+/** The draft's test without a brief: «Probar» before its check. */
+export const README_PROBAR_GENERAL = parrafosDeSeccion('Probar').slice(0, -1).join('\n\n');
 
 // «La IA que usas hoy» (catalog HERRAMIENTAS) a route serves: the ones its title names.
 const IA_RUTAS = HERRAMIENTAS.filter((h) => h.id !== 'ninguna');
@@ -540,6 +574,7 @@ function readmeMd(r) {
   return md([
     `# ${TITULO} · tu skill`,
     p.nombre ? `${p.nombre}, ${lcFirst(README_BASE)}` : README_BASE,
+    p.incluirBrief ? MODO_README.conBrief : MODO_README.general,
     ['| Archivo | Para qué |', '|---|---|', ...filas.map(([a, b]) => `| \`${a}\` | ${b} |`)].join('\n'),
     ...rutasReadme(p.herramientas),
     '## Usarla',
@@ -548,8 +583,9 @@ function readmeMd(r) {
       'Pega `PRIMER_MENSAJE.md` en ese chat y responde sus preguntas (máximo tres).',
       `Pega en ${destino} un prompt por capa, en orden; prueba cada capa antes de pegar la siguiente.`,
     ]),
-    // «Probar» with the brief itself: the README follows field 01, not the context line.
-    ...probarlaMd({ ...pruebaMvp(p), pregunta: p.brief || AVISO_SIN_BRIEF }, [README_PROBAR]),
+    // «Probar» with the brief itself (the README follows field 01, not the context line);
+    // without one, the draft's own test.
+    ...probarlaMd({ ...pruebaMvp(p), pregunta: p.brief || README_PROBAR_GENERAL }, [README_PROBAR]),
   ]);
 }
 

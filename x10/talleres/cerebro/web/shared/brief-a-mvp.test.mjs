@@ -12,15 +12,18 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import * as C from './brief-a-mvp.content.js';
 import {
-  ARCHIVOS_MVP, AVISO_SIN_BRIEF, CAMPOS_BRIEF, CAMPOS_MVP, CONFIRM3_MVP, EJEMPLO_MVP, HERRAMIENTAS_MVP, NIVELES_MVP,
-  README_BASE, README_PROBAR, REGLA_SECTOR_PUBLICO, RUTAS_README, SECTORES_MVP, SLUG_MVP, TIEMPOS, TONOS_MVP, VACIO_MVP,
-  buildMvp, camposDelBrief, descargasHabilitadas, nombreDelEjemplo, normalizeMvp, pasteMvp, pruebaMvp, zipMvp, zipTodoMvp,
+  ARCHIVOS_MVP, AVISO_SIN_BRIEF, CAMPOS_BRIEF, CAMPOS_MVP, CONFIRM3_MVP, EJEMPLO_MVP, HERRAMIENTAS_MVP, HUECO_BRIEF, MI_BRIEF,
+  MODO_README, NIVELES_MVP, README_BASE, README_PROBAR, README_PROBAR_GENERAL, REGLA_SECTOR_PUBLICO, RUTAS_README, SECTORES_MVP,
+  SLUG_MVP, TIEMPOS, TONOS_MVP, VACIO_MVP, buildMvp, camposDelBrief, descargasHabilitadas, nombreDelEjemplo, normalizeMvp,
+  pasteMvp, pruebaMvp, zipMvp, zipTodoMvp,
 } from './brief-a-mvp.js';
 import { HERRAMIENTAS } from './catalog.js';
 import { NIVELES, SECTORES, TONOS_IDEACION } from './ideacion.js';
 import { lcFirst, sentence } from './skill-general.js';
 
 const grupo7 = () => structuredClone(EJEMPLO_MVP);
+/** The example with its brief inside the skill (the switch above field 01, on). */
+const conBrief = () => ({ ...grupo7(), incluirBrief: true });
 const BAD = /undefined|null|NaN|\[object Object\]/;
 const FIXED = new Date(2026, 10, 5, 9, 0, 0);
 const SLUG = 'brief-a-mvp';
@@ -107,6 +110,13 @@ function unzipped(bytes, fn) {
 /** The text of the draft's SKILL body for a section, as the content module has it. */
 const borrador = (heading) => section(`${C.SKILL_CUERPO}\n`, heading);
 const cuerpoPrimer = (pm) => pm.slice(pm.indexOf('\n---\n\n') + 6).trimEnd();
+/** A text as a Markdown quote, line by line (how the README and «Mi brief» show a brief). */
+const cita = (text) => text.split('\n').map((l) => (l ? `> ${l}` : '>')).join('\n');
+/** The presentation line: two lines below the SKILL title. */
+const presentacionDe = (skill) => {
+  const ls = skill.split('\n');
+  return ls[ls.findIndex((l) => l.startsWith('# ')) + 2];
+};
 
 // ── Content anchors: what the generator relies on in the draft ──
 
@@ -143,6 +153,7 @@ test('README pieces come from the draft README by structure: opening, «Instalar
   const probar = parrafos(section(draft, 'Probar')).slice(1);
   assert.ok(probar.length >= 2, 'the draft test and its check');
   assert.equal(README_PROBAR, probar.at(-1), 'the check is the last paragraph of «Probar»');
+  assert.equal(README_PROBAR_GENERAL, probar.slice(0, -1).join('\n\n'), 'the draft test: «Probar» before its check');
   for (const k of ['cerrada', 'artifact', 'abierta']) assert.ok(C.CAJAS[k], k);
 });
 
@@ -168,6 +179,7 @@ test('constants: files in tab order, slug, catalogs shared with ideación, the f
   const P = 'PRIMER_MENSAJE.md';
   const R = 'README.md';
   assert.deepEqual(Object.fromEntries(CAMPOS_MVP.map((c) => [c.id, c.archivos])), {
+    incluirBrief: [S, G, R],
     brief: [S, G, P, R],
     sector: [S, G, P, 'references/tabla-de-recorte.md'],
     herramienta: [S, G, P, 'references/herramientas.md', R],
@@ -178,7 +190,7 @@ test('constants: files in tab order, slug, catalogs shared with ideación, the f
     tono: [S, G],
     herramientas: [R],
   });
-  assert.deepEqual(CAMPOS_MVP.map((c) => c.label), ['Brief', 'Sector', 'Herramienta', 'Nivel', 'Tiempo', 'Límites', 'Nombre', 'Tono', 'IA que usas']);
+  assert.deepEqual(CAMPOS_MVP.map((c) => c.label), ['Brief en la skill', 'Brief', 'Sector', 'Herramienta', 'Nivel', 'Tiempo', 'Límites', 'Nombre', 'Tono', 'IA que usas']);
   assert.deepEqual(Object.keys(VACIO_MVP), CAMPOS_MVP.map((c) => c.id));
   assert.equal(CAMPOS_BRIEF.length, 10);
 });
@@ -193,6 +205,11 @@ test('the Grupo 7 example of PROMPT 1', () => {
   );
   assert.deepEqual(g.restricciones, ['No usa datos reales de contratos ni contratistas', 'No calcula días hábiles; solo calendario']);
   assert.deepEqual(normalizeMvp(g), { ...g, restricciones: [...g.restricciones], herramientas: [...g.herramientas] });
+  // The skill is general by default: the brief goes in the chat, not inside the skill.
+  assert.equal(g.incluirBrief, false);
+  assert.equal(VACIO_MVP.incluirBrief, false);
+  assert.equal(normalizeMvp({}).incluirBrief, false);
+  assert.equal(normalizeMvp({ incluirBrief: true }).incluirBrief, true);
 });
 
 // ── buildMvp ──
@@ -293,10 +310,11 @@ test('A · «Ejemplo»: a brief (≥ 4 of the ten fields) names it by «Nombre y
   assert.ok(nombreDelEjemplo('palabra '.repeat(80)).length <= 160);
   const draft = borrador('Ejemplo');
   for (const [brief, nombre] of [[BRIEF_TABLA, 'Agenda de Préstamos'], [FRASE, FRASE]]) {
-    const g = section(buildMvp({ ...grupo7(), brief })['SKILL.md'], 'Ejemplo');
+    const g = section(buildMvp({ ...conBrief(), brief })['SKILL.md'], 'Ejemplo');
     assert.equal(g, draft.split(C.EJEMPLO_NOMBRE_BORRADOR).join(nombre), 'only the name changes; the expected output stays');
+    assert.equal(section(buildMvp({ ...grupo7(), brief })['SKILL.md'], 'Ejemplo'), draft, 'brief outside the skill: the draft example as is');
   }
-  assert.equal(section(buildMvp(VACIO_MVP)['SKILL.md'], 'Ejemplo'), draft, 'no brief: the draft example as is');
+  assert.equal(section(buildMvp({ ...VACIO_MVP, incluirBrief: true })['SKILL.md'], 'Ejemplo'), draft, 'no brief: the draft example as is');
 });
 
 test('C · tabla-de-recorte.md: the public-sector section only for the public sector', () => {
@@ -358,6 +376,7 @@ test('E · PRIMER_MENSAJE.md: the brief in full, the context line and the reques
   assert.ok(otro.includes('\nTodavía no sé con qué voy a construir; tengo una sesión de 90 minutos. Sector: empresa privada.\n'));
   const blanco = buildMvp({ brief })['PRIMER_MENSAJE.md'];
   assert.ok(blanco.includes(`${brief}\n\nAplica la skill brief-a-mvp:`), 'no context line when nothing is chosen');
+  assert.equal(buildMvp({ ...conBrief(), brief })['PRIMER_MENSAJE.md'], pm, 'the switch never touches the first message');
 });
 
 test('F · INSTRUCCIONES_GPT.md: the draft header, SKILL.md without frontmatter, the five references with their comment', () => {
@@ -468,22 +487,104 @@ test('zipTodoMvp: brief-a-mvp-kit with README, instructions, first message and t
   });
 });
 
-test('no brief: nine files with the notice in SKILL.md and PRIMER_MENSAJE.md, downloads disabled', () => {
+test('no brief, brief inside the skill: the notice in SKILL.md, the blank in PRIMER_MENSAJE.md, downloads disabled', () => {
   assert.equal(AVISO_SIN_BRIEF, '[Pega tu brief o tu idea en el campo 01 para generar la skill.]');
-  for (const p of [VACIO_MVP, { ...grupo7(), brief: '  \n ' }]) {
+  for (const p of [{ ...VACIO_MVP, incluirBrief: true }, { ...conBrief(), brief: '  \n ' }]) {
     const f = buildMvp(p);
     assert.deepEqual(Object.keys(f), ARCHIVOS_MVP);
     assert.ok(f['SKILL.md'].includes(`\n${AVISO_SIN_BRIEF}\n`));
-    assert.ok(cuerpoPrimer(f['PRIMER_MENSAJE.md']).startsWith(`Este es mi brief:\n\n${AVISO_SIN_BRIEF}\n`));
+    assert.ok(f['INSTRUCCIONES_GPT.md'].includes(`\n${AVISO_SIN_BRIEF}\n`));
+    assert.ok(!f['SKILL.md'].includes(`## ${MI_BRIEF.titulo}`), 'no empty «Mi brief»');
+    assert.ok(cuerpoPrimer(f['PRIMER_MENSAJE.md']).startsWith(`Este es mi brief:\n\n${HUECO_BRIEF}\n`));
     assert.equal(descargasHabilitadas(p), false);
   }
-  assert.ok(!buildMvp(grupo7())['SKILL.md'].includes(AVISO_SIN_BRIEF));
-  assert.equal(descargasHabilitadas(grupo7()), true);
+  assert.ok(!buildMvp(conBrief())['SKILL.md'].includes(AVISO_SIN_BRIEF));
+  assert.equal(descargasHabilitadas(conBrief()), true);
+  assert.equal(descargasHabilitadas({ incluirBrief: true, brief: 'x' }), true);
+});
+
+test('no brief, general skill (the default): a whole skill, the blank in PRIMER_MENSAJE.md, the draft test in the README, downloads ready', () => {
+  assert.equal(HUECO_BRIEF, '[Pega aquí tu brief completo o tu idea en una frase]');
+  for (const p of [VACIO_MVP, {}, { ...grupo7(), brief: '  \n ' }]) {
+    const f = buildMvp(p);
+    for (const n of ARCHIVOS_MVP) assert.ok(!f[n].includes(AVISO_SIN_BRIEF), `${n}: no notice`);
+    assert.ok(cuerpoPrimer(f['PRIMER_MENSAJE.md']).startsWith(`Este es mi brief:\n\n${HUECO_BRIEF}\n\n`));
+    assert.equal(pruebaMvp(p).pregunta, cuerpoPrimer(f['PRIMER_MENSAJE.md']), 'the test is the first message, blank included');
+    const pr = section(f['README.md'], 'Probarla');
+    assert.ok(pr.includes(`\n\n${cita(README_PROBAR_GENERAL)}\n\n`), 'the draft test, quoted');
+    assert.ok(pr.includes(README_PROBAR), 'and the draft check');
+    assert.equal(descargasHabilitadas(p), true);
+  }
   assert.equal(descargasHabilitadas({ brief: 'x' }), true);
+});
+
+test('incluirBrief off (the default): SKILL.md and INSTRUCCIONES_GPT.md never depend on the brief; PRIMER_MENSAJE.md carries it', () => {
+  const sinBrief = buildMvp({ ...grupo7(), brief: '' });
+  for (const brief of [BRIEF_TABLA, BRIEF_LINEAS, FRASE, C.EJEMPLO_BRIEF]) {
+    const f = buildMvp({ ...grupo7(), brief });
+    assert.equal(f['SKILL.md'], sinBrief['SKILL.md'], `SKILL.md: ${brief.slice(0, 30)}`);
+    assert.equal(f['INSTRUCCIONES_GPT.md'], sinBrief['INSTRUCCIONES_GPT.md'], `INSTRUCCIONES_GPT.md: ${brief.slice(0, 30)}`);
+    assert.equal(pasteMvp({ ...grupo7(), brief }), pasteMvp({ ...grupo7(), brief: '' }), 'the paste');
+    assert.ok(cuerpoPrimer(f['PRIMER_MENSAJE.md']).startsWith(`Este es mi brief:\n\n${normalizeMvp({ brief }).brief}\n\n`));
+  }
+  const f = buildMvp({ ...grupo7(), brief: BRIEF_TABLA });
+  // Below the table header, no line of the brief reaches the skill; all of them reach the first message.
+  for (const l of BRIEF_TABLA.split('\n').slice(2)) {
+    for (const n of ['SKILL.md', 'INSTRUCCIONES_GPT.md']) assert.ok(!f[n].includes(l), `${n}: ${l}`);
+    assert.ok(f['PRIMER_MENSAJE.md'].includes(l), `PRIMER_MENSAJE.md: ${l}`);
+  }
+  const s = f['SKILL.md'];
+  assert.ok(!s.includes(`## ${MI_BRIEF.titulo}`));
+  assert.equal(section(s, 'Ejemplo'), borrador('Ejemplo'), 'the draft example, Semáforo included');
+  assert.equal(
+    presentacionDe(s),
+    `Skill de mi cerebro. Llámame Fabián. Soy de una entidad del sector público, nunca he construido software. Construyo con Claude Code (${C.CAJAS.abierta}). Tengo una sesión de 90 minutos.`,
+    'the presentation describes the person, not the project',
+  );
+});
+
+test('incluirBrief on: SKILL.md ends with «Mi brief», the brief quoted whole; INSTRUCCIONES_GPT.md and the paste carry it too', () => {
+  assert.deepEqual(MI_BRIEF, { titulo: 'Mi brief', entrada: 'Si en el chat no te pego otro brief, parte de este.' });
+  const f = buildMvp({ ...conBrief(), brief: BRIEF_TABLA });
+  const s = f['SKILL.md'];
+  assert.equal(section(s, MI_BRIEF.titulo), [`## ${MI_BRIEF.titulo}`, '', MI_BRIEF.entrada, '', cita(BRIEF_TABLA)].join('\n'));
+  assert.ok(s.endsWith(`\n${cita(BRIEF_TABLA)}\n`), 'the last section of the skill');
+  for (const l of BRIEF_TABLA.split('\n')) {
+    for (const n of ['SKILL.md', 'INSTRUCCIONES_GPT.md', 'PRIMER_MENSAJE.md']) assert.ok(f[n].includes(l), `${n}: ${l}`);
+  }
+  assert.ok(pasteMvp({ ...conBrief(), brief: BRIEF_TABLA }).includes(cita(BRIEF_TABLA)), 'the paste');
+  // INSTRUCCIONES_GPT.md embeds the SKILL body: «Mi brief» once, with the skill's own heading, before the references.
+  const gpt = f['INSTRUCCIONES_GPT.md'];
+  assert.equal((gpt.match(/^## Mi brief$/gm) ?? []).length, 1, 'one «Mi brief» in INSTRUCCIONES_GPT.md');
+  assert.ok(gpt.indexOf(`## ${MI_BRIEF.titulo}\n\n${MI_BRIEF.entrada}\n\n${cita(BRIEF_TABLA)}\n\n---\n\n<!-- references/`) > 0, 'right before the references');
+  assert.equal(presentacionDe(s), presentacionDe(buildMvp(grupo7())['SKILL.md']), 'the same presentation line');
+  // A brief with its own headings and fences stays inside its quote: the skill keeps its sections.
+  const raro = '## Problema\nNo hay orden\n```\ncódigo\n```\n# Otro título';
+  const t = buildMvp({ ...conBrief(), brief: raro })['SKILL.md'];
+  assert.deepEqual(h2s(t), [...h2s(`${C.SKILL_CUERPO}\n`), `## ${MI_BRIEF.titulo}`]);
+  assert.equal(outsideFences(t).filter((l) => l.startsWith('# ')).length, 1, 'one title outside the fences');
+  // The references and the first message do not follow the switch.
+  const off = buildMvp({ ...grupo7(), brief: BRIEF_TABLA });
+  for (const n of ARCHIVOS_MVP.filter((x) => x.startsWith('references/') || x === 'PRIMER_MENSAJE.md')) assert.equal(f[n], off[n], n);
+});
+
+test('G · README.md says whether the skill carries the brief, right under the opening', () => {
+  assert.deepEqual(MODO_README, {
+    general: 'Esta skill es general: pégale tu brief en el chat.',
+    conBrief: 'Esta skill lleva tu brief adentro; para otro proyecto, genera otra.',
+  });
+  const off = buildMvp(grupo7())['README.md'];
+  assert.ok(off.includes(`\n\nFabián, ${lcFirst(README_BASE)}\n\n${MODO_README.general}\n\n| Archivo |`));
+  assert.ok(!off.includes(MODO_README.conBrief));
+  const on = buildMvp(conBrief())['README.md'];
+  assert.ok(on.includes(`\n\nFabián, ${lcFirst(README_BASE)}\n\n${MODO_README.conBrief}\n\n| Archivo |`));
+  assert.ok(!on.includes(MODO_README.general));
+  assert.ok(buildMvp(VACIO_MVP)['README.md'].includes(`\n\n${README_BASE}\n\n${MODO_README.general}\n\n`));
 });
 
 test('normalizeMvp repairs anything read back from storage', () => {
   const p = normalizeMvp({
+    incluirBrief: 'sí',
     brief: '  | A | B |  \r\n\r\n\r\n\r\n| C | D |  ',
     sector: 'marte',
     herramienta: 'cursor',
@@ -496,7 +597,7 @@ test('normalizeMvp repairs anything read back from storage', () => {
     extra: true,
   });
   assert.deepEqual(p, {
-    brief: '| A | B |\n\n| C | D |', sector: null, herramienta: null, nivel: 'algo', tiempo: null,
+    incluirBrief: false, brief: '| A | B |\n\n| C | D |', sector: null, herramienta: null, nivel: 'algo', tiempo: null,
     restricciones: ['No guarda fotos', 'Sin pagos'], nombre: 'Fabián', tono: 'directo', herramientas: ['claude'],
   });
   assert.deepEqual(Object.keys(normalizeMvp({})), Object.keys(VACIO_MVP));
@@ -510,6 +611,8 @@ test('empty and partial profiles still produce nine valid files', () => {
     { brief: FRASE }, { brief: BRIEF_LINEAS, sector: 'otro' }, { nivel: 'programo' }, { herramienta: 'codex' }, { tiempo: 'semana' },
     { nombre: 'Luz', tono: 'esencial', herramientas: ['gemini', 'copilot'] },
     { sector: 'nope', herramienta: {}, nivel: [], tiempo: 4, restricciones: null, brief: 7 },
+    { incluirBrief: true }, { incluirBrief: true, brief: FRASE }, { incluirBrief: true, brief: BRIEF_LINEAS, sector: 'otro', nombre: 'Luz' },
+    { incluirBrief: 'true', brief: BRIEF_TABLA },
   ];
   for (const p of partials) {
     const files = buildMvp(p);
@@ -527,6 +630,7 @@ test('empty and partial profiles still produce nine valid files', () => {
 
 test('field → file map is truthful: each field rewrites exactly the files it points to', () => {
   const changes = {
+    incluirBrief: { incluirBrief: true },
     brief: { brief: BRIEF_TABLA },
     sector: { sector: 'empresa' },
     herramienta: { herramienta: 'lovable' },
@@ -538,10 +642,25 @@ test('field → file map is truthful: each field rewrites exactly the files it p
     herramientas: { herramientas: ['chatgpt'] },
   };
   assert.deepEqual(CAMPOS_MVP.map((c) => c.id).sort(), Object.keys(changes).sort());
-  const base = buildMvp(grupo7());
-  for (const campo of CAMPOS_MVP) {
-    const next = buildMvp({ ...grupo7(), ...changes[campo.id] });
-    const changed = ARCHIVOS_MVP.filter((n) => next[n] !== base[n]);
-    assert.deepEqual(changed.sort(), [...campo.archivos].sort(), campo.id);
+  const cambiados = (desde, cambio) => {
+    const base = buildMvp(desde);
+    const next = buildMvp({ ...desde, ...cambio });
+    return ARCHIVOS_MVP.filter((n) => next[n] !== base[n]).sort();
+  };
+  const mapa = (id) => [...CAMPOS_MVP.find((c) => c.id === id).archivos].sort();
+  // The switch, from the example and from blank, either way.
+  for (const desde of [grupo7(), VACIO_MVP]) {
+    assert.deepEqual(cambiados(desde, { incluirBrief: true }), mapa('incluirBrief'), 'incluirBrief: off → on');
+    assert.deepEqual(cambiados({ ...desde, incluirBrief: true }, { incluirBrief: false }), mapa('incluirBrief'), 'incluirBrief: on → off');
+  }
+  // Every field with the brief inside the skill, where the brief reaches the most files.
+  for (const campo of CAMPOS_MVP.filter((c) => c.id !== 'incluirBrief')) {
+    assert.deepEqual(cambiados(conBrief(), changes[campo.id]), mapa(campo.id), campo.id);
+  }
+  // With the switch off (the default) the brief reaches the first message and the README test only;
+  // every other field rewrites the same files as with it on.
+  assert.deepEqual(cambiados(grupo7(), changes.brief), ['PRIMER_MENSAJE.md', 'README.md'], 'brief (off)');
+  for (const campo of CAMPOS_MVP.filter((c) => !['incluirBrief', 'brief'].includes(c.id))) {
+    assert.deepEqual(cambiados(grupo7(), changes[campo.id]), mapa(campo.id), `${campo.id} (off)`);
   }
 });
